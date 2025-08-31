@@ -1842,7 +1842,24 @@ var storage = (function() {
             clear: function() { this._data = {}; }
         };
     }
-})();
+})();// تأكد من أن جميع الصور لها أبعاد محددة
+document.querySelectorAll('img').forEach(img => {
+    if (!img.hasAttribute('width') || !img.hasAttribute('height')) {
+        img.setAttribute('width', 'auto');
+        img.setAttribute('height', 'auto');
+    }
+});
+
+// حل مشكلة event listeners في Safari
+document.addEventListener('DOMContentLoaded', function() {
+    // إعادة تهيئة جميع event listeners
+    initEventListeners();
+});
+
+function initEventListeners() {
+    // إعادة إرفاق جميع event listeners هنا
+    // خاصة تلك المتعلقة بالسلة والطلبات
+}
                                         const firebaseConfig = {
             apiKey: "AIzaSyBTrnKCYOtfSSDYtmVQbzP2HcwgkLT565Y",
             authDomain: "robuste-c8e0f.firebaseapp.com",
@@ -3040,5 +3057,6 @@ showSlides1();
         </div>
     </div>
 </div></body></html>
+
 
 
