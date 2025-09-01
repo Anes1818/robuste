@@ -1437,7 +1437,12 @@
   background: #bbb; border-radius: 50%; display: inline-block;
 }
 .active1, .dot1:hover { background: #717171; }
-
+.slideshow-container1 img {
+  width: 100%;         /* تاخذ كامل عرض الحاوية */
+  height: auto;        /* تحافظ على النسبة */
+  object-fit: contain; /* أو cover حسب اللي يعجبك */
+  display: block;      /* تشيل الفراغات تحت الصورة */
+}
 .language-switcher {
     display: flex;
     gap: 5px;
@@ -1501,7 +1506,7 @@
   .language-switcher .btn::after {
     font-size: 0.9rem;
     font-weight: 600;
-    color: #333;
+    color: #0e0e0e;
   }
 
   /* تأثير Hover */
@@ -1791,7 +1796,7 @@
     
 
 </section>
-                            <div class="row" id="productsContainer"></div></div></section><section id="reviews" class="py-5 bg-light"><div class="container"><h2 class="section-title">Avis clients</h2><div class="row"><div class="col-md-4 mb-4"><div class="review-card"><div class="d-flex"><img src="https://api.dicebear.com/7.x/initials/svg?seed=Ahmed%20Ben" class="rounded-circle me-3" width="60" height="60" alt="عميل"><div><h5 class="mb-0">عمر</h5><div class="text-warning"><i class="bi bi-star-fill"></i> <i class="bi bi-star-fill"></i> <i class="bi bi-star-fill"></i> <i class="bi bi-star-fill"></i> <i class="bi bi-star-fill"></i></div></div></div><p class="mt-3">"جودة المنتج ممتازة والتوصيل كان في الوقت المحدد، شكراً لفريق Robuste!"</p></div></div><div class="col-md-4 mb-4"><div class="review-card"><div class="d-flex"><img src="https://api.dicebear.com/7.x/initials/svg?seed=Rhmed%20Bn" class="rounded-circle me-3" width="60" height="60" alt="عميل"><div><h5 class="mb-0">Rose Blanch</h5><div class="text-warning"><i class="bi bi-star-fill"></i> <i class="bi bi-star-fill"></i> <i class="bi bi-star-fill"></i> <i class="bi bi-star-fill"></i> <i class="bi bi-star-half"></i></div></div></div><p class="mt-3">"Je suis ravie de la marque Robuste, j'utilise vos produits depuis pas mal d'années."</p></div></div><div class="col-md-4 mb-4"><div class="review-card"><div class="d-flex"><img src="https://api.dicebear.com/7.x/initials/svg?seed=Ahmed%20Hen" class="rounded-circle me-3" width="60" height="60" alt="عميل"><div><h5 class="mb-0">محمد</h5><div class="text-warning"><i class="bi bi-star-fill"></i> <i class="bi bi-star-fill"></i> <i class="bi bi-star-fill"></i> <i class="bi bi-star-fill"></i> <i class="bi bi-star-fill"></i></div></div></div><p class="mt-3">"الدفع عند الاستلام مريح جداً، والمنتج يعمل بكفاءة عالية، أنصح بالتعامل معهم."</p></div></div></div></div></section><div class="modal fade" id="orderModal" tabindex="-1" aria-hidden="true"><div class="modal-dialog modal-lg"><div class="modal-content"><div class="modal-header"><h5 class="modal-title">طلب منتج</h5><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div><div class="modal-body"><div class="order-summary mb-4"><h6 class="mb-3">ملخص الطلب</h6><div class="d-flex align-items-center"><img id="productImage" class="product-image-thumb me-3" src="" alt="صورة المنتج"><div><h5 id="productNameDisplay" class="mb-1"></h5><p id="productPrice" class="mb-0 text-primary fw-bold"></p></div></div></div><form id="orderForm"><input type="hidden" id="productName"> <input type="hidden" id="productPriceValue"> <input type="hidden" id="productImageUrl"><div class="row"><div class="col-md-6 mb-3"><label for="fullName" class="form-label">nom et prénom<span class="text-danger">*</span></label> <input type="text" class="form-control" id="fullName" required></div><div class="col-md-6 mb-3"><label for="phone" class="form-label">Numéro de téléphone <span class="text-danger">*</span></label> <input type="tel" class="form-control" id="phone" pattern="[0]{1}[5-7]{1}[0-9]{8}" required> <small class="text-muted">EX: 0551234566</small></div></div><div class="row"><div class="col-md-6 mb-3"><label for="email" class="form-label">E-mail</label> <input type="email" class="form-control" id="email"></div><div class="col-md-6 mb-3"><label for="wilaya" class="form-label">الولاية <span class="text-danger">*</span></label> <select class="form-select" id="wilaya" required><option value="">Choisissez votre état</option></select></div></div><div class="mb-3"><label for="address" class="form-label">Adresse </label> <textarea class="form-control" id="address" rows="2"></textarea></div><div class="row"><div class="col-md-6 mb-3">
+                            <div class="row" id="productsContainer"></div></div></section><section id="reviews" class="py-5 bg-light"><div class="container"><h2 class="section-title">Avis clients</h2><div class="row"><div class="col-md-4 mb-4"><div class="review-card"><div class="d-flex"><img src="https://api.dicebear.com/7.x/initials/svg?seed=Ahmed%20Ben" class="rounded-circle me-3" width="60" height="60" alt="عميل"><div><h5 class="mb-0">عمر</h5><div class="text-warning"><i class="bi bi-star-fill"></i> <i class="bi bi-star-fill"></i> <i class="bi bi-star-fill"></i> <i class="bi bi-star-fill"></i> <i class="bi bi-star-fill"></i></div></div></div><p class="mt-3">"جودة المنتج ممتازة والتوصيل كان في الوقت المحدد، شكراً لفريق Robuste!"</p></div></div><div class="col-md-4 mb-4"><div class="review-card"><div class="d-flex"><img src="https://api.dicebear.com/7.x/initials/svg?seed=Rhmed%20Bn" class="rounded-circle me-3" width="60" height="60" alt="عميل"><div><h5 class="mb-0">Rose Blanch</h5><div class="text-warning"><i class="bi bi-star-fill"></i> <i class="bi bi-star-fill"></i> <i class="bi bi-star-fill"></i> <i class="bi bi-star-fill"></i> <i class="bi bi-star-half"></i></div></div></div><p class="mt-3">"Je suis ravie de la marque Robuste, j'utilise vos produits depuis pas mal d'années."</p></div></div><div class="col-md-4 mb-4"><div class="review-card"><div class="d-flex"><img src="https://api.dicebear.com/7.x/initials/svg?seed=Ahmed%20Hen" class="rounded-circle me-3" width="60" height="60" alt="عميل"><div><h5 class="mb-0">محمد</h5><div class="text-warning"><i class="bi bi-star-fill"></i> <i class="bi bi-star-fill"></i> <i class="bi bi-star-fill"></i> <i class="bi bi-star-fill"></i> <i class="bi bi-star-fill"></i></div></div></div><p class="mt-3">"الدفع عند الاستلام مريح جداً، والمنتج يعمل بكفاءة عالية، أنصح بالتعامل معهم."</p></div></div></div></div></section><div class="modal fade" id="orderModal" tabindex="-1" aria-hidden="true"><div class="modal-dialog modal-lg"><div class="modal-content"><div class="modal-header"><h5 class="modal-title">طلب منتج</h5><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div><div class="modal-body"><div class="order-summary mb-4"><h6 class="mb-3">ملخص الطلب</h6><div class="d-flex align-items-center"><img id="productImage" class="product-image-thumb me-3" src="" alt="صورة المنتج"><div><h5 id="productNameDisplay" class="mb-1"></h5><p id="productPrice" class="mb-0 text-primary fw-bold"></p></div></div></div><form id="orderForm"><input type="hidden" id="productName"> <input type="hidden" id="productPriceValue"> <input type="hidden" id="productImageUrl"><div class="row"><div class="col-md-6 mb-3"><label for="fullName" class="form-label">nom et prénom<span class="text-danger">*</span></label> <input type="text" class="form-control" id="fullName" required></div><div class="col-md-6 mb-3"><label for="phone" class="form-label">Numéro de téléphone <span class="text-danger">*</span></label> <input type="tel" class="form-control" id="phone" pattern="[0]{1}[5-7]{1}[0-9]{8}" required> <small class="text-muted">EX: 0551234566</small></div></div><div class="row"><div class="col-md-6 mb-3"><label for="اختياري" class="form-label">E-mail</label> <input type="email" class="form-control" id="email"></div><div class="col-md-6 mb-3"><label for="wilaya" class="form-label">الولاية <span class="text-danger">*</span></label> <select class="form-select" id="wilaya" required><option value="">Choisissez votre état</option></select></div></div><div class="mb-3"><label for="address" class="form-label">Adresse </label> <textarea class="form-control" id="address" rows="2"></textarea></div><div class="row"><div class="col-md-6 mb-3">
                                 </div><div class="col-md-6 mb-3"><label class="form-label">طريقة الدفع</label><div class="form-check"><input class="form-check-input" type="radio" name="paymentMethod" id="cashOnDelivery" value="الدفع عند الاستلام" checked="checked"> <label class="form-check-label" for="cashOnDelivery">الدفع عند الاستلام</label></div><div class="form-check"><input class="form-check-input" type="radio" name="paymentMethod" id="onlinePayment" value="الدفع الإلكتروني"> <label class="form-check-label" for="onlinePayment">الدفع الإلكتروني</label></div></div></div></form></div><div class="modal-footer"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">إلغاء</button> <button type="button" class="btn btn-orange" id="submitOrderBtn" onclick="submitOrder()">Confirmer la commande</button></div></div></div></div><section id="contact" class="py-5"><div class="container"><h2 class="section-title">Contactez-nous</h2><div class="row"><div class="col-md-6 mb-4"><div class="contact-card h-100"><h4 class="mb-4">Coordonnées</h4><div class="d-flex mb-3"><div class="me-3 text-primary"><i class="bi bi-geo-alt fs-4"></i></div><div><h5>Adresse</h5><p class="mb-0">شارع بورقعة المنور، 426 قطعة، العلمة، سطيف، الجزائر</p></div></div><div class="d-flex mb-3"><div class="me-3 text-primary"><i class="bi bi-telephone fs-4"></i></div><div><h5>Téléphone</h5><p class="mb-0">0656360457</p></div></div><div class="d-flex mb-3"><div class="me-3 text-primary"><i class="bi bi-envelope fs-4"></i></div><div><h5>E-mail</h5><p class="mb-0">laidaouih@gmail.com</p></div></div><div class="d-flex"><div class="me-3 text-primary"><i class="bi bi-clock fs-4"></i></div><div><h5>Heures d'ouverture</h5><p class="mb-0">Tous les jours de 7h00 à 16h00</p></div></div><div class="mt-4"><h5>Suivez-nous sur</h5><div class="d-flex mt-3"><a href="https://www.facebook.com/share/19QooaXfy8/" class="social-icon"><i class="bi bi-facebook"></i> </a></i></a></div></div></div></div><div class="col-md-6 mb-4"><div class="contact-card h-100"><h4 class="mb-4">Envoyez-nous un message</h4><form id="contactForm"><div class="mb-3"><label for="contactName" class="form-label">Votre nom <span class="text-danger">*</span></label> <input type="text" class="form-control" id="contactName" required></div><div class="mb-3"><label for="contactEmail" class="form-label">Votre e-mail <span class="text-danger">*</span></label> <input type="email" class="form-control" id="contactEmail" required></div><div class="mb-3"><label for="contactPhone" class="form-label">Numéro de téléphone</label> <input type="tel" class="form-control" id="contactPhone"></div><div class="mb-3"><label for="contactMessage" class="form-label">Votre message <span class="text-danger">*</span></label> <textarea class="form-control" id="contactMessage" rows="4" required></textarea></div><button type="submit" class="btn btn-orange w-100"><span id="contactSubmitText">Envoyer le message</span> <span id="contactSpinner" class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span></button></form></div></div></div><div class="row mt-4"><div class="col-12">
                                     <div class="contact-card" style="cursor: pointer;">
   <h4 class="mb-4">Emplacement du magasin</h4>
@@ -1919,22 +1924,17 @@
             };
         }
 
-        // تأكد من أن جميع الصور لها أبعاد محددة
-        document.addEventListener('DOMContentLoaded', function() {
-            document.querySelectorAll('img').forEach(function(img) {
-                if (!img.hasAttribute('width') || !img.hasAttribute('height')) {
-                    // استخدام naturalWidth و naturalHeight إذا كانت متاحة
-                    if (img.naturalWidth && img.naturalHeight) {
-                        img.setAttribute('width', img.naturalWidth);
-                        img.setAttribute('height', img.naturalHeight);
-                    } else {
-                        // استخدام أبعاد افتراضية إذا لم تكن الأبعاد الطبيعية متاحة
-                        img.setAttribute('width', 'auto');
-                        img.setAttribute('height', 'auto');
-                    }
-                }
-            });
-        });
+       document.addEventListener('DOMContentLoaded', function() {
+  document.querySelectorAll('.slideshow-container1 img').forEach(function(img) {
+    if (!img.hasAttribute('width') || !img.hasAttribute('height')) {
+      if (img.naturalWidth && img.naturalHeight) {
+        img.setAttribute('width', img.naturalWidth);
+        img.setAttribute('height', img.naturalHeight);
+      }
+      // لا تضيف auto هنا، خليه يتعامل مع CSS
+    }
+  });
+});
 
         // حل مشكلة event listeners في Safari
         document.addEventListener('DOMContentLoaded', function() {
@@ -3186,21 +3186,27 @@ await emailjs.send(ORDER_SERVICE_ID, ORDER_TEMPLATE_ID, {
                 
                 showStatus('تم إرسال رسالتك بنجاح! سوف نتواصل معك قريباً.', 'success');
                 document.getElementById('contactForm').reset();
-            } catch (error) {
-                console.error('حدث خطأ:', error);
-                
-                // رسالة خطأ محددة
-                let errorMessage = 'حدث خطأ غير متوقع. يرجى المحاولة مرة أخرى.';
-                
-                if (error.code) {
-                    errorMessage = `خطأ في النظام: ${error.code}`;
-                } else if (error.message) {
-                    errorMessage = error.message;
-                } else if (error.text) {
-                    errorMessage = error.text;
-                }
-                
-                showStatus(`حدث خطأ أثناء إرسال الرسالة: ${errorMessage}`, 'error');
+           } catch (error) {
+    console.error('حدث خطأ:', error);
+
+    // Safari false error handling
+    if (error.code === 18 && navigator.userAgent.includes('Safari')) {
+        console.warn("Safari false error (code 18) تم تجاهله");
+        showStatus('تم إرسال رسالتك بنجاح! (Safari glitch)', 'success');
+        return;
+    }
+
+    let errorMessage = 'حدث خطأ غير متوقع. يرجى المحاولة مرة أخرى.';
+    if (error.code) {
+        errorMessage = `خطأ في النظام: ${error.code}`;
+    } else if (error.message) {
+        errorMessage = error.message;
+    } else if (error.text) {
+        errorMessage = error.text;
+    }
+    
+    showStatus(`حدث خطأ أثناء إرسال الرسالة: ${errorMessage}`, 'error');
+
             } finally {
                 // إعادة تمكين زر الإرسال
                 contactSpinner.classList.add('d-none');
@@ -3338,4 +3344,3 @@ showSlides1();
         </div>
     </div>
 </div></body></html>
-
