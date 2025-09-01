@@ -1815,52 +1815,167 @@
                                     </div></div></div></div></div></section><footer class="py-5 bg-dark text-white"><div class="container"><div class="row"><div class="col-lg-4 mb-4"><h5 class="mb-3">À propos de ROBUSTE</h5><p>Magasin spécialisé dans l'électroménager de haute qualité à prix compétitifs. Nous proposons les meilleurs produits et une livraison rapide.</p></p><div class="mt-3"><a href="https://www.facebook.com/share/19QooaXfy8/" class="social-icon"><i class="bi bi-facebook"></i> </a><a href="https://www.facebook.com/share/19QooaXfy8/" class="social-icon"></a></div></div><div class="col-lg-2 col-md-4 mb-4"><h5 class="mb-3">Liens rapides</h5><ul class="list-unstyled"><li class="mb-2"><a href="#" class="text-white text-decoration-none">Accueil</a></li><li class="mb-2"><a href="#products" class="text-white text-decoration-none">Produits</a></li><li class="mb-2"><a href="#reviews" class="text-white text-decoration-none">آراء العملاء</a></li><li class="mb-2"><a href="#contact" class="text-white text-decoration-none">Contactez-nous</a></li></ul></div><div class="col-lg-3 col-md-4 mb-4"><h5 class="mb-3">Service client</h5><ul class="list-unstyled"><li class="mb-2"><a href="#" class="text-white text-decoration-none">FAQ</a></li><li class="mb-2"><a href="#" class="text-white text-decoration-none">Modes de paiement</a></li><li class="mb-2"><a href="#" class="text-white text-decoration-none">Conditions de garantie</a></li></ul></div><div class="col-lg-3 col-md-4 mb-4"><div class="col-lg-3 col-md-4 mb-4"><h5 class="mb-3">Abonnez-vous à notre page</h5><p>Abonnez-vous pour recevoir les dernières offres</p><div class="mt-3"><a href="https://www.facebook.com/yourpage" class="btn btn-orange w-100" target="_blank">S'abonner</a></div></div></div></div><hr class="my-4 bg-light"><div class="row"><div class="col-md-6 text-center text-md-start mb-3 mb-md-0"><p class="mb-0">&copy; 2025 ROBUSTE. Tous droits réservés.</p></div><div class="col-md-6 text-center text-md-end"><div class="d-flex flex-column flex-md-row align-items-center justify-content-md-end"><p class="mb-2 mb-md-0 me-md-3">Paiement par carte gold disponible</p><img src="https://i.postimg.cc/bY06X2YN/logo-round.png" alt="Modes de paiement" style="width: 30px; height: auto;"></div></div></div></div></footer><a href="https://wa.me/213656360457" class="whatsapp-btn" target="_blank"><i class="bi bi-whatsapp"></i></a><script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script><script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script><script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script><script>// ============== تهيئة Firebase ==============
       
                                         // Polyfill for Object.entries for Safari
-if (!Object.entries) {
-    Object.entries = function(obj) {
-        var ownProps = Object.keys(obj),
-            i = ownProps.length,
-            resArray = new Array(i);
-        while (i--) {
-            resArray[i] = [ownProps[i], obj[ownProps[i]]];
+        if (typeof Object.entries !== 'function') {
+            Object.entries = function(obj) {
+                var ownProps = Object.keys(obj),
+                    i = ownProps.length,
+                    resArray = new Array(i);
+                while (i--) {
+                    resArray[i] = [ownProps[i], obj[ownProps[i]]];
+                }
+                return resArray;
+            };
         }
-        return resArray;
-    };
-}
 
-// Polyfill for localStorage in Safari private mode
-var storage = (function() {
-    try {
-        localStorage.setItem('test', 'test');
-        localStorage.removeItem('test');
-        return localStorage;
-    } catch(e) {
-        return {
-            _data: {},
-            setItem: function(id, val) { this._data[id] = val; },
-            getItem: function(id) { return this._data.hasOwnProperty(id) ? this._data[id] : undefined; },
-            removeItem: function(id) { delete this._data[id]; },
-            clear: function() { this._data = {}; }
-        };
-    }
-})();// تأكد من أن جميع الصور لها أبعاد محددة
-document.querySelectorAll('img').forEach(img => {
-    if (!img.hasAttribute('width') || !img.hasAttribute('height')) {
-        img.setAttribute('width', 'auto');
-        img.setAttribute('height', 'auto');
-    }
-});
+        // Polyfill for localStorage in Safari private mode
+        var storage = (function() {
+            var uid = new Date().getTime().toString();
+            var storage;
+            try {
+                (storage = window.localStorage).setItem(uid, uid);
+                var available = storage.getItem(uid) == uid;
+                storage.removeItem(uid);
+                return available ? storage : false;
+            } catch (e) {
+                return {
+                    data: {},
+                    setItem: function(id, val) {
+                        this.data[id] = val;
+                    },
+                    getItem: function(id) {
+                        return this.data.hasOwnProperty(id) ? this.data[id] : undefined;
+                    },
+                    removeItem: function(id) {
+                        delete this.data[id];
+                    },
+                    clear: function() {
+                        this.data = {};
+                    }
+                };
+            }
+        })();
 
-// حل مشكلة event listeners في Safari
-document.addEventListener('DOMContentLoaded', function() {
-    // إعادة تهيئة جميع event listeners
-    initEventListeners();
-});
+        // Polyfill for Array.from for older Safari versions
+        if (!Array.from) {
+            Array.from = (function () {
+                var toStr = Object.prototype.toString;
+                var isCallable = function (fn) {
+                    return typeof fn === 'function' || toStr.call(fn) === '[object Function]';
+                };
+                var toInteger = function (value) {
+                    var number = Number(value);
+                    if (isNaN(number)) { return 0; }
+                    if (number === 0 || !isFinite(number)) { return number; }
+                    return (number > 0 ? 1 : -1) * Math.floor(Math.abs(number));
+                };
+                var maxSafeInteger = Math.pow(2, 53) - 1;
+                var toLength = function (value) {
+                    var len = toInteger(value);
+                    return Math.min(Math.max(len, 0), maxSafeInteger);
+                };
 
-function initEventListeners() {
-    // إعادة إرفاق جميع event listeners هنا
-    // خاصة تلك المتعلقة بالسلة والطلبات
-}
-                                        const firebaseConfig = {
+                return function from(arrayLike/*, mapFn, thisArg */) {
+                    var C = this;
+                    var items = Object(arrayLike);
+                    if (arrayLike == null) {
+                        throw new TypeError('Array.from requires an array-like object - not null or undefined');
+                    }
+                    var mapFn = arguments.length > 1 ? arguments[1] : void undefined;
+                    var T;
+                    if (typeof mapFn !== 'undefined') {
+                        if (!isCallable(mapFn)) {
+                            throw new TypeError('Array.from: when provided, the second argument must be a function');
+                        }
+                        if (arguments.length > 2) {
+                            T = arguments[2];
+                        }
+                    }
+                    var len = toLength(items.length);
+                    var A = isCallable(C) ? Object(new C(len)) : new Array(len);
+                    var k = 0;
+                    var kValue;
+                    while (k < len) {
+                        kValue = items[k];
+                        if (mapFn) {
+                            A[k] = typeof T === 'undefined' ? mapFn(kValue, k) : mapFn.call(T, kValue, k);
+                        } else {
+                            A[k] = kValue;
+                        }
+                        k += 1;
+                    }
+                    A.length = len;
+                    return A;
+                };
+            })();
+        }
+
+        // Polyfill for NodeList.forEach for older Safari versions
+        if (window.NodeList && !NodeList.prototype.forEach) {
+            NodeList.prototype.forEach = function(callback, thisArg) {
+                thisArg = thisArg || window;
+                for (var i = 0; i < this.length; i++) {
+                    callback.call(thisArg, this[i], i, this);
+                }
+            };
+        }
+
+        // تأكد من أن جميع الصور لها أبعاد محددة
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelectorAll('img').forEach(function(img) {
+                if (!img.hasAttribute('width') || !img.hasAttribute('height')) {
+                    // استخدام naturalWidth و naturalHeight إذا كانت متاحة
+                    if (img.naturalWidth && img.naturalHeight) {
+                        img.setAttribute('width', img.naturalWidth);
+                        img.setAttribute('height', img.naturalHeight);
+                    } else {
+                        // استخدام أبعاد افتراضية إذا لم تكن الأبعاد الطبيعية متاحة
+                        img.setAttribute('width', 'auto');
+                        img.setAttribute('height', 'auto');
+                    }
+                }
+            });
+        });
+
+        // حل مشكلة event listeners في Safari
+        document.addEventListener('DOMContentLoaded', function() {
+            // إعادة تهيئة جميع event listeners
+            initEventListeners();
+        });
+
+        function initEventListeners() {
+            // إعادة إرفاق جميع event listeners هنا
+            // خاصة تلك المتعلقة بالسلة والطلبات
+            
+            // إضافة مستمعي الأحداث لأزرار الإضافة إلى السلة
+            document.querySelectorAll('.add-to-cart-btn').forEach(function(button) {
+                button.addEventListener('click', function() {
+                    var productId = this.getAttribute('data-id');
+                    var product = products.find(p => p.id == productId);
+                    if (product) {
+                        addToCart(product.name, product.price, product.priceValue, product.images, product.id);
+                    }
+                });
+            });
+            
+            // إضافة مستمعي الأحداث لأزرار الطلب المباشر
+            document.querySelectorAll('.buy-now-btn').forEach(function(button) {
+                button.addEventListener('click', function() {
+                    var productId = this.getAttribute('data-id');
+                    var product = products.find(p => p.id == productId);
+                    if (product) {
+                        showOrderModal(product.name, product.price, product.priceValue, product.images);
+                    }
+                });
+            });
+            
+            // إخفاء مؤشر الحالة عند النقر على زر الإغلاق
+            var closeButton = document.querySelector('#statusIndicator .btn-close');
+            if (closeButton) {
+                closeButton.addEventListener('click', hideStatus);
+            }
+        }
+
+        const firebaseConfig = {
             apiKey: "AIzaSyBTrnKCYOtfSSDYtmVQbzP2HcwgkLT565Y",
             authDomain: "robuste-c8e0f.firebaseapp.com",
             projectId: "robuste-c8e0f",
@@ -1889,7 +2004,6 @@ function initEventListeners() {
             "عين تموشنت", "غرداية", "غليزان"
         ];
 
- /// Liste des produits améliorée avec nouveaux produits
 const products = [
     {
         id: 1,
@@ -3057,6 +3171,5 @@ showSlides1();
         </div>
     </div>
 </div></body></html>
-
 
 
