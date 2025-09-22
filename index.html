@@ -511,7 +511,7 @@
   text-align: center;
   position: relative;
   overflow: hidden;
-  margin: 40px 0;
+  margin: 0px 0;
 }
 
 .offers-section::before {
@@ -1421,7 +1421,7 @@
 .cart-item {
     animation: slideIn 0.3s ease-out;
 }
-.slideshow-container1 { position: relative; max-width: 1000px; margin: auto; overflow: hidden;margin-top: 20px; }
+.slideshow-container1 { position: relative; max-width: 1000px; margin: auto; overflow: hidden;margin-top: 5px; }
 .mySlides1 { display: none; }
 .fade1 { animation: fade1 1.5s; }
 @keyframes fade1 { from {opacity: .4} to {opacity: 1} }
@@ -1433,7 +1433,7 @@
 .prev1 { left: 0; }
 .next1 { right: 0; }
 .dot1 {
-  cursor: pointer; height: 15px; width: 15px; margin: 0 2px;
+  cursor: pointer; height: 3px; width: 15px; margin: 0 0px;
   background: #bbb; border-radius: 50%; display: inline-block;
 }
 .active1, .dot1:hover { background: #717171; }
@@ -1680,10 +1680,10 @@
           </div>
 
           <h4 class="offer-product-title">Defroisseur Vapeur</h4>
-          <div class="offer-product-price">7000 د.ج</div>
-          <div class="offer-product-old-price">7500 د.ج</div>
+          <div class="offer-product-price">6500 د.ج</div>
+          <div class="offer-product-old-price">7000 د.ج</div>
           <button class="offer-btn"
-            onclick="addToCart('Defroisseur Vapeur', '7000 د.ج', 7000, ['images/Defroisseur Vapeur.jpeg', 'images/Defroisseur Vapeur-2.jpeg', 'images/Defroisseur Vapeur-3.jpeg'], 100)">
+            onclick="addToCart('Defroisseur Vapeur', '6500 د.ج', 6500, ['images/Defroisseur Vapeur.jpeg', 'images/Defroisseur Vapeur-2.jpeg', 'images/Defroisseur Vapeur-3.jpeg'], 100)">
             Ajouter au panier
           </button>
         </div>
@@ -1719,10 +1719,10 @@
           </div>
 
           <h4 class="offer-product-title">ASPIRATEUR SOUFFLEUR A MAIN</h4>
-          <div class="offer-product-price">5100 د.ج</div>
-          <div class="offer-product-old-price">5500 د.ج</div>
+          <div class="offer-product-price">5000 د.ج</div>
+          <div class="offer-product-old-price">5600 د.ج</div>
           <button class="offer-btn"
-            onclick="addToCart('APIRATEUR A MAIN', '5,100 د.ج', 5100, ['images/aspirateur a main 1.jpg','images/aspirateur a main 2.jpg'], 101)">
+            onclick="addToCart('APIRATEUR A MAIN', '5,000 د.ج', 5000, ['images/aspirateur a main 1.jpg','images/aspirateur a main 2.jpg'], 101)">
             Ajouter au panier
           </button>
         </div>
@@ -2027,8 +2027,8 @@ const products = [
         id: 2,
         code: "LCSW",
         name: "LISSEUR CHEVEUX SW 207",
-        price: "4 200 DA",
-        priceValue: 4200,
+        price: "4 100 DA",
+        priceValue: 4100,
         oldPrice: "5 800 DA",
         images: [
             "images/LISSEUR CHEVEUX.jpg",
@@ -2054,12 +2054,13 @@ const products = [
         description: "Brosse lissante en céramique avec ionisation",
         badge: "Nouveau"
     },
+     
     {
         id: 4,
         code: "DF09",
         name: "FRITEUSE DF  900 W",
-        price: "6 000 DA",
-        priceValue: 6000,
+        price: "5 900 DA",
+        priceValue: 5900,
         oldPrice: "7 800 DA",
         images: [
             "images/friteuse.jpg",
@@ -2073,8 +2074,8 @@ const products = [
         id: 5,
         code: "SES3",
         name: "EPILATEUR SES 3",
-        price: "4 000 DA",
-        priceValue: 4000,
+        price: "3 900 DA",
+        priceValue: 3900,
         oldPrice: "5 200 DA",
         images: [
             "images/EPILATOIR.png",
@@ -2089,8 +2090,8 @@ const products = [
         id: 6,
         code: "BNV4",
         name: "BROSSE NETTOYANTE VISAGE BNV 4",
-        price: "2 500 DA",
-        priceValue: 2500,
+        price: "2 400 DA",
+        priceValue: 2400,
         oldPrice: "3 300 DA",
         images: [
             "images/BROSSE NETOYANTE VISAGE.png",
@@ -2105,8 +2106,8 @@ const products = [
         id: 7,
         code: "MH400",
         name: "MINI HACHOIR EN VERRE MH 400",
-        price: "6 000 DA",
-        priceValue: 6000,
+        price: "5 900 DA",
+        priceValue: 5900,
         oldPrice: "7 500 DA",
         images: [
             "images/mini hachior inox robuste.png",
@@ -2166,8 +2167,8 @@ const products = [
         id: 11,
         code: "PK2",
         name: "PETRIN 1000 W PK2",
-        price: "17 200 DA",
-        priceValue: 17200,
+        price: "16 900 DA",
+        priceValue: 16900,
         oldPrice: "22 000 DA",
         images: [
             "images/pètrin pk2 noir.jpg",
@@ -3418,6 +3419,5 @@ showSlides1();
         </div>
     </div>
 </div></body></html>
-
 
 
