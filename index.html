@@ -2001,449 +2001,92 @@
             "عين تموشنت", "غرداية", "غليزان"
         ];
 
-const products = [
-   {
-        id: 1,
-        code: "SC",
-        name: "SECHE CHEVEUX PRO2000",
-        price: "4 200 DA",
-        priceValue: 4200,
-        oldPrice: "5 500 DA",
-        images: [
-            "images/SECHE CHEVEUX magenta.jpg",
-            "images/SECHE CHEVEUX rouge.jpg",
-            "images/SECHE CHEVEUX noir.jpg"
-            
-        ],
-        category: "coiffure",
-        description: "Sèche-cheveux professionnel 2000W avec 3 réglages de température",
-        badge: "Best-seller",
-        
-    },
-    {
-        id: 2,
-        code: "LCSW",
-        name: "LISSEUR CHEVEUX SW 207",
-        price: "4 100 DA",
-        priceValue: 4100,
-        oldPrice: "5 800 DA",
-        images: [
-            "images/LISSEUR CHEVEUX.jpg",
-            "images/LISSEUR CHEVEUX Robuste.jpg",
-            
-        ],
-        category: "coiffure",
-        description: "Lisseur céramique avec contrôle précis de la température",
-       
-    },
-    {
-        id: 3,
-        code: "LCB200N",
-        name: "LISSEUR CHEVEUX BROSSE LCB200N",
-        price: "3 400 DA",
-        priceValue: 3400,
-        oldPrice: "4 500 DA",
-        images: [
-            "images/LISSEUR CHEVEUX BROSSE.jpg",
-          
-        ],
-        category: "coiffure",
-        description: "Brosse lissante en céramique avec ionisation",
-        badge: "Nouveau"
-    },
-     
-    {
-        id: 4,
-        code: "DF09",
-        name: "FRITEUSE DF  900 W",
-        price: "5 900 DA",
-        priceValue: 5900,
-        oldPrice: "7 800 DA",
-        images: [
-            "images/friteuse.jpg",
-           
-        ],
-        category: "cuisine",
-        description: "Friteuse électrique 3L avec minuterie automatique",
-      
-    },
-    {
-        id: 5,
-        code: "SES3",
-        name: "EPILATEUR SES 3",
-        price: "3 900 DA",
-        priceValue: 3900,
-        oldPrice: "5 200 DA",
-        images: [
-            "images/EPILATOIR.png",
-            "images/EPILATOIR robuste.png",
-            
-        ],
-        category: "beauté",
-        description: "Épilateur électrique avec 5 accessoires multi-usages",
-        badge: "Top vente"
-    },
-    {
-        id: 6,
-        code: "BNV4",
-        name: "BROSSE NETTOYANTE VISAGE BNV 4",
-        price: "2 400 DA",
-        priceValue: 2400,
-        oldPrice: "3 300 DA",
-        images: [
-            "images/BROSSE NETOYANTE VISAGE.png",
-            "images/BROSSE NETOYANTE VISAGE Robuste.png",
-            
-        ],
-        category: "beauté",
-        description: "Brosse nettoyante visage 3 vitesses étanche",
-       
-    },
-    {
-        id: 7,
-        code: "MH400",
-        name: "MINI HACHOIR EN VERRE MH 400",
-        price: "5 900 DA",
-        priceValue: 5900,
-        oldPrice: "7 500 DA",
-        images: [
-            "images/mini hachior inox robuste.png",
-           
-        ],
-        category: "cuisine",
-        description: "Hachoir compact 400W avec bol en verre",
-       
-    },
-    {
-        id: 8,
-        code: "H350Q",
-        name: "HACHOIR LEGUMES 4 LAMES EN VERRE",
-        price: "6 000 DA",
-        priceValue: 6000,
-        oldPrice: "7 800 DA",
-        images: [
-            "images/quatro hachior.jpg",
-           
-        ],
-        category: "cuisine",
-        description: "Hachoir à légumes 4 lames inox avec bol verre",
-        badge: "Nouveau"
-    },
-    {
-        id: 9,
-        code: "MH350",
-        name: "HACHOIR HN19 350 W",
-        price: "4 300 DA",
-        priceValue: 4300,
-        oldPrice: "5 600 DA",
-        images: [
-           
-            "images/hachior plastic Robuste.jpg",
-            
-        ],
-        category: "cuisine",
-        description: "Hachoir à viande 350W avec bol plastique",
-       
-    },
-    {
-        id: 10,
-        code: "HL350",
-        name: "HACHOIRE LEGUME 400 W HLS 350",
-        price: "4 300 DA",
-        priceValue: 4300,
-        oldPrice: "5 900 DA",
-        images: [
-            "images/hachoir 400w.jpg",
-           
-        ],
-        category: "cuisine",
-        description: "Hachoir à légumes 400W avec récipient en verre",
-       
-    },
-    {
-        id: 11,
-        code: "PK2",
-        name: "PETRIN 1000 W PK2",
-        price: "16 900 DA",
-        priceValue: 16900,
-        oldPrice: "22 000 DA",
-        images: [
-            "images/pètrin pk2 noir.jpg",
-            "images/pètrin pk2.jpg",
-          
-        ],
-        category: "cuisine",
-        description: "Pétrin professionnel 1000W capacité 5kg",
-        badge: "Best-seller"
-    },
-    {
-        id: 12,
-        code: "A00000351",
-        name: "HACHOIR 400 W 2L DAILY",
-        price: "6 600 DA",
-        priceValue: 6600,
-        oldPrice: "8 200 DA",
-        images: [
-            "images/hachior daily.jpg",
-          
-        ],
-        category: "cuisine",
-        description: "Hachoir quotidien 400W avec bol 2 litres",
-       
-    },
-    {
-        id: 13,
-        code: "fr",
-        name: "Fer à repasser",
-        price: "4600 DA",
-        priceValue: 4600,
-        oldPrice: "5000 DA",
-        images: [
-            "images/Fer à repasser blue.jpg",
-            "images/Fer à repasser rouge.jpg",
-            "images/Fer à repasser magenta.jpg"
-        ],
-        category: "maison",
-        description: "Robot multifonction 5 en 1 avec accessoires",
-        discount: "10%"
-    },
-    {
-        id: 14,
-        code: "R26",
-        name: "ROBOT 26F",
-        price: "14 200 DA",
-        priceValue: 14200,
-        oldPrice: "18 000 DA",
-        images: [
-            "images/multifonction pètrin.jpg",
-            "images/multifonction pètrin 1.jpg",
-            
-        ],
-        category: "cuisine",
-        description: "Robot culinaire version premium 800W",
-        badge: "Nouveau"
-    },
-    {
-        id: 15,
-        code: "A00000396",
-        name: "CENTRALE VAPEUR SMART 2400W",
-        price: "12 600 DA",
-        priceValue: 12600,
-        oldPrice: "15 800 DA",
-        images: [
-            "images/CENTRALE VAPEUR SMART.jpg",
-            
-            
-        ],
-        category: "maison",
-        description: "Centrale vapeur professionnelle 2400W",
-        discount: "20%"
-    },
-    {
-        id: 16,
-        code: "A00000456",
-        name: "ASPIRATEUR SOUFFLEUR A MAIN AM80",
-        price: "5 100 DA",
-        priceValue: 5100,
-        oldPrice: "6 500 DA",
-        images: [
-            "images/aspirateur a main 1.jpg",
-            "images/aspirateur a main 2.jpg"
-        ],
-        category: "jardin",
-        description: "Aspirateur-souffleur portable 800W",
-        
-    },
-    {
-        id: 17,
-        code: "A00000455",
-        name: "NETTOYEUR DE TACHES 4 EN 1",
-        price: "23 500 DA",
-        priceValue: 25000,
-        oldPrice: "26 000 DA",
-        images: [
-            "images/NETTOYEUR DE TACHES 4 EN 1.jpg",
-            "images/NETTOYEUR DE TACHES 4 EN 1 robuste.jpg",
-      
-        ],
-        category: "maison",
-        description: "Nettoyeur vapeur multifonction 4 en 1",
-        badge: "Exclusivité",
-            discount: "20%"
-    },
-   
-    {
-        id: 19,
-        code: "CFTRE",
-        name: "CAFETIERE ELECTRIQUE CBL15B",
-        price: "15 300 DA",
-        priceValue: 15300,
-        oldPrice: "19 200 DA",
-        images: [
-            "images/cafetière a bra CB.jpg",
-           
-        ],
-        category: "café",
-        description: "Cafetière électrique programmable 1.5L",
-        discount: "20%"
-    },
-    {
-        id: 20,
-        code: "CFE1.8",
-        name: "CAFETIERE ELECTRIQUE C850",
-        price: "14 300 DA",
-        priceValue: 14300,
-        oldPrice: "17 900 DA",
-        images: [
-            "images/cafetière a bras c850.jpg",
-           
-        ],
-        category: "café",
-        description: "Cafetière filtre 850W avec arrêt automatique",
-        badge: "Promo"
-    },
-    {
-        id: 21,
-        code: "A00000362",
-        name: "CAFETIERE ELECTRIQUE A BRAS MOKA 850 W",
-        price: "14 300 DA",
-        priceValue: 14300,
-        oldPrice: "18 200 DA",
-        images: [
-            "images/cafetière a bras moka.jpg",
-           
-        ],
-        category: "café",
-        description: "Cafetière à bras italienne style moka",
-        discount: "21%"
-    },
-    {
-        id: 22,
-        code: "A00000363",
-        name: "CAFETIERE ELECTRIQUE A BRAS ROMA 1000 W",
-        price: "16 600 DA",
-        priceValue: 16600,
-        oldPrice: "21 000 DA",
-        images: [
-            "images/cafetière roma 1000w.jpg",
-          
-        ],
-        category: "café",
-        description: "Cafetière professionnelle à bras 1000W",
-        badge: "Nouveau"
-    },
-    {
-        id: 23,
-        code: "FSH",
-        name: "FRITEUSE ELECTRIQUE SANS HUILE 3.2L",
-        price: "13 000 DA",
-        priceValue: 13000,
-        oldPrice: "16 500 DA",
-        images: [
-            "images/air fryer 3.2L.jpg",
-           
-        ],
-        category: "cuisine",
-        description: "Friteuse à air chaud sans huile 3.2L",
-        discount: "21%"
-    },
-    {
-        id: 24,
-        code: "FSH1",
-        name: "FRITEUSE ELECTRIQUE SANS HUILE max 10L",
-        price: "24 000 DA",
-        priceValue: 24000,
-        oldPrice: "26 000 DA",
-        images: [
-            "images/air fryer 10 L.jpg",
-           
-        ],
-        category: "cuisine",
-        description: "Friteuse à air chaud sans huile 10 L",
-        discount: "21%"
-    },
-    {
-        id: 29,
-        code: "FSH1",
-        name: "FRITEUSE ELECTRIQUE SANS HUILE 5.7 Tactile",
-        price: "14 000 DA",
-        priceValue: 14000,
-        oldPrice: "16 000 DA",
-        images: [
-            "images/air fryer friture max 5.7l.jpg",
-           
-        ],
-        category: "cuisine",
-        description: "Friteuse à air chaud sans huile 10 L",
-        
-    },
-    {
-        id: 25,
-        code: "A00000454",
-        name: "PETRIN PROMAX 8L",
-        price: "20 500 DA",
-        priceValue: 18500,
-        oldPrice: "21 000 DA",
-        images: [
-            "images/petrin promax noir.jpg",
-            "images/petrin promax g.jpg",
-            
-        ],
-        category: "cuisine",
-        description: "Pétrin professionnel 8 litres 1200W",
-        discount: "21%"
-    },
-    {
-        id: 26,
-        code: "A00000380",
-        name: "CAFETIERE A CAPSULES AUTO ITALIA",
-        price: "18 900 DA",
-        priceValue: 18900,
-        oldPrice: "24 500 DA",
-        images: [
-            "images/Cafetière capsule.jpg",
-           
-        ],
-        category: "café",
-        description: "Machine à café automatique à capsules",
-        discount: "10%",
-        badge: "Nouveau"
-    },
-     {
-        id: 26,
-        code: "A00000380",
-        name: "planch modern",
-        price: "2 900 DA",
-        priceValue: 2900,
-        oldPrice: "3 500 DA",
-        images: [
-            "images/planche moderne.jpg",
-           
-        ],
-        category: "cuisine",
-        description: "planchs anti bacteria , micro plastic",
-        discount: "10%",
-        badge: "Nouveau"
+// ============== دالة جلب المنتجات من JSON ==============
+async function loadProductsFromJSON() {
+    try {
+        const response = await fetch('products.json');
+        if (!response.ok) {
+            throw new Error('Erreur lors du chargement des produits');
+        }
+        const products = await response.json();
+        console.log('Produits chargés:', products.length, 'produits');
+        return products;
+    } catch (error) {
+        console.error('Erreur:', error);
+        showStatus('Erreur lors du chargement des produits', 'error');
+        return [];
     }
-,
-  {
-        id: 26,
-        code: "A00000380",
-        name: "panineuse 2000w",
-        price: "14 500 DA",
-        priceValue: 14500,
-        oldPrice: "15 500 DA",
-        images: [
-            "images/panineuse.jpg",
-           
-        ],
-        category: "cuisine",
-        description: "panineuse 2000w avec plaque de grill",
-        discount: "10%",
-        badge: "Nouveau"
-    }
-];
+}
 
+// ============== دالة تحميل العروض الخاصة ==============
+async function loadSpecialOffers() {
+    try {
+        const products = await loadProductsFromJSON();
+        
+        // اختر 3 منتجات لها خصم للعروض الخاصة
+        const specialOffers = products
+            .filter(product => product.old_price && product.old_price > product.price)
+            .slice(0, 3);
+        
+        console.log('Offres spéciales chargées:', specialOffers.length, 'produits');
+        renderSpecialOffers(specialOffers);
+    } catch (error) {
+        console.error('Erreur lors du chargement des offres spéciales:', error);
+    }
+}
+
+// ============== دالة عرض العروض الخاصة ==============
+function renderSpecialOffers(offers) {
+    const offersContainer = document.querySelector('.offer-products');
+    if (!offersContainer) return;
+    
+    if (offers.length === 0) {
+        offersContainer.innerHTML = '<div class="col-12 text-center text-muted">Aucune offre spéciale pour le moment</div>';
+        return;
+    }
+    
+    offersContainer.innerHTML = offers.map((product, index) => {
+        const discountPercentage = Math.round(((product.old_price - product.price) / product.old_price) * 100);
+        
+        return `
+            <div class="col-md-4">
+                <div class="offer-product">
+                    <div class="offer-product-discount">-${discountPercentage}%</div>
+                    ${product.badge ? `<div class="offer-product-badge">${product.badge}</div>` : ''}
+
+                    <div id="carousel-offer-${product.id}" class="carousel slide" data-bs-ride="carousel">
+                        <div class="carousel-indicators">
+                            ${product.images.map((_, i) => `
+                                <button type="button" data-bs-target="#carousel-offer-${product.id}" data-bs-slide-to="${i}" 
+                                    ${i === 0 ? 'class="active"' : ''}></button>
+                            `).join('')}
+                        </div>
+                        <div class="carousel-inner">
+                            ${product.images.map((img, i) => `
+                                <div class="carousel-item ${i === 0 ? 'active' : ''}">
+                                    <img src="${img}" class="d-block w-100" alt="${product.title}" height="300" loading="lazy">
+                                </div>
+                            `).join('')}
+                        </div>
+                        <button class="carousel-control-prev" type="button" data-bs-target="#carousel-offer-${product.id}" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon"></span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#carousel-offer-${product.id}" data-bs-slide="next">
+                            <span class="carousel-control-next-icon"></span>
+                        </button>
+                    </div>
+
+                    <h4 class="offer-product-title">${product.title}</h4>
+                    <div class="offer-product-price">${product.price.toLocaleString()} DA</div>
+                    <div class="offer-product-old-price">${product.old_price.toLocaleString()} DA</div>
+                    <a href="product.html?pid=${product.id}" class="offer-btn" style="display: block; text-decoration: none; text-align: center; color: inherit;">
+                        Voir le produit
+                    </a>
+                </div>
+            </div>
+        `;
+    }).join('');
+}
         // متغيرات عامة
         let orderModal = null;
         const ORDER_SERVICE_ID = "service_lc1q5k8";
@@ -2468,6 +2111,7 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // بدء مؤقت العرض الخاص
     startOfferTimer();
+    loadSpecialOffers(); // تحميل العروض الخاصة من JSON
     // تهيئة سلة المشتريات
 updateCartCount();
 renderCart();
