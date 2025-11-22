@@ -1682,10 +1682,9 @@
           <h4 class="offer-product-title">Defroisseur Vapeur</h4>
           <div class="offer-product-price">6500 د.ج</div>
           <div class="offer-product-old-price">7000 د.ج</div>
-          <button class="offer-btn"
-            onclick="addToCart('Defroisseur Vapeur', '6500 د.ج', 6500, ['images/Defroisseur Vapeur.jpeg', 'images/Defroisseur Vapeur-2.jpeg', 'images/Defroisseur Vapeur-3.jpeg'], 100)">
-            Ajouter au panier
-          </button>
+          <a href="product.html?pid=100" class="offer-btn" style="display: block; text-decoration: none; text-align: center; color: inherit;">
+    Voir le produit
+</a>
         </div>
       </div>
 
@@ -1721,10 +1720,9 @@
           <h4 class="offer-product-title">ASPIRATEUR SOUFFLEUR A MAIN</h4>
           <div class="offer-product-price">5000 د.ج</div>
           <div class="offer-product-old-price">5600 د.ج</div>
-          <button class="offer-btn"
-            onclick="addToCart('APIRATEUR A MAIN', '5,000 د.ج', 5000, ['images/aspirateur a main 1.jpg','images/aspirateur a main 2.jpg'], 101)">
-            Ajouter au panier
-          </button>
+          <a href="product.html?pid=101" class="offer-btn" style="display: block; text-decoration: none; text-align: center; color: inherit;">
+    Voir le produit
+</a>
         </div>
       </div>
 
@@ -1761,10 +1759,9 @@
           <h4 class="offer-product-title">NETTOYEUR DE TACHES 4 EN 1</h4>
           <div class="offer-product-price">23,500 د.ج</div>
           <div class="offer-product-old-price">25,000 د.ج</div>
-          <button class="offer-btn"
-            onclick="addToCart('NETTOYEUR DE TACHES 4 EN 1', '23,500 د.ج', 23500, ['images/NETTOYEUR DE TACHES 4 EN 1.jpg', 'images/NETTOYEUR DE TACHES 4 EN 1 robuste.jpg' ], 102)">
-            Ajouter au panier
-          </button>
+          <a href="product.html?pid=102" class="offer-btn" style="display: block; text-decoration: none; text-align: center; color: inherit;">
+    Voir le produit
+</a>
         </div>
       </div>
 
@@ -2528,36 +2525,36 @@ renderCart();
             </button>
         ` : '';
         
-       const productCard = `
+      const productCard = `
     <div class="col-6 col-md-4 col-lg-3 mb-4">
-        <div class="product-card card h-100 position-relative">
-            ${productBadge}
-            ${discountBadge}
-            <div id="carousel-${product.id}" class="carousel slide product-carousel" data-bs-ride="carousel">
-                <div class="carousel-indicators">
-                    ${carouselIndicators}
+        <a href="product.html?pid=${product.id}" style="text-decoration: none; color: inherit;">
+            <div class="product-card card h-100 position-relative">
+                ${productBadge}
+                ${discountBadge}
+                <div id="carousel-${product.id}" class="carousel slide product-carousel" data-bs-ride="carousel">
+                    <div class="carousel-indicators">
+                        ${carouselIndicators}
+                    </div>
+                    <div class="carousel-inner">
+                        ${carouselItems}
+                    </div>
+                    ${carouselControls}
                 </div>
-                <div class="carousel-inner">
-                    ${carouselItems}
+                <div class="card-body">
+                    <h5 class="card-title">${product.name}</h5>
+                    <p class="card-text text-muted small">${product.description}</p>
+                    <div class="d-flex align-items-center mt-3">
+                        ${oldPrice}
+                        <p dir="ltr" class="fw-bold text-primary mb-0">${product.price}</p>
+                    </div>
                 </div>
-                ${carouselControls}
-            </div>
-            <div class="card-body">
-                <h5 class="card-title">${product.name}</h5>
-                <p class="card-text text-muted small">${product.description}</p>
-                <div class="d-flex align-items-center mt-3">
-                    ${oldPrice}
-                    <p dir="ltr" class="fw-bold text-primary mb-0">${product.price}</p>
+                <div class="card-footer bg-transparent border-0">
+                    <button class="btn btn-orange w-100">
+                        <i class="bi bi-eye"></i> Voir le produit
+                    </button>
                 </div>
             </div>
-            <div class="card-footer bg-transparent border-0">
-               
-<button class="btn btn-orange w-100" 
-        onclick="addToCart('${product.name}', '${product.price}', ${product.priceValue}, ['${product.images.join("','")}'], ${product.id})">
-    <i class="bi bi-cart-plus"></i> Ajouter au panier
-</button>
-            </div>
-        </div>
+        </a>
     </div>
 `;
         container.innerHTML += productCard;
@@ -3419,5 +3416,4 @@ showSlides1();
         </div>
     </div>
 </div></body></html>
-
 
