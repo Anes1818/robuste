@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Products Admin Dashboard</title>
+    <title>لوحة تحكم المنتجات</title>
     <style>
         :root {
             --primary: #4a6fa5;
@@ -88,6 +88,13 @@
             border-radius: 4px;
             box-sizing: border-box;
             font-size: 16px;
+            direction: ltr;
+            text-align: left;
+        }
+
+        textarea.form-control {
+            direction: rtl;
+            text-align: right;
         }
 
         body.dark-mode .form-control {
@@ -199,7 +206,7 @@
         .products-table th,
         .products-table td {
             padding: 12px 15px;
-            text-align: left;
+            text-align: right;
             border-bottom: 1px solid var(--border);
         }
 
@@ -313,7 +320,9 @@
 
         .dynamic-item input {
             flex: 1;
-            margin-right: 10px;
+            margin-left: 10px;
+            direction: ltr;
+            text-align: left;
         }
 
         .remove-btn {
@@ -356,7 +365,7 @@
         .toast {
             position: fixed;
             bottom: 20px;
-            right: 20px;
+            left: 20px;
             padding: 15px 20px;
             background-color: var(--success);
             color: white;
@@ -426,23 +435,23 @@
     <!-- Login Screen -->
     <div id="loginScreen" class="login-container">
         <div class="login-form">
-            <h2>Admin Login</h2>
+            <h2>تسجيل الدخول للإدارة</h2>
             <div class="form-group">
-                <label for="password">Password</label>
-                <input type="password" id="password" class="form-control" placeholder="Enter admin password">
+                <label for="password">كلمة المرور</label>
+                <input type="password" id="password" class="form-control" placeholder="أدخل كلمة مرور المدير">
             </div>
-            <button id="loginBtn" class="btn btn-primary">Login</button>
+            <button id="loginBtn" class="btn btn-primary">تسجيل الدخول</button>
         </div>
     </div>
 
     <!-- Admin Dashboard -->
     <div id="adminDashboard" class="container" style="display: none;">
         <div class="admin-header">
-            <h1 class="admin-title">Products Admin Dashboard</h1>
+            <h1 class="admin-title">لوحة تحكم المنتجات</h1>
             <div class="admin-actions">
                 <button id="themeToggle" class="theme-toggle">🌙</button>
-                <button id="addProductBtn" class="btn btn-success">Add New Product</button>
-                <button id="logoutBtn" class="btn btn-danger">Logout</button>
+                <button id="addProductBtn" class="btn btn-success">إضافة منتج جديد</button>
+                <button id="logoutBtn" class="btn btn-danger">تسجيل الخروج</button>
             </div>
         </div>
 
@@ -457,80 +466,80 @@
     <div id="productModal" class="modal">
         <div class="modal-content">
             <div class="modal-header">
-                <h2 class="modal-title" id="modalTitle">Add New Product</h2>
+                <h2 class="modal-title" id="modalTitle">إضافة منتج جديد</h2>
                 <button class="close-btn" id="closeModal">&times;</button>
             </div>
             <form id="productForm">
                 <input type="hidden" id="productId">
                 <div class="form-row">
                     <div class="form-col">
-                        <label for="title">Title *</label>
-                        <input type="text" id="title" class="form-control" required>
+                        <label for="title">العنوان</label>
+                        <input type="text" id="title" class="form-control">
                     </div>
                     <div class="form-col">
-                        <label for="category">Category *</label>
-                        <input type="text" id="category" class="form-control" required>
+                        <label for="category">الفئة</label>
+                        <input type="text" id="category" class="form-control">
                     </div>
                 </div>
                 <div class="form-row">
                     <div class="form-col">
-                        <label for="price">Price (DA) *</label>
-                        <input type="number" id="price" class="form-control" min="0" step="0.01" required>
+                        <label for="price">السعر (دج)</label>
+                        <input type="number" id="price" class="form-control" min="0" step="0.01">
                     </div>
                     <div class="form-col">
-                        <label for="old_price">Old Price (DA)</label>
+                        <label for="old_price">السعر القديم (دج)</label>
                         <input type="number" id="old_price" class="form-control" min="0" step="0.01">
                     </div>
                 </div>
                 <div class="form-row">
                     <div class="form-col">
-                        <label for="stock">Stock *</label>
-                        <input type="number" id="stock" class="form-control" min="0" required>
+                        <label for="stock">المخزون</label>
+                        <input type="number" id="stock" class="form-control" min="0">
                     </div>
                     <div class="form-col">
-                        <label for="badge">Badge</label>
+                        <label for="badge">الشارة</label>
                         <input type="text" id="badge" class="form-control">
                     </div>
                 </div>
                 <div class="form-row">
                     <div class="form-col">
-                        <label for="description_short">Short Description *</label>
-                        <textarea id="description_short" class="form-control" rows="2" required></textarea>
+                        <label for="description_short">الوصف المختصر</label>
+                        <textarea id="description_short" class="form-control" rows="2"></textarea>
                     </div>
                 </div>
                 <div class="form-row">
                     <div class="form-col">
-                        <label for="description_long">Long Description</label>
+                        <label for="description_long">الوصف الطويل</label>
                         <textarea id="description_long" class="form-control" rows="4"></textarea>
                     </div>
                 </div>
                 <div class="form-row">
                     <div class="form-col">
-                        <label>Images</label>
+                        <label>الصور</label>
                         <div class="dynamic-list" id="imagesList">
                             <div class="dynamic-item">
-                                <input type="text" class="form-control image-input" placeholder="Image URL">
+                                <input type="text" class="form-control image-input" placeholder="رابط الصورة">
                                 <button type="button" class="remove-btn">&times;</button>
                             </div>
                         </div>
-                        <button type="button" class="add-btn" id="addImageBtn">Add Image</button>
+                        <button type="button" class="add-btn" id="addImageBtn">إضافة صورة</button>
                     </div>
                 </div>
                 <div class="form-row">
                     <div class="form-col">
-                        <label>Features</label>
+                        <label>الميزات</label>
                         <div class="dynamic-list" id="featuresList">
                             <div class="dynamic-item">
-                                <input type="text" class="form-control feature-input" placeholder="Feature">
+                                <input type="text" class="form-control feature-input" placeholder="الميزة">
                                 <button type="button" class="remove-btn">&times;</button>
                             </div>
                         </div>
-                        <button type="button" class="add-btn" id="addFeatureBtn">Add Feature</button>
+                        <button type="button" class="add-btn" id="addFeatureBtn">إضافة ميزة</button>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" id="cancelBtn">Cancel</button>
-                    <button type="submit" class="btn btn-primary" id="saveProductBtn">Save Product</button>
+                    <button type="button" class="btn btn-secondary" id="cancelBtn">إلغاء</button>
+                    <button type="submit" class="btn btn-primary" id="saveProductBtn">حفظ المنتج</button>
                 </div>
             </form>
         </div>
@@ -543,8 +552,8 @@
         // Configuration
         const GITHUB_USERNAME = 'Anes1818';
         const GITHUB_REPO = 'robuste';
-        const GITHUB_TOKEN = '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';
-        const ADMIN_PASSWORD_HASH = '8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918'; // "admin" SHA-256 hash
+        const GITHUB_TOKEN = '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';
+        const ADMIN_PASSWORD_HASH = '8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918';
 
         // State
         let products = [];
@@ -569,7 +578,7 @@
                 adminDashboard.style.display = 'block';
                 loadProducts();
             } else {
-                alert('Invalid password');
+                alert('كلمة المرور غير صحيحة');
             }
         });
 
@@ -600,11 +609,11 @@
 
         // Dynamic fields
         document.getElementById('addImageBtn').addEventListener('click', function() {
-            addDynamicField('imagesList', 'image-input', 'Image URL');
+            addDynamicField('imagesList', 'image-input', 'رابط الصورة');
         });
 
         document.getElementById('addFeatureBtn').addEventListener('click', function() {
-            addDynamicField('featuresList', 'feature-input', 'Feature');
+            addDynamicField('featuresList', 'feature-input', 'الميزة');
         });
 
         // Form submission
@@ -625,26 +634,27 @@
                 });
 
                 if (!response.ok) {
-                    throw new Error(`Failed to fetch products: ${response.status}`);
+                    throw new Error(`فشل في جلب المنتجات: ${response.status}`);
                 }
 
                 const data = await response.json();
                 fileSha = data.sha;
                 
-                // Decode base64 content
-                const content = atob(data.content);
+                // Decode base64 content with proper UTF-8 handling
+                const content = decodeURIComponent(escape(atob(data.content)));
                 products = JSON.parse(content);
                 
                 renderProducts();
             } catch (error) {
                 console.error('Error loading products:', error);
-                showToast('Error loading products: ' + error.message, true);
+                showToast('خطأ في تحميل المنتجات: ' + error.message, true);
             }
         }
 
         async function saveToGitHub() {
             try {
                 const content = JSON.stringify(products, null, 2);
+                // Proper UTF-8 encoding for Arabic text
                 const contentBase64 = btoa(unescape(encodeURIComponent(content)));
                 
                 const response = await fetch(`https://api.github.com/repos/${GITHUB_USERNAME}/${GITHUB_REPO}/contents/products.json`, {
@@ -652,27 +662,27 @@
                     headers: {
                         'Authorization': `token ${GITHUB_TOKEN}`,
                         'Accept': 'application/vnd.github.v3+json',
-                        'Content-Type': 'application/json'
+                        'Content-Type': 'application/json; charset=utf-8'
                     },
                     body: JSON.stringify({
-                        message: 'Update products.json via admin dashboard',
+                        message: 'تحديث products.json عبر لوحة التحكم',
                         content: contentBase64,
                         sha: fileSha
                     })
                 });
 
                 if (!response.ok) {
-                    throw new Error(`Failed to save products: ${response.status}`);
+                    throw new Error(`فشل في حفظ المنتجات: ${response.status}`);
                 }
 
                 const data = await response.json();
                 fileSha = data.content.sha;
                 
-                showToast('Products saved successfully!');
+                showToast('تم حفظ المنتجات بنجاح!');
                 return true;
             } catch (error) {
                 console.error('Error saving products:', error);
-                showToast('Error saving products: ' + error.message, true);
+                showToast('خطأ في حفظ المنتجات: ' + error.message, true);
                 return false;
             }
         }
@@ -680,7 +690,7 @@
         // Product CRUD operations
         function openModal(product = null) {
             currentProductId = product ? product.id : null;
-            modalTitle.textContent = product ? 'Edit Product' : 'Add New Product';
+            modalTitle.textContent = product ? 'تعديل المنتج' : 'إضافة منتج جديد';
             
             // Reset form
             productForm.reset();
@@ -690,39 +700,39 @@
             document.getElementById('featuresList').innerHTML = '';
             
             // Add initial empty fields
-            addDynamicField('imagesList', 'image-input', 'Image URL');
-            addDynamicField('featuresList', 'feature-input', 'Feature');
+            addDynamicField('imagesList', 'image-input', 'رابط الصورة');
+            addDynamicField('featuresList', 'feature-input', 'الميزة');
             
             // Populate form if editing
             if (product) {
                 document.getElementById('productId').value = product.id;
-                document.getElementById('title').value = product.title;
-                document.getElementById('price').value = product.price;
+                document.getElementById('title').value = product.title || '';
+                document.getElementById('price').value = product.price || '';
                 document.getElementById('old_price').value = product.old_price || '';
-                document.getElementById('description_short').value = product.description_short;
+                document.getElementById('description_short').value = product.description_short || '';
                 document.getElementById('description_long').value = product.description_long || '';
-                document.getElementById('stock').value = product.stock;
-                document.getElementById('category').value = product.category;
+                document.getElementById('stock').value = product.stock || '';
+                document.getElementById('category').value = product.category || '';
                 document.getElementById('badge').value = product.badge || '';
                 
                 // Populate images
                 document.getElementById('imagesList').innerHTML = '';
                 if (product.images && product.images.length > 0) {
                     product.images.forEach(image => {
-                        addDynamicField('imagesList', 'image-input', 'Image URL', image);
+                        addDynamicField('imagesList', 'image-input', 'رابط الصورة', image);
                     });
                 } else {
-                    addDynamicField('imagesList', 'image-input', 'Image URL');
+                    addDynamicField('imagesList', 'image-input', 'رابط الصورة');
                 }
                 
                 // Populate features
                 document.getElementById('featuresList').innerHTML = '';
                 if (product.features && product.features.length > 0) {
                     product.features.forEach(feature => {
-                        addDynamicField('featuresList', 'feature-input', 'Feature', feature);
+                        addDynamicField('featuresList', 'feature-input', 'الميزة', feature);
                     });
                 } else {
-                    addDynamicField('featuresList', 'feature-input', 'Feature');
+                    addDynamicField('featuresList', 'feature-input', 'الميزة');
                 }
             }
             
@@ -745,24 +755,18 @@
                 .map(input => input.value.trim())
                 .filter(value => value !== '');
             
-            // Validate required fields
-            if (!formData.get('title') || !formData.get('price') || !formData.get('description_short') || 
-                !formData.get('stock') || !formData.get('category')) {
-                showToast('Please fill in all required fields', true);
-                return;
-            }
-            
+            // Create product data with defaults for empty fields
             const productData = {
                 id: currentProductId || generateId(),
-                title: formData.get('title'),
-                price: parseInt(formData.get('price')),
+                title: formData.get('title') || '',
+                price: formData.get('price') ? parseInt(formData.get('price')) : 0,
                 old_price: formData.get('old_price') ? parseInt(formData.get('old_price')) : null,
                 images: images,
-                description_short: formData.get('description_short'),
+                description_short: formData.get('description_short') || '',
                 description_long: formData.get('description_long') || '',
                 features: features,
-                stock: parseInt(formData.get('stock')),
-                category: formData.get('category'),
+                stock: formData.get('stock') ? parseInt(formData.get('stock')) : 0,
+                category: formData.get('category') || '',
                 badge: formData.get('badge') || ''
             };
             
@@ -786,7 +790,7 @@
         }
 
         function deleteProduct(id) {
-            if (confirm('Are you sure you want to delete this product?')) {
+            if (confirm('هل أنت متأكد من حذف هذا المنتج؟')) {
                 products = products.filter(p => p.id !== id);
                 saveToGitHub().then(success => {
                     if (success) {
@@ -803,7 +807,7 @@
 
         function renderProducts() {
             if (products.length === 0) {
-                productsContainer.innerHTML = '<p>No products found.</p>';
+                productsContainer.innerHTML = '<p>لا توجد منتجات</p>';
                 return;
             }
             
@@ -811,13 +815,13 @@
                 <table class="products-table">
                     <thead>
                         <tr>
-                            <th>ID</th>
-                            <th>Image</th>
-                            <th>Title</th>
-                            <th>Price</th>
-                            <th>Category</th>
-                            <th>Stock</th>
-                            <th>Actions</th>
+                            <th>الرقم</th>
+                            <th>الصورة</th>
+                            <th>العنوان</th>
+                            <th>السعر</th>
+                            <th>الفئة</th>
+                            <th>المخزون</th>
+                            <th>الإجراءات</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -830,15 +834,15 @@
                         <td>
                             ${product.images && product.images.length > 0 ? 
                                 `<img src="${product.images[0]}" alt="${product.title}" class="product-image">` : 
-                                'No image'}
+                                'لا توجد صورة'}
                         </td>
                         <td>${product.title}</td>
-                        <td>${product.price} DA${product.old_price ? `<br><small><s>${product.old_price} DA</s></small>` : ''}</td>
+                        <td>${product.price} دج${product.old_price ? `<br><small><s>${product.old_price} دج</s></small>` : ''}</td>
                         <td>${product.category}</td>
                         <td>${product.stock}</td>
                         <td class="action-buttons">
-                            <button class="btn btn-warning btn-sm" onclick="openModal(${JSON.stringify(product).replace(/"/g, '&quot;')})">Edit</button>
-                            <button class="btn btn-danger btn-sm" onclick="deleteProduct(${product.id})">Delete</button>
+                            <button class="btn btn-warning btn-sm" onclick="openModal(${JSON.stringify(product).replace(/"/g, '&quot;')})">تعديل</button>
+                            <button class="btn btn-danger btn-sm" onclick="deleteProduct(${product.id})">حذف</button>
                         </td>
                     </tr>
                 `;
