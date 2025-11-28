@@ -33,15 +33,15 @@
 :root {
     --primary: #FF6B35;
     --primary-dark: #E05A2B;
-    --secondary: #12100e;
-    --light: #020202;
-    --dark: #f3f1f0;
+    --secondary: #FFF8F0;
+    --light: #FFFFFF;
+    --dark: #333333;
     --gray: #6C757D;
     --success: #28a745;
     --danger: #dc3545;
     --gradient: linear-gradient(135deg, #FF6B35 0%, #FF8E53 100%);
     --amazon-bg: #EAEDED;
-    --amazon-border: #101212;
+    --amazon-border: #DDD;
     --amazon-text: #0F1111;
     --amazon-price: #B12704;
 }
@@ -54,13 +54,13 @@ body {
 }
 
 .navbar {
-    background-color: var(--dark);
+    background-color: var(--light);
     box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
     transition: all 0.3s ease;
 }
 
 .navbar-brand {
-    color: var(--light) !important;
+    color: var(--primary) !important;
     font-weight: 700;
     font-size: 1.5rem;
 }
@@ -359,7 +359,7 @@ body {
     margin-bottom: 15px;
 }
 
-/* Related products section */
+/* Related products section - FIXED */
 .related-products {
     margin-top: 40px;
     padding: 40px 0;
@@ -387,6 +387,25 @@ body {
     gap: 20px;
     transition: transform 0.5s ease;
     padding: 10px 0;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
+    scrollbar-color: var(--primary) #f1f1f1;
+}
+
+.products-track::-webkit-scrollbar {
+    height: 8px;
+}
+
+.products-track::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+}
+
+.products-track::-webkit-scrollbar-thumb {
+    background: var(--primary);
+    border-radius: 10px;
 }
 
 .product-slide {
@@ -703,17 +722,19 @@ body {
 
 <body>
     <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top bg-white shadow-sm">
         <div class="container">
             <a class="navbar-brand" href="index.html">
                 <img src="https://i.postimg.cc/7P7BK44r/f525e1dd-9f2c-4160-aed1-882a8b28b75c-20250703-131500-0000.png" 
                      alt="Robuste Logo" class="d-inline-block align-top" 
                      style="width: 150px; height: auto; max-height: 40px; object-fit:fill;">
-                <span class="d-none d-lg-inline fw-bold fs-4 ms-2">ROBUSTE eulma</span>
+                <span class="d-none d-lg-inline fw-bold fs-4 ms-2" style="color: #FF6B35;">ROBUSTE eulma</span>
             </a>
             
             <!-- Language switcher -->
-
+            <div class="language-switcher me-3">
+                <a href="ar/product.html" class="btn btn-sm btn-outline-secondary">العربية</a>
+            </div>
             
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
@@ -730,7 +751,7 @@ body {
             
             <!-- Cart icon with counter -->
             <div class="cart-icon-container ms-lg-4">
-                <span class="cart-label d-none d-lg-inline text-white">panier</span>
+                <span class="cart-label d-none d-lg-inline">panier</span>
                 <a href="#" class="cart-btn position-relative" onclick="toggleCart(); return false;">
                     <i class="bi bi-cart3"></i>
                     <span class="position-absolute badge rounded-pill bg-danger" id="cartCount">0</span>
@@ -972,19 +993,24 @@ body {
             emailjs.init("k77vdaUWPpnLrfTnS");
         })();
 
-        // Shopping cart management
+        // Shopping cart management - UPDATED TO MATCH INDEX.HTML
         let cart = [];
         let currentProduct = null;
         let relatedProducts = [];
 
-        try {
-            const cartData = localStorage.getItem('robuste_cart');
-            if (cartData) {
-                cart = JSON.parse(cartData);
+        // Load cart from localStorage
+        function loadCart() {
+            try {
+                const cartData = localStorage.getItem('robuste_cart');
+                if (cartData) {
+                    cart = JSON.parse(cartData);
+                }
+            } catch (e) {
+                console.error('Erreur lors du chargement du panier:', e);
+                cart = [];
             }
-        } catch (e) {
-            console.error('Erreur lors du chargement du panier:', e);
-            cart = [];
+            updateCartCount();
+            renderCart();
         }
 
         // Update cart counter
@@ -997,6 +1023,152 @@ body {
             const count = cart.reduce((total, item) => total + (item.quantity || 0), 0);
             cartCount.textContent = count;
             checkoutBtn.disabled = count === 0;
+        }
+
+        // Render cart items
+        function renderCart() {
+            const cartItems = document.getElementById('cartItems');
+            const emptyCartMessage = document.getElementById('emptyCartMessage');
+            const cartTotal = document.getElementById('cartTotal');
+            
+            if (!cartItems || !cartTotal) return;
+            
+            // Clear current content
+            while (cartItems.firstChild) {
+                cartItems.removeChild(cartItems.firstChild);
+            }
+            
+            if (cart.length === 0) {
+                const emptyDiv = document.createElement('div');
+                emptyDiv.className = 'text-center py-4 text-muted';
+                emptyDiv.id = 'emptyCartMessage';
+                emptyDiv.innerHTML = '<i class="bi bi-cart-x display-4 d-block mb-2"></i>سلة المشتريات فارغة';
+                cartItems.appendChild(emptyDiv);
+                cartTotal.textContent = '0 د.ج';
+                return;
+            }
+            
+            let total = 0;
+            cart.forEach((item, index) => {
+                const itemTotal = (item.price || 0) * (item.quantity || 0);
+                total += itemTotal;
+                
+                const itemElement = document.createElement('div');
+                itemElement.className = 'cart-item';
+                itemElement.dataset.id = item.id || '';
+                
+                itemElement.innerHTML = `
+                    <div class="d-flex">
+                        <img src="${item.image || ''}" alt="${item.name || 'منتج'}" class="cart-item-img me-3" style="width: 80px; height: 80px; object-fit: contain; border-radius: 8px; background-color: #f8f8f8; padding: 5px;">
+                        <div class="cart-item-details">
+                            <div class="cart-item-title">${item.name || 'منتج بدون اسم'}</div>
+                            <div class="cart-item-price">${item.price || 0} د.ج</div>
+                            <div class="quantity-controls">
+                                <button class="quantity-btn" data-action="decrease" data-index="${index}">-</button>
+                                <input type="number" class="quantity-input" value="${item.quantity || 1}" min="1" data-index="${index}">
+                                <button class="quantity-btn" data-action="increase" data-index="${index}">+</button>
+                            </div>
+                        </div>
+                        <button class="remove-item align-self-start" data-index="${index}">
+                            <i class="bi bi-trash"></i>
+                        </button>
+                    </div>
+                `;
+                
+                cartItems.appendChild(itemElement);
+            });
+            
+            cartTotal.textContent = `${total.toLocaleString('ar-DZ')} د.ج`;
+            
+            // Add event listeners after rendering
+            attachCartEventListeners();
+        }
+
+        // Add event listeners to cart items
+        function attachCartEventListeners() {
+            // Quantity buttons
+            document.querySelectorAll('.quantity-btn').forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    const index = parseInt(this.dataset.index);
+                    const action = this.dataset.action;
+                    
+                    if (isNaN(index) || index < 0 || index >= cart.length) return;
+                    
+                    if (action === 'increase') {
+                        updateQuantity(index, cart[index].quantity + 1);
+                    } else if (action === 'decrease') {
+                        updateQuantity(index, cart[index].quantity - 1);
+                    }
+                });
+            });
+            
+            // Quantity inputs
+            document.querySelectorAll('.quantity-input').forEach(input => {
+                input.addEventListener('change', function(e) {
+                    const index = parseInt(this.dataset.index);
+                    if (isNaN(index) || index < 0 || index >= cart.length) return;
+                    
+                    const newQuantity = parseInt(this.value) || 1;
+                    updateQuantity(index, newQuantity);
+                });
+                
+                // Prevent non-numeric input
+                input.addEventListener('keydown', function(e) {
+                    if (!/[\d\b\t\n]|Arrow|Delete|Backspace|Tab/.test(e.key) && 
+                        !(e.ctrlKey || e.metaKey)) {
+                        e.preventDefault();
+                    }
+                });
+            });
+            
+            // Remove buttons
+            document.querySelectorAll('.remove-item').forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    const index = parseInt(this.dataset.index);
+                    if (isNaN(index) || index < 0 || index >= cart.length) return;
+                    
+                    removeFromCart(index);
+                });
+            });
+        }
+
+        // Update item quantity
+        function updateQuantity(index, newQuantity) {
+            if (isNaN(index) || index < 0 || index >= cart.length) return;
+            
+            if (newQuantity < 1) {
+                removeFromCart(index);
+                return;
+            }
+            
+            cart[index].quantity = newQuantity;
+            
+            try {
+                localStorage.setItem('robuste_cart', JSON.stringify(cart));
+            } catch (e) {
+                console.error('Erreur lors de la mise à jour du panier:', e);
+            }
+            
+            renderCart();
+            updateCartCount();
+        }
+
+        // Remove item from cart
+        function removeFromCart(index) {
+            if (isNaN(index) || index < 0 || index >= cart.length) return;
+            
+            const productName = cart[index].name || 'منتج';
+            cart.splice(index, 1);
+            
+            try {
+                localStorage.setItem('robuste_cart', JSON.stringify(cart));
+            } catch (e) {
+                console.error('Erreur lors de la mise à jour du panier:', e);
+            }
+            
+            renderCart();
+            updateCartCount();
+            showStatus(`تمت إزالة "${productName}" من السلة`, 'success');
         }
 
         // Add product to cart
@@ -1035,6 +1207,7 @@ body {
             }
             
             updateCartCount();
+            renderCart();
             showStatus(`"${name}" a été ajouté au panier`, 'success');
         }
 
@@ -1053,6 +1226,12 @@ body {
                 document.getElementById('cartOffcanvas').classList.add('show');
                 document.body.classList.add('offcanvas-open');
             }
+        }
+
+        // Checkout function
+        function checkout() {
+            // Redirect to index.html for checkout
+            window.location.href = 'index.html';
         }
 
         // Load product data
@@ -1435,7 +1614,7 @@ body {
 
         // Page initialization
         document.addEventListener('DOMContentLoaded', function() {
-            updateCartCount();
+            loadCart(); // Load cart from localStorage
             loadProduct();
         });
     </script>
