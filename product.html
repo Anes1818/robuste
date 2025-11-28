@@ -13,9 +13,9 @@
 
 <!-- Theme color -->
 <meta name="theme-color" content="#ff6600">
-<title>Robuste eulma - Produit</title>
+<title>Robuste eulma - Accueil</title>
 
-<!-- Google Fonts -->
+<!-- Google Fonts (Tajawal) -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
@@ -26,20 +26,27 @@
 <!-- Bootstrap Icons -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
 
-<!-- EmailJS -->
-<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
-
 <style>
+/* أنماط موقع Robuste الأصلية */
 :root {
     --primary: #FF6B35;
     --primary-dark: #E05A2B;
+    --primary-light: rgba(255, 107, 53, 0.1);
     --secondary: #FFF8F0;
     --light: #FFFFFF;
     --dark: #333333;
     --gray: #6C757D;
     --success: #28a745;
     --danger: #dc3545;
-    --gradient: linear-gradient(135deg, #FF6B35 0%, #FF8E53 100%);
+    --shadow-sm: 0 2px 8px rgba(0,0,0,0.08);
+    --shadow-md: 0 4px 20px rgba(0,0,0,0.12);
+    --shadow-lg: 0 8px 30px rgba(0,0,0,0.15);
+    --border-radius: 12px;
+    --border-radius-lg: 20px;
+}
+
+* {
+    box-sizing: border-box;
 }
 
 body {
@@ -47,12 +54,14 @@ body {
     background-color: var(--secondary);
     color: var(--dark);
     padding-top: 56px;
+    line-height: 1.6;
 }
 
 .navbar {
     background-color: var(--light);
-    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+    box-shadow: var(--shadow-sm);
     transition: all 0.3s ease;
+    border-bottom: 1px solid rgba(0,0,0,0.05);
 }
 
 .navbar-brand {
@@ -61,240 +70,51 @@ body {
     font-size: 1.5rem;
 }
 
-/* أنماط صفحة المنتج المحسنة */
-.product-page {
-    padding: 40px 0;
-}
-
-.product-gallery {
-    position: sticky;
-    top: 80px;
-}
-
-.main-image {
-    border-radius: 16px;
+/* أنماط جديدة للصفحة الرئيسية */
+.hero-section {
+    background: linear-gradient(135deg, rgba(255,107,53,0.1) 0%, rgba(255,255,255,0.8) 100%);
+    padding: 120px 0 100px;
+    position: relative;
     overflow: hidden;
-    margin-bottom: 15px;
-    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 450px;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-    transition: all 0.3s ease;
+    border-bottom-left-radius: var(--border-radius-lg);
+    border-bottom-right-radius: var(--border-radius-lg);
 }
 
-.main-image:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+.hero-content {
+    position: relative;
+    z-index: 2;
 }
 
-.main-image img {
-    max-width: 100%;
-    max-height: 100%;
-    object-fit: contain;
-    transition: transform 0.3s ease;
-}
-
-.main-image:hover img {
-    transform: scale(1.05);
-}
-
-.thumbnails {
-    display: flex;
-    gap: 12px;
-    overflow-x: auto;
-    padding: 15px 0;
-}
-
-.thumbnail {
-    width: 80px;
-    height: 80px;
-    border-radius: 12px;
-    overflow: hidden;
-    cursor: pointer;
-    border: 3px solid transparent;
-    transition: all 0.3s ease;
-    flex-shrink: 0;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-}
-
-.thumbnail.active {
-    border-color: var(--primary);
-    transform: scale(1.1);
-}
-
-.thumbnail img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.3s ease;
-}
-
-.thumbnail:hover img {
-    transform: scale(1.1);
-}
-
-.product-info {
-    background: white;
-    border-radius: 20px;
-    padding: 35px;
-    box-shadow: 0 10px 40px rgba(0,0,0,0.08);
-    border: 1px solid rgba(255, 107, 53, 0.1);
-}
-
-.product-badge {
-    display: inline-block;
-    background: var(--gradient);
-    color: white;
-    padding: 8px 20px;
-    border-radius: 25px;
-    font-size: 0.9rem;
-    font-weight: 700;
-    margin-bottom: 20px;
-    box-shadow: 0 4px 15px rgba(255, 107, 53, 0.3);
-    animation: pulse 2s infinite;
-}
-
-@keyframes pulse {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.05); }
-    100% { transform: scale(1); }
-}
-
-.product-title {
-    font-size: 2.2rem;
+.hero-title {
+    font-size: 3.5rem;
     font-weight: 800;
     margin-bottom: 20px;
     color: var(--dark);
-    background: linear-gradient(135deg, #333 0%, #666 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    line-height: 1.2;
 }
 
-.rating {
-    display: flex;
-    align-items: center;
-    margin-bottom: 25px;
-    background: #f8f9fa;
-    padding: 12px 20px;
-    border-radius: 15px;
-}
-
-.stars {
-    color: #FFD700;
-    margin-left: 10px;
-    font-size: 1.2rem;
-}
-
-.rating-text {
-    color: var(--gray);
-    font-size: 1rem;
-    font-weight: 600;
-}
-
-.price-section {
+.hero-subtitle {
+    font-size: 1.3rem;
     margin-bottom: 30px;
-    padding: 20px;
-    background: linear-gradient(135deg, #fff5f5 0%, #fff0f0 100%);
-    border-radius: 15px;
-    border-left: 4px solid var(--primary);
-}
-
-.current-price {
-    font-size: 2.5rem;
-    font-weight: 900;
-    color: var(--primary);
-    margin-left: 10px;
-    text-shadow: 0 2px 4px rgba(0,0,0,0.1);
-}
-
-.old-price {
-    font-size: 1.4rem;
     color: var(--gray);
-    text-decoration: line-through;
-}
-
-.discount {
-    background: var(--danger);
-    color: white;
-    padding: 6px 15px;
-    border-radius: 20px;
-    font-size: 1rem;
-    font-weight: 700;
-    margin-right: 10px;
-    box-shadow: 0 4px 12px rgba(220, 53, 69, 0.3);
-}
-
-.features-list {
-    margin: 30px 0;
-    background: #f8f9fa;
-    padding: 25px;
-    border-radius: 15px;
-}
-
-.features-list li {
-    margin-bottom: 12px;
-    padding-right: 35px;
-    position: relative;
-    font-size: 1.1rem;
     line-height: 1.6;
 }
 
-.features-list li:before {
-    content: "✓";
-    position: absolute;
-    right: 0;
-    color: var(--success);
-    font-weight: bold;
-    font-size: 1.3rem;
-    background: white;
-    width: 28px;
-    height: 28px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-}
-
-.stock-info {
-    display: flex;
-    align-items: center;
-    margin-bottom: 25px;
-    padding: 20px;
-    background: linear-gradient(135deg, #f0fff4 0%, #e6ffed 100%);
-    border-radius: 12px;
-    border: 2px solid var(--success);
-}
-
-.stock-info.in-stock {
-    color: var(--success);
-}
-
-.stock-info i {
-    margin-left: 15px;
-    font-size: 1.5rem;
-}
-
-.action-buttons {
+.hero-buttons {
     display: flex;
     gap: 15px;
-    margin-top: 35px;
+    flex-wrap: wrap;
 }
 
 .btn-orange {
-    background: var(--gradient);
+    background-color: var(--primary);
     color: white;
     border: none;
-    padding: 16px 30px;
-    border-radius: 12px;
+    padding: 14px 30px;
+    border-radius: var(--border-radius);
     font-weight: 700;
-    font-size: 1.1rem;
     transition: all 0.3s;
-    flex: 1;
-    box-shadow: 0 6px 20px rgba(255, 107, 53, 0.3);
+    box-shadow: var(--shadow-sm);
     position: relative;
     overflow: hidden;
 }
@@ -307,127 +127,73 @@ body {
     width: 100%;
     height: 100%;
     background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
-    transition: left 0.5s;
+    transition: all 0.5s;
+}
+
+.btn-orange:hover {
+    background-color: var(--primary-dark);
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-md);
 }
 
 .btn-orange:hover:before {
     left: 100%;
 }
 
-.btn-orange:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 10px 25px rgba(255, 107, 53, 0.4);
-}
-
 .btn-outline-orange {
     border: 2px solid var(--primary);
     color: var(--primary);
     background: transparent;
-    padding: 16px 30px;
-    border-radius: 12px;
+    padding: 14px 30px;
+    border-radius: var(--border-radius);
     font-weight: 700;
-    font-size: 1.1rem;
     transition: all 0.3s;
-    flex: 1;
     position: relative;
     overflow: hidden;
 }
 
 .btn-outline-orange:hover {
-    background: var(--gradient);
+    background-color: var(--primary);
     color: white;
     transform: translateY(-3px);
-    box-shadow: 0 8px 20px rgba(255, 107, 53, 0.3);
+    box-shadow: var(--shadow-sm);
 }
 
-.shipping-info {
-    margin-top: 30px;
-    padding: 25px;
-    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-    border-radius: 15px;
-    border: 1px solid rgba(0,0,0,0.05);
-}
-
-.shipping-info .item {
-    display: flex;
-    align-items: center;
-    margin-bottom: 15px;
-    padding: 12px;
-    background: white;
-    border-radius: 10px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-}
-
-.shipping-info .item i {
-    margin-left: 15px;
-    color: var(--primary);
-    font-size: 1.4rem;
-    background: var(--gradient);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-}
-
-.product-details {
-    margin-top: 60px;
-    background: white;
-    border-radius: 20px;
-    padding: 40px;
-    box-shadow: 0 10px 40px rgba(0,0,0,0.08);
-    border: 1px solid rgba(255, 107, 53, 0.1);
-}
-
-.details-tabs {
-    border-bottom: 2px solid #e9ecef;
-    margin-bottom: 30px;
-}
-
-.details-tabs .nav-link {
-    border: none;
-    color: var(--gray);
+.section-title {
+    font-size: 2.5rem;
     font-weight: 700;
-    padding: 15px 30px;
-    font-size: 1.1rem;
-    transition: all 0.3s;
+    text-align: center;
+    margin-bottom: 50px;
+    color: var(--dark);
     position: relative;
+    padding-bottom: 15px;
 }
 
-.details-tabs .nav-link.active {
-    color: var(--primary);
-    background: transparent;
-}
-
-.details-tabs .nav-link.active:after {
+.section-title:after {
     content: '';
     position: absolute;
-    bottom: -2px;
-    right: 0;
-    width: 100%;
-    height: 3px;
-    background: var(--gradient);
-    border-radius: 3px 3px 0 0;
+    bottom: 0;
+    right: 50%;
+    transform: translateX(50%);
+    width: 80px;
+    height: 4px;
+    background: var(--primary);
+    border-radius: 2px;
 }
 
-.description-content {
-    line-height: 1.8;
-    font-size: 1.15rem;
-    color: #555;
-}
-
-.features-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 25px;
-    margin-top: 30px;
+.features-section {
+    padding: 100px 0;
 }
 
 .feature-card {
-    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-    padding: 30px 25px;
-    border-radius: 15px;
+    background: white;
+    border-radius: var(--border-radius);
+    padding: 35px 25px;
     text-align: center;
+    box-shadow: var(--shadow-sm);
     transition: all 0.3s ease;
-    border: 1px solid rgba(255, 107, 53, 0.1);
+    height: 100%;
+    border: 1px solid rgba(0,0,0,0.05);
     position: relative;
     overflow: hidden;
 }
@@ -436,409 +202,547 @@ body {
     content: '';
     position: absolute;
     top: 0;
-    left: 0;
     right: 0;
+    width: 100%;
     height: 4px;
-    background: var(--gradient);
+    background: var(--primary);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s ease;
 }
 
 .feature-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+    transform: translateY(-10px);
+    box-shadow: var(--shadow-md);
 }
 
-.feature-card i {
-    font-size: 2.5rem;
-    background: var(--gradient);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    margin-bottom: 20px;
+.feature-card:hover:before {
+    transform: scaleX(1);
 }
 
-/* قسم المنتجات المقترحة */
-.related-products {
-    margin-top: 80px;
-    padding: 60px 0;
-    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-}
-
-.section-title {
-    text-align: center;
-    font-size: 2.5rem;
-    font-weight: 800;
-    margin-bottom: 50px;
-    background: linear-gradient(135deg, #333 0%, #666 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-}
-
-.products-slider {
-    position: relative;
-    overflow: hidden;
-}
-
-.products-track {
-    display: flex;
-    gap: 30px;
-    transition: transform 0.5s ease;
-    padding: 20px 0;
-}
-
-.product-slide {
-    flex: 0 0 300px;
-    background: white;
-    border-radius: 20px;
-    overflow: hidden;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-    transition: all 0.3s ease;
-    position: relative;
-}
-
-.product-slide:hover {
-    transform: translateY(-10px) scale(1.02);
-    box-shadow: 0 20px 50px rgba(0,0,0,0.15);
-}
-
-.product-slide img {
-    width: 100%;
-    height: 200px;
-    object-fit: cover;
-}
-
-.product-slide-content {
-    padding: 20px;
-}
-
-.slide-nav {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    background: white;
-    border: none;
-    width: 50px;
-    height: 50px;
+.feature-icon {
+    width: 80px;
+    height: 80px;
+    background: var(--primary-light);
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-    z-index: 10;
-    transition: all 0.3s;
+    margin: 0 auto 20px;
+    transition: all 0.3s ease;
+}
+
+.feature-card:hover .feature-icon {
+    background: var(--primary);
+    transform: scale(1.1);
+}
+
+.feature-card:hover .feature-icon i {
+    color: white;
+}
+
+.feature-icon i {
+    font-size: 2rem;
+    color: var(--primary);
+    transition: all 0.3s ease;
+}
+
+.feature-title {
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin-bottom: 15px;
+}
+
+.why-choose-section {
+    padding: 100px 0;
+    background: white;
+    border-radius: var(--border-radius-lg);
+    margin: 30px 0;
+}
+
+.reason-card {
+    background: var(--secondary);
+    border-radius: var(--border-radius);
+    padding: 30px;
+    margin-bottom: 30px;
+    transition: all 0.3s ease;
+    border-left: 4px solid var(--primary);
+    box-shadow: var(--shadow-sm);
+    position: relative;
+    overflow: hidden;
+}
+
+.reason-card:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, var(--primary-light) 0%, transparent 100%);
+    opacity: 0;
+    transition: all 0.3s ease;
+}
+
+.reason-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-md);
+}
+
+.reason-card:hover:before {
+    opacity: 1;
+}
+
+.reason-number {
+    width: 50px;
+    height: 50px;
+    background: var(--primary);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
     font-size: 1.2rem;
+    margin-bottom: 20px;
+    position: relative;
+    z-index: 1;
+}
+
+.products-section {
+    padding: 100px 0;
+}
+
+.product-card {
+    background: white;
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+    transition: all 0.3s ease;
+    margin-bottom: 30px;
+    border: 1px solid rgba(0,0,0,0.05);
+    position: relative;
+}
+
+.product-card:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, var(--primary-light) 0%, transparent 100%);
+    opacity: 0;
+    transition: all 0.3s ease;
+    z-index: 1;
+}
+
+.product-card:hover {
+    transform: translateY(-10px);
+    box-shadow: var(--shadow-md);
+}
+
+.product-card:hover:before {
+    opacity: 1;
+}
+
+.product-image {
+    height: 220px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f8f9fa;
+    position: relative;
+    z-index: 2;
+}
+
+.product-image img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    transition: all 0.5s ease;
+}
+
+.product-card:hover .product-image img {
+    transform: scale(1.05);
+}
+
+.product-info {
+    padding: 25px 20px;
+    position: relative;
+    z-index: 2;
+}
+
+.product-name {
+    font-weight: 700;
+    margin-bottom: 10px;
+    font-size: 1.1rem;
+}
+
+.product-price {
+    color: var(--primary);
+    font-weight: 800;
+    font-size: 1.2rem;
+}
+
+.product-old-price {
+    color: var(--gray);
+    text-decoration: line-through;
+    font-size: 0.9rem;
+    margin-left: 10px;
+}
+
+.reviews-section {
+    padding: 100px 0;
+    background: white;
+    border-radius: var(--border-radius-lg);
+    margin: 30px 0;
+}
+
+.review-card {
+    background: var(--secondary);
+    border-radius: var(--border-radius);
+    padding: 30px;
+    margin-bottom: 30px;
+    box-shadow: var(--shadow-sm);
+    border-left: 4px solid var(--primary);
+    position: relative;
+    overflow: hidden;
+}
+
+.review-card:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, var(--primary-light) 0%, transparent 100%);
+    opacity: 0;
+    transition: all 0.3s ease;
+}
+
+.review-card:hover:before {
+    opacity: 1;
+}
+
+.review-stars {
+    color: #FFD700;
+    margin-bottom: 15px;
+    font-size: 1.2rem;
+}
+
+.review-text {
+    font-style: italic;
+    margin-bottom: 20px;
+    line-height: 1.6;
+    position: relative;
+    z-index: 1;
+}
+
+.review-author {
+    font-weight: 700;
+    color: var(--dark);
+    position: relative;
+    z-index: 1;
+}
+
+.steps-section {
+    padding: 100px 0;
+}
+
+.step-card {
+    text-align: center;
+    padding: 30px;
+    position: relative;
+}
+
+.step-card:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--primary-light);
+    border-radius: var(--border-radius);
+    opacity: 0;
+    transition: all 0.3s ease;
+}
+
+.step-card:hover:before {
+    opacity: 1;
+}
+
+.step-number {
+    width: 70px;
+    height: 70px;
+    background: var(--primary);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 1.5rem;
+    margin: 0 auto 20px;
+    position: relative;
+    z-index: 1;
+    box-shadow: var(--shadow-sm);
+}
+
+.step-card h3, .step-card p {
+    position: relative;
+    z-index: 1;
+}
+
+.faq-section {
+    padding: 100px 0;
+    background: white;
+    border-radius: var(--border-radius-lg);
+    margin: 30px 0;
+}
+
+.faq-item {
+    margin-bottom: 15px;
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+    border: 1px solid rgba(0,0,0,0.05);
+}
+
+.faq-question {
+    background-color: #f8f9fa;
+    padding: 20px;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.faq-question:after {
+    content: '\f282';
+    font-family: 'Bootstrap Icons';
+    transition: all 0.3s ease;
+}
+
+.faq-question:hover {
+    background-color: #e9ecef;
+}
+
+.faq-answer {
+    padding: 0 20px;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+    background-color: white;
+}
+
+.faq-item.active .faq-answer {
+    padding: 20px;
+    max-height: 500px;
+}
+
+.faq-item.active .faq-question {
+    background-color: var(--primary-light);
     color: var(--primary);
 }
 
-.slide-nav:hover {
-    background: var(--primary);
-    color: white;
-    transform: translateY(-50%) scale(1.1);
+.faq-item.active .faq-question:after {
+    transform: rotate(180deg);
 }
 
-.slide-prev {
-    right: -25px;
+.about-section {
+    padding: 100px 0;
 }
 
-.slide-next {
-    left: -25px;
+.about-content {
+    font-size: 1.1rem;
+    line-height: 1.8;
 }
 
-/* نافذة الطلب المحسنة */
-.order-modal .modal-content {
-    border-radius: 20px;
-    border: none;
-    box-shadow: 0 25px 50px rgba(0,0,0,0.2);
-    overflow: hidden;
-}
-
-.order-modal .modal-header {
-    background: var(--gradient);
-    color: white;
-    border-bottom: none;
-    padding: 25px 30px;
-}
-
-.order-modal .modal-title {
-    font-weight: 700;
-    font-size: 1.5rem;
-}
-
-.order-modal .modal-body {
-    padding: 30px;
-}
-
-.order-summary-card {
-    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-    border-radius: 15px;
-    padding: 25px;
-    margin-bottom: 25px;
-    border: 2px dashed var(--primary);
-}
-
-.form-floating {
+.about-content p {
     margin-bottom: 20px;
 }
 
-.form-floating label {
-    color: #666;
-    font-weight: 500;
+/* Dark Mode Styles */
+body.dark-mode {
+    background-color: #111;
+    color: #eee;
 }
 
-.form-control, .form-select {
-    border-radius: 12px;
-    border: 2px solid #e9ecef;
-    padding: 15px;
-    font-size: 1rem;
-    transition: all 0.3s;
+body.dark-mode .navbar {
+    background-color: #222;
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.3);
+    border-bottom: 1px solid rgba(255,255,255,0.05);
 }
 
-.form-control:focus, .form-select:focus {
-    border-color: var(--primary);
-    box-shadow: 0 0 0 0.25rem rgba(255, 107, 53, 0.25);
-    transform: translateY(-2px);
+body.dark-mode .navbar-brand,
+body.dark-mode .nav-link {
+    color: #eee !important;
 }
 
-.payment-methods {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-    gap: 15px;
-    margin: 25px 0;
+body.dark-mode .feature-card,
+body.dark-mode .product-card,
+body.dark-mode .review-card,
+body.dark-mode .faq-section {
+    background-color: #222;
+    color: #eee;
+    border-color: rgba(255,255,255,0.05);
 }
 
-.payment-method {
-    border: 2px solid #e9ecef;
-    border-radius: 12px;
-    padding: 15px;
-    text-align: center;
+body.dark-mode .reason-card,
+body.dark-mode .step-card {
+    background-color: #333;
+    color: #eee;
+}
+
+body.dark-mode .hero-section {
+    background: linear-gradient(135deg, rgba(255,107,53,0.1) 0%, rgba(34,34,34,0.8) 100%);
+}
+
+body.dark-mode .section-title {
+    color: #eee;
+}
+
+body.dark-mode .faq-question {
+    background-color: #333;
+    color: #eee;
+}
+
+body.dark-mode .faq-question:hover {
+    background-color: #444;
+}
+
+body.dark-mode .faq-answer {
+    background-color: #222;
+}
+
+body.dark-mode .faq-item.active .faq-question {
+    background-color: rgba(255, 107, 53, 0.2);
+}
+
+body.dark-mode .why-choose-section,
+body.dark-mode .reviews-section,
+body.dark-mode .faq-section {
+    background-color: #222;
+}
+
+/* Dark Mode Toggle */
+.dark-mode-toggle {
+    background: none;
+    border: none;
+    color: var(--primary);
+    font-size: 1.2rem;
     cursor: pointer;
-    transition: all 0.3s;
-    background: white;
+    transition: all 0.3s ease;
+    padding: 8px 12px;
+    border-radius: 50%;
+    background-color: var(--primary-light);
 }
 
-.payment-method:hover {
-    border-color: var(--primary);
-    transform: translateY(-2px);
+.dark-mode-toggle:hover {
+    background-color: var(--primary);
+    color: white;
 }
 
-.payment-method.active {
-    border-color: var(--primary);
-    background: rgba(255, 107, 53, 0.05);
-}
-
-.payment-method i {
-    font-size: 2rem;
-    margin-bottom: 10px;
-    background: var(--gradient);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-}
-
-/* تحسينات للهاتف */
-@media (max-width: 768px) {
-    .product-page {
-        padding: 20px 0;
-    }
-    
-    .main-image {
-        height: 300px;
-    }
-    
-    .product-title {
-        font-size: 1.8rem;
-    }
-    
-    .current-price {
-        font-size: 2rem;
-    }
-    
-    .action-buttons {
-        flex-direction: column;
-    }
-    
-    .product-info {
-        padding: 25px;
-    }
-    
-    .slide-nav {
-        display: none;
-    }
-    
-    .products-track {
-        gap: 20px;
-        padding: 10px;
-    }
-    
-    .product-slide {
-        flex: 0 0 280px;
-    }
-}
-
-/* أنماط السلة والتنبيهات */
+/* WhatsApp Button */
 .whatsapp-btn {
     position: fixed;
-    bottom: 25px;
-    left: 25px;
-    z-index: 1000;
+    bottom: 20px;
+    left: 20px;
     width: 60px;
     height: 60px;
-    border-radius: 50%;
-    background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+    background-color: #25D366;
     color: white;
+    border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 28px;
-    box-shadow: 0 8px 25px rgba(37, 211, 102, 0.4);
-    transition: all 0.3s;
+    font-size: 1.8rem;
+    box-shadow: var(--shadow-md);
+    z-index: 1000;
+    transition: all 0.3s ease;
+    text-decoration: none;
 }
 
 .whatsapp-btn:hover {
-    transform: scale(1.15) rotate(5deg);
-    box-shadow: 0 12px 30px rgba(37, 211, 102, 0.6);
-}
-
-.status-indicator {
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    z-index: 2000;
-    max-width: 400px;
-}
-
-.spinner-border {
-    width: 1.5rem;
-    height: 1.5rem;
-    border-width: 0.2em;
-}
-
-.order-confirmation {
-    background-color: rgba(255, 255, 255, 0.95);
-    border-left: 5px solid var(--success);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
-    border-radius: 15px;
-}
-
-.order-error {
-    background-color: rgba(255, 255, 255, 0.95);
-    border-left: 5px solid var(--danger);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
-    border-radius: 15px;
-}
-
-.cart-icon-container {
-    position: fixed;
-    top: 80px;
-    left: 20px;
-    z-index: 1000;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.cart-btn {
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: var(--gradient);
+    transform: scale(1.1);
     color: white;
-    border: none;
-    box-shadow: 0 6px 20px rgba(255, 107, 53, 0.4);
-    transition: all 0.3s ease;
-    text-decoration: none;
-    position: relative;
-    margin-left: 1vh;
-    top: 2vh;
+    box-shadow: var(--shadow-lg);
 }
 
-.cart-btn:hover {
-    transform: scale(1.15) rotate(5deg);
-    box-shadow: 0 10px 25px rgba(255, 107, 53, 0.6);
-}
-
-.cart-btn i {
-    font-size: 1.5rem;
-}
-
-#cartCount {
-    position: absolute;
-    top: -5px;
-    right: -5px;
-    background: var(--danger);
-    color: white;
-    border-radius: 50%;
-    width: 24px;
-    height: 24px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 0.8rem;
-    font-weight: bold;
-    border: 2px solid white;
-    animation: pulse 1.5s infinite;
-}
-
-@keyframes pulse {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.1); }
-    100% { transform: scale(1); }
-}
-
-.language-switcher {
-    display: flex;
-    gap: 5px;
-}
-
-/* تحسينات للشاشات الصغيرة */
+/* Responsive */
 @media (max-width: 768px) {
-    .cart-icon-container {
-        top: 70px;
-        left: 15px;
+    .hero-title {
+        font-size: 2.5rem;
     }
     
-    .cart-btn {
+    .hero-subtitle {
+        font-size: 1.1rem;
+    }
+    
+    .hero-buttons {
+        flex-direction: column;
+    }
+    
+    .section-title {
+        font-size: 2rem;
+    }
+    
+    .features-section,
+    .why-choose-section,
+    .products-section,
+    .reviews-section,
+    .steps-section,
+    .faq-section,
+    .about-section {
+        padding: 60px 0;
+    }
+    
+    .whatsapp-btn {
         width: 50px;
         height: 50px;
-    }
-    
-    .cart-btn i {
-        font-size: 1.3rem;
-    }
-    
-    #cartCount {
-        width: 20px;
-        height: 20px;
-        font-size: 0.7rem;
+        font-size: 1.5rem;
+        bottom: 15px;
+        left: 15px;
     }
 }
 
-/* تأثيرات دخول */
-.fade-in {
-    animation: fadeIn 0.8s ease-in;
-}
-
-.slide-in-up {
-    animation: slideInUp 0.8s ease-out;
-}
-
-@keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
-}
-
-@keyframes slideInUp {
-    from { 
+/* Animations */
+@keyframes fadeInUp {
+    from {
         opacity: 0;
         transform: translateY(30px);
     }
-    to { 
+    to {
         opacity: 1;
         transform: translateY(0);
     }
+}
+
+.fade-in-up {
+    animation: fadeInUp 0.6s ease forwards;
+}
+
+.delay-1 {
+    animation-delay: 0.1s;
+}
+
+.delay-2 {
+    animation-delay: 0.2s;
+}
+
+.delay-3 {
+    animation-delay: 0.3s;
+}
+
+.delay-4 {
+    animation-delay: 0.4s;
 }
 </style>
 </head>
@@ -847,12 +751,17 @@ body {
     <!-- نافبار مطابق للموقع الأصلي -->
     <nav class="navbar navbar-expand-lg navbar-light fixed-top bg-white shadow-sm">
         <div class="container">
-            <a class="navbar-brand" href="index.html">
+            <a class="navbar-brand" href="landing.html">
                 <img src="https://i.postimg.cc/7P7BK44r/f525e1dd-9f2c-4160-aed1-882a8b28b75c-20250703-131500-0000.png" 
                      alt="Robuste Logo" class="d-inline-block align-top" 
                      style="width: 180px; height: auto; max-height: 50px; object-fit:fill;">
                 <span class="d-none d-lg-inline fw-bold fs-4 ms-2" style="color: #FF6B35;">ROBUSTE eulma</span>
             </a>
+            
+            <!-- زر تبديل الوضع المظلم -->
+            <button class="dark-mode-toggle me-3" id="darkModeToggle">
+                <i class="bi bi-moon"></i>
+            </button>
             
             <!-- زر تغيير اللغة -->
             <div class="language-switcher me-3">
@@ -865,65 +774,291 @@ body {
             
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav me-auto">
-                    <li class="nav-item mx-2"><a class="nav-link" href="index.html">Accueil</a></li>
-                    <li class="nav-item"><a class="nav-link" href="index.html#products">Produits</a></li>
-                    <li class="nav-item"><a class="nav-link" href="index.html#reviews">Avis clients</a></li>
-                    <li class="nav-item"><a class="nav-link" href="index.html#contact">Contactez-nous</a></li>
+                    <li class="nav-item mx-2"><a class="nav-link active" href="landing.html">Accueil</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#products">Produits</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#reviews">Avis clients</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#contact">Contactez-nous</a></li>
                 </ul>
-            </div>
-            
-            <!-- أيقونة السلة مع عداد -->
-            <div class="cart-icon-container ms-lg-4">
-                <span class="cart-label d-none d-lg-inline">panier</span>
-                <a href="#" class="cart-btn position-relative" onclick="toggleCart(); return false;">
-                    <i class="bi bi-cart3"></i>
-                    <span class="position-absolute badge rounded-pill bg-danger" id="cartCount">0</span>
-                </a>
             </div>
         </div>
     </nav>
 
-    <!-- مؤشر الحالة -->
-    <div class="status-indicator" id="statusIndicator" style="display: none;">
-        <div class="alert alert-dismissible fade show" role="alert">
-            <span id="statusMessage"></span>
-            <button type="button" class="btn-close" onclick="hideStatus()"></button>
-        </div>
-    </div>
-
-    <!-- محتوى صفحة المنتج -->
-    <div class="container product-page">
-        <div class="row" id="productContainer">
-            <!-- سيتم تعبئة هذا القسم بالبيانات الديناميكية -->
-            <div class="text-center py-5">
-                <div class="spinner-border text-primary" role="status">
-                    <span class="visually-hidden">Chargement...</span>
+    <!-- قسم الهيرو -->
+    <section class="hero-section">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <div class="hero-content fade-in-up">
+                        <h1 class="hero-title">Électroménager de qualité supérieure</h1>
+                        <p class="hero-subtitle">Découvrez notre gamme d'appareils électroménagers robustes et fiables, conçus pour durer. Livraison rapide et garantie incluse dans toute l'Algérie.</p>
+                        <div class="hero-buttons">
+                            <a href="#products" class="btn btn-orange">Voir nos produits</a>
+                            <a href="#about" class="btn btn-outline-orange">En savoir plus</a>
+                        </div>
+                    </div>
                 </div>
-                <p class="mt-3">Chargement du produit...</p>
+                <div class="col-lg-6">
+                    <img src="https://i.postimg.cc/7P7BK44r/f525e1dd-9f2c-4160-aed1-882a8b28b75c-20250703-131500-0000.png" alt="Robuste Appliances" class="img-fluid fade-in-up delay-1">
+                </div>
             </div>
         </div>
-    </div>
+    </section>
 
-    <!-- قسم المنتجات المقترحة -->
-    <section class="related-products">
+    <!-- قسم المميزات -->
+    <section class="features-section">
         <div class="container">
-            <h2 class="section-title">Produits Similaires</h2>
-            <div class="products-slider">
-                <button class="slide-nav slide-prev" onclick="slideProducts(-1)">
-                    <i class="bi bi-chevron-right"></i>
-                </button>
-                <button class="slide-nav slide-next" onclick="slideProducts(1)">
-                    <i class="bi bi-chevron-left"></i>
-                </button>
-                <div class="products-track" id="productsTrack">
-                    <!-- سيتم تعبئة هذا القسم بالمنتجات المقترحة -->
+            <h2 class="section-title">Pourquoi choisir ROBUSTE ?</h2>
+            <div class="row">
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <div class="feature-card fade-in-up delay-1">
+                        <div class="feature-icon">
+                            <i class="bi bi-shield-check"></i>
+                        </div>
+                        <h3 class="feature-title">Garantie 2 ans</h3>
+                        <p>Tous nos produits sont couverts par une garantie de 2 ans pour votre tranquillité d'esprit.</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <div class="feature-card fade-in-up delay-2">
+                        <div class="feature-icon">
+                            <i class="bi bi-truck"></i>
+                        </div>
+                        <h3 class="feature-title">Livraison rapide</h3>
+                        <p>Livraison express dans toute l'Algérie. Recevez votre commande en 24-48 heures.</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <div class="feature-card fade-in-up delay-3">
+                        <div class="feature-icon">
+                            <i class="bi bi-credit-card"></i>
+                        </div>
+                        <h3 class="feature-title">Paiement sécurisé</h3>
+                        <p>Paiement à la livraison ou par carte Gold. Transactions 100% sécurisées.</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <div class="feature-card fade-in-up delay-4">
+                        <div class="feature-icon">
+                            <i class="bi bi-headset"></i>
+                        </div>
+                        <h3 class="feature-title">Support 7j/7</h3>
+                        <p>Notre équipe est disponible 7 jours sur 7 pour répondre à toutes vos questions.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- قسم لماذا تختار ROBUSTE -->
+    <section class="why-choose-section" id="about">
+        <div class="container">
+            <h2 class="section-title">Notre engagement qualité</h2>
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="reason-card fade-in-up delay-1">
+                        <div class="reason-number">1</div>
+                        <h3>Matériaux durables</h3>
+                        <p>Nous sélectionnons rigoureusement les matériaux pour assurer la longévité de nos produits.</p>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="reason-card fade-in-up delay-2">
+                        <div class="reason-number">2</div>
+                        <h3>Tests rigoureux</h3>
+                        <p>Chaque produit subit des tests de qualité stricts avant d'être mis en vente.</p>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="reason-card fade-in-up delay-3">
+                        <div class="reason-number">3</div>
+                        <h3>Service après-vente</h3>
+                        <p>Notre équipe SAV est formée pour résoudre rapidement tout problème technique.</p>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="reason-card fade-in-up delay-4">
+                        <div class="reason-number">4</div>
+                        <h3>Rapport qualité-prix</h3>
+                        <p>Nous proposons le meilleur rapport qualité-prix du marché algérien.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- قسم المنتجات الأكثر مبيعًا -->
+    <section class="products-section" id="products">
+        <div class="container">
+            <h2 class="section-title">Nos best-sellers</h2>
+            <div class="row" id="featuredProducts">
+                <!-- سيتم تعبئة هذا القسم بالمنتجات -->
+                <div class="col-12 text-center py-5">
+                    <div class="spinner-border text-primary" role="status">
+                        <span class="visually-hidden">Chargement...</span>
+                    </div>
+                    <p class="mt-3">Chargement des produits...</p>
+                </div>
+            </div>
+            <div class="text-center mt-4">
+                <a href="index.html#products" class="btn btn-orange">Voir tous les produits</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- قسم التقييمات -->
+    <section class="reviews-section" id="reviews">
+        <div class="container">
+            <h2 class="section-title">Ce que disent nos clients</h2>
+            <div class="row">
+                <div class="col-lg-4 col-md-6">
+                    <div class="review-card fade-in-up delay-1">
+                        <div class="review-stars">
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                        </div>
+                        <p class="review-text">"Produit de très haute qualité, livraison rapide. Je recommande vivement ROBUSTE!"</p>
+                        <div class="review-author">- Omar K.</div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="review-card fade-in-up delay-2">
+                        <div class="review-stars">
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-half"></i>
+                        </div>
+                        <p class="review-text">"Service client exceptionnel. Ils m'ont aidé à choisir le produit parfait pour mes besoins."</p>
+                        <div class="review-author">- Sarah M.</div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="review-card fade-in-up delay-3">
+                        <div class="review-stars">
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                        </div>
+                        <p class="review-text">"J'ai acheté plusieurs produits chez ROBUSTE, toujours satisfait de la qualité et du service."</p>
+                        <div class="review-author">- Ahmed B.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- قسم خطوات الشراء -->
+    <section class="steps-section">
+        <div class="container">
+            <h2 class="section-title">Comment commander ?</h2>
+            <div class="row">
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <div class="step-card fade-in-up delay-1">
+                        <div class="step-number">1</div>
+                        <h3>Choisissez</h3>
+                        <p>Parcourez notre catalogue et sélectionnez le produit qui vous convient.</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <div class="step-card fade-in-up delay-2">
+                        <div class="step-number">2</div>
+                        <h3>Commandez</h3>
+                        <p>Ajoutez le produit à votre panier et finalisez votre commande.</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <div class="step-card fade-in-up delay-3">
+                        <div class="step-number">3</div>
+                        <h3>Recevez</h3>
+                        <p>Nous livrons votre commande à votre domicile en 24-48 heures.</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <div class="step-card fade-in-up delay-4">
+                        <div class="step-number">4</div>
+                        <h3>Profitez</h3>
+                        <p>Utilisez votre nouvel appareil en toute sérénité avec notre garantie.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- قسم الأسئلة الشائعة -->
+    <section class="faq-section">
+        <div class="container">
+            <h2 class="section-title">Questions fréquentes</h2>
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="faq-list">
+                        <div class="faq-item">
+                            <div class="faq-question">
+                                <span>Quelles sont les zones de livraison ?</span>
+                            </div>
+                            <div class="faq-answer">
+                                <p>Nous livrons dans toutes les wilayas d'Algérie. La livraison est gratuite pour les commandes supérieures à 5000 DZD.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="faq-item">
+                            <div class="faq-question">
+                                <span>Quels sont les modes de paiement acceptés ?</span>
+                            </div>
+                            <div class="faq-answer">
+                                <p>Nous acceptons le paiement à la livraison (contre remboursement) ainsi que le paiement par carte Gold.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="faq-item">
+                            <div class="faq-question">
+                                <span>Comment puis-je suivre ma commande ?</span>
+                            </div>
+                            <div class="faq-answer">
+                                <p>Après confirmation de votre commande, nous vous enverrons un numéro de suivi par WhatsApp pour suivre l'état de votre livraison.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="faq-item">
+                            <div class="faq-question">
+                                <span>Que faire en cas de problème avec mon produit ?</span>
+                            </div>
+                            <div class="faq-answer">
+                                <p>Contactez notre service client via WhatsApp. Nous nous engageons à résoudre tout problème sous 48 heures.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- قسم About -->
+    <section class="about-section" id="about">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <h2 class="section-title text-start">À propos de ROBUSTE</h2>
+                    <div class="about-content">
+                        <p>Fondée en 2020, ROBUSTE s'est imposée comme une référence dans la vente d'électroménager en Algérie. Notre mission est de proposer des produits de qualité à des prix accessibles, accompagnés d'un service client exceptionnel.</p>
+                        <p>Nous sélectionnons rigoureusement chaque produit dans notre catalogue pour garantir durabilité, performance et satisfaction client. Notre équipe est passionnée par l'innovation et s'engage à vous offrir la meilleure expérience d'achat possible.</p>
+                        <p>Avec des milliers de clients satisfaits à travers le pays, nous continuons à grandir tout en restant fidèles à nos valeurs : qualité, fiabilité et service client irréprochable.</p>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <img src="https://i.postimg.cc/7P7BK44r/f525e1dd-9f2c-4160-aed1-882a8b28b75c-20250703-131500-0000.png" alt="À propos de ROBUSTE" class="img-fluid rounded">
                 </div>
             </div>
         </div>
     </section>
 
     <!-- فوتر مطابق للموقع الأصلي -->
-    <footer class="py-5 bg-dark text-white">
+    <footer class="py-5 bg-dark text-white" id="contact">
         <div class="container">
             <div class="row">
                 <div class="col-lg-4 mb-4">
@@ -936,10 +1071,10 @@ body {
                 <div class="col-lg-2 col-md-4 mb-4">
                     <h5 class="mb-3">Liens rapides</h5>
                     <ul class="list-unstyled">
-                        <li class="mb-2"><a href="index.html" class="text-white text-decoration-none">Accueil</a></li>
-                        <li class="mb-2"><a href="index.html#products" class="text-white text-decoration-none">Produits</a></li>
-                        <li class="mb-2"><a href="index.html#reviews" class="text-white text-decoration-none">Avis clients</a></li>
-                        <li class="mb-2"><a href="index.html#contact" class="text-white text-decoration-none">Contactez-nous</a></li>
+                        <li class="mb-2"><a href="landing.html" class="text-white text-decoration-none">Accueil</a></li>
+                        <li class="mb-2"><a href="#products" class="text-white text-decoration-none">Produits</a></li>
+                        <li class="mb-2"><a href="#reviews" class="text-white text-decoration-none">Avis clients</a></li>
+                        <li class="mb-2"><a href="#about" class="text-white text-decoration-none">À propos</a></li>
                     </ul>
                 </div>
                 <div class="col-lg-3 col-md-4 mb-4">
@@ -978,716 +1113,140 @@ body {
         <i class="bi bi-whatsapp"></i>
     </a>
 
-    <!-- سلة المشتريات -->
-    <div class="offcanvas offcanvas-end" tabindex="-1" id="cartOffcanvas" aria-labelledby="cartOffcanvasLabel">
-        <div class="offcanvas-header">
-            <h5 class="offcanvas-title" id="cartOffcanvasLabel">Panier d'achat</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-        </div>
-        <div class="offcanvas-body">
-            <div id="cartItems" class="mb-3">
-                <div class="text-center py-4 text-muted" id="emptyCartMessage">
-                    <i class="bi bi-cart-x display-4 d-block mb-2"></i>
-                    Panier d'achat فارغة
-                </div>
-            </div>
-            
-            <div class="cart-summary border-top pt-3">
-                <div class="d-flex justify-content-between mb-2">
-                    <span>Total:</span>
-                    <span id="cartTotal">0 د.ج</span>
-                </div>
-                <button class="btn btn-orange w-100" onclick="checkout()" id="checkoutBtn" disabled>
-                    <i class="bi bi-bag-check"></i> Finaliser la commande
-                </button>
-            </div>
-        </div>
-    </div>
-
-    <!-- نافذة الطلب المباشر -->
-    <div class="modal fade order-modal" id="orderModal" tabindex="-1" aria-labelledby="orderModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="orderModalLabel">Commande Rapide</h5>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <div class="order-summary-card">
-                        <h6 class="mb-3">Résumé de la commande</h6>
-                        <div class="d-flex align-items-center">
-                            <img id="orderProductImage" class="product-image-thumb me-3" src="" alt="Produit" style="width: 80px; height: 80px; object-fit: cover; border-radius: 10px;">
-                            <div>
-                                <h5 id="orderProductName" class="mb-1"></h5>
-                                <p id="orderProductPrice" class="mb-0 text-primary fw-bold"></p>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <form id="quickOrderForm">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-floating">
-                                    <input type="text" class="form-control" id="quickFullName" placeholder="Nom complet" required>
-                                    <label for="quickFullName">Nom complet *</label>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-floating">
-                                    <input type="tel" class="form-control" id="quickPhone" placeholder="Téléphone" pattern="[0]{1}[5-7]{1}[0-9]{8}" required>
-                                    <label for="quickPhone">Numéro de téléphone *</label>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="row mt-3">
-                            <div class="col-md-6">
-                                <div class="form-floating">
-                                    <input type="email" class="form-control" id="quickEmail" placeholder="Email">
-                                    <label for="quickEmail">Email (optionnel)</label>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-floating">
-                                    <select class="form-select" id="quickWilaya" required>
-                                        <option value="">Sélectionnez votre wilaya</option>
-                                    </select>
-                                    <label for="quickWilaya">Wilaya *</label>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="form-floating mt-3">
-                            <textarea class="form-control" id="quickAddress" placeholder="Adresse" style="height: 100px"></textarea>
-                            <label for="quickAddress">Adresse de livraison</label>
-                        </div>
-                        
-                        <div class="payment-methods mt-4">
-                            <div class="payment-method active" onclick="selectPayment('cash')">
-                                <i class="bi bi-cash-coin"></i>
-                                <div>Paiement à la livraison</div>
-                            </div>
-                            <div class="payment-method" onclick="selectPayment('card')">
-                                <i class="bi bi-credit-card"></i>
-                                <div>Carte Gold</div>
-                            </div>
-                            <div class="payment-method" onclick="selectPayment('edahabia')">
-                                <i class="bi bi-phone"></i>
-                                <div>Edahabia</div>
-                            </div>
-                        </div>
-                        
-                        <input type="hidden" id="selectedPayment" value="cash">
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
-                    <button type="button" class="btn btn-orange" onclick="submitQuickOrder()">
-                        <i class="bi bi-send-check"></i> Confirmer la commande
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
-
     <!-- Scripts -->
-    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
     <script>
-        // ============== تهيئة Firebase ==============
-        const firebaseConfig = {
-            apiKey: "AIzaSyBTrnKCYOtfSSDYtmVQbzP2HcwgkLT565Y",
-            authDomain: "robuste-c8e0f.firebaseapp.com",
-            projectId: "robuste-c8e0f",
-            storageBucket: "robuste-c8e0f.appspot.com",
-            messagingSenderId: "975609984963",
-            appId: "1:975609984963:web:a481efb493a88d7bc7af76",
-            measurementId: "G-DWT7MZN028"
-        };
-
-        // تهيئة Firebase
-        firebase.initializeApp(firebaseConfig);
-        const db = firebase.firestore();
-
-        // تهيئة EmailJS
-        (function() {
-            emailjs.init("k77vdaUWPpnLrfTnS");
-        })();
-
-        // ============== إدارة سلة المشتريات ==============
-        let cart = [];
-        let currentProduct = null;
-        let relatedProducts = [];
-
-        try {
-            const cartData = localStorage.getItem('robuste_cart');
-            if (cartData) {
-                cart = JSON.parse(cartData);
-            }
-        } catch (e) {
-            console.error('Erreur lors du chargement du panier:', e);
-            cart = [];
-        }
-
-        // تحديث عداد السلة
-        function updateCartCount() {
-            const cartCount = document.getElementById('cartCount');
-            const checkoutBtn = document.getElementById('checkoutBtn');
+        // ========== Dark Mode Functionality ==========
+        function initDarkMode() {
+            const isDarkMode = localStorage.getItem('robuste_darkmode') === 'true';
             
-            if (!cartCount || !checkoutBtn) return;
-            
-            const count = cart.reduce((total, item) => total + (item.quantity || 0), 0);
-            cartCount.textContent = count;
-            checkoutBtn.disabled = count === 0;
-        }
-
-        // إضافة منتج إلى السلة
-        function addToCart(productName, productPrice, priceValue, productImages, productId) {
-            const name = typeof productName === 'string' ? productName : 'Produit sans nom';
-            const price = typeof priceValue === 'number' ? priceValue : 
-                         typeof productPrice === 'number' ? productPrice : 0;
-            const id = productId || Date.now().toString();
-            
-            let image = '';
-            if (Array.isArray(productImages) && productImages.length > 0) {
-                image = productImages[0];
-            } else if (typeof productImages === 'string') {
-                image = productImages;
+            if (isDarkMode) {
+                document.body.classList.add('dark-mode');
+                updateDarkModeToggle();
             }
             
-            const existingItemIndex = cart.findIndex(item => item.id === id);
+            document.getElementById('darkModeToggle').addEventListener('click', toggleDarkMode);
+        }
+
+        function toggleDarkMode() {
+            document.body.classList.toggle('dark-mode');
+            const isDarkMode = document.body.classList.contains('dark-mode');
             
-            if (existingItemIndex >= 0) {
-                cart[existingItemIndex].quantity += 1;
-            } else {
-                cart.push({
-                    id: id,
-                    name: name,
-                    price: price,
-                    image: image,
-                    quantity: 1
+            localStorage.setItem('robuste_darkmode', isDarkMode);
+            updateDarkModeToggle();
+        }
+
+        function updateDarkModeToggle() {
+            const toggleBtn = document.getElementById('darkModeToggle');
+            const isDarkMode = document.body.classList.contains('dark-mode');
+            toggleBtn.innerHTML = isDarkMode ? '<i class="bi bi-brightness-high"></i>' : '<i class="bi bi-moon"></i>';
+        }
+
+        // ========== FAQ Functionality ==========
+        function initFAQ() {
+            const faqItems = document.querySelectorAll('.faq-item');
+            
+            faqItems.forEach(item => {
+                const question = item.querySelector('.faq-question');
+                
+                question.addEventListener('click', () => {
+                    faqItems.forEach(otherItem => {
+                        if (otherItem !== item) {
+                            otherItem.classList.remove('active');
+                        }
+                    });
+                    
+                    item.classList.toggle('active');
                 });
-            }
-            
-            try {
-                localStorage.setItem('robuste_cart', JSON.stringify(cart));
-            } catch (e) {
-                console.error('Erreur lors de la sauvegarde du panier:', e);
-                showStatus('Impossible de sauvegarder le panier, la mémoire de stockage peut être pleine', 'error');
-            }
-            
-            updateCartCount();
-            showStatus(`"${name}" a été ajouté au panier`, 'success');
+            });
         }
 
-        // إظهار/إخفاء السلة
-        function toggleCart() {
-            if (cart.length === 0) {
-                showStatus('Le panier est vide', 'info');
-                return;
-            }
-            
-            try {
-                const cartOffcanvas = new bootstrap.Offcanvas(document.getElementById('cartOffcanvas'));
-                cartOffcanvas.show();
-            } catch (e) {
-                console.error('Erreur lors de l\'ouverture du panier:', e);
-                document.getElementById('cartOffcanvas').classList.add('show');
-                document.body.classList.add('offcanvas-open');
-            }
-        }
-
-        // ============== جلب بيانات المنتج ==============
-        async function loadProduct() {
-            const urlParams = new URLSearchParams(window.location.search);
-            const productId = parseInt(urlParams.get('pid'));
-            
-            if (!productId) {
-                showProductError('ID de produit non spécifié');
-                return;
-            }
-            
-            try {
-                const response = await fetch('products.json');
-                
-                if (!response.ok) {
-                    throw new Error('Erreur lors du chargement des produits');
-                }
-                
-                const products = await response.json();
-                const product = products.find(p => p.id === productId);
-                
-                if (!product) {
-                    showProductError('Produit non trouvé');
-                    return;
-                }
-                
-                currentProduct = product;
-                renderProduct(product);
-                loadRelatedProducts(product.category, product.id);
-                populateWilayas();
-            } catch (error) {
-                console.error('Erreur:', error);
-                showProductError('Erreur lors du chargement du produit');
-            }
-        }
-
-        // تحميل المنتجات المقترحة
-        async function loadRelatedProducts(category, currentProductId) {
+        // ========== Featured Products ==========
+        async function loadFeaturedProducts() {
             try {
                 const response = await fetch('products.json');
                 const products = await response.json();
                 
-                // تصفية المنتجات بنفس الفئة باستثناء المنتج الحالي
-                relatedProducts = products.filter(p => 
-                    p.category === category && p.id !== currentProductId
-                ).slice(0, 8); // أخذ أول 8 منتجات
+                // أخذ أفضل 4 منتجات
+                const featuredProducts = products.slice(0, 4);
                 
-                renderRelatedProducts();
+                renderFeaturedProducts(featuredProducts);
             } catch (error) {
-                console.error('Erreur lors du chargement des produits similaires:', error);
+                console.error('Error loading featured products:', error);
+                document.getElementById('featuredProducts').innerHTML = `
+                    <div class="col-12 text-center py-4 text-muted">
+                        <i class="bi bi-exclamation-triangle"></i>
+                        <p>لا يمكن تحميل المنتجات حالياً</p>
+                    </div>
+                `;
             }
         }
 
-        // عرض المنتجات المقترحة
-        function renderRelatedProducts() {
-            const track = document.getElementById('productsTrack');
+        function renderFeaturedProducts(products) {
+            const container = document.getElementById('featuredProducts');
             
-            if (relatedProducts.length === 0) {
-                track.innerHTML = '<p class="text-center text-muted">Aucun produit similaire trouvé</p>';
+            if (products.length === 0) {
+                container.innerHTML = `
+                    <div class="col-12 text-center py-4 text-muted">
+                        <p>لا توجد منتجات حالياً</p>
+                    </div>
+                `;
                 return;
             }
             
-            track.innerHTML = relatedProducts.map(product => `
-                <div class="product-slide fade-in">
-                    <img src="${product.images[0]}" alt="${product.title}" loading="lazy">
-                    <div class="product-slide-content">
-                        <h6 class="fw-bold">${product.title}</h6>
-                        <p class="text-muted small mb-2">${product.description_short}</p>
-                        <div class="d-flex justify-content-between align-items-center">
-                            <span class="fw-bold text-primary">${product.price.toLocaleString()} د.ج</span>
-                            <a href="product.html?pid=${product.id}" class="btn btn-sm btn-outline-primary">
-                                Voir
-                            </a>
+            const productsHTML = products.map(product => `
+                <div class="col-lg-3 col-md-6">
+                    <div class="product-card fade-in-up">
+                        <div class="product-image">
+                            <img src="${product.images[0]}" alt="${product.title}" loading="lazy">
+                        </div>
+                        <div class="product-info">
+                            <h4 class="product-name">${product.title}</h4>
+                            <div class="price-section">
+                                ${product.old_price ? `
+                                    <span class="product-old-price">${product.old_price.toLocaleString()} د.ج</span>
+                                ` : ''}
+                                <span class="product-price">${product.price.toLocaleString()} د.ج</span>
+                            </div>
+                            <a href="product.html?pid=${product.id}" class="btn btn-outline-orange w-100 mt-3">Voir le produit</a>
                         </div>
                     </div>
                 </div>
             `).join('');
+            
+            container.innerHTML = productsHTML;
         }
 
-        // تمرير المنتجات المقترحة
-        function slideProducts(direction) {
-            const track = document.getElementById('productsTrack');
-            const scrollAmount = 320; // عرض المنتج + الgap
-            track.scrollBy({ left: direction * scrollAmount, behavior: 'smooth' });
-        }
-
-        // تعبئة قائمة الولايات
-        function populateWilayas() {
-            const wilayas = [
-                "Adrar", "Chlef", "Laghouat", "Oum El Bouaghi", "Batna", "Béjaïa", "Biskra", "Béchar", "Blida",
-                "Bouira", "Tamanrasset", "Tébessa", "Tlemcen", "Tiaret", "Tizi Ouzou", "Alger", "Djelfa", "Jijel",
-                "Sétif", "Saïda", "Skikda", "Sidi Bel Abbès", "Annaba", "Guelma", "Constantine", "Médéa", "Mostaganem",
-                "M'Sila", "Mascara", "Ouargla", "Oran", "El Bayadh", "Illizi", "Bordj Bou Arréridj", "Boumerdès", "El Tarf",
-                "Tindouf", "Tissemsilt", "El Oued", "Khenchela", "Souk Ahras", "Tipaza", "Mila", "Aïn Defla", "Naâma",
-                "Aïn Témouchent", "Ghardaïa", "Relizane"
-            ];
-            
-            const wilayaSelect = document.getElementById('quickWilaya');
-            wilayas.forEach(wilaya => {
-                const option = document.createElement('option');
-                option.value = wilaya;
-                option.textContent = wilaya;
-                wilayaSelect.appendChild(option);
-            });
-        }
-
-        // عرض المنتج
-        function renderProduct(product) {
-            const container = document.getElementById('productContainer');
-            
-            // حساب نسبة الخصم
-            const discountPercentage = product.old_price ? 
-                Math.round(((product.old_price - product.price) / product.old_price) * 100) : 0;
-            
-            // إنشاء معرض الصور
-            const thumbnails = product.images.map((img, index) => `
-                <div class="thumbnail ${index === 0 ? 'active' : ''}" onclick="changeMainImage('${img}', this)">
-                    <img src="${img}" alt="Miniature ${index + 1}" loading="lazy">
-                </div>
-            `).join('');
-            
-            // إنشاء قائمة المميزات
-            const featuresList = product.features.map(feature => `
-                <li>${feature}</li>
-            `).join('');
-            
-            container.innerHTML = `
-                <div class="col-lg-6 mb-5">
-                    <div class="product-gallery">
-                        <div class="main-image">
-                            <img src="${product.images[0]}" alt="${product.title}" id="mainProductImage">
-                        </div>
-                        <div class="thumbnails">
-                            ${thumbnails}
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="col-lg-6 mb-5">
-                    <div class="product-info slide-in-up">
-                        ${product.badge ? `<span class="product-badge">${product.badge}</span>` : ''}
-                        
-                        <h1 class="product-title">${product.title}</h1>
-                        
-                        <div class="rating">
-                            <div class="stars">
-                                <i class="bi bi-star-fill"></i>
-                                <i class="bi bi-star-fill"></i>
-                                <i class="bi bi-star-fill"></i>
-                                <i class="bi bi-star-fill"></i>
-                                <i class="bi bi-star-half"></i>
-                            </div>
-                            <span class="rating-text">(4.2) · 128 avis</span>
-                        </div>
-                        
-                        <div class="price-section">
-                            ${product.old_price ? `
-                                <span class="discount">-${discountPercentage}%</span>
-                                <span class="old-price">${product.old_price.toLocaleString()} د.ج</span>
-                            ` : ''}
-                            <span class="current-price">${product.price.toLocaleString()} د.ج</span>
-                        </div>
-                        
-                        <p class="lead">${product.description_short}</p>
-                        
-                        <div class="features-list">
-                            <ul>
-                                ${featuresList}
-                            </ul>
-                        </div>
-                        
-                        <div class="stock-info ${product.stock > 0 ? 'in-stock' : ''}">
-                            <i class="bi ${product.stock > 0 ? 'bi-check-circle-fill' : 'bi-x-circle-fill'}"></i>
-                            <span>${product.stock > 0 ? `En stock (${product.stock} disponible${product.stock > 1 ? 's' : ''})` : 'Rupture de stock'}</span>
-                        </div>
-                        
-                        <div class="action-buttons">
-                            <button class="btn-orange" onclick="addToCart('${product.title}', '${product.price.toLocaleString()} د.ج', ${product.price}, ['${product.images.join("','")}'], ${product.id})">
-                                <i class="bi bi-cart-plus"></i> Ajouter au panier
-                            </button>
-                            <button class="btn-outline-orange" onclick="openQuickOrder('${product.title}', ${product.price}, '${product.images[0]}', ${product.id})">
-                                <i class="bi bi-lightning"></i> Commander maintenant
-                            </button>
-                        </div>
-                        
-                        <div class="shipping-info">
-                            <div class="item">
-                                <i class="bi bi-truck"></i>
-                                <span>Livraison gratuite à partir de 5000 د.ج</span>
-                            </div>
-                            <div class="item">
-                                <i class="bi bi-shield-check"></i>
-                                <span>Garantie 2 ans incluse</span>
-                            </div>
-                            <div class="item">
-                                <i class="bi bi-arrow-clockwise"></i>
-                                <span>Retour facile sous 14 jours</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="col-12">
-                    <div class="product-details slide-in-up">
-                        <ul class="nav nav-tabs details-tabs" id="productTabs" role="tablist">
-                            <li class="nav-item" role="presentation">
-                                <button class="nav-link active" id="description-tab" data-bs-toggle="tab" data-bs-target="#description" type="button" role="tab">Description</button>
-                            </li>
-                            <li class="nav-item" role="presentation">
-                                <button class="nav-link" id="features-tab" data-bs-toggle="tab" data-bs-target="#features" type="button" role="tab">Caractéristiques</button>
-                            </li>
-                            <li class="nav-item" role="presentation">
-                                <button class="nav-link" id="reviews-tab" data-bs-toggle="tab" data-bs-target="#reviews" type="button" role="tab">Avis</button>
-                            </li>
-                        </ul>
-                        
-                        <div class="tab-content mt-4" id="productTabsContent">
-                            <div class="tab-pane fade show active" id="description" role="tabpanel">
-                                <div class="description-content">
-                                    ${product.description_long}
-                                </div>
-                            </div>
-                            
-                            <div class="tab-pane fade" id="features" role="tabpanel">
-                                <div class="features-grid">
-                                    <div class="feature-card">
-                                        <i class="bi bi-lightning-charge"></i>
-                                        <h5>Haute performance</h5>
-                                        <p>Technologie avancée pour des résultats optimaux</p>
-                                    </div>
-                                    <div class="feature-card">
-                                        <i class="bi bi-shield-check"></i>
-                                        <h5>Sécurité garantie</h5>
-                                        <p>Normes de sécurité internationales</p>
-                                    </div>
-                                    <div class="feature-card">
-                                        <i class="bi bi-award"></i>
-                                        <h5>Qualité Robuste</h5>
-                                        <p>Fabriqué avec des matériaux durables</p>
-                                    </div>
-                                    <div class="feature-card">
-                                        <i class="bi bi-heart"></i>
-                                        <h5>Conception ergonomique</h5>
-                                        <p>Facile à utiliser au quotidien</p>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <div class="tab-pane fade" id="reviews" role="tabpanel">
-                                <div class="review-item mb-4">
-                                    <div class="d-flex align-items-center mb-2">
-                                        <div class="stars me-2">
-                                            <i class="bi bi-star-fill"></i>
-                                            <i class="bi bi-star-fill"></i>
-                                            <i class="bi bi-star-fill"></i>
-                                            <i class="bi bi-star-fill"></i>
-                                            <i class="bi bi-star-fill"></i>
-                                        </div>
-                                        <strong>Omar</strong>
-                                    </div>
-                                    <p>"Produit de très bonne qualité, je recommande!"</p>
-                                </div>
-                                
-                                <div class="review-item mb-4">
-                                    <div class="d-flex align-items-center mb-2">
-                                        <div class="stars me-2">
-                                            <i class="bi bi-star-fill"></i>
-                                            <i class="bi bi-star-fill"></i>
-                                            <i class="bi bi-star-fill"></i>
-                                            <i class="bi bi-star-fill"></i>
-                                            <i class="bi bi-star-half"></i>
-                                        </div>
-                                        <strong>Sarah</strong>
-                                    </div>
-                                    <p>"Très satisfaite de mon achat, livraison rapide."</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            `;
-            
-            // تهيئة التبويبات
-            const triggerTabList = [].slice.call(document.querySelectorAll('#productTabs button'));
-            triggerTabList.forEach(function (triggerEl) {
-                var tabTrigger = new bootstrap.Tab(triggerEl);
-                triggerEl.addEventListener('click', function (event) {
-                    event.preventDefault();
-                    tabTrigger.show();
-                });
-            });
-        }
-
-        // تغيير الصورة الرئيسية
-        function changeMainImage(src, element) {
-            document.getElementById('mainProductImage').src = src;
-            
-            // إزالة النشط من جميع الصور المصغرة
-            document.querySelectorAll('.thumbnail').forEach(thumb => {
-                thumb.classList.remove('active');
-            });
-            
-            // إضافة النشط للصورة المحددة
-            element.classList.add('active');
-        }
-
-        // فتح نافذة الطلب المباشر
-        function openQuickOrder(productName, productPrice, productImage, productId) {
-            document.getElementById('orderProductName').textContent = productName;
-            document.getElementById('orderProductPrice').textContent = productPrice.toLocaleString() + ' د.ج';
-            document.getElementById('orderProductImage').src = productImage;
-            
-            // حفظ بيانات المنتج للنظام
-            window.quickOrderProduct = {
-                name: productName,
-                price: productPrice,
-                image: productImage,
-                id: productId
+        // ========== Scroll Animation ==========
+        function initScrollAnimation() {
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.1
             };
             
-            const orderModal = new bootstrap.Modal(document.getElementById('orderModal'));
-            orderModal.show();
-        }
-
-        // اختيار طريقة الدفع
-        function selectPayment(method) {
-            document.getElementById('selectedPayment').value = method;
-            
-            // إزالة النشط من جميع الطرق
-            document.querySelectorAll('.payment-method').forEach(item => {
-                item.classList.remove('active');
-            });
-            
-            // إضافة النشط للطريقة المحددة
-            event.currentTarget.classList.add('active');
-        }
-
-        // إرسال الطلب المباشر
-        async function submitQuickOrder() {
-            const fullName = document.getElementById('quickFullName').value;
-            const phone = document.getElementById('quickPhone').value;
-            const email = document.getElementById('quickEmail').value || 'Non fourni';
-            const wilaya = document.getElementById('quickWilaya').value;
-            const address = document.getElementById('quickAddress').value || 'Non spécifiée';
-            const paymentMethod = document.getElementById('selectedPayment').value;
-            
-            // التحقق من صحة البيانات
-            if (!fullName || !phone || !wilaya) {
-                showStatus('Veuillez remplir tous les champs obligatoires', 'error');
-                return;
-            }
-            
-            const phoneRegex = /^0[5-7][0-9]{8}$/;
-            if (!phoneRegex.test(phone)) {
-                showStatus('Numéro de téléphone invalide. Doit contenir 10 chiffres et commencer par 05, 06 ou 07', 'error');
-                return;
-            }
-            
-            const orderData = {
-                product: window.quickOrderProduct.name,
-                productPrice: window.quickOrderProduct.price,
-                totalPrice: window.quickOrderProduct.price,
-                customer: fullName,
-                phone: phone,
-                email: email,
-                wilaya: wilaya,
-                address: address,
-                payment: paymentMethod,
-                timestamp: new Date().toISOString(),
-                status: 'Nouveau'
-            };
-            
-            // عرض حالة التحميل
-            showStatus('Traitement de votre commande...', 'loading');
-            
-            const submitBtn = document.querySelector('#orderModal .btn-orange');
-            submitBtn.disabled = true;
-            submitBtn.innerHTML = `
-                <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-                Traitement...
-            `;
-            
-            try {
-                // تخزين الطلب في Firebase
-                const docRef = await db.collection('orders').add(orderData);
-                
-                // إرسال إيميل
-                await emailjs.send("service_lc1q5k8", "template_a15g7yg", {
-                    order_id: docRef.id,
-                    customer_name: fullName,
-                    customer_phone: phone,
-                    customer_email: email,
-                    wilaya: wilaya,
-                    address: address,
-                    total_price: window.quickOrderProduct.price.toLocaleString(),
-                    payment_method: paymentMethod,
-                    order_date: new Date().toLocaleString('fr-FR'),
-                    product_name: window.quickOrderProduct.name
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('fade-in-up');
+                        observer.unobserve(entry.target);
+                    }
                 });
-                
-                // رسالة النجاح
-                showStatus(`
-                    <div class="text-center">
-                        <i class="bi bi-check-circle-fill text-success fs-1"></i>
-                        <h5 class="mt-2">Commande confirmée!</h5>
-                        <div class="text-start mt-3">
-                            <p><strong>Numéro de commande:</strong> ${docRef.id}</p>
-                            <p><strong>Nom:</strong> ${fullName}</p>
-                            <p><strong>Produit:</strong> ${window.quickOrderProduct.name}</p>
-                            <p><strong>Montant total:</strong> ${window.quickOrderProduct.price.toLocaleString()} د.ج</p>
-                            <p class="mt-3">Nous vous contacterons au <strong>${phone}</strong> dans les 24 heures.</p>
-                        </div>
-                    </div>
-                `, 'success');
-                
-                // إغلاق النافذة وإعادة تعيين النموذج
-                const orderModal = bootstrap.Modal.getInstance(document.getElementById('orderModal'));
-                orderModal.hide();
-                document.getElementById('quickOrderForm').reset();
-                
-            } catch (error) {
-                console.error('Erreur:', error);
-                showStatus('Erreur lors de l\'envoi de la commande. Veuillez réessayer.', 'error');
-            } finally {
-                submitBtn.disabled = false;
-                submitBtn.innerHTML = '<i class="bi bi-send-check"></i> Confirmer la commande';
-            }
+            }, observerOptions);
+            
+            // مراقبة العناصر التي لديها كلاس fade-in-up
+            document.querySelectorAll('.fade-in-up').forEach(el => {
+                observer.observe(el);
+            });
         }
 
-        // عرض خطأ المنتج
-        function showProductError(message) {
-            const container = document.getElementById('productContainer');
-            container.innerHTML = `
-                <div class="col-12 text-center py-5">
-                    <i class="bi bi-exclamation-triangle display-1 text-danger"></i>
-                    <h3 class="mt-3">${message}</h3>
-                    <p class="mb-4">Nous n'avons pas pu trouver le produit demandé.</p>
-                    <a href="index.html" class="btn btn-orange btn-lg">
-                        <i class="bi bi-arrow-left"></i> Retour à l'accueil
-                    </a>
-                </div>
-            `;
-        }
-
-        // ============== وظائف عرض الحالة ==============
-        function showStatus(message, type) {
-            const indicator = document.getElementById('statusIndicator');
-            const messageElement = document.getElementById('statusMessage');
-            
-            messageElement.innerHTML = message;
-            
-            const alert = indicator.querySelector('.alert');
-            alert.className = 'alert alert-dismissible fade show';
-            
-            switch (type) {
-                case 'success':
-                    alert.classList.add('alert-success', 'order-confirmation');
-                    break;
-                case 'error':
-                    alert.classList.add('alert-danger', 'order-error');
-                    break;
-                case 'info':
-                    alert.classList.add('alert-info');
-                    break;
-                case 'loading':
-                    alert.classList.add('alert-info');
-                    messageElement.innerHTML = `
-                        <span class="spinner-border spinner-border-sm me-2" role="status"></span>
-                        ${message}
-                    `;
-                    break;
-                default:
-                    alert.classList.add('alert-info');
-            }
-            
-            indicator.style.display = 'block';
-            
-            if (type === 'success') {
-                setTimeout(hideStatus, 8000);
-            }
-        }
-
-        function hideStatus() {
-            document.getElementById('statusIndicator').style.display = 'none';
-        }
-
-        // ============== تهيئة الصفحة ==============
+        // ========== Initialize Everything ==========
         document.addEventListener('DOMContentLoaded', function() {
-            updateCartCount();
-            loadProduct();
+            initDarkMode();
+            initFAQ();
+            loadFeaturedProducts();
+            initScrollAnimation();
         });
     </script>
 </body>
