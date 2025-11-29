@@ -30,7 +30,6 @@
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
 
 <style>
-/* جميع أنماط CSS السابقة تبقى كما هي */
 :root {
     --primary: #FF6B35;
     --primary-dark: #E05A2B;
@@ -42,47 +41,49 @@
     --danger: #dc3545;
 }
 
-body {
-    font-family: 'Tajawal', sans-serif;
-    background-color: var(--secondary);
-    color: var(--dark);
-    padding-top: 56px;
-}
-
-.navbar {
-    background-color: var(--light);
-    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
-    transition: all 0.3s ease;
-}
-
-.navbar-brand {
-    color: var(--primary) !important;
-    font-weight: 700;
-    font-size: 1.5rem;
-}
-
-.section-title {
-    position: relative;
-    margin-bottom: 40px;
-    padding-bottom: 15px;
-    font-weight: 800;
-    color: var(--dark);
-    text-align: center;
-}
-
-.section-title::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    right: 50%;
-    transform: translateX(50%);
-    width: 80px;
-    height: 4px;
-    background-color: var(--primary);
-    border-radius: 2px;
-}
-
-/* تصميم جديد يشبه أمازون */
+        
+        body {
+            font-family: 'Tajawal', sans-serif;
+            background-color: var(--secondary);
+            color: var(--dark);
+            padding-top: 56px;
+        }
+        
+        .navbar {
+            background-color: var(--light);
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .navbar-brand {
+            color: var(--primary) !important;
+            font-weight: 700;
+            font-size: 1.5rem;
+        }
+        
+        .section-title {
+            position: relative;
+            margin-bottom: 40px;
+            padding-bottom: 15px;
+            font-weight: 800;
+            color: var(--dark);
+            text-align: center;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 50%;
+            transform: translateX(50%);
+            width: 80px;
+            height: 4px;
+            background-color: var(--primary);
+            border-radius: 2px;
+        }
+        
+        
+     /* تصميم جديد يشبه أمازون */
 .product-card {
     border: 1px solid #e7e7e7;
     border-radius: 8px;
@@ -134,7 +135,7 @@ body {
     height: 40px;
     overflow: hidden;
     display: -webkit-box;
-    -webkit-line-clamp: 2;
+    -webkit-line-clam: 2;
     -webkit-box-orient: vertical;
 }
 
@@ -216,92 +217,92 @@ body {
         height: 120px;
     }
 }  
-
-.btn-orange {
-    background-color: var(--primary);
-    color: white;
-    border: none;
-    padding: 10px 25px;
-    border-radius: 8px;
-    font-weight: 700;
-    transition: all 0.3s;
-}
-
-.btn-orange:hover {
-    background-color: var(--primary-dark);
-    transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-}
-
-.whatsapp-btn {
-    position: fixed;
-    bottom: 25px;
-    left: 25px;
-    z-index: 1000;
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    background-color: #25D366;
-    color: white;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 28px;
-    box-shadow: 0 5px 15px rgba(37, 211, 102, 0.3);
-    transition: all 0.3s;
-}
-
-.whatsapp-btn:hover {
-    transform: scale(1.1);
-}
-
-.status-indicator {
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    z-index: 2000;
-    max-width: 350px;
-}
-
-.spinner-border {
-    width: 1.5rem;
-    height: 1.5rem;
-    border-width: 0.2em;
-}
-
-.order-confirmation {
-    background-color: rgba(255, 255, 255, 0.95);
-    border-left: 5px solid var(--success);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-}
-
-.order-error {
-    background-color: rgba(255, 255, 255, 0.95);
-    border-left: 5px solid var(--danger);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-}
-
-.contact-card {
-    background: white;
-    border-radius: 12px;
-    padding: 25px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.08);
-    height: 100%;
-}
-
-.feature-icon {
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    background: var(--primary);
-    color: white;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.5rem;
-    margin-bottom: 15px;
-}
-
+        
+        .btn-orange {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 10px 25px;
+            border-radius: 8px;
+            font-weight: 700;
+            transition: all 0.3s;
+        }
+        
+        .btn-orange:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .whatsapp-btn {
+            position: fixed;
+            bottom: 25px;
+            left: 25px;
+            z-index: 1000;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background-color: #25D366;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            box-shadow: 0 5px 15px rgba(37, 211, 102, 0.3);
+            transition: all 0.3s;
+        }
+        
+        .whatsapp-btn:hover {
+            transform: scale(1.1);
+        }
+        
+        .status-indicator {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 2000;
+            max-width: 350px;
+        }
+        
+        .spinner-border {
+            width: 1.5rem;
+            height: 1.5rem;
+            border-width: 0.2em;
+        }
+        
+        .order-confirmation {
+            background-color: rgba(255, 255, 255, 0.95);
+            border-left: 5px solid var(--success);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .order-error {
+            background-color: rgba(255, 255, 255, 0.95);
+            border-left: 5px solid var(--danger);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .contact-card {
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            height: 100%;
+        }
+        
+        .feature-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: var(--primary);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+        
 /* أنماط الهيرو الجديدة */
 .hero-container {
     width: 100%;
@@ -368,6 +369,7 @@ body {
     }
 }
 
+
 .product-badge {
     position: absolute;
     top: 15px;
@@ -393,115 +395,114 @@ body {
     font-weight: 600;
     z-index: 1;
 }
-
-.review-card {
-    background: white;
-    border-radius: 12px;
-    padding: 25px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.08);
-    height: 100%;
-    transition: all 0.3s;
-}
-
-.review-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 20px rgba(0,0,0,0.12);
-}
-
-.map-container {
-    height: 300px;
-    border-radius: 12px;
-    overflow: hidden;
-}
-
-/* تحسينات التجاوب */
-@media (max-width: 768px) {
-    .hero-title {
-        font-size: 2rem;
-    }
-    .hero-subtitle {
-        font-size: 1.1rem;
-    }
-    .section-title {
-        font-size: 1.5rem;
-    }
-    .map-container {
-        height: 250px;
-    }
-}
-
-.social-icon {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    background-color: rgba(0,0,0,0.1);
-    color: var(--dark);
-    margin-left: 10px;
-    transition: all 0.3s;
-}
-
-.social-icon:hover {
-    background-color: var(--primary);
-    color: white;
-    transform: translateY(-3px);
-}
-
-.confirmation-icon {
-    font-size: 5rem;
-    color: var(--success);
-    margin-bottom: 20px;
-    animation: pulse 1s infinite;
-}
-
-@keyframes pulse {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.1); }
-    100% { transform: scale(1); }
-}
-
-.order-summary {
-    background-color: #f8f9fa;
-    border-radius: 8px;
-    padding: 15px;
-    margin-bottom: 20px;
-}
-
-.product-image-thumb {
-    width: 60px;
-    height: 60px;
-    border-radius: 8px;
-    object-fit: cover;
-}
-
-.form-control:focus, .form-select:focus {
-    border-color: var(--primary);
-    box-shadow: 0 0 0 0.25rem rgba(255, 107, 53, 0.25);
-}
-
-/* تحسينات إضافية */
-.whatsapp-contact-btn {
-    background-color: #25D366;
-    color: white;
-    font-weight: 600;
-    transition: all 0.3s;
-}
-
-.whatsapp-contact-btn:hover {
-    background-color: #128C7E;
-    color: white;
-}
-
-.feature-item {
-    transition: transform 0.3s ease;
-}
-
-.feature-item:hover {
-    transform: translateY(-5px);
-}
-
+        
+        .review-card {
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            height: 100%;
+            transition: all 0.3s;
+        }
+        
+        .review-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+        }
+        
+        .map-container {
+            height: 300px;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+        
+        /* تحسينات التجاوب */
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2rem;
+            }
+            .hero-subtitle {
+                font-size: 1.1rem;
+            }
+            .section-title {
+                font-size: 1.5rem;
+            }
+            .map-container {
+                height: 250px;
+            }
+        }
+        
+        .social-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: rgba(0,0,0,0.1);
+            color: var(--dark);
+            margin-left: 10px;
+            transition: all 0.3s;
+        }
+        
+        .social-icon:hover {
+            background-color: var(--primary);
+            color: white;
+            transform: translateY(-3px);
+        }
+        
+        .confirmation-icon {
+            font-size: 5rem;
+            color: var(--success);
+            margin-bottom: 20px;
+            animation: pulse 1s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+        
+        .order-summary {
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .product-image-thumb {
+            width: 60px;
+            height: 60px;
+            border-radius: 8px;
+            object-fit: cover;
+        }
+        
+        .form-control:focus, .form-select:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 0.25rem rgba(255, 107, 53, 0.25);
+        }
+        
+        /* تحسينات إضافية */
+        .whatsapp-contact-btn {
+            background-color: #25D366;
+            color: white;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        
+        .whatsapp-contact-btn:hover {
+            background-color: #128C7E;
+            color: white;
+        }
+        
+        .feature-item {
+            transition: transform 0.3s ease;
+        }
+        
+        .feature-item:hover {
+            transform: translateY(-5px);
+        }
 /* ============== قسم العروض الخاصة ============== */
 .offers-section {
   background: linear-gradient(135deg, #FF6B35 0%, #FF8C42 50%, #FFA552 100%);
@@ -522,11 +523,11 @@ body {
   filter: blur(2px);
 }
 
-.products-grid > * {
-  flex: 0 0 auto;
-  scroll-snap-align: start;
-}
 
+.products-grid > * {
+  flex: 0 0 auto; /* يمنع التمدد */
+  scroll-snap-align: start; /* يخلي العنصر يبدأ من البداية */
+}
 /* ===== العنوان ===== */
 .offers-title {
   font-size: 2.8rem;
@@ -633,6 +634,7 @@ body {
   margin: 40px auto 0;
   display: flex;
   flex-wrap: nowrap;
+ 
   gap: 30px;
   padding: 0 20px;
   overflow-x: auto;
@@ -701,15 +703,16 @@ body {
   min-width: 100%;
 }
 
-.carousel-item img {
+
+  .carousel-item img {
     height: 200px;
     object-fit: cover; transition: transform 3s ease;
-}
-@media (min-width: 768px) {
+  }
+  @media (min-width: 768px) {
     .carousel-item img {
       height: 300px;
     }
-}
+  }
 
 .offer-product:hover .carousel-item img {
   transform: scale(1.05);
@@ -765,7 +768,7 @@ body {
   max-height: 42px;
   overflow: hidden;
   display: -webkit-box;
-  -webkit-line-clamp: 2;
+  -webkit-line-clam: 2;
   -webkit-box-orient: vertical;
 }
 
@@ -821,7 +824,6 @@ body {
     overflow-x: hidden;
   }
 }
-
 .product-card {
     border-radius: 10px;
     overflow: hidden;
@@ -845,7 +847,7 @@ body {
     height: 40px;
     overflow: hidden;
     display: -webkit-box;
-    -webkit-line-clamp: 2;
+    -webkit-line-lamp: 2 ;
     -webkit-box-orient: vertical;
 }
 
@@ -854,7 +856,7 @@ body {
     height: 40px;
     overflow: hidden;
     display: -webkit-box;
-    -webkit-line-clamp: 2;
+    -webkit-line-lamp: 2  ;
     -webkit-box-orient: vertical;
 }
 
@@ -882,9 +884,8 @@ body {
         padding: 8px 12px;
         font-size: 0.8rem;
     }
-}
 
-/* أضف هذا في قسم الأنماط */
+}/* أضف هذا في قسم الأنماط */
 .categories-filter {
     padding: 15px 0;
     border-bottom: 1px solid #eee;
@@ -924,9 +925,7 @@ body {
         padding: 6px 15px;
         font-size: 0.9rem;
     }
-}
-
-@media (max-width: 768px) {
+}@media (max-width: 768px) {
     .feature-item {
         flex: 0 0 25%;
         max-width: 25%;
@@ -948,40 +947,36 @@ body {
     .row.text-center {
         flex-wrap: nowrap;
     }
-}
-
-/* أضف هذا في قسم الـ media queries للهاتف */
+}/* أضف هذا في قسم الـ media queries للهاتف */
 @media (max-width: 768px) {
     .feature-item {
         flex: 0 0 auto;
-        width: 25%;
-        padding: 0 5px;
+        width: 25%; /* لجعل كل عنصر يأخذ 25% من العرض */
+        padding: 0 5px; /* تقليل المساحة الجانبية */
     }
     
     .feature-icon {
-        width: 40px;
+        width: 40px; /* تصغير حجم الأيقونة */
         height: 40px;
-        font-size: 1rem;
-        margin-bottom: 8px;
+        font-size: 1rem; /* تصغير حجم الخط */
+        margin-bottom: 8px; /* تقليل المسافة السفلية */
     }
     
     .feature-item h5 {
-        font-size: 0.8rem;
+        font-size: 0.8rem; /* تصغير حجم العنوان */
         margin-bottom: 5px;
     }
     
     .feature-item p {
-        font-size: 0.7rem;
-        display: none;
+        font-size: 0.7rem; /* تصغير حجم النص */
+        display: none; /* إخفاء النص على الهواتف إذا أردت */
     }
     
+    /* لجعل الصف يأخذ سطراً واحداً بدون لف */
     .row.text-center {
         flex-wrap: nowrap;
-        overflow-x: auto;
-    }
-}
-
-/* أضف هذا في قسم الـ media queries للهاتف */
+        overflow-x: auto; /* لتمكين التمرير الأفقي إذا لزم الأمر */
+    }/* أضف هذا في قسم الـ media queries للهاتف */
 @media (max-width: 768px) {
     /* تصغير حجم قسم العروض */
     .offers-section {
@@ -1060,9 +1055,7 @@ body {
         padding: 5px 15px !important;
         font-size: 0.8rem !important;
     }
-}
-
-/* تأثيرات حركية (أضفها في القسم العام) */
+}/* تأثيرات حركية (أضفها في القسم العام) */
 .offer-product {
     transition: all 0.3s ease;
     transform: scale(0.98);
@@ -1078,6 +1071,10 @@ body {
     scroll-behavior: smooth;
     -webkit-overflow-scrolling: touch;
 }
+
+
+}
+
 
 /* أنماط محسنة لزر السلة */
 .cart-icon-container {
@@ -1207,17 +1204,16 @@ body {
     }
     
     .cart-label {
-        display: none;
+        display: none; /* إخفاء النص على الشاشات الصغيرة جدًا */
     }
 }
 
 /* منع التداخل مع زر القائمة على الجوال */
 @media (max-width: 991px) {
     .navbar-toggler {
-        z-index: 1001;
+        z-index: 1001; /* تأكد من أن زر القائمة فوق زر السلة */
     }
 }
-
 /* ============== أنماط سلة المشتريات ============== */
 .offcanvas {
     font-family: 'Tajawal', sans-serif;
@@ -1425,7 +1421,6 @@ body {
 .cart-item {
     animation: slideIn 0.3s ease-out;
 }
-
 .slideshow-container1 { position: relative; max-width: 1000px; margin: auto; overflow: hidden;margin-top: 5px; }
 .mySlides1 { display: none; }
 .fade1 { animation: fade1 1.5s; }
@@ -1443,15 +1438,21 @@ body {
 }
 .active1, .dot1:hover { background: #717171; }
 .slideshow-container1 img {
-  width: 100%;
-  height: auto;
-  object-fit: contain;
-  display: block;
+  width: 100%;         /* تاخذ كامل عرض الحاوية */
+  height: auto;        /* تحافظ على النسبة */
+  object-fit: contain; /* أو cover حسب اللي يعجبك */
+  display: block;      /* تشيل الفراغات تحت الصورة */
 }
-
 .language-switcher {
     display: flex;
     gap: 5px;
+}
+
+
+/* الأساس: مسافات بسيطة بين الروابط */
+.language-switcher {
+  display: inline-flex;
+  gap: .5rem;
 }
 
 /* الأساس: مسافات بسيطة بين الروابط */
@@ -1477,14 +1478,19 @@ body {
     width: clamp(44px, 12vw, 56px);
     height: clamp(44px, 12vw, 56px);
     border-radius: 50% !important;
+
     display: flex;
     align-items: center;
     justify-content: center;
+
     padding: 0 !important;
-    font-size: 0;
+    font-size: 0; /* إخفاء النص الأصلي */
+
     background: linear-gradient(135deg, #ffffff, #f7f7f7);
     border: 1px solid #ddd;
     box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+
+    /* أنيميشن دخول */
     opacity: 0;
     transform: scale(0.6);
     animation: fadeInScale 0.5s ease forwards;
@@ -1523,10 +1529,7 @@ body {
   }
 }
 </style>
-</head>
-
-<body>
-<nav class="navbar navbar-expand-lg navbar-light fixed-top bg-white shadow-sm">
+</head><body><nav class="navbar navbar-expand-lg navbar-light fixed-top bg-white shadow-sm">
     <div class="container">
         <a class="navbar-brand" href="#">
             <img src="https://i.postimg.cc/7P7BK44r/f525e1dd-9f2c-4160-aed1-882a8b28b75c-20250703-131500-0000.png" 
@@ -1538,6 +1541,7 @@ body {
         <!-- زر تغيير اللغة خارج القائمة -->
         <div class="language-switcher me-3">
                 <a href="ar/index.html" class="btn btn-sm btn-outline-secondary">العربية</a>
+               
             </div>
         
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
@@ -1562,19 +1566,13 @@ body {
             </a>
         </div>
     </div>
-</nav>
+</nav><div class="status-indicator" id="statusIndicator" style="display: none;"><div class="alert alert-dismissible fade show" role="alert"><span id="statusMessage"></span> <button type="button" class="btn-close" onclick="hideStatus()"></button></div></div>
+  
 
-<div class="status-indicator" id="statusIndicator" style="display: none;">
-    <div class="alert alert-dismissible fade show" role="alert">
-        <span id="statusMessage"></span> 
-        <button type="button" class="btn-close" onclick="hideStatus()"></button>
-    </div>
-</div>
-
-<!-- قسم الهيرو -->
+<!-- بهذا الجزء المعدل -->
 <section class="hero-container position-relative">
     <div class="hero-image-container">
-        <img width="3780" height="1890" src="images/banner.webp" alt="أجهزة منزلية" class="hero-image">
+        <img   width="3780" height="1890" src="images/banner.webp" alt="أجهزة منزلية" class="hero-image">
         <div class="image-overlay"></div>
     </div>
     <div class="hero-content container text-center position-absolute top-50 start-50 translate-middle">
@@ -1587,7 +1585,7 @@ body {
     </div>
 </section>
 
-<!-- السلايدر -->
+   <!-- HTML -->
 <div class="slideshow-container1">
   <div class="mySlides1 fade1">
     <img src="images/signal-2025-08-21-103443_002.webp" style="width:100%">
@@ -1606,6 +1604,7 @@ body {
   </div>
   <a class="prev1" onclick="plusSlides1(-1)">&#10094;</a>
   <a class="next1" onclick="plusSlides1(1)">&#10095;</a>
+
 </div>
   
 <br>
@@ -1616,8 +1615,7 @@ body {
   <span class="dot1" onclick="currentSlide1(4)"></span>
 </div>
     
-<!-- قسم العروض الخاصة -->
-<section class="offers-section">
+   <section class="offers-section">
   <div class="container position-relative">
     <h2 class="offers-title">Offres spéciales</h2>
     <p class="offer-subtitle">Profitez de nos offres exceptionnelles sur les meilleurs appareils électriques avec des remises allant jusqu'à 20% pour une durée limitée</p>
@@ -1645,19 +1643,138 @@ body {
       </div>
     </div>
 
-    <!-- المنتجات سيتم تحميلها ديناميكيًا -->
-    <div class="row offer-products" id="specialOffersContainer">
-        <!-- سيتم حقن العروض الخاصة هنا -->
+    <!-- Produits -->
+    <div class="row offer-products">
+
+      <!-- المنتج 1 -->
+      <div class="col-md-4">
+        <div class="offer-product">
+          <div class="offer-product-discount">Quantité limitée</div>
+          <div class="offer-product-badge">Le plus demandé</div>
+
+          <div id="carousel-offer-1" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-indicators">
+              <button type="button" data-bs-target="#carousel-offer-1" data-bs-slide-to="0" class="active"></button>
+              <button type="button" data-bs-target="#carousel-offer-1" data-bs-slide-to="1"></button>
+              <button type="button" data-bs-target="#carousel-offer-1" data-bs-slide-to="2"></button>
+            </div>
+
+            <div class="carousel-inner">
+              <div class="carousel-item active">
+                 <img src="images/Robuste Defroisseur 1.jpg" class="d-block w-100" alt="Defroisseur" height="800" width="800">
+              </div>
+              <div class="carousel-item">
+                <img loading="lazy" src="images/Robuste Defroisseur 2.jpg" class="d-block w-100"  alt="Defroisseur" height="800" width="800">
+              </div>
+              <div class="carousel-item">
+                <img loading="lazy" src="images/Robuste Defroisseur.jpg" class="d-block w-100"  alt="Defroisseur"height="800" width="800" >
+              </div>
+            </div>
+
+            <button class="carousel-control-prev" type="button" data-bs-target="#carousel-offer-1" data-bs-slide="prev">
+              <span class="carousel-control-prev-icon"></span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carousel-offer-1" data-bs-slide="next">
+              <span class="carousel-control-next-icon"></span>
+            </button>
+          </div>
+
+          <h4 class="offer-product-title">Defroisseur Vapeur</h4>
+          <div class="offer-product-price">6500 د.ج</div>
+          <div class="offer-product-old-price">7000 د.ج</div>
+          <a href="product.html?pid=100" class="offer-btn" style="display: block; text-decoration: none; text-align: center; color: inherit;">
+    Voir le produit
+</a>
+        </div>
+      </div>
+
+      <!-- المنتج 2 -->
+      <div class="col-md-4">
+        <div class="offer-product">
+          <div class="offer-product-discount">خصم 10%</div>
+
+          <div id="carousel-offer-2" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-indicators">
+              <button type="button" data-bs-target="#carousel-offer-2" data-bs-slide-to="0" class="active"></button>
+              <button type="button" data-bs-target="#carousel-offer-2" data-bs-slide-to="1"></button>
+            </div>
+
+            <div class="carousel-inner">
+               <div class="carousel-item active">
+                <img loading="lazy" src="images/aspirateur a main 1.jpg" class="d-block w-100" alt="ASPIRATEUR SOUFFLEUR A MAIN 1" height="800" width="800">
+              </div>
+              <div class="carousel-item">
+                <img  sloading="lazy" src="images/aspirateur a main 2.jpg" class="d-block w-100" alt="ASPIRATEUR SOUFFLEUR A MAIN 2"   height="800" width="800"  >
+              </div>
+            
+            </div>
+
+            <button class="carousel-control-prev" type="button" data-bs-target="#carousel-offer-2" data-bs-slide="prev">
+              <span class="carousel-control-prev-icon"></span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carousel-offer-2" data-bs-slide="next">
+              <span class="carousel-control-next-icon"></span>
+            </button>
+          </div>
+
+          <h4 class="offer-product-title">ASPIRATEUR SOUFFLEUR A MAIN</h4>
+          <div class="offer-product-price">5000 د.ج</div>
+          <div class="offer-product-old-price">5600 د.ج</div>
+          <a href="product.html?pid=101" class="offer-btn" style="display: block; text-decoration: none; text-align: center; color: inherit;">
+    Voir le produit
+</a>
+        </div>
+      </div>
+
+      <!-- المنتج 3 -->
+      <div class="col-md-4">
+        <div class="offer-product">
+          <div class="offer-product-discount">خصم 20%</div>
+          <div class="offer-product-badge">Nouveau</div>
+
+          <div id="carousel-offer-3" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-indicators">
+              <button type="button" data-bs-target="#carousel-offer-3" data-bs-slide-to="0" class="active"></button>
+              <button type="button" data-bs-target="#carousel-offer-3" data-bs-slide-to="1"></button>
+            </div>
+
+            <div class="carousel-inner">
+              
+               <div class="carousel-item active">
+                <img loading="lazy" src="images/NETTOYEUR DE TACHES 4 EN 1.jpg" class="d-block w-100" alt="صورة المنتج 2"height="800" width="800" >
+              </div>
+              <div class="carousel-item">
+                <img loading="lazy" src="images/NETTOYEUR DE TACHES 4 EN 1 robuste.jpg" class="d-block w-100" alt="صورة المنتج 3" height="800" width="800" >
+              </div>
+            </div>
+
+            <button class="carousel-control-prev" type="button" data-bs-target="#carousel-offer-3" data-bs-slide="prev">
+              <span class="carousel-control-prev-icon"></span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carousel-offer-3" data-bs-slide="next">
+              <span class="carousel-control-next-icon"></span>
+            </button>
+          </div>
+
+          <h4 class="offer-product-title">NETTOYEUR DE TACHES 4 EN 1</h4>
+          <div class="offer-product-price">23,500 د.ج</div>
+          <div class="offer-product-old-price">25,000 د.ج</div>
+          <a href="product.html?pid=102" class="offer-btn" style="display: block; text-decoration: none; text-align: center; color: inherit;">
+    Voir le produit
+</a>
+        </div>
+      </div>
+
     </div>
   </div>
 </section>    
-
-<!-- قسم المنتجات -->
-<section id="products" class="py-5">
+                            <section id="products" class="py-5">
     <div class="container">
+
+
         <h2 class="section-title">أحدث Produits</h2>
         
-        <!-- فلاتر الفئات -->
+        <!-- أضف هذا الجزء الNouveau هنا -->
         <div class="categories-filter mb-5">
             <div class="d-flex flex-wrap justify-content-center gap-2">
                 <button class="btn btn-outline-primary category-btn active" data-category="all">Tous</button>
@@ -1669,325 +1786,37 @@ body {
                 <button class="btn btn-outline-primary category-btn" data-category="café">Machines à café</button>
             </div>
         </div>
+        <!-- نهاية الجزء الNouveau -->
         
-        <!-- حاوية المنتجات -->
-        <div class="row" id="productsContainer">
-            <!-- سيتم حقن المنتجات هنا ديناميكيًا -->
-        </div>
+        <div class="row" id="productsContainer"></div>
     </div>
+    
+
 </section>
-
-<!-- قسم آراء العملاء -->
-<section id="reviews" class="py-5 bg-light">
-    <div class="container">
-        <h2 class="section-title">Avis clients</h2>
-        <div class="row">
-            <div class="col-md-4 mb-4">
-                <div class="review-card">
-                    <div class="d-flex">
-                        <img src="https://api.dicebear.com/7.x/initials/svg?seed=Ahmed%20Ben" class="rounded-circle me-3" width="60" height="60" alt="عميل">
-                        <div>
-                            <h5 class="mb-0">عمر</h5>
-                            <div class="text-warning">
-                                <i class="bi bi-star-fill"></i> <i class="bi bi-star-fill"></i> <i class="bi bi-star-fill"></i> <i class="bi bi-star-fill"></i> <i class="bi bi-star-fill"></i>
-                            </div>
-                        </div>
-                    </div>
-                    <p class="mt-3">"جودة المنتج ممتازة والتوصيل كان في الوقت المحدد، شكراً لفريق Robuste!"</p>
-                </div>
-            </div>
-            <div class="col-md-4 mb-4">
-                <div class="review-card">
-                    <div class="d-flex">
-                        <img src="https://api.dicebear.com/7.x/initials/svg?seed=Rhmed%20Bn" class="rounded-circle me-3" width="60" height="60" alt="عميل">
-                        <div>
-                            <h5 class="mb-0">Rose Blanch</h5>
-                            <div class="text-warning">
-                                <i class="bi bi-star-fill"></i> <i class="bi bi-star-fill"></i> <i class="bi bi-star-fill"></i> <i class="bi bi-star-fill"></i> <i class="bi bi-star-half"></i>
-                            </div>
-                        </div>
-                    </div>
-                    <p class="mt-3">"Je suis ravie de la marque Robuste, j'utilise vos produits depuis pas mal d'années."</p>
-                </div>
-            </div>
-            <div class="col-md-4 mb-4">
-                <div class="review-card">
-                    <div class="d-flex">
-                        <img src="https://api.dicebear.com/7.x/initials/svg?seed=Ahmed%20Hen" class="rounded-circle me-3" width="60" height="60" alt="عميل">
-                        <div>
-                            <h5 class="mb-0">محمد</h5>
-                            <div class="text-warning">
-                                <i class="bi bi-star-fill"></i> <i class="bi bi-star-fill"></i> <i class="bi bi-star-fill"></i> <i class="bi bi-star-fill"></i> <i class="bi bi-star-fill"></i>
-                            </div>
-                        </div>
-                    </div>
-                    <p class="mt-3">"الدفع عند الاستلام مريح جداً، والمنتج يعمل بكفاءة عالية، أنصح بالتعامل معهم."</p>
-                </div>
-            </div>
-        </div>
+                            <div class="row" id="productsContainer"></div></div></section><section id="reviews" class="py-5 bg-light"><div class="container"><h2 class="section-title">Avis clients</h2><div class="row"><div class="col-md-4 mb-4"><div class="review-card"><div class="d-flex"><img src="https://api.dicebear.com/7.x/initials/svg?seed=Ahmed%20Ben" class="rounded-circle me-3" width="60" height="60" alt="عميل"><div><h5 class="mb-0">عمر</h5><div class="text-warning"><i class="bi bi-star-fill"></i> <i class="bi bi-star-fill"></i> <i class="bi bi-star-fill"></i> <i class="bi bi-star-fill"></i> <i class="bi bi-star-fill"></i></div></div></div><p class="mt-3">"جودة المنتج ممتازة والتوصيل كان في الوقت المحدد، شكراً لفريق Robuste!"</p></div></div><div class="col-md-4 mb-4"><div class="review-card"><div class="d-flex"><img src="https://api.dicebear.com/7.x/initials/svg?seed=Rhmed%20Bn" class="rounded-circle me-3" width="60" height="60" alt="عميل"><div><h5 class="mb-0">Rose Blanch</h5><div class="text-warning"><i class="bi bi-star-fill"></i> <i class="bi bi-star-fill"></i> <i class="bi bi-star-fill"></i> <i class="bi bi-star-fill"></i> <i class="bi bi-star-half"></i></div></div></div><p class="mt-3">"Je suis ravie de la marque Robuste, j'utilise vos produits depuis pas mal d'années."</p></div></div><div class="col-md-4 mb-4"><div class="review-card"><div class="d-flex"><img src="https://api.dicebear.com/7.x/initials/svg?seed=Ahmed%20Hen" class="rounded-circle me-3" width="60" height="60" alt="عميل"><div><h5 class="mb-0">محمد</h5><div class="text-warning"><i class="bi bi-star-fill"></i> <i class="bi bi-star-fill"></i> <i class="bi bi-star-fill"></i> <i class="bi bi-star-fill"></i> <i class="bi bi-star-fill"></i></div></div></div><p class="mt-3">"الدفع عند الاستلام مريح جداً، والمنتج يعمل بكفاءة عالية، أنصح بالتعامل معهم."</p></div></div></div></div></section><div class="modal fade" id="orderModal" tabindex="-1" aria-hidden="true"><div class="modal-dialog modal-lg"><div class="modal-content"><div class="modal-header"><h5 class="modal-title">طلب منتج</h5><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div><div class="modal-body"><div class="order-summary mb-4"><h6 class="mb-3">ملخص الطلب</h6><div class="d-flex align-items-center"><img id="productImage" class="product-image-thumb me-3" src="" alt="صورة المنتج"><div><h5 id="productNameDisplay" class="mb-1"></h5><p id="productPrice" class="mb-0 text-primary fw-bold"></p></div></div></div><form id="orderForm"><input type="hidden" id="productName"> <input type="hidden" id="productPriceValue"> <input type="hidden" id="productImageUrl"><div class="row"><div class="col-md-6 mb-3"><label for="fullName" class="form-label">nom et prénom<span class="text-danger">*</span></label> <input type="text" class="form-control" id="fullName" required></div><div class="col-md-6 mb-3"><label for="phone" class="form-label">Numéro de téléphone <span class="text-danger">*</span></label> <input type="tel" class="form-control" id="phone" pattern="[0]{1}[5-7]{1}[0-9]{8}" required> <small class="text-muted">EX: 0551234566</small></div></div><div class="row"><div class="col-md-6 mb-3"><label for="اختياري" class="form-label"> اختياري email</label> <input type="email" class="form-control" id="email"></div><div class="col-md-6 mb-3"><label for="wilaya" class="form-label">الولاية <span class="text-danger">*</span></label> <select class="form-select" id="wilaya" required><option value="">Choisissez votre état</option></select></div></div><div class="mb-3"><label for="address" class="form-label">Adresse </label> <textarea class="form-control" id="address" rows="2"></textarea></div><div class="row"><div class="col-md-6 mb-3">
+                                </div><div class="col-md-6 mb-3"><label class="form-label">طريقة الدفع</label><div class="form-check"><input class="form-check-input" type="radio" name="paymentMethod" id="cashOnDelivery" value="الدفع عند الاستلام" checked="checked"> <label class="form-check-label" for="cashOnDelivery">الدفع عند الاستلام</label></div><div class="form-check"><input class="form-check-input" type="radio" name="paymentMethod" id="onlinePayment" value="الدفع الإلكتروني"> <label class="form-check-label" for="onlinePayment">الدفع الإلكتروني</label></div></div></div></form></div><div class="modal-footer"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">إلغاء</button> <button type="button" class="btn btn-orange" id="submitOrderBtn" onclick="submitOrder()">Confirmer la commande</button></div></div></div></div><section id="contact" class="py-5"><div class="container"><h2 class="section-title">Contactez-nous</h2><div class="row"><div class="col-md-6 mb-4"><div class="contact-card h-100"><h4 class="mb-4">Coordonnées</h4><div class="d-flex mb-3"><div class="me-3 text-primary"><i class="bi bi-geo-alt fs-4"></i></div><div><h5>Adresse</h5><p class="mb-0">شارع بورقعة المنور، 426 قطعة، العلمة، سطيف، الجزائر</p></div></div><div class="d-flex mb-3"><div class="me-3 text-primary"><i class="bi bi-telephone fs-4"></i></div><div><h5>Téléphone</h5><p class="mb-0">0656360457</p></div></div><div class="d-flex mb-3"><div class="me-3 text-primary"><i class="bi bi-envelope fs-4"></i></div><div><h5>E-mail</h5><p class="mb-0">laidaouih@gmail.com</p></div></div><div class="d-flex"><div class="me-3 text-primary"><i class="bi bi-clock fs-4"></i></div><div><h5>Heures d'ouverture</h5><p class="mb-0">Tous les jours de 7h00 à 16h00</p></div></div><div class="mt-4"><h5>Suivez-nous sur</h5><div class="d-flex mt-3"><a href="https://www.facebook.com/share/19QooaXfy8/" class="social-icon"><i class="bi bi-facebook"></i> </a></i></a></div></div></div></div><div class="col-md-6 mb-4"><div class="contact-card h-100"><h4 class="mb-4">Envoyez-nous un message</h4><form id="contactForm"><div class="mb-3"><label for="contactName" class="form-label">Votre nom <span class="text-danger">*</span></label> <input type="text" class="form-control" id="contactName" required></div><div class="mb-3"><label for="contactEmail" class="form-label">Votre e-mail <span class="text-danger">*</span></label> <input type="email" class="form-control" id="contactEmail" required></div><div class="mb-3"><label for="contactPhone" class="form-label">Numéro de téléphone</label> <input type="tel" class="form-control" id="contactPhone"></div><div class="mb-3"><label for="contactMessage" class="form-label">Votre message <span class="text-danger">*</span></label> <textarea class="form-control" id="contactMessage" rows="4" required></textarea></div><button type="submit" class="btn btn-orange w-100"><span id="contactSubmitText">Envoyer le message</span> <span id="contactSpinner" class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span></button></form></div></div></div><div class="row mt-4"><div class="col-12">
+                                    <div class="contact-card" style="cursor: pointer;">
+  <h4 class="mb-4">Emplacement du magasin</h4>
+  
+  <!-- نلف الخريطة داخل رابط -->
+  <a href="https://maps.app.goo.gl/Cpk1L8fAadgE9pB76" target="_blank" style="display: block; text-decoration: none;">
+    <div class="map-container" style="position: relative; width: 100%; height: 300px;">
+      <iframe 
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3190.123456789012!2d5.7129892!3d36.1524645!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x12f2d5f1a5a5a5a5%3A0x12f2d5f1a5a5a5a5!2sROBUSTE%20EL%20EULMA!5e0!3m2!1sen!2sdz!4v1621234567890!5m2!1sen!2sdz" 
+        width="100%" 
+        height="100%" 
+        style="border:0; border-radius: 8px; pointer-events: none;" 
+        allowfullscreen="" 
+        loading="lazy" 
+        referrerpolicy="no-referrer-when-downgrade" 
+        title="موقع متجر ROBUSTE EL EULMA">
+      </iframe>
     </div>
-</section>
-
-<!-- نموذج الطلب -->
-<div class="modal fade" id="orderModal" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">طلب منتج</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <div class="order-summary mb-4">
-                    <h6 class="mb-3">ملخص الطلب</h6>
-                    <div class="d-flex align-items-center">
-                        <img id="productImage" class="product-image-thumb me-3" src="" alt="صورة المنتج">
-                        <div>
-                            <h5 id="productNameDisplay" class="mb-1"></h5>
-                            <p id="productPrice" class="mb-0 text-primary fw-bold"></p>
-                        </div>
-                    </div>
-                </div>
-                <form id="orderForm">
-                    <input type="hidden" id="productName">
-                    <input type="hidden" id="productPriceValue">
-                    <input type="hidden" id="productImageUrl">
-                    <div class="row">
-                        <div class="col-md-6 mb-3">
-                            <label for="fullName" class="form-label">nom et prénom<span class="text-danger">*</span></label>
-                            <input type="text" class="form-control" id="fullName" required>
-                        </div>
-                        <div class="col-md-6 mb-3">
-                            <label for="phone" class="form-label">Numéro de téléphone <span class="text-danger">*</span></label>
-                            <input type="tel" class="form-control" id="phone" pattern="[0]{1}[5-7]{1}[0-9]{8}" required>
-                            <small class="text-muted">EX: 0551234566</small>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6 mb-3">
-                            <label for="email" class="form-label"> اختياري email</label>
-                            <input type="email" class="form-control" id="email">
-                        </div>
-                        <div class="col-md-6 mb-3">
-                            <label for="wilaya" class="form-label">الولاية <span class="text-danger">*</span></label>
-                            <select class="form-select" id="wilaya" required>
-                                <option value="">Choisissez votre état</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="mb-3">
-                        <label for="address" class="form-label">Adresse </label>
-                        <textarea class="form-control" id="address" rows="2"></textarea>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6 mb-3"></div>
-                        <div class="col-md-6 mb-3">
-                            <label class="form-label">طريقة الدفع</label>
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="paymentMethod" id="cashOnDelivery" value="الدفع عند الاستلام" checked="checked">
-                                <label class="form-check-label" for="cashOnDelivery">الدفع عند الاستلام</label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="paymentMethod" id="onlinePayment" value="الدفع الإلكتروني">
-                                <label class="form-check-label" for="onlinePayment">الدفع الإلكتروني</label>
-                            </div>
-                        </div>
-                    </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">إلغاء</button>
-                <button type="button" class="btn btn-orange" id="submitOrderBtn" onclick="submitOrder()">Confirmer la commande</button>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- قسم الاتصال -->
-<section id="contact" class="py-5">
-    <div class="container">
-        <h2 class="section-title">Contactez-nous</h2>
-        <div class="row">
-            <div class="col-md-6 mb-4">
-                <div class="contact-card h-100">
-                    <h4 class="mb-4">Coordonnées</h4>
-                    <div class="d-flex mb-3">
-                        <div class="me-3 text-primary"><i class="bi bi-geo-alt fs-4"></i></div>
-                        <div>
-                            <h5>Adresse</h5>
-                            <p class="mb-0">شارع بورقعة المنور، 426 قطعة، العلمة، سطيف، الجزائر</p>
-                        </div>
-                    </div>
-                    <div class="d-flex mb-3">
-                        <div class="me-3 text-primary"><i class="bi bi-telephone fs-4"></i></div>
-                        <div>
-                            <h5>Téléphone</h5>
-                            <p class="mb-0">0656360457</p>
-                        </div>
-                    </div>
-                    <div class="d-flex mb-3">
-                        <div class="me-3 text-primary"><i class="bi bi-envelope fs-4"></i></div>
-                        <div>
-                            <h5>E-mail</h5>
-                            <p class="mb-0">laidaouih@gmail.com</p>
-                        </div>
-                    </div>
-                    <div class="d-flex">
-                        <div class="me-3 text-primary"><i class="bi bi-clock fs-4"></i></div>
-                        <div>
-                            <h5>Heures d'ouverture</h5>
-                            <p class="mb-0">Tous les jours de 7h00 à 16h00</p>
-                        </div>
-                    </div>
-                    <div class="mt-4">
-                        <h5>Suivez-nous sur</h5>
-                        <div class="d-flex mt-3">
-                            <a href="https://www.facebook.com/share/19QooaXfy8/" class="social-icon"><i class="bi bi-facebook"></i> </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6 mb-4">
-                <div class="contact-card h-100">
-                    <h4 class="mb-4">Envoyez-nous un message</h4>
-                    <form id="contactForm">
-                        <div class="mb-3">
-                            <label for="contactName" class="form-label">Votre nom <span class="text-danger">*</span></label>
-                            <input type="text" class="form-control" id="contactName" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="contactEmail" class="form-label">Votre e-mail <span class="text-danger">*</span></label>
-                            <input type="email" class="form-control" id="contactEmail" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="contactPhone" class="form-label">Numéro de téléphone</label>
-                            <input type="tel" class="form-control" id="contactPhone">
-                        </div>
-                        <div class="mb-3">
-                            <label for="contactMessage" class="form-label">Votre message <span class="text-danger">*</span></label>
-                            <textarea class="form-control" id="contactMessage" rows="4" required></textarea>
-                        </div>
-                        <button type="submit" class="btn btn-orange w-100">
-                            <span id="contactSubmitText">Envoyer le message</span>
-                            <span id="contactSpinner" class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
-                        </button>
-                    </form>
-                </div>
-            </div>
-        </div>
-        <div class="row mt-4">
-            <div class="col-12">
-                <div class="contact-card" style="cursor: pointer;">
-                    <h4 class="mb-4">Emplacement du magasin</h4>
-                    <a href="https://maps.app.goo.gl/Cpk1L8fAadgE9pB76" target="_blank" style="display: block; text-decoration: none;">
-                        <div class="map-container" style="position: relative; width: 100%; height: 300px;">
-                            <iframe 
-                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3190.123456789012!2d5.7129892!3d36.1524645!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x12f2d5f1a5a5a5a5%3A0x12f2d5f1a5a5a5a5!2sROBUSTE%20EL%20EULMA!5e0!3m2!1sen!2sdz!4v1621234567890!5m2!1sen!2sdz" 
-                                width="100%" 
-                                height="100%" 
-                                style="border:0; border-radius: 8px; pointer-events: none;" 
-                                allowfullscreen="" 
-                                loading="lazy" 
-                                referrerpolicy="no-referrer-when-downgrade" 
-                                title="موقع متجر ROBUSTE EL EULMA">
-                            </iframe>
-                        </div>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- الفوتر -->
-<footer class="py-5 bg-dark text-white">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-4 mb-4">
-                <h5 class="mb-3">À propos de ROBUSTE</h5>
-                <p>Magasin spécialisé dans l'électroménager de haute qualité à prix compétitifs. Nous proposons les meilleurs produits et une livraison rapide.</p>
-                <div class="mt-3">
-                    <a href="https://www.facebook.com/share/19QooaXfy8/" class="social-icon"><i class="bi bi-facebook"></i> </a>
-                </div>
-            </div>
-            <div class="col-lg-2 col-md-4 mb-4">
-                <h5 class="mb-3">Liens rapides</h5>
-                <ul class="list-unstyled">
-                    <li class="mb-2"><a href="#" class="text-white text-decoration-none">Accueil</a></li>
-                    <li class="mb-2"><a href="#products" class="text-white text-decoration-none">Produits</a></li>
-                    <li class="mb-2"><a href="#reviews" class="text-white text-decoration-none">آراء العملاء</a></li>
-                    <li class="mb-2"><a href="#contact" class="text-white text-decoration-none">Contactez-nous</a></li>
-                </ul>
-            </div>
-            <div class="col-lg-3 col-md-4 mb-4">
-                <h5 class="mb-3">Service client</h5>
-                <ul class="list-unstyled">
-                    <li class="mb-2"><a href="#" class="text-white text-decoration-none">FAQ</a></li>
-                    <li class="mb-2"><a href="#" class="text-white text-decoration-none">Modes de paiement</a></li>
-                    <li class="mb-2"><a href="#" class="text-white text-decoration-none">Conditions de garantie</a></li>
-                </ul>
-            </div>
-            <div class="col-lg-3 col-md-4 mb-4">
-                <h5 class="mb-3">Abonnez-vous à notre page</h5>
-                <p>Abonnez-vous pour recevoir les dernières offres</p>
-                <div class="mt-3">
-                    <a href="https://www.facebook.com/share/19QooaXfy8/" class="btn btn-orange w-100" target="_blank">S'abonner</a>
-                </div>
-            </div>
-        </div>
-        <hr class="my-4 bg-light">
-        <div class="row">
-            <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
-                <p class="mb-0">&copy; 2025 ROBUSTE. Tous droits réservés.</p>
-            </div>
-            <div class="col-md-6 text-center text-md-end">
-                <div class="d-flex flex-column flex-md-row align-items-center justify-content-md-end">
-                    <p class="mb-2 mb-md-0 me-md-3">Paiement par carte gold disponible</p>
-                    <img src="https://i.postimg.cc/bY06X2YN/logo-round.png" alt="Modes de paiement" style="width: 30px; height: auto;">
-                </div>
-            </div>
-        </div>
-    </div>
-</footer>
-
-<!-- زر الواتساب -->
-<a href="https://wa.me/213656360457" class="whatsapp-btn" target="_blank"><i class="bi bi-whatsapp"></i></a>
-
-<!-- سلة المشتريات -->
-<div class="offcanvas offcanvas-end" tabindex="-1" id="cartOffcanvas" aria-labelledby="cartOffcanvasLabel">
-    <div class="offcanvas-header">
-        <h5 class="offcanvas-title" id="cartOffcanvasLabel">Panier d'achat</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-    </div>
-    <div class="offcanvas-body">
-        <div id="cartItems" class="mb-3">
-            <div class="text-center py-4 text-muted" id="emptyCartMessage">
-                <i class="bi bi-cart-x display-4 d-block mb-2"></i>
-                Panier d'achat فارغة
-            </div>
-        </div>
-        
-        <div class="cart-summary border-top pt-3">
-            <div class="d-flex justify-content-between mb-2">
-                <span>Total:</span>
-                <span id="cartTotal">0 د.ج</span>
-            </div>
-            <button class="btn btn-orange w-100" onclick="checkout()" id="checkoutBtn" disabled>
-                <i class="bi bi-bag-check"></i> Finaliser la commande
-            </button>
-        </div>
-    </div>
-</div>
-
-<!-- مكتبات JavaScript -->
-<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-
-<!-- مكتبات JavaScript -->
-<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-<script src="js/app.js"></script>
+  </a>
+</div></iframe>
+                                    </div></div></div></div></div></section><footer class="py-5 bg-dark text-white"><div class="container"><div class="row"><div class="col-lg-4 mb-4"><h5 class="mb-3">À propos de ROBUSTE</h5><p>Magasin spécialisé dans l'électroménager de haute qualité à prix compétitifs. Nous proposons les meilleurs produits et une livraison rapide.</p></p><div class="mt-3"><a href="https://www.facebook.com/share/19QooaXfy8/" class="social-icon"><i class="bi bi-facebook"></i> </a><a href="https://www.facebook.com/share/19QooaXfy8/" class="social-icon"></a></div></div><div class="col-lg-2 col-md-4 mb-4"><h5 class="mb-3">Liens rapides</h5><ul class="list-unstyled"><li class="mb-2"><a href="#" class="text-white text-decoration-none">Accueil</a></li><li class="mb-2"><a href="#products" class="text-white text-decoration-none">Produits</a></li><li class="mb-2"><a href="#reviews" class="text-white text-decoration-none">آراء العملاء</a></li><li class="mb-2"><a href="#contact" class="text-white text-decoration-none">Contactez-nous</a></li></ul></div><div class="col-lg-3 col-md-4 mb-4"><h5 class="mb-3">Service client</h5><ul class="list-unstyled"><li class="mb-2"><a href="#" class="text-white text-decoration-none">FAQ</a></li><li class="mb-2"><a href="#" class="text-white text-decoration-none">Modes de paiement</a></li><li class="mb-2"><a href="#" class="text-white text-decoration-none">Conditions de garantie</a></li></ul></div><div class="col-lg-3 col-md-4 mb-4"><div class="col-lg-3 col-md-4 mb-4"><h5 class="mb-3">Abonnez-vous à notre page</h5><p>Abonnez-vous pour recevoir les dernières offres</p><div class="mt-3"><a href="https://www.facebook.com/share/19QooaXfy8/" class="btn btn-orange w-100" target="_blank">S'abonner</a></div></div></div></div><hr class="my-4 bg-light"><div class="row"><div class="col-md-6 text-center text-md-start mb-3 mb-md-0"><p class="mb-0">&copy; 2025 ROBUSTE. Tous droits réservés.</p></div><div class="col-md-6 text-center text-md-end"><div class="d-flex flex-column flex-md-row align-items-center justify-content-md-end"><p class="mb-2 mb-md-0 me-md-3">Paiement par carte gold disponible</p><img src="https://i.postimg.cc/bY06X2YN/logo-round.png" alt="Modes de paiement" style="width: 30px; height: auto;"></div></div></div></div></footer><a href="https://wa.me/213656360457" class="whatsapp-btn" target="_blank"><i class="bi bi-whatsapp"></i></a><script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script><script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script><script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+                                    <script src="js/app.js"></script>
+       
 <div class="offcanvas offcanvas-end" tabindex="-1" id="cartOffcanvas" aria-labelledby="cartOffcanvasLabel">
     <div class="offcanvas-header">
         <h5 class="offcanvas-title" id="cartOffcanvasLabel">Panier d'achat</h5>
