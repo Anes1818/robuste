@@ -30,6 +30,7 @@
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
 
 <style>
+/* جميع أنماط CSS السابقة تبقى كما هي */
 :root {
     --primary: #FF6B35;
     --primary-dark: #E05A2B;
@@ -41,49 +42,47 @@
     --danger: #dc3545;
 }
 
-        
-        body {
-            font-family: 'Tajawal', sans-serif;
-            background-color: var(--secondary);
-            color: var(--dark);
-            padding-top: 56px;
-        }
-        
-        .navbar {
-            background-color: var(--light);
-            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
-            transition: all 0.3s ease;
-        }
-        
-        .navbar-brand {
-            color: var(--primary) !important;
-            font-weight: 700;
-            font-size: 1.5rem;
-        }
-        
-        .section-title {
-            position: relative;
-            margin-bottom: 40px;
-            padding-bottom: 15px;
-            font-weight: 800;
-            color: var(--dark);
-            text-align: center;
-        }
-        
-        .section-title::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            right: 50%;
-            transform: translateX(50%);
-            width: 80px;
-            height: 4px;
-            background-color: var(--primary);
-            border-radius: 2px;
-        }
-        
-        
-     /* تصميم جديد يشبه أمازون */
+body {
+    font-family: 'Tajawal', sans-serif;
+    background-color: var(--secondary);
+    color: var(--dark);
+    padding-top: 56px;
+}
+
+.navbar {
+    background-color: var(--light);
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+.navbar-brand {
+    color: var(--primary) !important;
+    font-weight: 700;
+    font-size: 1.5rem;
+}
+
+.section-title {
+    position: relative;
+    margin-bottom: 40px;
+    padding-bottom: 15px;
+    font-weight: 800;
+    color: var(--dark);
+    text-align: center;
+}
+
+.section-title::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    right: 50%;
+    transform: translateX(50%);
+    width: 80px;
+    height: 4px;
+    background-color: var(--primary);
+    border-radius: 2px;
+}
+
+/* تصميم جديد يشبه أمازون */
 .product-card {
     border: 1px solid #e7e7e7;
     border-radius: 8px;
@@ -135,7 +134,7 @@
     height: 40px;
     overflow: hidden;
     display: -webkit-box;
-    -webkit-line-clam: 2;
+    -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
 }
 
@@ -217,92 +216,92 @@
         height: 120px;
     }
 }  
-        
-        .btn-orange {
-            background-color: var(--primary);
-            color: white;
-            border: none;
-            padding: 10px 25px;
-            border-radius: 8px;
-            font-weight: 700;
-            transition: all 0.3s;
-        }
-        
-        .btn-orange:hover {
-            background-color: var(--primary-dark);
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-        }
-        
-        .whatsapp-btn {
-            position: fixed;
-            bottom: 25px;
-            left: 25px;
-            z-index: 1000;
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            background-color: #25D366;
-            color: white;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 28px;
-            box-shadow: 0 5px 15px rgba(37, 211, 102, 0.3);
-            transition: all 0.3s;
-        }
-        
-        .whatsapp-btn:hover {
-            transform: scale(1.1);
-        }
-        
-        .status-indicator {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            z-index: 2000;
-            max-width: 350px;
-        }
-        
-        .spinner-border {
-            width: 1.5rem;
-            height: 1.5rem;
-            border-width: 0.2em;
-        }
-        
-        .order-confirmation {
-            background-color: rgba(255, 255, 255, 0.95);
-            border-left: 5px solid var(--success);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-        }
-        
-        .order-error {
-            background-color: rgba(255, 255, 255, 0.95);
-            border-left: 5px solid var(--danger);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-        }
-        
-        .contact-card {
-            background: white;
-            border-radius: 12px;
-            padding: 25px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
-            height: 100%;
-        }
-        
-        .feature-icon {
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            background: var(--primary);
-            color: white;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-            margin-bottom: 15px;
-        }
-        
+
+.btn-orange {
+    background-color: var(--primary);
+    color: white;
+    border: none;
+    padding: 10px 25px;
+    border-radius: 8px;
+    font-weight: 700;
+    transition: all 0.3s;
+}
+
+.btn-orange:hover {
+    background-color: var(--primary-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.whatsapp-btn {
+    position: fixed;
+    bottom: 25px;
+    left: 25px;
+    z-index: 1000;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-color: #25D366;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    box-shadow: 0 5px 15px rgba(37, 211, 102, 0.3);
+    transition: all 0.3s;
+}
+
+.whatsapp-btn:hover {
+    transform: scale(1.1);
+}
+
+.status-indicator {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 2000;
+    max-width: 350px;
+}
+
+.spinner-border {
+    width: 1.5rem;
+    height: 1.5rem;
+    border-width: 0.2em;
+}
+
+.order-confirmation {
+    background-color: rgba(255, 255, 255, 0.95);
+    border-left: 5px solid var(--success);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.order-error {
+    background-color: rgba(255, 255, 255, 0.95);
+    border-left: 5px solid var(--danger);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.contact-card {
+    background: white;
+    border-radius: 12px;
+    padding: 25px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+    height: 100%;
+}
+
+.feature-icon {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: var(--primary);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+}
+
 /* أنماط الهيرو الجديدة */
 .hero-container {
     width: 100%;
@@ -369,7 +368,6 @@
     }
 }
 
-
 .product-badge {
     position: absolute;
     top: 15px;
@@ -395,114 +393,115 @@
     font-weight: 600;
     z-index: 1;
 }
-        
-        .review-card {
-            background: white;
-            border-radius: 12px;
-            padding: 25px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
-            height: 100%;
-            transition: all 0.3s;
-        }
-        
-        .review-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.12);
-        }
-        
-        .map-container {
-            height: 300px;
-            border-radius: 12px;
-            overflow: hidden;
-        }
-        
-        /* تحسينات التجاوب */
-        @media (max-width: 768px) {
-            .hero-title {
-                font-size: 2rem;
-            }
-            .hero-subtitle {
-                font-size: 1.1rem;
-            }
-            .section-title {
-                font-size: 1.5rem;
-            }
-            .map-container {
-                height: 250px;
-            }
-        }
-        
-        .social-icon {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background-color: rgba(0,0,0,0.1);
-            color: var(--dark);
-            margin-left: 10px;
-            transition: all 0.3s;
-        }
-        
-        .social-icon:hover {
-            background-color: var(--primary);
-            color: white;
-            transform: translateY(-3px);
-        }
-        
-        .confirmation-icon {
-            font-size: 5rem;
-            color: var(--success);
-            margin-bottom: 20px;
-            animation: pulse 1s infinite;
-        }
-        
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.1); }
-            100% { transform: scale(1); }
-        }
-        
-        .order-summary {
-            background-color: #f8f9fa;
-            border-radius: 8px;
-            padding: 15px;
-            margin-bottom: 20px;
-        }
-        
-        .product-image-thumb {
-            width: 60px;
-            height: 60px;
-            border-radius: 8px;
-            object-fit: cover;
-        }
-        
-        .form-control:focus, .form-select:focus {
-            border-color: var(--primary);
-            box-shadow: 0 0 0 0.25rem rgba(255, 107, 53, 0.25);
-        }
-        
-        /* تحسينات إضافية */
-        .whatsapp-contact-btn {
-            background-color: #25D366;
-            color: white;
-            font-weight: 600;
-            transition: all 0.3s;
-        }
-        
-        .whatsapp-contact-btn:hover {
-            background-color: #128C7E;
-            color: white;
-        }
-        
-        .feature-item {
-            transition: transform 0.3s ease;
-        }
-        
-        .feature-item:hover {
-            transform: translateY(-5px);
-        }
+
+.review-card {
+    background: white;
+    border-radius: 12px;
+    padding: 25px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+    height: 100%;
+    transition: all 0.3s;
+}
+
+.review-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+}
+
+.map-container {
+    height: 300px;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+/* تحسينات التجاوب */
+@media (max-width: 768px) {
+    .hero-title {
+        font-size: 2rem;
+    }
+    .hero-subtitle {
+        font-size: 1.1rem;
+    }
+    .section-title {
+        font-size: 1.5rem;
+    }
+    .map-container {
+        height: 250px;
+    }
+}
+
+.social-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: rgba(0,0,0,0.1);
+    color: var(--dark);
+    margin-left: 10px;
+    transition: all 0.3s;
+}
+
+.social-icon:hover {
+    background-color: var(--primary);
+    color: white;
+    transform: translateY(-3px);
+}
+
+.confirmation-icon {
+    font-size: 5rem;
+    color: var(--success);
+    margin-bottom: 20px;
+    animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}
+
+.order-summary {
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 20px;
+}
+
+.product-image-thumb {
+    width: 60px;
+    height: 60px;
+    border-radius: 8px;
+    object-fit: cover;
+}
+
+.form-control:focus, .form-select:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 0.25rem rgba(255, 107, 53, 0.25);
+}
+
+/* تحسينات إضافية */
+.whatsapp-contact-btn {
+    background-color: #25D366;
+    color: white;
+    font-weight: 600;
+    transition: all 0.3s;
+}
+
+.whatsapp-contact-btn:hover {
+    background-color: #128C7E;
+    color: white;
+}
+
+.feature-item {
+    transition: transform 0.3s ease;
+}
+
+.feature-item:hover {
+    transform: translateY(-5px);
+}
+
 /* ============== قسم العروض الخاصة ============== */
 .offers-section {
   background: linear-gradient(135deg, #FF6B35 0%, #FF8C42 50%, #FFA552 100%);
@@ -523,11 +522,11 @@
   filter: blur(2px);
 }
 
-
 .products-grid > * {
-  flex: 0 0 auto; /* يمنع التمدد */
-  scroll-snap-align: start; /* يخلي العنصر يبدأ من البداية */
+  flex: 0 0 auto;
+  scroll-snap-align: start;
 }
+
 /* ===== العنوان ===== */
 .offers-title {
   font-size: 2.8rem;
@@ -634,7 +633,6 @@
   margin: 40px auto 0;
   display: flex;
   flex-wrap: nowrap;
- 
   gap: 30px;
   padding: 0 20px;
   overflow-x: auto;
@@ -703,16 +701,15 @@
   min-width: 100%;
 }
 
-
-  .carousel-item img {
+.carousel-item img {
     height: 200px;
     object-fit: cover; transition: transform 3s ease;
-  }
-  @media (min-width: 768px) {
+}
+@media (min-width: 768px) {
     .carousel-item img {
       height: 300px;
     }
-  }
+}
 
 .offer-product:hover .carousel-item img {
   transform: scale(1.05);
@@ -768,7 +765,7 @@
   max-height: 42px;
   overflow: hidden;
   display: -webkit-box;
-  -webkit-line-clam: 2;
+  -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
 }
 
@@ -824,6 +821,7 @@
     overflow-x: hidden;
   }
 }
+
 .product-card {
     border-radius: 10px;
     overflow: hidden;
@@ -847,7 +845,7 @@
     height: 40px;
     overflow: hidden;
     display: -webkit-box;
-    -webkit-line-lamp: 2 ;
+    -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
 }
 
@@ -856,7 +854,7 @@
     height: 40px;
     overflow: hidden;
     display: -webkit-box;
-    -webkit-line-lamp: 2  ;
+    -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
 }
 
@@ -884,8 +882,9 @@
         padding: 8px 12px;
         font-size: 0.8rem;
     }
+}
 
-}/* أضف هذا في قسم الأنماط */
+/* أضف هذا في قسم الأنماط */
 .categories-filter {
     padding: 15px 0;
     border-bottom: 1px solid #eee;
@@ -925,7 +924,9 @@
         padding: 6px 15px;
         font-size: 0.9rem;
     }
-}@media (max-width: 768px) {
+}
+
+@media (max-width: 768px) {
     .feature-item {
         flex: 0 0 25%;
         max-width: 25%;
@@ -947,36 +948,40 @@
     .row.text-center {
         flex-wrap: nowrap;
     }
-}/* أضف هذا في قسم الـ media queries للهاتف */
+}
+
+/* أضف هذا في قسم الـ media queries للهاتف */
 @media (max-width: 768px) {
     .feature-item {
         flex: 0 0 auto;
-        width: 25%; /* لجعل كل عنصر يأخذ 25% من العرض */
-        padding: 0 5px; /* تقليل المساحة الجانبية */
+        width: 25%;
+        padding: 0 5px;
     }
     
     .feature-icon {
-        width: 40px; /* تصغير حجم الأيقونة */
+        width: 40px;
         height: 40px;
-        font-size: 1rem; /* تصغير حجم الخط */
-        margin-bottom: 8px; /* تقليل المسافة السفلية */
+        font-size: 1rem;
+        margin-bottom: 8px;
     }
     
     .feature-item h5 {
-        font-size: 0.8rem; /* تصغير حجم العنوان */
+        font-size: 0.8rem;
         margin-bottom: 5px;
     }
     
     .feature-item p {
-        font-size: 0.7rem; /* تصغير حجم النص */
-        display: none; /* إخفاء النص على الهواتف إذا أردت */
+        font-size: 0.7rem;
+        display: none;
     }
     
-    /* لجعل الصف يأخذ سطراً واحداً بدون لف */
     .row.text-center {
         flex-wrap: nowrap;
-        overflow-x: auto; /* لتمكين التمرير الأفقي إذا لزم الأمر */
-    }/* أضف هذا في قسم الـ media queries للهاتف */
+        overflow-x: auto;
+    }
+}
+
+/* أضف هذا في قسم الـ media queries للهاتف */
 @media (max-width: 768px) {
     /* تصغير حجم قسم العروض */
     .offers-section {
@@ -1055,7 +1060,9 @@
         padding: 5px 15px !important;
         font-size: 0.8rem !important;
     }
-}/* تأثيرات حركية (أضفها في القسم العام) */
+}
+
+/* تأثيرات حركية (أضفها في القسم العام) */
 .offer-product {
     transition: all 0.3s ease;
     transform: scale(0.98);
@@ -1071,10 +1078,6 @@
     scroll-behavior: smooth;
     -webkit-overflow-scrolling: touch;
 }
-
-
-}
-
 
 /* أنماط محسنة لزر السلة */
 .cart-icon-container {
@@ -1204,16 +1207,17 @@
     }
     
     .cart-label {
-        display: none; /* إخفاء النص على الشاشات الصغيرة جدًا */
+        display: none;
     }
 }
 
 /* منع التداخل مع زر القائمة على الجوال */
 @media (max-width: 991px) {
     .navbar-toggler {
-        z-index: 1001; /* تأكد من أن زر القائمة فوق زر السلة */
+        z-index: 1001;
     }
 }
+
 /* ============== أنماط سلة المشتريات ============== */
 .offcanvas {
     font-family: 'Tajawal', sans-serif;
@@ -1421,6 +1425,7 @@
 .cart-item {
     animation: slideIn 0.3s ease-out;
 }
+
 .slideshow-container1 { position: relative; max-width: 1000px; margin: auto; overflow: hidden;margin-top: 5px; }
 .mySlides1 { display: none; }
 .fade1 { animation: fade1 1.5s; }
@@ -1438,21 +1443,15 @@
 }
 .active1, .dot1:hover { background: #717171; }
 .slideshow-container1 img {
-  width: 100%;         /* تاخذ كامل عرض الحاوية */
-  height: auto;        /* تحافظ على النسبة */
-  object-fit: contain; /* أو cover حسب اللي يعجبك */
-  display: block;      /* تشيل الفراغات تحت الصورة */
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  display: block;
 }
+
 .language-switcher {
     display: flex;
     gap: 5px;
-}
-
-
-/* الأساس: مسافات بسيطة بين الروابط */
-.language-switcher {
-  display: inline-flex;
-  gap: .5rem;
 }
 
 /* الأساس: مسافات بسيطة بين الروابط */
@@ -1478,19 +1477,14 @@
     width: clamp(44px, 12vw, 56px);
     height: clamp(44px, 12vw, 56px);
     border-radius: 50% !important;
-
     display: flex;
     align-items: center;
     justify-content: center;
-
     padding: 0 !important;
-    font-size: 0; /* إخفاء النص الأصلي */
-
+    font-size: 0;
     background: linear-gradient(135deg, #ffffff, #f7f7f7);
     border: 1px solid #ddd;
     box-shadow: 0 4px 12px rgba(0,0,0,0.06);
-
-    /* أنيميشن دخول */
     opacity: 0;
     transform: scale(0.6);
     animation: fadeInScale 0.5s ease forwards;
@@ -1529,7 +1523,10 @@
   }
 }
 </style>
-</head><body><nav class="navbar navbar-expand-lg navbar-light fixed-top bg-white shadow-sm">
+</head>
+
+<body>
+<nav class="navbar navbar-expand-lg navbar-light fixed-top bg-white shadow-sm">
     <div class="container">
         <a class="navbar-brand" href="#">
             <img src="https://i.postimg.cc/7P7BK44r/f525e1dd-9f2c-4160-aed1-882a8b28b75c-20250703-131500-0000.png" 
@@ -1541,7 +1538,6 @@
         <!-- زر تغيير اللغة خارج القائمة -->
         <div class="language-switcher me-3">
                 <a href="ar/index.html" class="btn btn-sm btn-outline-secondary">العربية</a>
-               
             </div>
         
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
@@ -1566,13 +1562,19 @@
             </a>
         </div>
     </div>
-</nav><div class="status-indicator" id="statusIndicator" style="display: none;"><div class="alert alert-dismissible fade show" role="alert"><span id="statusMessage"></span> <button type="button" class="btn-close" onclick="hideStatus()"></button></div></div>
-  
+</nav>
 
-<!-- بهذا الجزء المعدل -->
+<div class="status-indicator" id="statusIndicator" style="display: none;">
+    <div class="alert alert-dismissible fade show" role="alert">
+        <span id="statusMessage"></span> 
+        <button type="button" class="btn-close" onclick="hideStatus()"></button>
+    </div>
+</div>
+
+<!-- قسم الهيرو -->
 <section class="hero-container position-relative">
     <div class="hero-image-container">
-        <img   width="3780" height="1890" src="images/banner.webp" alt="أجهزة منزلية" class="hero-image">
+        <img width="3780" height="1890" src="images/banner.webp" alt="أجهزة منزلية" class="hero-image">
         <div class="image-overlay"></div>
     </div>
     <div class="hero-content container text-center position-absolute top-50 start-50 translate-middle">
@@ -1585,7 +1587,7 @@
     </div>
 </section>
 
-   <!-- HTML -->
+<!-- السلايدر -->
 <div class="slideshow-container1">
   <div class="mySlides1 fade1">
     <img src="images/signal-2025-08-21-103443_002.webp" style="width:100%">
@@ -1604,7 +1606,6 @@
   </div>
   <a class="prev1" onclick="plusSlides1(-1)">&#10094;</a>
   <a class="next1" onclick="plusSlides1(1)">&#10095;</a>
-
 </div>
   
 <br>
@@ -1615,7 +1616,8 @@
   <span class="dot1" onclick="currentSlide1(4)"></span>
 </div>
     
-   <section class="offers-section">
+<!-- قسم العروض الخاصة -->
+<section class="offers-section">
   <div class="container position-relative">
     <h2 class="offers-title">Offres spéciales</h2>
     <p class="offer-subtitle">Profitez de nos offres exceptionnelles sur les meilleurs appareils électriques avec des remises allant jusqu'à 20% pour une durée limitée</p>
@@ -1643,138 +1645,19 @@
       </div>
     </div>
 
-    <!-- Produits -->
-    <div class="row offer-products">
-
-      <!-- المنتج 1 -->
-      <div class="col-md-4">
-        <div class="offer-product">
-          <div class="offer-product-discount">Quantité limitée</div>
-          <div class="offer-product-badge">Le plus demandé</div>
-
-          <div id="carousel-offer-1" class="carousel slide" data-bs-ride="carousel">
-            <div class="carousel-indicators">
-              <button type="button" data-bs-target="#carousel-offer-1" data-bs-slide-to="0" class="active"></button>
-              <button type="button" data-bs-target="#carousel-offer-1" data-bs-slide-to="1"></button>
-              <button type="button" data-bs-target="#carousel-offer-1" data-bs-slide-to="2"></button>
-            </div>
-
-            <div class="carousel-inner">
-              <div class="carousel-item active">
-                 <img src="images/Robuste Defroisseur 1.jpg" class="d-block w-100" alt="Defroisseur" height="800" width="800">
-              </div>
-              <div class="carousel-item">
-                <img loading="lazy" src="images/Robuste Defroisseur 2.jpg" class="d-block w-100"  alt="Defroisseur" height="800" width="800">
-              </div>
-              <div class="carousel-item">
-                <img loading="lazy" src="images/Robuste Defroisseur.jpg" class="d-block w-100"  alt="Defroisseur"height="800" width="800" >
-              </div>
-            </div>
-
-            <button class="carousel-control-prev" type="button" data-bs-target="#carousel-offer-1" data-bs-slide="prev">
-              <span class="carousel-control-prev-icon"></span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#carousel-offer-1" data-bs-slide="next">
-              <span class="carousel-control-next-icon"></span>
-            </button>
-          </div>
-
-          <h4 class="offer-product-title">Defroisseur Vapeur</h4>
-          <div class="offer-product-price">6500 د.ج</div>
-          <div class="offer-product-old-price">7000 د.ج</div>
-          <a href="product.html?pid=100" class="offer-btn" style="display: block; text-decoration: none; text-align: center; color: inherit;">
-    Voir le produit
-</a>
-        </div>
-      </div>
-
-      <!-- المنتج 2 -->
-      <div class="col-md-4">
-        <div class="offer-product">
-          <div class="offer-product-discount">خصم 10%</div>
-
-          <div id="carousel-offer-2" class="carousel slide" data-bs-ride="carousel">
-            <div class="carousel-indicators">
-              <button type="button" data-bs-target="#carousel-offer-2" data-bs-slide-to="0" class="active"></button>
-              <button type="button" data-bs-target="#carousel-offer-2" data-bs-slide-to="1"></button>
-            </div>
-
-            <div class="carousel-inner">
-               <div class="carousel-item active">
-                <img loading="lazy" src="images/aspirateur a main 1.jpg" class="d-block w-100" alt="ASPIRATEUR SOUFFLEUR A MAIN 1" height="800" width="800">
-              </div>
-              <div class="carousel-item">
-                <img  sloading="lazy" src="images/aspirateur a main 2.jpg" class="d-block w-100" alt="ASPIRATEUR SOUFFLEUR A MAIN 2"   height="800" width="800"  >
-              </div>
-            
-            </div>
-
-            <button class="carousel-control-prev" type="button" data-bs-target="#carousel-offer-2" data-bs-slide="prev">
-              <span class="carousel-control-prev-icon"></span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#carousel-offer-2" data-bs-slide="next">
-              <span class="carousel-control-next-icon"></span>
-            </button>
-          </div>
-
-          <h4 class="offer-product-title">ASPIRATEUR SOUFFLEUR A MAIN</h4>
-          <div class="offer-product-price">5000 د.ج</div>
-          <div class="offer-product-old-price">5600 د.ج</div>
-          <a href="product.html?pid=101" class="offer-btn" style="display: block; text-decoration: none; text-align: center; color: inherit;">
-    Voir le produit
-</a>
-        </div>
-      </div>
-
-      <!-- المنتج 3 -->
-      <div class="col-md-4">
-        <div class="offer-product">
-          <div class="offer-product-discount">خصم 20%</div>
-          <div class="offer-product-badge">Nouveau</div>
-
-          <div id="carousel-offer-3" class="carousel slide" data-bs-ride="carousel">
-            <div class="carousel-indicators">
-              <button type="button" data-bs-target="#carousel-offer-3" data-bs-slide-to="0" class="active"></button>
-              <button type="button" data-bs-target="#carousel-offer-3" data-bs-slide-to="1"></button>
-            </div>
-
-            <div class="carousel-inner">
-              
-               <div class="carousel-item active">
-                <img loading="lazy" src="images/NETTOYEUR DE TACHES 4 EN 1.jpg" class="d-block w-100" alt="صورة المنتج 2"height="800" width="800" >
-              </div>
-              <div class="carousel-item">
-                <img loading="lazy" src="images/NETTOYEUR DE TACHES 4 EN 1 robuste.jpg" class="d-block w-100" alt="صورة المنتج 3" height="800" width="800" >
-              </div>
-            </div>
-
-            <button class="carousel-control-prev" type="button" data-bs-target="#carousel-offer-3" data-bs-slide="prev">
-              <span class="carousel-control-prev-icon"></span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#carousel-offer-3" data-bs-slide="next">
-              <span class="carousel-control-next-icon"></span>
-            </button>
-          </div>
-
-          <h4 class="offer-product-title">NETTOYEUR DE TACHES 4 EN 1</h4>
-          <div class="offer-product-price">23,500 د.ج</div>
-          <div class="offer-product-old-price">25,000 د.ج</div>
-          <a href="product.html?pid=102" class="offer-btn" style="display: block; text-decoration: none; text-align: center; color: inherit;">
-    Voir le produit
-</a>
-        </div>
-      </div>
-
+    <!-- المنتجات سيتم تحميلها ديناميكيًا -->
+    <div class="row offer-products" id="specialOffersContainer">
+        <!-- سيتم حقن العروض الخاصة هنا -->
     </div>
   </div>
 </section>    
-                            <section id="products" class="py-5">
+
+<!-- قسم المنتجات -->
+<section id="products" class="py-5">
     <div class="container">
-
-
         <h2 class="section-title">أحدث Produits</h2>
         
-        <!-- أضف هذا الجزء الNouveau هنا -->
+        <!-- فلاتر الفئات -->
         <div class="categories-filter mb-5">
             <div class="d-flex flex-wrap justify-content-center gap-2">
                 <button class="btn btn-outline-primary category-btn active" data-category="all">Tous</button>
@@ -1786,258 +1669,488 @@
                 <button class="btn btn-outline-primary category-btn" data-category="café">Machines à café</button>
             </div>
         </div>
-        <!-- نهاية الجزء الNouveau -->
         
-        <div class="row" id="productsContainer"></div>
+        <!-- حاوية المنتجات -->
+        <div class="row" id="productsContainer">
+            <!-- سيتم حقن المنتجات هنا ديناميكيًا -->
+        </div>
     </div>
-    
-
 </section>
-                            <div class="row" id="productsContainer"></div></div></section><section id="reviews" class="py-5 bg-light"><div class="container"><h2 class="section-title">Avis clients</h2><div class="row"><div class="col-md-4 mb-4"><div class="review-card"><div class="d-flex"><img src="https://api.dicebear.com/7.x/initials/svg?seed=Ahmed%20Ben" class="rounded-circle me-3" width="60" height="60" alt="عميل"><div><h5 class="mb-0">عمر</h5><div class="text-warning"><i class="bi bi-star-fill"></i> <i class="bi bi-star-fill"></i> <i class="bi bi-star-fill"></i> <i class="bi bi-star-fill"></i> <i class="bi bi-star-fill"></i></div></div></div><p class="mt-3">"جودة المنتج ممتازة والتوصيل كان في الوقت المحدد، شكراً لفريق Robuste!"</p></div></div><div class="col-md-4 mb-4"><div class="review-card"><div class="d-flex"><img src="https://api.dicebear.com/7.x/initials/svg?seed=Rhmed%20Bn" class="rounded-circle me-3" width="60" height="60" alt="عميل"><div><h5 class="mb-0">Rose Blanch</h5><div class="text-warning"><i class="bi bi-star-fill"></i> <i class="bi bi-star-fill"></i> <i class="bi bi-star-fill"></i> <i class="bi bi-star-fill"></i> <i class="bi bi-star-half"></i></div></div></div><p class="mt-3">"Je suis ravie de la marque Robuste, j'utilise vos produits depuis pas mal d'années."</p></div></div><div class="col-md-4 mb-4"><div class="review-card"><div class="d-flex"><img src="https://api.dicebear.com/7.x/initials/svg?seed=Ahmed%20Hen" class="rounded-circle me-3" width="60" height="60" alt="عميل"><div><h5 class="mb-0">محمد</h5><div class="text-warning"><i class="bi bi-star-fill"></i> <i class="bi bi-star-fill"></i> <i class="bi bi-star-fill"></i> <i class="bi bi-star-fill"></i> <i class="bi bi-star-fill"></i></div></div></div><p class="mt-3">"الدفع عند الاستلام مريح جداً، والمنتج يعمل بكفاءة عالية، أنصح بالتعامل معهم."</p></div></div></div></div></section><div class="modal fade" id="orderModal" tabindex="-1" aria-hidden="true"><div class="modal-dialog modal-lg"><div class="modal-content"><div class="modal-header"><h5 class="modal-title">طلب منتج</h5><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div><div class="modal-body"><div class="order-summary mb-4"><h6 class="mb-3">ملخص الطلب</h6><div class="d-flex align-items-center"><img id="productImage" class="product-image-thumb me-3" src="" alt="صورة المنتج"><div><h5 id="productNameDisplay" class="mb-1"></h5><p id="productPrice" class="mb-0 text-primary fw-bold"></p></div></div></div><form id="orderForm"><input type="hidden" id="productName"> <input type="hidden" id="productPriceValue"> <input type="hidden" id="productImageUrl"><div class="row"><div class="col-md-6 mb-3"><label for="fullName" class="form-label">nom et prénom<span class="text-danger">*</span></label> <input type="text" class="form-control" id="fullName" required></div><div class="col-md-6 mb-3"><label for="phone" class="form-label">Numéro de téléphone <span class="text-danger">*</span></label> <input type="tel" class="form-control" id="phone" pattern="[0]{1}[5-7]{1}[0-9]{8}" required> <small class="text-muted">EX: 0551234566</small></div></div><div class="row"><div class="col-md-6 mb-3"><label for="اختياري" class="form-label"> اختياري email</label> <input type="email" class="form-control" id="email"></div><div class="col-md-6 mb-3"><label for="wilaya" class="form-label">الولاية <span class="text-danger">*</span></label> <select class="form-select" id="wilaya" required><option value="">Choisissez votre état</option></select></div></div><div class="mb-3"><label for="address" class="form-label">Adresse </label> <textarea class="form-control" id="address" rows="2"></textarea></div><div class="row"><div class="col-md-6 mb-3">
-                                </div><div class="col-md-6 mb-3"><label class="form-label">طريقة الدفع</label><div class="form-check"><input class="form-check-input" type="radio" name="paymentMethod" id="cashOnDelivery" value="الدفع عند الاستلام" checked="checked"> <label class="form-check-label" for="cashOnDelivery">الدفع عند الاستلام</label></div><div class="form-check"><input class="form-check-input" type="radio" name="paymentMethod" id="onlinePayment" value="الدفع الإلكتروني"> <label class="form-check-label" for="onlinePayment">الدفع الإلكتروني</label></div></div></div></form></div><div class="modal-footer"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">إلغاء</button> <button type="button" class="btn btn-orange" id="submitOrderBtn" onclick="submitOrder()">Confirmer la commande</button></div></div></div></div><section id="contact" class="py-5"><div class="container"><h2 class="section-title">Contactez-nous</h2><div class="row"><div class="col-md-6 mb-4"><div class="contact-card h-100"><h4 class="mb-4">Coordonnées</h4><div class="d-flex mb-3"><div class="me-3 text-primary"><i class="bi bi-geo-alt fs-4"></i></div><div><h5>Adresse</h5><p class="mb-0">شارع بورقعة المنور، 426 قطعة، العلمة، سطيف، الجزائر</p></div></div><div class="d-flex mb-3"><div class="me-3 text-primary"><i class="bi bi-telephone fs-4"></i></div><div><h5>Téléphone</h5><p class="mb-0">0656360457</p></div></div><div class="d-flex mb-3"><div class="me-3 text-primary"><i class="bi bi-envelope fs-4"></i></div><div><h5>E-mail</h5><p class="mb-0">laidaouih@gmail.com</p></div></div><div class="d-flex"><div class="me-3 text-primary"><i class="bi bi-clock fs-4"></i></div><div><h5>Heures d'ouverture</h5><p class="mb-0">Tous les jours de 7h00 à 16h00</p></div></div><div class="mt-4"><h5>Suivez-nous sur</h5><div class="d-flex mt-3"><a href="https://www.facebook.com/share/19QooaXfy8/" class="social-icon"><i class="bi bi-facebook"></i> </a></i></a></div></div></div></div><div class="col-md-6 mb-4"><div class="contact-card h-100"><h4 class="mb-4">Envoyez-nous un message</h4><form id="contactForm"><div class="mb-3"><label for="contactName" class="form-label">Votre nom <span class="text-danger">*</span></label> <input type="text" class="form-control" id="contactName" required></div><div class="mb-3"><label for="contactEmail" class="form-label">Votre e-mail <span class="text-danger">*</span></label> <input type="email" class="form-control" id="contactEmail" required></div><div class="mb-3"><label for="contactPhone" class="form-label">Numéro de téléphone</label> <input type="tel" class="form-control" id="contactPhone"></div><div class="mb-3"><label for="contactMessage" class="form-label">Votre message <span class="text-danger">*</span></label> <textarea class="form-control" id="contactMessage" rows="4" required></textarea></div><button type="submit" class="btn btn-orange w-100"><span id="contactSubmitText">Envoyer le message</span> <span id="contactSpinner" class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span></button></form></div></div></div><div class="row mt-4"><div class="col-12">
-                                    <div class="contact-card" style="cursor: pointer;">
-  <h4 class="mb-4">Emplacement du magasin</h4>
-  
-  <!-- نلف الخريطة داخل رابط -->
-  <a href="https://maps.app.goo.gl/Cpk1L8fAadgE9pB76" target="_blank" style="display: block; text-decoration: none;">
-    <div class="map-container" style="position: relative; width: 100%; height: 300px;">
-      <iframe 
-        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3190.123456789012!2d5.7129892!3d36.1524645!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x12f2d5f1a5a5a5a5%3A0x12f2d5f1a5a5a5a5!2sROBUSTE%20EL%20EULMA!5e0!3m2!1sen!2sdz!4v1621234567890!5m2!1sen!2sdz" 
-        width="100%" 
-        height="100%" 
-        style="border:0; border-radius: 8px; pointer-events: none;" 
-        allowfullscreen="" 
-        loading="lazy" 
-        referrerpolicy="no-referrer-when-downgrade" 
-        title="موقع متجر ROBUSTE EL EULMA">
-      </iframe>
+
+<!-- قسم آراء العملاء -->
+<section id="reviews" class="py-5 bg-light">
+    <div class="container">
+        <h2 class="section-title">Avis clients</h2>
+        <div class="row">
+            <div class="col-md-4 mb-4">
+                <div class="review-card">
+                    <div class="d-flex">
+                        <img src="https://api.dicebear.com/7.x/initials/svg?seed=Ahmed%20Ben" class="rounded-circle me-3" width="60" height="60" alt="عميل">
+                        <div>
+                            <h5 class="mb-0">عمر</h5>
+                            <div class="text-warning">
+                                <i class="bi bi-star-fill"></i> <i class="bi bi-star-fill"></i> <i class="bi bi-star-fill"></i> <i class="bi bi-star-fill"></i> <i class="bi bi-star-fill"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="mt-3">"جودة المنتج ممتازة والتوصيل كان في الوقت المحدد، شكراً لفريق Robuste!"</p>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="review-card">
+                    <div class="d-flex">
+                        <img src="https://api.dicebear.com/7.x/initials/svg?seed=Rhmed%20Bn" class="rounded-circle me-3" width="60" height="60" alt="عميل">
+                        <div>
+                            <h5 class="mb-0">Rose Blanch</h5>
+                            <div class="text-warning">
+                                <i class="bi bi-star-fill"></i> <i class="bi bi-star-fill"></i> <i class="bi bi-star-fill"></i> <i class="bi bi-star-fill"></i> <i class="bi bi-star-half"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="mt-3">"Je suis ravie de la marque Robuste, j'utilise vos produits depuis pas mal d'années."</p>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="review-card">
+                    <div class="d-flex">
+                        <img src="https://api.dicebear.com/7.x/initials/svg?seed=Ahmed%20Hen" class="rounded-circle me-3" width="60" height="60" alt="عميل">
+                        <div>
+                            <h5 class="mb-0">محمد</h5>
+                            <div class="text-warning">
+                                <i class="bi bi-star-fill"></i> <i class="bi bi-star-fill"></i> <i class="bi bi-star-fill"></i> <i class="bi bi-star-fill"></i> <i class="bi bi-star-fill"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="mt-3">"الدفع عند الاستلام مريح جداً، والمنتج يعمل بكفاءة عالية، أنصح بالتعامل معهم."</p>
+                </div>
+            </div>
+        </div>
     </div>
-  </a>
-</div></iframe>
-                                    </div></div></div></div></div></section><footer class="py-5 bg-dark text-white"><div class="container"><div class="row"><div class="col-lg-4 mb-4"><h5 class="mb-3">À propos de ROBUSTE</h5><p>Magasin spécialisé dans l'électroménager de haute qualité à prix compétitifs. Nous proposons les meilleurs produits et une livraison rapide.</p></p><div class="mt-3"><a href="https://www.facebook.com/share/19QooaXfy8/" class="social-icon"><i class="bi bi-facebook"></i> </a><a href="https://www.facebook.com/share/19QooaXfy8/" class="social-icon"></a></div></div><div class="col-lg-2 col-md-4 mb-4"><h5 class="mb-3">Liens rapides</h5><ul class="list-unstyled"><li class="mb-2"><a href="#" class="text-white text-decoration-none">Accueil</a></li><li class="mb-2"><a href="#products" class="text-white text-decoration-none">Produits</a></li><li class="mb-2"><a href="#reviews" class="text-white text-decoration-none">آراء العملاء</a></li><li class="mb-2"><a href="#contact" class="text-white text-decoration-none">Contactez-nous</a></li></ul></div><div class="col-lg-3 col-md-4 mb-4"><h5 class="mb-3">Service client</h5><ul class="list-unstyled"><li class="mb-2"><a href="#" class="text-white text-decoration-none">FAQ</a></li><li class="mb-2"><a href="#" class="text-white text-decoration-none">Modes de paiement</a></li><li class="mb-2"><a href="#" class="text-white text-decoration-none">Conditions de garantie</a></li></ul></div><div class="col-lg-3 col-md-4 mb-4"><div class="col-lg-3 col-md-4 mb-4"><h5 class="mb-3">Abonnez-vous à notre page</h5><p>Abonnez-vous pour recevoir les dernières offres</p><div class="mt-3"><a href="https://www.facebook.com/share/19QooaXfy8/" class="btn btn-orange w-100" target="_blank">S'abonner</a></div></div></div></div><hr class="my-4 bg-light"><div class="row"><div class="col-md-6 text-center text-md-start mb-3 mb-md-0"><p class="mb-0">&copy; 2025 ROBUSTE. Tous droits réservés.</p></div><div class="col-md-6 text-center text-md-end"><div class="d-flex flex-column flex-md-row align-items-center justify-content-md-end"><p class="mb-2 mb-md-0 me-md-3">Paiement par carte gold disponible</p><img src="https://i.postimg.cc/bY06X2YN/logo-round.png" alt="Modes de paiement" style="width: 30px; height: auto;"></div></div></div></div></footer><a href="https://wa.me/213656360457" class="whatsapp-btn" target="_blank"><i class="bi bi-whatsapp"></i></a><script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script><script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script><script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script><script>// ============== تهيئة Firebase ==============
-      
-                                        // Polyfill for Object.entries for Safari
-        if (typeof Object.entries !== 'function') {
-            Object.entries = function(obj) {
-                var ownProps = Object.keys(obj),
-                    i = ownProps.length,
-                    resArray = new Array(i);
-                while (i--) {
-                    resArray[i] = [ownProps[i], obj[ownProps[i]]];
-                }
-                return resArray;
-            };
-        }
+</section>
 
-        // Polyfill for localStorage in Safari private mode
-        var storage = (function() {
-            var uid = new Date().getTime().toString();
-            var storage;
-            try {
-                (storage = window.localStorage).setItem(uid, uid);
-                var available = storage.getItem(uid) == uid;
-                storage.removeItem(uid);
-                return available ? storage : false;
-            } catch (e) {
-                return {
-                    data: {},
-                    setItem: function(id, val) {
-                        this.data[id] = val;
-                    },
-                    getItem: function(id) {
-                        return this.data.hasOwnProperty(id) ? this.data[id] : undefined;
-                    },
-                    removeItem: function(id) {
-                        delete this.data[id];
-                    },
-                    clear: function() {
-                        this.data = {};
-                    }
-                };
-            }
-        })();
+<!-- نموذج الطلب -->
+<div class="modal fade" id="orderModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">طلب منتج</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="order-summary mb-4">
+                    <h6 class="mb-3">ملخص الطلب</h6>
+                    <div class="d-flex align-items-center">
+                        <img id="productImage" class="product-image-thumb me-3" src="" alt="صورة المنتج">
+                        <div>
+                            <h5 id="productNameDisplay" class="mb-1"></h5>
+                            <p id="productPrice" class="mb-0 text-primary fw-bold"></p>
+                        </div>
+                    </div>
+                </div>
+                <form id="orderForm">
+                    <input type="hidden" id="productName">
+                    <input type="hidden" id="productPriceValue">
+                    <input type="hidden" id="productImageUrl">
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="fullName" class="form-label">nom et prénom<span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" id="fullName" required>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="phone" class="form-label">Numéro de téléphone <span class="text-danger">*</span></label>
+                            <input type="tel" class="form-control" id="phone" pattern="[0]{1}[5-7]{1}[0-9]{8}" required>
+                            <small class="text-muted">EX: 0551234566</small>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="email" class="form-label"> اختياري email</label>
+                            <input type="email" class="form-control" id="email">
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="wilaya" class="form-label">الولاية <span class="text-danger">*</span></label>
+                            <select class="form-select" id="wilaya" required>
+                                <option value="">Choisissez votre état</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="address" class="form-label">Adresse </label>
+                        <textarea class="form-control" id="address" rows="2"></textarea>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 mb-3"></div>
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">طريقة الدفع</label>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="paymentMethod" id="cashOnDelivery" value="الدفع عند الاستلام" checked="checked">
+                                <label class="form-check-label" for="cashOnDelivery">الدفع عند الاستلام</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="paymentMethod" id="onlinePayment" value="الدفع الإلكتروني">
+                                <label class="form-check-label" for="onlinePayment">الدفع الإلكتروني</label>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">إلغاء</button>
+                <button type="button" class="btn btn-orange" id="submitOrderBtn" onclick="submitOrder()">Confirmer la commande</button>
+            </div>
+        </div>
+    </div>
+</div>
 
-        // Polyfill for Array.from for older Safari versions
-        if (!Array.from) {
-            Array.from = (function () {
-                var toStr = Object.prototype.toString;
-                var isCallable = function (fn) {
-                    return typeof fn === 'function' || toStr.call(fn) === '[object Function]';
-                };
-                var toInteger = function (value) {
-                    var number = Number(value);
-                    if (isNaN(number)) { return 0; }
-                    if (number === 0 || !isFinite(number)) { return number; }
-                    return (number > 0 ? 1 : -1) * Math.floor(Math.abs(number));
-                };
-                var maxSafeInteger = Math.pow(2, 53) - 1;
-                var toLength = function (value) {
-                    var len = toInteger(value);
-                    return Math.min(Math.max(len, 0), maxSafeInteger);
-                };
+<!-- قسم الاتصال -->
+<section id="contact" class="py-5">
+    <div class="container">
+        <h2 class="section-title">Contactez-nous</h2>
+        <div class="row">
+            <div class="col-md-6 mb-4">
+                <div class="contact-card h-100">
+                    <h4 class="mb-4">Coordonnées</h4>
+                    <div class="d-flex mb-3">
+                        <div class="me-3 text-primary"><i class="bi bi-geo-alt fs-4"></i></div>
+                        <div>
+                            <h5>Adresse</h5>
+                            <p class="mb-0">شارع بورقعة المنور، 426 قطعة، العلمة، سطيف، الجزائر</p>
+                        </div>
+                    </div>
+                    <div class="d-flex mb-3">
+                        <div class="me-3 text-primary"><i class="bi bi-telephone fs-4"></i></div>
+                        <div>
+                            <h5>Téléphone</h5>
+                            <p class="mb-0">0656360457</p>
+                        </div>
+                    </div>
+                    <div class="d-flex mb-3">
+                        <div class="me-3 text-primary"><i class="bi bi-envelope fs-4"></i></div>
+                        <div>
+                            <h5>E-mail</h5>
+                            <p class="mb-0">laidaouih@gmail.com</p>
+                        </div>
+                    </div>
+                    <div class="d-flex">
+                        <div class="me-3 text-primary"><i class="bi bi-clock fs-4"></i></div>
+                        <div>
+                            <h5>Heures d'ouverture</h5>
+                            <p class="mb-0">Tous les jours de 7h00 à 16h00</p>
+                        </div>
+                    </div>
+                    <div class="mt-4">
+                        <h5>Suivez-nous sur</h5>
+                        <div class="d-flex mt-3">
+                            <a href="https://www.facebook.com/share/19QooaXfy8/" class="social-icon"><i class="bi bi-facebook"></i> </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 mb-4">
+                <div class="contact-card h-100">
+                    <h4 class="mb-4">Envoyez-nous un message</h4>
+                    <form id="contactForm">
+                        <div class="mb-3">
+                            <label for="contactName" class="form-label">Votre nom <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" id="contactName" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="contactEmail" class="form-label">Votre e-mail <span class="text-danger">*</span></label>
+                            <input type="email" class="form-control" id="contactEmail" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="contactPhone" class="form-label">Numéro de téléphone</label>
+                            <input type="tel" class="form-control" id="contactPhone">
+                        </div>
+                        <div class="mb-3">
+                            <label for="contactMessage" class="form-label">Votre message <span class="text-danger">*</span></label>
+                            <textarea class="form-control" id="contactMessage" rows="4" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-orange w-100">
+                            <span id="contactSubmitText">Envoyer le message</span>
+                            <span id="contactSpinner" class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-4">
+            <div class="col-12">
+                <div class="contact-card" style="cursor: pointer;">
+                    <h4 class="mb-4">Emplacement du magasin</h4>
+                    <a href="https://maps.app.goo.gl/Cpk1L8fAadgE9pB76" target="_blank" style="display: block; text-decoration: none;">
+                        <div class="map-container" style="position: relative; width: 100%; height: 300px;">
+                            <iframe 
+                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3190.123456789012!2d5.7129892!3d36.1524645!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x12f2d5f1a5a5a5a5%3A0x12f2d5f1a5a5a5a5!2sROBUSTE%20EL%20EULMA!5e0!3m2!1sen!2sdz!4v1621234567890!5m2!1sen!2sdz" 
+                                width="100%" 
+                                height="100%" 
+                                style="border:0; border-radius: 8px; pointer-events: none;" 
+                                allowfullscreen="" 
+                                loading="lazy" 
+                                referrerpolicy="no-referrer-when-downgrade" 
+                                title="موقع متجر ROBUSTE EL EULMA">
+                            </iframe>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 
-                return function from(arrayLike/*, mapFn, thisArg */) {
-                    var C = this;
-                    var items = Object(arrayLike);
-                    if (arrayLike == null) {
-                        throw new TypeError('Array.from requires an array-like object - not null or undefined');
-                    }
-                    var mapFn = arguments.length > 1 ? arguments[1] : void undefined;
-                    var T;
-                    if (typeof mapFn !== 'undefined') {
-                        if (!isCallable(mapFn)) {
-                            throw new TypeError('Array.from: when provided, the second argument must be a function');
-                        }
-                        if (arguments.length > 2) {
-                            T = arguments[2];
-                        }
-                    }
-                    var len = toLength(items.length);
-                    var A = isCallable(C) ? Object(new C(len)) : new Array(len);
-                    var k = 0;
-                    var kValue;
-                    while (k < len) {
-                        kValue = items[k];
-                        if (mapFn) {
-                            A[k] = typeof T === 'undefined' ? mapFn(kValue, k) : mapFn.call(T, kValue, k);
-                        } else {
-                            A[k] = kValue;
-                        }
-                        k += 1;
-                    }
-                    A.length = len;
-                    return A;
-                };
-            })();
-        }
+<!-- الفوتر -->
+<footer class="py-5 bg-dark text-white">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4 mb-4">
+                <h5 class="mb-3">À propos de ROBUSTE</h5>
+                <p>Magasin spécialisé dans l'électroménager de haute qualité à prix compétitifs. Nous proposons les meilleurs produits et une livraison rapide.</p>
+                <div class="mt-3">
+                    <a href="https://www.facebook.com/share/19QooaXfy8/" class="social-icon"><i class="bi bi-facebook"></i> </a>
+                </div>
+            </div>
+            <div class="col-lg-2 col-md-4 mb-4">
+                <h5 class="mb-3">Liens rapides</h5>
+                <ul class="list-unstyled">
+                    <li class="mb-2"><a href="#" class="text-white text-decoration-none">Accueil</a></li>
+                    <li class="mb-2"><a href="#products" class="text-white text-decoration-none">Produits</a></li>
+                    <li class="mb-2"><a href="#reviews" class="text-white text-decoration-none">آراء العملاء</a></li>
+                    <li class="mb-2"><a href="#contact" class="text-white text-decoration-none">Contactez-nous</a></li>
+                </ul>
+            </div>
+            <div class="col-lg-3 col-md-4 mb-4">
+                <h5 class="mb-3">Service client</h5>
+                <ul class="list-unstyled">
+                    <li class="mb-2"><a href="#" class="text-white text-decoration-none">FAQ</a></li>
+                    <li class="mb-2"><a href="#" class="text-white text-decoration-none">Modes de paiement</a></li>
+                    <li class="mb-2"><a href="#" class="text-white text-decoration-none">Conditions de garantie</a></li>
+                </ul>
+            </div>
+            <div class="col-lg-3 col-md-4 mb-4">
+                <h5 class="mb-3">Abonnez-vous à notre page</h5>
+                <p>Abonnez-vous pour recevoir les dernières offres</p>
+                <div class="mt-3">
+                    <a href="https://www.facebook.com/share/19QooaXfy8/" class="btn btn-orange w-100" target="_blank">S'abonner</a>
+                </div>
+            </div>
+        </div>
+        <hr class="my-4 bg-light">
+        <div class="row">
+            <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+                <p class="mb-0">&copy; 2025 ROBUSTE. Tous droits réservés.</p>
+            </div>
+            <div class="col-md-6 text-center text-md-end">
+                <div class="d-flex flex-column flex-md-row align-items-center justify-content-md-end">
+                    <p class="mb-2 mb-md-0 me-md-3">Paiement par carte gold disponible</p>
+                    <img src="https://i.postimg.cc/bY06X2YN/logo-round.png" alt="Modes de paiement" style="width: 30px; height: auto;">
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
 
-        // Polyfill for NodeList.forEach for older Safari versions
-        if (window.NodeList && !NodeList.prototype.forEach) {
-            NodeList.prototype.forEach = function(callback, thisArg) {
-                thisArg = thisArg || window;
-                for (var i = 0; i < this.length; i++) {
-                    callback.call(thisArg, this[i], i, this);
-                }
-            };
-        }
+<!-- زر الواتساب -->
+<a href="https://wa.me/213656360457" class="whatsapp-btn" target="_blank"><i class="bi bi-whatsapp"></i></a>
 
-       document.addEventListener('DOMContentLoaded', function() {
-  document.querySelectorAll('.slideshow-container1 img').forEach(function(img) {
-    if (!img.hasAttribute('width') || !img.hasAttribute('height')) {
-      if (img.naturalWidth && img.naturalHeight) {
-        img.setAttribute('width', img.naturalWidth);
-        img.setAttribute('height', img.naturalHeight);
-      }
-      // لا تضيف auto هنا، خليه يتعامل مع CSS
-    }
-  });
-});
+<!-- سلة المشتريات -->
+<div class="offcanvas offcanvas-end" tabindex="-1" id="cartOffcanvas" aria-labelledby="cartOffcanvasLabel">
+    <div class="offcanvas-header">
+        <h5 class="offcanvas-title" id="cartOffcanvasLabel">Panier d'achat</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body">
+        <div id="cartItems" class="mb-3">
+            <div class="text-center py-4 text-muted" id="emptyCartMessage">
+                <i class="bi bi-cart-x display-4 d-block mb-2"></i>
+                Panier d'achat فارغة
+            </div>
+        </div>
+        
+        <div class="cart-summary border-top pt-3">
+            <div class="d-flex justify-content-between mb-2">
+                <span>Total:</span>
+                <span id="cartTotal">0 د.ج</span>
+            </div>
+            <button class="btn btn-orange w-100" onclick="checkout()" id="checkoutBtn" disabled>
+                <i class="bi bi-bag-check"></i> Finaliser la commande
+            </button>
+        </div>
+    </div>
+</div>
 
-        // حل مشكلة event listeners في Safari
-        document.addEventListener('DOMContentLoaded', function() {
-            // إعادة تهيئة جميع event listeners
-            initEventListeners();
-        });
+<!-- مكتبات JavaScript -->
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
-        function initEventListeners() {
-            // إعادة إرفاق جميع event listeners هنا
-            // خاصة تلك المتعلقة بالسلة والطلبات
-            
-            // إضافة مستمعي الأحداث لأزرار الإضافة إلى السلة
-            document.querySelectorAll('.add-to-cart-btn').forEach(function(button) {
-                button.addEventListener('click', function() {
-                    var productId = this.getAttribute('data-id');
-                    var product = products.find(p => p.id == productId);
-                    if (product) {
-                        addToCart(product.name, product.price, product.priceValue, product.images, product.id);
-                    }
-                });
-            });
-            
-            // إضافة مستمعي الأحداث لأزرار الطلب المباشر
-            document.querySelectorAll('.buy-now-btn').forEach(function(button) {
-                button.addEventListener('click', function() {
-                    var productId = this.getAttribute('data-id');
-                    var product = products.find(p => p.id == productId);
-                    if (product) {
-                        showOrderModal(product.name, product.price, product.priceValue, product.images);
-                    }
-                });
-            });
-            
-            // إخفاء مؤشر الحالة عند النقر على زر الإغلاق
-            var closeButton = document.querySelector('#statusIndicator .btn-close');
-            if (closeButton) {
-                closeButton.addEventListener('click', hideStatus);
-            }
-        }
+<script>
+// ============== تهيئة Firebase ==============
+const firebaseConfig = {
+    apiKey: "AIzaSyBTrnKCYOtfSSDYtmVQbzP2HcwgkLT565Y",
+    authDomain: "robuste-c8e0f.firebaseapp.com",
+    projectId: "robuste-c8e0f",
+    storageBucket: "robuste-c8e0f.appspot.com",
+    messagingSenderId: "975609984963",
+    appId: "1:975609984963:web:a481efb493a88d7bc7af76",
+    measurementId: "G-DWT7MZN028"
+};
 
-        const firebaseConfig = {
-            apiKey: "AIzaSyBTrnKCYOtfSSDYtmVQbzP2HcwgkLT565Y",
-            authDomain: "robuste-c8e0f.firebaseapp.com",
-            projectId: "robuste-c8e0f",
-            storageBucket: "robuste-c8e0f.appspot.com",
-            messagingSenderId: "975609984963",
-            appId: "1:975609984963:web:a481efb493a88d7bc7af76",
-            measurementId: "G-DWT7MZN028"
-        };
+// تهيئة Firebase
+firebase.initializeApp(firebaseConfig);
+const db = firebase.firestore();
 
-        // تهيئة Firebase
-        firebase.initializeApp(firebaseConfig);
-        const db = firebase.firestore();
+// تهيئة EmailJS
+(function() {
+    emailjs.init("k77vdaUWPpnLrfTnS");
+})();
 
-        // تهيئة EmailJS باستخدام المفاتيح المقدمة
-        (function() {
-            emailjs.init("k77vdaUWPpnLrfTnS");
-        })();
+// قائمة الولايات الجزائرية
+const wilayas = [
+    "أدرار", "الشلف", "الأغواط", "أم البواقي", "باتنة", "بجاية", "بسكرة", "بشار", "البليدة",
+    "البويرة", "تمنراست", "تبسة", "تلمسان", "تيارت", "تيزي وزو", "الجزائر", "الجلفة", "جيجل",
+    "سطيف", "سعيدة", "سكيكدة", "سيدي بلعباس", "عنابة", "قالمة", "قسنطينة", "المدية", "مستغانم",
+    "المسيلة", "معسكر", "ورقلة", "وهران", "البيض", "إليزي", "برج بوعريريج", "بومرداس", "الطارف",
+    "تيندوف", "تيسمسيلت", "الوادي", "خنشلة", "سوق أهراس", "تيبازة", "ميلة", "عين الدفلى", "النعامة",
+    "عين تموشنت", "غرداية", "غليزان"
+];
 
-       // قائمة الولايات الجزائرية
-        const wilayas = [
-            "أدرار", "الشلف", "الأغواط", "أم البواقي", "باتنة", "بجاية", "بسكرة", "بشار", "البليدة",
-            "البويرة", "تمنراست", "تبسة", "تلمسان", "تيارت", "تيزي وزو", "الجزائر", "الجلفة", "جيجل",
-            "سطيف", "سعيدة", "سكيكدة", "سيدي بلعباس", "عنابة", "قالمة", "قسنطينة", "المدية", "مستغانم",
-            "المسيلة", "معسكر", "ورقلة", "وهران", "البيض", "إليزي", "برج بوعريريج", "بومرداس", "الطارف",
-            "تيندوف", "تيسمسيلت", "الوادي", "خنشلة", "سوق أهراس", "تيبازة", "ميلة", "عين الدفلى", "النعامة",
-            "عين تموشنت", "غرداية", "غليزان"
-        ];
+// ============== نظام المنتجات الديناميكي ==============
 
-// ============== دالة جلب المنتجات من JSON ==============
-async function loadProductsFromJSON() {
+// دالة جلب وعرض المنتجات من JSON
+async function loadAndDisplayProducts(category = 'all') {
     try {
         const response = await fetch('products.json');
         if (!response.ok) {
             throw new Error('Erreur lors du chargement des produits');
         }
         const products = await response.json();
-        console.log('Produits chargés:', products.length, 'produits');
-        return products;
+        
+        // تصفية المنتجات حسب الفئة
+        const filteredProducts = category === 'all' 
+            ? products 
+            : products.filter(product => product.category === category);
+        
+        renderProducts(filteredProducts);
     } catch (error) {
         console.error('Erreur:', error);
         showStatus('Erreur lors du chargement des produits', 'error');
-        return [];
     }
 }
 
-// ============== دالة تحميل العروض الخاصة ==============
+// دالة عرض المنتجات
+function renderProducts(products) {
+    const container = document.getElementById('productsContainer');
+    if (!container) return;
+    
+    container.innerHTML = '';
+    
+    if (products.length === 0) {
+        container.innerHTML = '<div class="col-12 text-center text-muted py-5">Aucun produit trouvé</div>';
+        return;
+    }
+    
+    products.forEach(product => {
+        const discountBadge = product.old_price && product.old_price > product.price ? `
+            <div class="discount-badge">
+                خصم ${Math.round(((product.old_price - product.price) / product.old_price) * 100)}%
+            </div>
+        ` : '';
+        
+        const oldPrice = product.old_price && product.old_price > product.price ? `
+            <small dir="ltr" class="text-decoration-line-through text-muted me-2">${product.old_price.toLocaleString()} DA</small>
+        ` : '';
+        
+        const productBadge = product.badge ? `
+            <div class="product-badge">
+                ${product.badge}
+            </div>
+        ` : '';
+        
+        // إنشاء سلايدر للصور
+        const carouselIndicators = product.images.map((_, index) => `
+            <button type="button" data-bs-target="#carousel-${product.id}" data-bs-slide-to="${index}" 
+                ${index === 0 ? 'class="active" aria-current="true"' : ''} 
+                aria-label="صورة ${index + 1}">
+            </button>
+        `).join('');
+        
+        const carouselItems = product.images.map((img, index) => `
+            <div class="carousel-item ${index === 0 ? 'active' : ''}">
+                <img src="${img}" class="d-block w-100" alt="${product.title}" loading="lazy">
+            </div>
+        `).join('');
+        
+        const carouselControls = product.images.length > 1 ? `
+            <button class="carousel-control-prev" type="button" data-bs-target="#carousel-${product.id}" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">السابق</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carousel-${product.id}" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">التالي</span>
+            </button>
+        ` : '';
+        
+        const productCard = `
+            <div class="col-6 col-md-4 col-lg-3 mb-4">
+                <a href="product.html?pid=${product.id}" style="text-decoration: none; color: inherit;">
+                    <div class="product-card card h-100 position-relative">
+                        ${productBadge}
+                        ${discountBadge}
+                        <div id="carousel-${product.id}" class="carousel slide product-carousel" data-bs-ride="carousel">
+                            <div class="carousel-indicators">
+                                ${carouselIndicators}
+                            </div>
+                            <div class="carousel-inner">
+                                ${carouselItems}
+                            </div>
+                            ${carouselControls}
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">${product.title}</h5>
+                            <p class="card-text text-muted small">${product.description_short}</p>
+                            <div class="d-flex align-items-center mt-3">
+                                ${oldPrice}
+                                <p dir="ltr" class="fw-bold text-primary mb-0">${product.price.toLocaleString()} DA</p>
+                            </div>
+                        </div>
+                        <div class="card-footer bg-transparent border-0">
+                            <button class="btn btn-orange w-100">
+                                <i class="bi bi-eye"></i> Voir le produit
+                            </button>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        `;
+        
+        container.innerHTML += productCard;
+    });
+}
+
+// دالة تحميل العروض الخاصة
 async function loadSpecialOffers() {
     try {
-        const products = await loadProductsFromJSON();
+        const response = await fetch('products.json');
+        if (!response.ok) {
+            throw new Error('Erreur lors du chargement des produits');
+        }
+        const products = await response.json();
         
         // اختر 3 منتجات لها خصم للعروض الخاصة
         const specialOffers = products
             .filter(product => product.old_price && product.old_price > product.price)
             .slice(0, 3);
         
-        console.log('Offres spéciales chargées:', specialOffers.length, 'produits');
         renderSpecialOffers(specialOffers);
     } catch (error) {
         console.error('Erreur lors du chargement des offres spéciales:', error);
     }
 }
 
-// ============== دالة عرض العروض الخاصة ==============
+// دالة عرض العروض الخاصة
 function renderSpecialOffers(offers) {
-    const offersContainer = document.querySelector('.offer-products');
+    const offersContainer = document.getElementById('specialOffersContainer');
     if (!offersContainer) return;
     
     if (offers.length === 0) {
@@ -2087,141 +2200,9 @@ function renderSpecialOffers(offers) {
         `;
     }).join('');
 }
-        // متغيرات عامة
-        let orderModal = null;
-        const ORDER_SERVICE_ID = "service_lc1q5k8";
-        const ORDER_TEMPLATE_ID = "template_a15g7yg";
-        const CONTACT_TEMPLATE_ID = "template_11pkq0k";
 
-        // عند تحميل الصفحة
-   // عند تحميل الصفحة
-document.addEventListener('DOMContentLoaded', function() {
-    renderProducts(); // ستعرض جميع المنتجات افتراضيًا
-    populateWilayas();
-    setupEventListeners();
-    
-    // تهيئة نموذج الطلب
-    orderModal = new bootstrap.Modal(document.getElementById('orderModal'));
-    
-    // إعداد نموذج الاتصال
-    document.getElementById('contactForm').addEventListener('submit', function(e) {
-        e.preventDefault();
-        sendContactMessage();
-    });
-    
-    // بدء مؤقت العرض الخاص
-    startOfferTimer();
-    loadSpecialOffers(); // تحميل العروض الخاصة من JSON
-    // تهيئة سلة المشتريات
-updateCartCount();
-renderCart();
-});
-
-      function renderProducts(category = 'all') {
-    const container = document.getElementById('productsContainer');
-    container.innerHTML = '';
-    
-    // تصفية المنتجات حسب الفئة
-    const filteredProducts = category === 'all' 
-        ? products 
-        : products.filter(product => product.category === category);
-    
-    filteredProducts.forEach(product => {
-        const discountBadge = product.discount ? `
-            <div class="discount-badge">
-                خصم ${product.discount}
-            </div>
-        ` : '';
-        
-        const oldPrice = product.oldPrice ? `
-            <small dir="ltr" class="text-decoration-line-through text-muted me-2">${product.oldPrice}</small>
-        ` : '';
-        
-        const productBadge = product.badge ? `
-            <div class="product-badge">
-                ${product.badge}
-            </div>
-        ` : '';
-        
-        // إنشاء سلايدر للصور
-        const carouselIndicators = product.images.map((_, index) => `
-            <button type="button" data-bs-target="#carousel-${product.id}" data-bs-slide-to="${index}" 
-                ${index === 0 ? 'class="active" aria-current="true"' : ''} 
-                aria-label="صورة ${index + 1}">
-            </button>
-        `).join('');
-        
-       const carouselItems = product.images.map((img, index) => `
-            <div class="carousel-item ${index === 0 ? 'active' : ''}">
-                <img src="${img}" class="d-block w-100" alt="صورة المنتج ${index + 1}" loading="lazy"
-                width="auto" >
-            </div>
-        `).join('');
-        
-        const carouselControls = product.images.length > 1 ? `
-            <button class="carousel-control-prev" type="button" data-bs-target="#carousel-${product.id}" data-bs-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">السابق</span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#carousel-${product.id}" data-bs-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">التالي</span>
-            </button>
-        ` : '';
-        
-      const productCard = `
-    <div class="col-6 col-md-4 col-lg-3 mb-4">
-        <a href="product.html?pid=${product.id}" style="text-decoration: none; color: inherit;">
-            <div class="product-card card h-100 position-relative">
-                ${productBadge}
-                ${discountBadge}
-                <div id="carousel-${product.id}" class="carousel slide product-carousel" data-bs-ride="carousel">
-                    <div class="carousel-indicators">
-                        ${carouselIndicators}
-                    </div>
-                    <div class="carousel-inner">
-                        ${carouselItems}
-                    </div>
-                    ${carouselControls}
-                </div>
-                <div class="card-body">
-                    <h5 class="card-title">${product.name}</h5>
-                    <p class="card-text text-muted small">${product.description}</p>
-                    <div class="d-flex align-items-center mt-3">
-                        ${oldPrice}
-                        <p dir="ltr" class="fw-bold text-primary mb-0">${product.price}</p>
-                    </div>
-                </div>
-                <div class="card-footer bg-transparent border-0">
-                    <button class="btn btn-orange w-100">
-                        <i class="bi bi-eye"></i> Voir le produit
-                    </button>
-                </div>
-            </div>
-        </a>
-    </div>
-`;
-        container.innerHTML += productCard;
-    });
-
-
-}
-        // تعبئة قائمة الولايات
-        function populateWilayas() {
-            const wilayaSelect = document.getElementById('wilaya');
-            wilayas.forEach(wilaya => {
-                const option = document.createElement('option');
-                option.value = wilaya;
-                option.textContent = wilaya;
-                wilayaSelect.appendChild(option);
-            });
-        }
-
-function setupEventListeners() {
-    // إخفاء مؤشر الحالة عند النقر على زر الإغلاق
-    document.querySelector('#statusIndicator .btn-close').addEventListener('click', hideStatus);
-    
-    // أحداث الفئات الجديدة
+// ============== إعداد نظام الفئات ==============
+function setupCategoryFilters() {
     document.querySelectorAll('.category-btn').forEach(btn => {
         btn.addEventListener('click', function() {
             // إزالة النشط من جميع الأزرار
@@ -2234,56 +2215,89 @@ function setupEventListeners() {
             
             // تصفية المنتجات حسب الفئة
             const category = this.dataset.category;
-            renderProducts(category);
+            loadAndDisplayProducts(category);
         });
     });
 }
 
-        // بدء مؤقت العرض الخاص
-        function startOfferTimer() {
-            const daysElement = document.getElementById('days');
-            const hoursElement = document.getElementById('hours');
-            const minutesElement = document.getElementById('minutes');
-            const secondsElement = document.getElementById('seconds');
-            
-            // تاريخ انتهاء العرض (3 أيام من الآن)
-            const endDate = new Date();
-            endDate.setDate(endDate.getDate() + 3);
-            
-            function updateTimer() {
-                const now = new Date();
-                const difference = endDate - now;
-                
-                if (difference <= 0) {
-                    // انتهى الوقت
-                    daysElement.textContent = '00';
-                    hoursElement.textContent = '00';
-                    minutesElement.textContent = '00';
-                    secondsElement.textContent = '00';
-                    return;
-                }
-                
-                // حساب الأيام، الساعات، الدقائق، الثواني
-                const days = Math.floor(difference / (1000 * 60 * 60 * 24));
-                const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
-                const seconds = Math.floor((difference % (1000 * 60)) / 1000);
-                
-                // تحديث العناصر
-                daysElement.textContent = days.toString().padStart(2, '0');
-                hoursElement.textContent = hours.toString().padStart(2, '0');
-                minutesElement.textContent = minutes.toString().padStart(2, '0');
-                secondsElement.textContent = seconds.toString().padStart(2, '0');
-            }
-            
-            // تحديث المؤثر كل ثانية
-            updateTimer();
-            setInterval(updateTimer, 1000);
-        }
-// ============== إدارة سلة المشتريات - متوافق مع جميع المتصفحات ==============
-// حل مشاكل التوافق مع سفاري والمتصفحات الأخرى
+// ============== تهيئة الصفحة عند التحميل ==============
+document.addEventListener('DOMContentLoaded', function() {
+    loadAndDisplayProducts(); // تحميل جميع المنتجات
+    setupCategoryFilters(); // إعداد نظام الفئات
+    loadSpecialOffers(); // تحميل العروض الخاصة
+    populateWilayas(); // تعبئة قائمة الولايات
+    startOfferTimer(); // بدء مؤقت العرض الخاص
+    
+    // تهيئة نموذج الطلب
+    orderModal = new bootstrap.Modal(document.getElementById('orderModal'));
+    
+    // إعداد نموذج الاتصال
+    document.getElementById('contactForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        sendContactMessage();
+    });
+    
+    // تهيئة سلة المشتريات
+    updateCartCount();
+    renderCart();
+});
 
-// تهيئة سلة المشتريات مع معالجة الأخطاء
+// ============== بقية الدوال الأساسية ==============
+
+// تعبئة قائمة الولايات
+function populateWilayas() {
+    const wilayaSelect = document.getElementById('wilaya');
+    wilayas.forEach(wilaya => {
+        const option = document.createElement('option');
+        option.value = wilaya;
+        option.textContent = wilaya;
+        wilayaSelect.appendChild(option);
+    });
+}
+
+// بدء مؤقت العرض الخاص
+function startOfferTimer() {
+    const daysElement = document.getElementById('days');
+    const hoursElement = document.getElementById('hours');
+    const minutesElement = document.getElementById('minutes');
+    const secondsElement = document.getElementById('seconds');
+    
+    // تاريخ انتهاء العرض (3 أيام من الآن)
+    const endDate = new Date();
+    endDate.setDate(endDate.getDate() + 3);
+    
+    function updateTimer() {
+        const now = new Date();
+        const difference = endDate - now;
+        
+        if (difference <= 0) {
+            // انتهى الوقت
+            daysElement.textContent = '00';
+            hoursElement.textContent = '00';
+            minutesElement.textContent = '00';
+            secondsElement.textContent = '00';
+            return;
+        }
+        
+        // حساب الأيام، الساعات، الدقائق، الثواني
+        const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+        
+        // تحديث العناصر
+        daysElement.textContent = days.toString().padStart(2, '0');
+        hoursElement.textContent = hours.toString().padStart(2, '0');
+        minutesElement.textContent = minutes.toString().padStart(2, '0');
+        secondsElement.textContent = seconds.toString().padStart(2, '0');
+    }
+    
+    // تحديث المؤثر كل ثانية
+    updateTimer();
+    setInterval(updateTimer, 1000);
+}
+
+// ============== إدارة سلة المشتريات ==============
 let cart = [];
 try {
     const cartData = localStorage.getItem('robuste_cart');
@@ -2295,14 +2309,7 @@ try {
     cart = [];
 }
 
-// دالة مساعدة للتوافق مع eventListener في سفاري
-function safeAddEventListener(element, event, handler) {
-    if (element && typeof element.addEventListener === 'function') {
-        element.addEventListener(event, handler);
-    }
-}
-
-// تحديث عداد السلة مع التحقق من وجود العناصر
+// تحديث عداد السلة
 function updateCartCount() {
     const cartCount = document.getElementById('cartCount');
     const checkoutBtn = document.getElementById('checkoutBtn');
@@ -2314,7 +2321,7 @@ function updateCartCount() {
     checkoutBtn.disabled = count === 0;
 }
 
-// عرض محتويات السلة مع معالجة الأخطاء
+// عرض محتويات السلة
 function renderCart() {
     const cartItems = document.getElementById('cartItems');
     const emptyCartMessage = document.getElementById('emptyCartMessage');
@@ -2322,7 +2329,7 @@ function renderCart() {
     
     if (!cartItems || !cartTotal) return;
     
-    // مسح المحتوى الحالي بطريقة متوافقة
+    // مسح المحتوى الحالي
     while (cartItems.firstChild) {
         cartItems.removeChild(cartItems.firstChild);
     }
@@ -2377,7 +2384,7 @@ function renderCart() {
 function attachCartEventListeners() {
     // معالجة أزرار الكمية
     document.querySelectorAll('.quantity-btn').forEach(btn => {
-        safeAddEventListener(btn, 'click', function(e) {
+        btn.addEventListener('click', function(e) {
             const index = parseInt(this.dataset.index);
             const action = this.dataset.action;
             
@@ -2393,7 +2400,7 @@ function attachCartEventListeners() {
     
     // معالجة حقول الإدخال
     document.querySelectorAll('.quantity-input').forEach(input => {
-        safeAddEventListener(input, 'change', function(e) {
+        input.addEventListener('change', function(e) {
             const index = parseInt(this.dataset.index);
             if (isNaN(index) || index < 0 || index >= cart.length) return;
             
@@ -2402,8 +2409,7 @@ function attachCartEventListeners() {
         });
         
         // منع الإدخال غير الرقمي
-        safeAddEventListener(input, 'keydown', function(e) {
-            // السماح فقط بالأرقام ومفاتيح التحكم
+        input.addEventListener('keydown', function(e) {
             if (!/[\d\b\t\n]|Arrow|Delete|Backspace|Tab/.test(e.key) && 
                 !(e.ctrlKey || e.metaKey)) {
                 e.preventDefault();
@@ -2413,7 +2419,7 @@ function attachCartEventListeners() {
     
     // معالجة أزرار الحذف
     document.querySelectorAll('.remove-item').forEach(btn => {
-        safeAddEventListener(btn, 'click', function(e) {
+        btn.addEventListener('click', function(e) {
             const index = parseInt(this.dataset.index);
             if (isNaN(index) || index < 0 || index >= cart.length) return;
             
@@ -2422,7 +2428,7 @@ function attachCartEventListeners() {
     });
 }
 
-// إظهار/إخفاء السلة مع التحقق من وجود bootstrap
+// إظهار/إخفاء السلة
 function toggleCart() {
     if (cart.length === 0) {
         showStatus('سلة المشتريات فارغة', 'info');
@@ -2430,29 +2436,21 @@ function toggleCart() {
     }
     
     try {
-        // التحقق من وجود bootstrap قبل استخدامه
-        if (typeof bootstrap !== 'undefined' && bootstrap.Offcanvas) {
-            const cartOffcanvas = new bootstrap.Offcanvas(document.getElementById('cartOffcanvas'));
-            cartOffcanvas.show();
-        } else {
-            // fallback في حالة عدم وجود bootstrap
-            document.getElementById('cartOffcanvas').classList.add('show');
-        }
+        const cartOffcanvas = new bootstrap.Offcanvas(document.getElementById('cartOffcanvas'));
+        cartOffcanvas.show();
     } catch (e) {
         console.error('خطأ في فتح السلة:', e);
-        // fallback يدوي
         document.getElementById('cartOffcanvas').classList.add('show');
         document.body.classList.add('offcanvas-open');
     }
 }
 
-// إضافة منتج إلى السلة مع معالجة القيم
+// إضافة منتج إلى السلة
 function addToCart(productName, productPrice, priceValue, productImages, productId) {
-    // التحقق من القيم المدخلة
     const name = typeof productName === 'string' ? productName : 'منتج بدون اسم';
     const price = typeof priceValue === 'number' ? priceValue : 
                  typeof productPrice === 'number' ? productPrice : 0;
-    const id = productId || Date.now().toString(); // إنشاء معرف فريد إذا لم يتم توفيره
+    const id = productId || Date.now().toString();
     
     let image = '';
     if (Array.isArray(productImages) && productImages.length > 0) {
@@ -2475,7 +2473,7 @@ function addToCart(productName, productPrice, priceValue, productImages, product
         });
     }
     
-    // حفظ السلة في localStorage مع معالجة الأخطاء
+    // حفظ السلة في localStorage
     try {
         localStorage.setItem('robuste_cart', JSON.stringify(cart));
     } catch (e) {
@@ -2530,204 +2528,10 @@ function removeFromCart(index) {
     showStatus(`تمت إزالة "${productName}" من السلة`, 'success');
 }
 
-// دالة مساعدة لعرض الرسائل
-function showStatus(message, type) {
-    // يمكن تنفيذ هذه الدالة حسب بيئة العمل الخاصة بك
-    console.log(`${type}: ${message}`);
-    // مثال بسيط:
-    alert(message);
-}
+// ============== وظائف الطلب ==============
+let orderModal = null;
 
-// تهيئة السلة عند تحميل الصفحة
-document.addEventListener('DOMContentLoaded', function() {
-    updateCartCount();
-    renderCart();
-});
-
-// حل مشكلة localStorage في وضع التصفح الخاص
-function isLocalStorageAvailable() {
-    try {
-        const test = 'test';
-        localStorage.setItem(test, test);
-        localStorage.removeItem(test);
-        return true;
-    } catch(e) {
-        return false;
-    }
-}
-
-// استخدام بديل إذا كان localStorage غير متاح
-if (!isLocalStorageAvailable()) {
-    console.warn('localStorage غير متاح، سيتم استخدام تخزين مؤقت في الذاكرة فقط');
-    // يمكن إضافة بديل مثل cookies أو التخزين في الذاكرة فقط
-}
-// إتمام عملية الشراء
-async function checkout() {
-    if (cart.length === 0) {
-        showStatus('سلة المشتريات فارغة', 'error');
-        return;
-    }
-    
-    // إخفاء سلة المشتريات
-    const cartOffcanvas = bootstrap.Offcanvas.getInstance(document.getElementById('cartOffcanvas'));
-    cartOffcanvas.hide();
-    
-    // إظهار نموذج بيانات العميل
-    document.getElementById('orderForm').reset();
-    document.getElementById('cashOnDelivery').checked = true;
-    
-    // حساب المجموع الكلي
-    const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-    
-    // ملء بيانات الطلب (سيتم استخدام أول منتج كعنوان للطلب)
-    const firstItem = cart[0];
-    document.getElementById('productName').value = `${cart.length} منتجات مختلفة`;
-    document.getElementById('productPriceValue').value = total;
-    document.getElementById('productImageUrl').value = firstItem.image;
-    
-    document.getElementById('productNameDisplay').textContent = `${cart.length} منتجات مختلفة`;
-    document.getElementById('productPrice').textContent = `${total.toLocaleString()} د.ج`;
-    document.getElementById('productImage').src = firstItem.image;
-    
-    // إظهار نموذج الطلب
-    orderModal.show();
-    
-    // تعديل دالة submitOrder لترسل جميع المنتجات
-    window.submitOrder = async function() {
-        // الحصول على بيانات العميل من النموذج
-        const fullName = document.getElementById('fullName').value;
-        const phone = document.getElementById('phone').value;
-        const email = document.getElementById('email').value || 'لم يتم تقديمه';
-        const wilaya = document.getElementById('wilaya').value;
-        const address = document.getElementById('address').value || 'غير محدد';
-        const paymentMethod = document.querySelector('input[name="paymentMethod"]:checked').value;
-        
-        // التحقق من صحة البيانات
-        if (!fullName || !phone || !wilaya) {
-            showStatus('الرجاء ملء جميع الحقول المطلوبة', 'error');
-            return;
-        }
-        
-        const phoneRegex = /^0[5-7][0-9]{8}$/;
-        if (!phoneRegex.test(phone)) {
-            showStatus('رقم الهاتف غير صحيح. يجب أن يتكون من 10 أرقام ويبدأ بـ 05 أو 06 أو 07', 'error');
-            return;
-        }
-        
-        // إعداد بيانات الطلب
-        const orderData = {
-            products: cart,
-            customer: fullName,
-            phone: phone,
-            email: email,
-            wilaya: wilaya,
-            address: address,
-            payment: paymentMethod,
-            totalPrice: total,
-            timestamp: new Date().toISOString(),
-            status: 'جديد'
-        };
-        
-        // عرض حالة التحميل
-        showStatus('جاري معالجة طلبك...', 'loading');
-        
-        // تعطيل زر الإرسال أثناء المعالجة
-        const submitBtn = document.getElementById('submitOrderBtn');
-        submitBtn.disabled = true;
-        submitBtn.innerHTML = `
-            <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-            جاري المعالجة...
-        `;
-        
-        try {
-            // تخزين الطلب في Firebase
-            const docRef = await db.collection('orders').add(orderData);
-            console.log("تم تخزين الطلب في Firebase:", docRef.id);
-            
-          // إنشاء قائمة المنتجات للبريد الإلكتروني (بلا جدول)
-const productsList = cart.map(item => `
-<div style="margin-bottom: 10px; padding: 8px; border-bottom: 1px solid #eee;">
-  <strong>المنتج:</strong> ${item.name} <br>
-  <strong>الكمية:</strong> ${item.quantity} <br>
-  <strong>السعر:</strong> ${item.price.toLocaleString()} د.ج <br>
-  <strong>المجموع:</strong> ${(item.price * item.quantity).toLocaleString()} د.ج
-</div>
-`).join('');
-            
-            // إرسال إيميل عبر EmailJS
-            await emailjs.send(ORDER_SERVICE_ID, ORDER_TEMPLATE_ID, {
-                order_id: docRef.id,
-                customer_name: fullName,
-                customer_phone: phone,
-                customer_email: email,
-                wilaya: wilaya,
-                address: address,
-                total_price: total.toLocaleString(),
-                payment_method: paymentMethod,
-                order_date: new Date().toLocaleString('ar-DZ'),
-                products: productsList
-            });
-            
-            console.log("تم إرسال إيميل تأكيد الطلب");
-            
-            // عرض رسالة النجاح
-            showStatus(`
-                <div class="text-center">
-                    <i class="bi bi-check-circle-fill text-success fs-1"></i>
-                    <h5 class="mt-2">تم تأكيد طلبك بنجاح!</h5>
-                    <div class="text-start mt-3">
-                        <p><strong>رقم الطلب:</strong> ${docRef.id}</p>
-                        <p><strong>الاسم:</strong> ${fullName}</p>
-                        <p><strong>عدد المنتجات:</strong> ${cart.length} منتجات</p>
-                        <p><strong>المبلغ الإجمالي:</strong> ${total.toLocaleString()} د.ج</p>
-                        <p class="mt-3">سيتم التواصل معك على الرقم <strong>${phone}</strong> خلال 24 ساعة لتأكيد الشحن.</p>
-                    </div>
-                    <a href="https://wa.me/213656360457?text=${encodeURIComponent(
-                        `استفسار عن الطلب ${docRef.id}\nالاسم: ${fullName}\nعدد المنتجات: ${cart.length}\nالمجموع: ${total.toLocaleString()} د.ج\nرقم الهاتف: ${phone}`
-                    )}" class="btn whatsapp-contact-btn mt-2 w-100" target="_blank">
-                        <i class="bi bi-whatsapp"></i> تواصل عبر واتساب (اختياري)
-                    </a>
-                </div>
-            `, 'success');
-            
-            // تفريغ السلة وإعادة تعيين النموذج
-            cart = [];
-            localStorage.removeItem('robuste_cart');
-            updateCartCount();
-            document.getElementById('orderForm').reset();
-            orderModal.hide();
-            
-        } catch (error) {
-    console.error('حدث خطأ:', error);
-
-    // Safari false error handling
-    if (error.code === 18 && navigator.userAgent.includes('Safari')) {
-        console.warn("Safari false error (code 18) تم تجاهله");
-        showStatus('تم إرسال رسالتك بنجاح! (Safari glitch)', 'success');
-        return;
-    }
-
-    let errorMessage = 'حدث خطأ غير متوقع. يرجى المحاولة مرة أخرى.';
-    if (error.code) {
-        errorMessage = `خطأ في النظام: ${error.code}`;
-    } else if (error.message) {
-        errorMessage = error.message;
-    } else if (error.text) {
-        errorMessage = error.text;
-    }
-    
-    showStatus(`حدث خطأ أثناء إرسال الرسالة: ${errorMessage}`, 'error');
-
-        } finally {
-            // إعادة تمكين زر الإرسال
-            submitBtn.disabled = false;
-            submitBtn.innerHTML = 'تأكيد الطلب';
-        }
-    };
-}
-        // ============== وظائف الطلب ==============
-       function showOrderModal(productName, productPrice, priceValue, productImages) {
-    // استخدام الصورة الأولى كصورة رئيسية
+function showOrderModal(productName, productPrice, priceValue, productImages) {
     const mainImage = Array.isArray(productImages) ? productImages[0] : productImages;
     
     document.getElementById('productName').value = productName;
@@ -2739,266 +2543,217 @@ const productsList = cart.map(item => `
     document.getElementById('productImage').src = mainImage;
     
     document.getElementById('orderForm').reset();
-    document.getElementById('quantity').value = 1;
     document.getElementById('cashOnDelivery').checked = true;
     orderModal.show();
 }
 
-        // إرسال الطلب
-        async function submitOrder() {
-            // الحصول على بيانات الطلب
-            const productName = document.getElementById('productName').value;
-            const productPrice = document.getElementById('productPriceValue').value;
-            const productImage = document.getElementById('productImageUrl').value;
-            const fullName = document.getElementById('fullName').value;
-            const phone = document.getElementById('phone').value;
-            const email = document.getElementById('email').value || 'لم يتم تقديمه';
-            const wilaya = document.getElementById('wilaya').value;
-            const address = document.getElementById('address').value || 'غير محدد';
-            const quantity = document.getElementById('quantity').value;
-            const paymentMethod = document.querySelector('input[name="paymentMethod"]:checked').value;
-            const totalPrice = productPrice * quantity;
-            
-            // التحقق من صحة البيانات
-            if (!fullName || !phone || !wilaya) {
-                showStatus('الرجاء ملء جميع الحقول المطلوبة', 'error');
-                return;
-            }
-            
-            // التحقق من صحة رقم الهاتف
-            const phoneRegex = /^0[5-7][0-9]{8}$/;
-            if (!phoneRegex.test(phone)) {
-                showStatus('رقم الهاتف غير صحيح. يجب أن يتكون من 10 أرقام ويبدأ بـ 05 أو 06 أو 07', 'error');
-                return;
-            }
-            
-            // إعداد بيانات الطلب
-            const orderData = {
-                product: productName,
-                productPrice: productPrice,
-                totalPrice: totalPrice,
-                customer: fullName,
-                phone: phone,
-                email: email,
-                wilaya: wilaya,
-                address: address,
-                quantity: quantity,
-                payment: paymentMethod,
-                timestamp: new Date().toISOString(),
-                status: 'جديد'
-            };
-            
-            // عرض حالة التحميل
-            showStatus('جاري معالجة طلبك...', 'loading');
-            
-            // تعطيل زر الإرسال أثناء المعالجة
-            const submitBtn = document.getElementById('submitOrderBtn');
-            submitBtn.disabled = true;
-            submitBtn.innerHTML = `
-                <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-                جاري المعالجة...
-            `;
-            
-            try {
-                // ============== تخزين الطلب في Firebase ==============
-                const docRef = await db.collection('orders').add(orderData);
-                console.log("تم تخزين الطلب في Firebase:", docRef.id);
-                
-                // ============== إرسال إيميل عبر EmailJS ==============
-              
-await emailjs.send(ORDER_SERVICE_ID, ORDER_TEMPLATE_ID, {
-    order_id: docRef.id,
-    customer_name: fullName,
-    customer_phone: phone,
-    customer_email: email,
-    wilaya: wilaya,
-    address: address,
-    total_price: total.toLocaleString(),
-    payment_method: paymentMethod,
-    order_date: new Date().toLocaleString('ar-DZ'),
-    products: { 
-        value: productsTable, 
-        html: true // هذا هو المفتاح الحل!
-    }
-                });
-                
-                console.log("تم إرسال إيميل تأكيد الطلب");
-                
-                // عرض رسالة النجاح مع خيار التواصل بالواتساب
-                showStatus(`
-                    <div class="text-center">
-                        <i class="bi bi-check-circle-fill text-success fs-1"></i>
-                        <h5 class="mt-2">تم تأكيد طلبك بنجاح!</h5>
-                        <div class="text-start mt-3">
-                            <p><strong>رقم الطلب:</strong> ${docRef.id}</p>
-                            <p><strong>الاسم:</strong> ${fullName}</p>
-                            <p><strong>المنتج:</strong> ${productName} (${quantity} وحدة)</p>
-                            <p><strong>المبلغ الإجمالي:</strong> ${totalPrice} د.ج</p>
-                            <p class="mt-3">سيتم التواصل معك على الرقم <strong>${phone}</strong> خلال 24 ساعة لتأكيد الشحن.</p>
-                        </div>
-                        <a href="https://wa.me/213656360457?text=${encodeURIComponent(
-                            `استفسار عن الطلب ${docRef.id}\nالاسم: ${fullName}\nالمنتج: ${productName}\nالكمية: ${quantity}\nرقم الهاتف: ${phone}`
-                        )}" class="btn whatsapp-contact-btn mt-2 w-100" target="_blank">
-                            <i class="bi bi-whatsapp"></i> تواصل عبر واتساب (اختياري)
-                        </a>
-                        <small class="text-muted d-block mt-2">أو يمكنك التواصل عبر البريد الإلكتروني</small>
-                    </div>
-                `, 'success');
-                
-                // إعادة تعيين النموذج وإغلاق النافذة
-                document.getElementById('orderForm').reset();
-                orderModal.hide();
-                
-            } catch (error) {
-                console.error('حدث خطأ:', error);
-                
-                // رسالة خطأ محددة
-                let errorMessage = 'حدث خطأ غير متوقع. يرجى المحاولة مرة أخرى.';
-                
-                if (error.code) {
-                    errorMessage = `خطأ في النظام: ${error.code}`;
-                } else if (error.message) {
-                    errorMessage = error.message;
-                } else if (error.text) {
-                    errorMessage = error.text;
-                }
-                
-                showStatus(`حدث خطأ أثناء إرسال الطلب: ${errorMessage}`, 'error');
-            } finally {
-                // إعادة تمكين زر الإرسال
-                submitBtn.disabled = false;
-                submitBtn.innerHTML = 'تأكيد الطلب';
-            }
-        }
-
-        // إرسال رسالة الاتصال
-        async function sendContactMessage() {
-            const name = document.getElementById('contactName').value;
-            const email = document.getElementById('contactEmail').value;
-            const phone = document.getElementById('contactPhone').value || 'لم يتم تقديمه';
-            const message = document.getElementById('contactMessage').value;
-            
-            if (!name || !email || !message) {
-                showStatus('الرجاء ملء جميع الحقول المطلوبة', 'error');
-                return;
-            }
-            
-            // عرض حالة التحميل
-            const contactSpinner = document.getElementById('contactSpinner');
-            const contactSubmitText = document.getElementById('contactSubmitText');
-            contactSpinner.classList.remove('d-none');
-            contactSubmitText.textContent = 'جاري الإرسال...';
-            
-            try {
-                // إرسال رسالة الاتصال عبر EmailJS
-                await emailjs.send(ORDER_SERVICE_ID, CONTACT_TEMPLATE_ID, {
-                    from_name: name,
-                    from_email: email,
-                    phone_number: phone,
-                    message: message
-                });
-                
-                console.log("تم إرسال رسالة الاتصال");
-                
-                showStatus('تم إرسال رسالتك بنجاح! سوف نتواصل معك قريباً.', 'success');
-                document.getElementById('contactForm').reset();
-           } catch (error) {
-    console.error('حدث خطأ:', error);
-
-    // Safari false error handling
-    if (error.code === 18 && navigator.userAgent.includes('Safari')) {
-        console.warn("Safari false error (code 18) تم تجاهله");
-        showStatus('تم إرسال رسالتك بنجاح! (Safari glitch)', 'success');
+// إرسال الطلب
+async function submitOrder() {
+    const productName = document.getElementById('productName').value;
+    const productPrice = document.getElementById('productPriceValue').value;
+    const productImage = document.getElementById('productImageUrl').value;
+    const fullName = document.getElementById('fullName').value;
+    const phone = document.getElementById('phone').value;
+    const email = document.getElementById('email').value || 'لم يتم تقديمه';
+    const wilaya = document.getElementById('wilaya').value;
+    const address = document.getElementById('address').value || 'غير محدد';
+    const paymentMethod = document.querySelector('input[name="paymentMethod"]:checked').value;
+    
+    // التحقق من صحة البيانات
+    if (!fullName || !phone || !wilaya) {
+        showStatus('الرجاء ملء جميع الحقول المطلوبة', 'error');
         return;
     }
-
-    let errorMessage = 'حدث خطأ غير متوقع. يرجى المحاولة مرة أخرى.';
-    if (error.code) {
-        errorMessage = `خطأ في النظام: ${error.code}`;
-    } else if (error.message) {
-        errorMessage = error.message;
-    } else if (error.text) {
-        errorMessage = error.text;
+    
+    const phoneRegex = /^0[5-7][0-9]{8}$/;
+    if (!phoneRegex.test(phone)) {
+        showStatus('رقم الهاتف غير صحيح. يجب أن يتكون من 10 أرقام ويبدأ بـ 05 أو 06 أو 07', 'error');
+        return;
     }
     
-    showStatus(`حدث خطأ أثناء إرسال الرسالة: ${errorMessage}`, 'error');
-
-            } finally {
-                // إعادة تمكين زر الإرسال
-                contactSpinner.classList.add('d-none');
-                contactSubmitText.textContent = 'إرسال الرسالة';
-            }
-        }
-
-        // ============== وظائف عرض الحالة ==============
+    // إعداد بيانات الطلب
+    const orderData = {
+        product: productName,
+        productPrice: productPrice,
+        customer: fullName,
+        phone: phone,
+        email: email,
+        wilaya: wilaya,
+        address: address,
+        payment: paymentMethod,
+        timestamp: new Date().toISOString(),
+        status: 'جديد'
+    };
+    
+    // عرض حالة التحميل
+    showStatus('جاري معالجة طلبك...', 'loading');
+    
+    // تعطيل زر الإرسال أثناء المعالجة
+    const submitBtn = document.getElementById('submitOrderBtn');
+    submitBtn.disabled = true;
+    submitBtn.innerHTML = `
+        <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+        جاري المعالجة...
+    `;
+    
+    try {
+        // تخزين الطلب في Firebase
+        const docRef = await db.collection('orders').add(orderData);
+        console.log("تم تخزين الطلب في Firebase:", docRef.id);
         
-        // عرض حالة الطلب
-        function showStatus(message, type) {
-            const indicator = document.getElementById('statusIndicator');
-            const messageElement = document.getElementById('statusMessage');
-            
-            // إعداد الرسالة
-            messageElement.innerHTML = message;
-            
-            // إعداد التصميم حسب النوع
-            const alert = indicator.querySelector('.alert');
-            alert.className = 'alert alert-dismissible fade show';
-            
-            switch (type) {
-                case 'success':
-                    alert.classList.add('alert-success', 'order-confirmation');
-                    break;
-                case 'error':
-                    alert.classList.add('alert-danger', 'order-error');
-                    break;
-                case 'loading':
-                    alert.classList.add('alert-info');
-                    messageElement.innerHTML = `
-                        <span class="spinner-border spinner-border-sm me-2" role="status"></span>
-                        ${message}
-                    `;
-                    break;
-                default:
-                    alert.classList.add('alert-info');
-            }
-            
-            // إظهار المؤشر
-            indicator.style.display = 'block';
-            
-            // إخفاء التلقائي لرسائل النجاح بعد 5 ثواني
-            if (type === 'success') {
-                setTimeout(hideStatus, 5000);
-            }
+        // إرسال إيميل عبر EmailJS
+        await emailjs.send("service_lc1q5k8", "template_a15g7yg", {
+            order_id: docRef.id,
+            customer_name: fullName,
+            customer_phone: phone,
+            customer_email: email,
+            wilaya: wilaya,
+            address: address,
+            payment_method: paymentMethod,
+            order_date: new Date().toLocaleString('ar-DZ')
+        });
+        
+        console.log("تم إرسال إيميل تأكيد الطلب");
+        
+        // عرض رسالة النجاح
+        showStatus(`
+            <div class="text-center">
+                <i class="bi bi-check-circle-fill text-success fs-1"></i>
+                <h5 class="mt-2">تم تأكيد طلبك بنجاح!</h5>
+                <div class="text-start mt-3">
+                    <p><strong>رقم الطلب:</strong> ${docRef.id}</p>
+                    <p><strong>الاسم:</strong> ${fullName}</p>
+                    <p class="mt-3">سيتم التواصل معك على الرقم <strong>${phone}</strong> خلال 24 ساعة لتأكيد الشحن.</p>
+                </div>
+                <a href="https://wa.me/213656360457?text=${encodeURIComponent(
+                    `استفسار عن الطلب ${docRef.id}\nالاسم: ${fullName}\nرقم الهاتف: ${phone}`
+                )}" class="btn whatsapp-contact-btn mt-2 w-100" target="_blank">
+                    <i class="bi bi-whatsapp"></i> تواصل عبر واتساب (اختياري)
+                </a>
+            </div>
+        `, 'success');
+        
+        // إعادة تعيين النموذج وإغلاق النافذة
+        document.getElementById('orderForm').reset();
+        orderModal.hide();
+        
+    } catch (error) {
+        console.error('حدث خطأ:', error);
+        
+        let errorMessage = 'حدث خطأ غير متوقع. يرجى المحاولة مرة أخرى.';
+        
+        if (error.code) {
+            errorMessage = `خطأ في النظام: ${error.code}`;
+        } else if (error.message) {
+            errorMessage = error.message;
+        } else if (error.text) {
+            errorMessage = error.text;
         }
         
-        // إخفاء مؤشر الحالة
-        function hideStatus() {
-            document.getElementById('statusIndicator').style.display = 'none';
-        }
+        showStatus(`حدث خطأ أثناء إرسال الطلب: ${errorMessage}`, 'error');
+    } finally {
+        // إعادة تمكين زر الإرسال
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = 'تأكيد الطلب';
+    }
+}
 
-        // ============== وظائف إضافية ==============
-        // ============== وظائف إضافية ==============
+// إرسال رسالة الاتصال
+async function sendContactMessage() {
+    const name = document.getElementById('contactName').value;
+    const email = document.getElementById('contactEmail').value;
+    const phone = document.getElementById('contactPhone').value || 'لم يتم تقديمه';
+    const message = document.getElementById('contactMessage').value;
+    
+    if (!name || !email || !message) {
+        showStatus('الرجاء ملء جميع الحقول المطلوبة', 'error');
+        return;
+    }
+    
+    // عرض حالة التحميل
+    const contactSpinner = document.getElementById('contactSpinner');
+    const contactSubmitText = document.getElementById('contactSubmitText');
+    contactSpinner.classList.remove('d-none');
+    contactSubmitText.textContent = 'جاري الإرسال...';
+    
+    try {
+        // إرسال رسالة الاتصال عبر EmailJS
+        await emailjs.send("service_lc1q5k8", "template_11pkq0k", {
+            from_name: name,
+            from_email: email,
+            phone_number: phone,
+            message: message
+        });
         
-        // تغيير اللغة
-        function changeLanguage(lang) {
-            const arBtn = document.querySelector('[onclick="changeLanguage(\'ar\')"]');
-            const frBtn = document.querySelector('[onclick="changeLanguage(\'fr\')"]');
-            
-            if (lang === 'fr') {
-                showStatus('La version française sera disponible bientôt. Merci pour votre patience.', 'info');
-                arBtn.classList.remove('btn-primary');
-                frBtn.classList.add('btn-primary');
-            } else {
-                arBtn.classList.add('btn-primary');
-                frBtn.classList.remove('btn-primary');
-            }
-        }  // تعديل دالة showOrderModal لتعمل مع مصفوفة الصور
- 
+        console.log("تم إرسال رسالة الاتصال");
+        
+        showStatus('تم إرسال رسالتك بنجاح! سوف نتواصل معك قريباً.', 'success');
+        document.getElementById('contactForm').reset();
+    } catch (error) {
+        console.error('حدث خطأ:', error);
+        
+        let errorMessage = 'حدث خطأ غير متوقع. يرجى المحاولة مرة أخرى.';
+        if (error.code) {
+            errorMessage = `خطأ في النظام: ${error.code}`;
+        } else if (error.message) {
+            errorMessage = error.message;
+        } else if (error.text) {
+            errorMessage = error.text;
+        }
+        
+        showStatus(`حدث خطأ أثناء إرسال الرسالة: ${errorMessage}`, 'error');
+    } finally {
+        // إعادة تمكين زر الإرسال
+        contactSpinner.classList.add('d-none');
+        contactSubmitText.textContent = 'إرسال الرسالة';
+    }
+}
 
+// ============== وظائف عرض الحالة ==============
+function showStatus(message, type) {
+    const indicator = document.getElementById('statusIndicator');
+    const messageElement = document.getElementById('statusMessage');
+    
+    // إعداد الرسالة
+    messageElement.innerHTML = message;
+    
+    // إعداد التصميم حسب النوع
+    const alert = indicator.querySelector('.alert');
+    alert.className = 'alert alert-dismissible fade show';
+    
+    switch (type) {
+        case 'success':
+            alert.classList.add('alert-success', 'order-confirmation');
+            break;
+        case 'error':
+            alert.classList.add('alert-danger', 'order-error');
+            break;
+        case 'loading':
+            alert.classList.add('alert-info');
+            messageElement.innerHTML = `
+                <span class="spinner-border spinner-border-sm me-2" role="status"></span>
+                ${message}
+            `;
+            break;
+        default:
+            alert.classList.add('alert-info');
+    }
+    
+    // إظهار المؤشر
+    indicator.style.display = 'block';
+    
+    // إخفاء التلقائي لرسائل النجاح بعد 5 ثواني
+    if (type === 'success') {
+        setTimeout(hideStatus, 5000);
+    }
+}
 
+// إخفاء مؤشر الحالة
+function hideStatus() {
+    document.getElementById('statusIndicator').style.display = 'none';
+}
 
-
-
+// ============== السلايدر ==============
 let slideIndex1 = 1;
 showSlides1(slideIndex1);
 
@@ -3030,34 +2785,6 @@ function showSlides1(n) {
 setInterval(() => {
   plusSlides1(1);
 }, 4000);
-
-// تشغيل السلايدر عند التحميل
-showSlides1();
-
-       </script>
-<div class="offcanvas offcanvas-end" tabindex="-1" id="cartOffcanvas" aria-labelledby="cartOffcanvasLabel">
-    <div class="offcanvas-header">
-        <h5 class="offcanvas-title" id="cartOffcanvasLabel">Panier d'achat</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-    </div>
-    <div class="offcanvas-body">
-        <div id="cartItems" class="mb-3">
-            
-            <div class="text-center py-4 text-muted" id="emptyCartMessage">
-                <i class="bi bi-cart-x display-4 d-block mb-2"></i>
-                Panier d'achat فارغة
-            </div>
-        </div>
-        
-        <div class="cart-summary border-top pt-3">
-            <div class="d-flex justify-content-between mb-2">
-                <span>Total:</span>
-                <span id="cartTotal">0 د.ج</span>
-            </div>
-            <button class="btn btn-orange w-100" onclick="checkout()" id="checkoutBtn" disabled>
-                <i class="bi bi-bag-check"></i> Finaliser la commande
-            </button>
-        </div>
-    </div>
-</div></body></html>
-
+</script>
+</body>
+</html>
