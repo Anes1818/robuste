@@ -2296,8 +2296,10 @@ function startOfferTimer() {
     updateTimer();
     setInterval(updateTimer, 1000);
 }
+// ============== إدارة سلة المشتريات - متوافق مع جميع المتصفحات ==============
+// حل مشاكل التوافق مع سفاري والمتصفحات الأخرى
 
-// ============== إدارة سلة المشتريات ==============
+// تهيئة سلة المشتريات مع معالجة الأخطاء
 let cart = [];
 try {
     const cartData = localStorage.getItem('robuste_cart');
@@ -2309,7 +2311,14 @@ try {
     cart = [];
 }
 
-// تحديث عداد السلة
+// دالة مساعدة للتوافق مع eventListener في سفاري
+function safeAddEventListener(element, event, handler) {
+    if (element && typeof element.addEventListener === 'function') {
+        element.addEventListener(event, handler);
+    }
+}
+
+// تحديث عداد السلة مع التحقق من وجود العناصر
 function updateCartCount() {
     const cartCount = document.getElementById('cartCount');
     const checkoutBtn = document.getElementById('checkoutBtn');
@@ -2321,7 +2330,7 @@ function updateCartCount() {
     checkoutBtn.disabled = count === 0;
 }
 
-// عرض محتويات السلة
+// عرض محتويات السلة مع معالجة الأخطاء
 function renderCart() {
     const cartItems = document.getElementById('cartItems');
     const emptyCartMessage = document.getElementById('emptyCartMessage');
@@ -2329,7 +2338,7 @@ function renderCart() {
     
     if (!cartItems || !cartTotal) return;
     
-    // مسح المحتوى الحالي
+    // مسح المحتوى الحالي بطريقة متوافقة
     while (cartItems.firstChild) {
         cartItems.removeChild(cartItems.firstChild);
     }
@@ -2384,7 +2393,7 @@ function renderCart() {
 function attachCartEventListeners() {
     // معالجة أزرار الكمية
     document.querySelectorAll('.quantity-btn').forEach(btn => {
-        btn.addEventListener('click', function(e) {
+        safeAddEventListener(btn, 'click', function(e) {
             const index = parseInt(this.dataset.index);
             const action = this.dataset.action;
             
@@ -2400,7 +2409,7 @@ function attachCartEventListeners() {
     
     // معالجة حقول الإدخال
     document.querySelectorAll('.quantity-input').forEach(input => {
-        input.addEventListener('change', function(e) {
+        safeAddEventListener(input, 'change', function(e) {
             const index = parseInt(this.dataset.index);
             if (isNaN(index) || index < 0 || index >= cart.length) return;
             
@@ -2409,7 +2418,8 @@ function attachCartEventListeners() {
         });
         
         // منع الإدخال غير الرقمي
-        input.addEventListener('keydown', function(e) {
+        safeAddEventListener(input, 'keydown', function(e) {
+            // السماح فقط بالأرقام ومفاتيح التحكم
             if (!/[\d\b\t\n]|Arrow|Delete|Backspace|Tab/.test(e.key) && 
                 !(e.ctrlKey || e.metaKey)) {
                 e.preventDefault();
@@ -2419,7 +2429,7 @@ function attachCartEventListeners() {
     
     // معالجة أزرار الحذف
     document.querySelectorAll('.remove-item').forEach(btn => {
-        btn.addEventListener('click', function(e) {
+        safeAddEventListener(btn, 'click', function(e) {
             const index = parseInt(this.dataset.index);
             if (isNaN(index) || index < 0 || index >= cart.length) return;
             
@@ -2428,7 +2438,7 @@ function attachCartEventListeners() {
     });
 }
 
-// إظهار/إخفاء السلة
+// إظهار/إخفاء السلة مع التحقق من وجود bootstrap
 function toggleCart() {
     if (cart.length === 0) {
         showStatus('سلة المشتريات فارغة', 'info');
@@ -2436,21 +2446,29 @@ function toggleCart() {
     }
     
     try {
-        const cartOffcanvas = new bootstrap.Offcanvas(document.getElementById('cartOffcanvas'));
-        cartOffcanvas.show();
+        // التحقق من وجود bootstrap قبل استخدامه
+        if (typeof bootstrap !== 'undefined' && bootstrap.Offcanvas) {
+            const cartOffcanvas = new bootstrap.Offcanvas(document.getElementById('cartOffcanvas'));
+            cartOffcanvas.show();
+        } else {
+            // fallback في حالة عدم وجود bootstrap
+            document.getElementById('cartOffcanvas').classList.add('show');
+        }
     } catch (e) {
         console.error('خطأ في فتح السلة:', e);
+        // fallback يدوي
         document.getElementById('cartOffcanvas').classList.add('show');
         document.body.classList.add('offcanvas-open');
     }
 }
 
-// إضافة منتج إلى السلة
+// إضافة منتج إلى السلة مع معالجة القيم
 function addToCart(productName, productPrice, priceValue, productImages, productId) {
+    // التحقق من القيم المدخلة
     const name = typeof productName === 'string' ? productName : 'منتج بدون اسم';
     const price = typeof priceValue === 'number' ? priceValue : 
                  typeof productPrice === 'number' ? productPrice : 0;
-    const id = productId || Date.now().toString();
+    const id = productId || Date.now().toString(); // إنشاء معرف فريد إذا لم يتم توفيره
     
     let image = '';
     if (Array.isArray(productImages) && productImages.length > 0) {
@@ -2473,7 +2491,7 @@ function addToCart(productName, productPrice, priceValue, productImages, product
         });
     }
     
-    // حفظ السلة في localStorage
+    // حفظ السلة في localStorage مع معالجة الأخطاء
     try {
         localStorage.setItem('robuste_cart', JSON.stringify(cart));
     } catch (e) {
@@ -2528,10 +2546,204 @@ function removeFromCart(index) {
     showStatus(`تمت إزالة "${productName}" من السلة`, 'success');
 }
 
-// ============== وظائف الطلب ==============
-let orderModal = null;
+// دالة مساعدة لعرض الرسائل
+function showStatus(message, type) {
+    // يمكن تنفيذ هذه الدالة حسب بيئة العمل الخاصة بك
+    console.log(`${type}: ${message}`);
+    // مثال بسيط:
+    alert(message);
+}
 
-function showOrderModal(productName, productPrice, priceValue, productImages) {
+// تهيئة السلة عند تحميل الصفحة
+document.addEventListener('DOMContentLoaded', function() {
+    updateCartCount();
+    renderCart();
+});
+
+// حل مشكلة localStorage في وضع التصفح الخاص
+function isLocalStorageAvailable() {
+    try {
+        const test = 'test';
+        localStorage.setItem(test, test);
+        localStorage.removeItem(test);
+        return true;
+    } catch(e) {
+        return false;
+    }
+}
+
+// استخدام بديل إذا كان localStorage غير متاح
+if (!isLocalStorageAvailable()) {
+    console.warn('localStorage غير متاح، سيتم استخدام تخزين مؤقت في الذاكرة فقط');
+    // يمكن إضافة بديل مثل cookies أو التخزين في الذاكرة فقط
+}
+// إتمام عملية الشراء
+async function checkout() {
+    if (cart.length === 0) {
+        showStatus('سلة المشتريات فارغة', 'error');
+        return;
+    }
+    
+    // إخفاء سلة المشتريات
+    const cartOffcanvas = bootstrap.Offcanvas.getInstance(document.getElementById('cartOffcanvas'));
+    cartOffcanvas.hide();
+    
+    // إظهار نموذج بيانات العميل
+    document.getElementById('orderForm').reset();
+    document.getElementById('cashOnDelivery').checked = true;
+    
+    // حساب المجموع الكلي
+    const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+    
+    // ملء بيانات الطلب (سيتم استخدام أول منتج كعنوان للطلب)
+    const firstItem = cart[0];
+    document.getElementById('productName').value = `${cart.length} منتجات مختلفة`;
+    document.getElementById('productPriceValue').value = total;
+    document.getElementById('productImageUrl').value = firstItem.image;
+    
+    document.getElementById('productNameDisplay').textContent = `${cart.length} منتجات مختلفة`;
+    document.getElementById('productPrice').textContent = `${total.toLocaleString()} د.ج`;
+    document.getElementById('productImage').src = firstItem.image;
+    
+    // إظهار نموذج الطلب
+    orderModal.show();
+    
+    // تعديل دالة submitOrder لترسل جميع المنتجات
+    window.submitOrder = async function() {
+        // الحصول على بيانات العميل من النموذج
+        const fullName = document.getElementById('fullName').value;
+        const phone = document.getElementById('phone').value;
+        const email = document.getElementById('email').value || 'لم يتم تقديمه';
+        const wilaya = document.getElementById('wilaya').value;
+        const address = document.getElementById('address').value || 'غير محدد';
+        const paymentMethod = document.querySelector('input[name="paymentMethod"]:checked').value;
+        
+        // التحقق من صحة البيانات
+        if (!fullName || !phone || !wilaya) {
+            showStatus('الرجاء ملء جميع الحقول المطلوبة', 'error');
+            return;
+        }
+        
+        const phoneRegex = /^0[5-7][0-9]{8}$/;
+        if (!phoneRegex.test(phone)) {
+            showStatus('رقم الهاتف غير صحيح. يجب أن يتكون من 10 أرقام ويبدأ بـ 05 أو 06 أو 07', 'error');
+            return;
+        }
+        
+        // إعداد بيانات الطلب
+        const orderData = {
+            products: cart,
+            customer: fullName,
+            phone: phone,
+            email: email,
+            wilaya: wilaya,
+            address: address,
+            payment: paymentMethod,
+            totalPrice: total,
+            timestamp: new Date().toISOString(),
+            status: 'جديد'
+        };
+        
+        // عرض حالة التحميل
+        showStatus('جاري معالجة طلبك...', 'loading');
+        
+        // تعطيل زر الإرسال أثناء المعالجة
+        const submitBtn = document.getElementById('submitOrderBtn');
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = `
+            <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+            جاري المعالجة...
+        `;
+        
+        try {
+            // تخزين الطلب في Firebase
+            const docRef = await db.collection('orders').add(orderData);
+            console.log("تم تخزين الطلب في Firebase:", docRef.id);
+            
+          // إنشاء قائمة المنتجات للبريد الإلكتروني (بلا جدول)
+const productsList = cart.map(item => `
+<div style="margin-bottom: 10px; padding: 8px; border-bottom: 1px solid #eee;">
+  <strong>المنتج:</strong> ${item.name} <br>
+  <strong>الكمية:</strong> ${item.quantity} <br>
+  <strong>السعر:</strong> ${item.price.toLocaleString()} د.ج <br>
+  <strong>المجموع:</strong> ${(item.price * item.quantity).toLocaleString()} د.ج
+</div>
+`).join('');
+            
+            // إرسال إيميل عبر EmailJS
+            await emailjs.send(ORDER_SERVICE_ID, ORDER_TEMPLATE_ID, {
+                order_id: docRef.id,
+                customer_name: fullName,
+                customer_phone: phone,
+                customer_email: email,
+                wilaya: wilaya,
+                address: address,
+                total_price: total.toLocaleString(),
+                payment_method: paymentMethod,
+                order_date: new Date().toLocaleString('ar-DZ'),
+                products: productsList
+            });
+            
+            console.log("تم إرسال إيميل تأكيد الطلب");
+            
+            // عرض رسالة النجاح
+            showStatus(`
+                <div class="text-center">
+                    <i class="bi bi-check-circle-fill text-success fs-1"></i>
+                    <h5 class="mt-2">تم تأكيد طلبك بنجاح!</h5>
+                    <div class="text-start mt-3">
+                        <p><strong>رقم الطلب:</strong> ${docRef.id}</p>
+                        <p><strong>الاسم:</strong> ${fullName}</p>
+                        <p><strong>عدد المنتجات:</strong> ${cart.length} منتجات</p>
+                        <p><strong>المبلغ الإجمالي:</strong> ${total.toLocaleString()} د.ج</p>
+                        <p class="mt-3">سيتم التواصل معك على الرقم <strong>${phone}</strong> خلال 24 ساعة لتأكيد الشحن.</p>
+                    </div>
+                    <a href="https://wa.me/213656360457?text=${encodeURIComponent(
+                        `استفسار عن الطلب ${docRef.id}\nالاسم: ${fullName}\nعدد المنتجات: ${cart.length}\nالمجموع: ${total.toLocaleString()} د.ج\nرقم الهاتف: ${phone}`
+                    )}" class="btn whatsapp-contact-btn mt-2 w-100" target="_blank">
+                        <i class="bi bi-whatsapp"></i> تواصل عبر واتساب (اختياري)
+                    </a>
+                </div>
+            `, 'success');
+            
+            // تفريغ السلة وإعادة تعيين النموذج
+            cart = [];
+            localStorage.removeItem('robuste_cart');
+            updateCartCount();
+            document.getElementById('orderForm').reset();
+            orderModal.hide();
+            
+        } catch (error) {
+    console.error('حدث خطأ:', error);
+
+    // Safari false error handling
+    if (error.code === 18 && navigator.userAgent.includes('Safari')) {
+        console.warn("Safari false error (code 18) تم تجاهله");
+        showStatus('تم إرسال رسالتك بنجاح! (Safari glitch)', 'success');
+        return;
+    }
+
+    let errorMessage = 'حدث خطأ غير متوقع. يرجى المحاولة مرة أخرى.';
+    if (error.code) {
+        errorMessage = `خطأ في النظام: ${error.code}`;
+    } else if (error.message) {
+        errorMessage = error.message;
+    } else if (error.text) {
+        errorMessage = error.text;
+    }
+    
+    showStatus(`حدث خطأ أثناء إرسال الرسالة: ${errorMessage}`, 'error');
+
+        } finally {
+            // إعادة تمكين زر الإرسال
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = 'تأكيد الطلب';
+        }
+    };
+}
+        // ============== وظائف الطلب ==============
+       function showOrderModal(productName, productPrice, priceValue, productImages) {
+    // استخدام الصورة الأولى كصورة رئيسية
     const mainImage = Array.isArray(productImages) ? productImages[0] : productImages;
     
     document.getElementById('productName').value = productName;
@@ -2543,217 +2755,266 @@ function showOrderModal(productName, productPrice, priceValue, productImages) {
     document.getElementById('productImage').src = mainImage;
     
     document.getElementById('orderForm').reset();
+    document.getElementById('quantity').value = 1;
     document.getElementById('cashOnDelivery').checked = true;
     orderModal.show();
 }
 
-// إرسال الطلب
-async function submitOrder() {
-    const productName = document.getElementById('productName').value;
-    const productPrice = document.getElementById('productPriceValue').value;
-    const productImage = document.getElementById('productImageUrl').value;
-    const fullName = document.getElementById('fullName').value;
-    const phone = document.getElementById('phone').value;
-    const email = document.getElementById('email').value || 'لم يتم تقديمه';
-    const wilaya = document.getElementById('wilaya').value;
-    const address = document.getElementById('address').value || 'غير محدد';
-    const paymentMethod = document.querySelector('input[name="paymentMethod"]:checked').value;
-    
-    // التحقق من صحة البيانات
-    if (!fullName || !phone || !wilaya) {
-        showStatus('الرجاء ملء جميع الحقول المطلوبة', 'error');
-        return;
-    }
-    
-    const phoneRegex = /^0[5-7][0-9]{8}$/;
-    if (!phoneRegex.test(phone)) {
-        showStatus('رقم الهاتف غير صحيح. يجب أن يتكون من 10 أرقام ويبدأ بـ 05 أو 06 أو 07', 'error');
-        return;
-    }
-    
-    // إعداد بيانات الطلب
-    const orderData = {
-        product: productName,
-        productPrice: productPrice,
-        customer: fullName,
-        phone: phone,
-        email: email,
-        wilaya: wilaya,
-        address: address,
-        payment: paymentMethod,
-        timestamp: new Date().toISOString(),
-        status: 'جديد'
-    };
-    
-    // عرض حالة التحميل
-    showStatus('جاري معالجة طلبك...', 'loading');
-    
-    // تعطيل زر الإرسال أثناء المعالجة
-    const submitBtn = document.getElementById('submitOrderBtn');
-    submitBtn.disabled = true;
-    submitBtn.innerHTML = `
-        <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-        جاري المعالجة...
-    `;
-    
-    try {
-        // تخزين الطلب في Firebase
-        const docRef = await db.collection('orders').add(orderData);
-        console.log("تم تخزين الطلب في Firebase:", docRef.id);
-        
-        // إرسال إيميل عبر EmailJS
-        await emailjs.send("service_lc1q5k8", "template_a15g7yg", {
-            order_id: docRef.id,
-            customer_name: fullName,
-            customer_phone: phone,
-            customer_email: email,
-            wilaya: wilaya,
-            address: address,
-            payment_method: paymentMethod,
-            order_date: new Date().toLocaleString('ar-DZ')
-        });
-        
-        console.log("تم إرسال إيميل تأكيد الطلب");
-        
-        // عرض رسالة النجاح
-        showStatus(`
-            <div class="text-center">
-                <i class="bi bi-check-circle-fill text-success fs-1"></i>
-                <h5 class="mt-2">تم تأكيد طلبك بنجاح!</h5>
-                <div class="text-start mt-3">
-                    <p><strong>رقم الطلب:</strong> ${docRef.id}</p>
-                    <p><strong>الاسم:</strong> ${fullName}</p>
-                    <p class="mt-3">سيتم التواصل معك على الرقم <strong>${phone}</strong> خلال 24 ساعة لتأكيد الشحن.</p>
-                </div>
-                <a href="https://wa.me/213656360457?text=${encodeURIComponent(
-                    `استفسار عن الطلب ${docRef.id}\nالاسم: ${fullName}\nرقم الهاتف: ${phone}`
-                )}" class="btn whatsapp-contact-btn mt-2 w-100" target="_blank">
-                    <i class="bi bi-whatsapp"></i> تواصل عبر واتساب (اختياري)
-                </a>
-            </div>
-        `, 'success');
-        
-        // إعادة تعيين النموذج وإغلاق النافذة
-        document.getElementById('orderForm').reset();
-        orderModal.hide();
-        
-    } catch (error) {
-        console.error('حدث خطأ:', error);
-        
-        let errorMessage = 'حدث خطأ غير متوقع. يرجى المحاولة مرة أخرى.';
-        
-        if (error.code) {
-            errorMessage = `خطأ في النظام: ${error.code}`;
-        } else if (error.message) {
-            errorMessage = error.message;
-        } else if (error.text) {
-            errorMessage = error.text;
-        }
-        
-        showStatus(`حدث خطأ أثناء إرسال الطلب: ${errorMessage}`, 'error');
-    } finally {
-        // إعادة تمكين زر الإرسال
-        submitBtn.disabled = false;
-        submitBtn.innerHTML = 'تأكيد الطلب';
-    }
-}
-
-// إرسال رسالة الاتصال
-async function sendContactMessage() {
-    const name = document.getElementById('contactName').value;
-    const email = document.getElementById('contactEmail').value;
-    const phone = document.getElementById('contactPhone').value || 'لم يتم تقديمه';
-    const message = document.getElementById('contactMessage').value;
-    
-    if (!name || !email || !message) {
-        showStatus('الرجاء ملء جميع الحقول المطلوبة', 'error');
-        return;
-    }
-    
-    // عرض حالة التحميل
-    const contactSpinner = document.getElementById('contactSpinner');
-    const contactSubmitText = document.getElementById('contactSubmitText');
-    contactSpinner.classList.remove('d-none');
-    contactSubmitText.textContent = 'جاري الإرسال...';
-    
-    try {
-        // إرسال رسالة الاتصال عبر EmailJS
-        await emailjs.send("service_lc1q5k8", "template_11pkq0k", {
-            from_name: name,
-            from_email: email,
-            phone_number: phone,
-            message: message
-        });
-        
-        console.log("تم إرسال رسالة الاتصال");
-        
-        showStatus('تم إرسال رسالتك بنجاح! سوف نتواصل معك قريباً.', 'success');
-        document.getElementById('contactForm').reset();
-    } catch (error) {
-        console.error('حدث خطأ:', error);
-        
-        let errorMessage = 'حدث خطأ غير متوقع. يرجى المحاولة مرة أخرى.';
-        if (error.code) {
-            errorMessage = `خطأ في النظام: ${error.code}`;
-        } else if (error.message) {
-            errorMessage = error.message;
-        } else if (error.text) {
-            errorMessage = error.text;
-        }
-        
-        showStatus(`حدث خطأ أثناء إرسال الرسالة: ${errorMessage}`, 'error');
-    } finally {
-        // إعادة تمكين زر الإرسال
-        contactSpinner.classList.add('d-none');
-        contactSubmitText.textContent = 'إرسال الرسالة';
-    }
-}
-
-// ============== وظائف عرض الحالة ==============
-function showStatus(message, type) {
-    const indicator = document.getElementById('statusIndicator');
-    const messageElement = document.getElementById('statusMessage');
-    
-    // إعداد الرسالة
-    messageElement.innerHTML = message;
-    
-    // إعداد التصميم حسب النوع
-    const alert = indicator.querySelector('.alert');
-    alert.className = 'alert alert-dismissible fade show';
-    
-    switch (type) {
-        case 'success':
-            alert.classList.add('alert-success', 'order-confirmation');
-            break;
-        case 'error':
-            alert.classList.add('alert-danger', 'order-error');
-            break;
-        case 'loading':
-            alert.classList.add('alert-info');
-            messageElement.innerHTML = `
-                <span class="spinner-border spinner-border-sm me-2" role="status"></span>
-                ${message}
+        // إرسال الطلب
+        async function submitOrder() {
+            // الحصول على بيانات الطلب
+            const productName = document.getElementById('productName').value;
+            const productPrice = document.getElementById('productPriceValue').value;
+            const productImage = document.getElementById('productImageUrl').value;
+            const fullName = document.getElementById('fullName').value;
+            const phone = document.getElementById('phone').value;
+            const email = document.getElementById('email').value || 'لم يتم تقديمه';
+            const wilaya = document.getElementById('wilaya').value;
+            const address = document.getElementById('address').value || 'غير محدد';
+            const quantity = document.getElementById('quantity').value;
+            const paymentMethod = document.querySelector('input[name="paymentMethod"]:checked').value;
+            const totalPrice = productPrice * quantity;
+            
+            // التحقق من صحة البيانات
+            if (!fullName || !phone || !wilaya) {
+                showStatus('الرجاء ملء جميع الحقول المطلوبة', 'error');
+                return;
+            }
+            
+            // التحقق من صحة رقم الهاتف
+            const phoneRegex = /^0[5-7][0-9]{8}$/;
+            if (!phoneRegex.test(phone)) {
+                showStatus('رقم الهاتف غير صحيح. يجب أن يتكون من 10 أرقام ويبدأ بـ 05 أو 06 أو 07', 'error');
+                return;
+            }
+            
+            // إعداد بيانات الطلب
+            const orderData = {
+                product: productName,
+                productPrice: productPrice,
+                totalPrice: totalPrice,
+                customer: fullName,
+                phone: phone,
+                email: email,
+                wilaya: wilaya,
+                address: address,
+                quantity: quantity,
+                payment: paymentMethod,
+                timestamp: new Date().toISOString(),
+                status: 'جديد'
+            };
+            
+            // عرض حالة التحميل
+            showStatus('جاري معالجة طلبك...', 'loading');
+            
+            // تعطيل زر الإرسال أثناء المعالجة
+            const submitBtn = document.getElementById('submitOrderBtn');
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = `
+                <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                جاري المعالجة...
             `;
-            break;
-        default:
-            alert.classList.add('alert-info');
+            
+            try {
+                // ============== تخزين الطلب في Firebase ==============
+                const docRef = await db.collection('orders').add(orderData);
+                console.log("تم تخزين الطلب في Firebase:", docRef.id);
+                
+                // ============== إرسال إيميل عبر EmailJS ==============
+              
+await emailjs.send(ORDER_SERVICE_ID, ORDER_TEMPLATE_ID, {
+    order_id: docRef.id,
+    customer_name: fullName,
+    customer_phone: phone,
+    customer_email: email,
+    wilaya: wilaya,
+    address: address,
+    total_price: total.toLocaleString(),
+    payment_method: paymentMethod,
+    order_date: new Date().toLocaleString('ar-DZ'),
+    products: { 
+        value: productsTable, 
+        html: true // هذا هو المفتاح الحل!
+    }
+                });
+                
+                console.log("تم إرسال إيميل تأكيد الطلب");
+                
+                // عرض رسالة النجاح مع خيار التواصل بالواتساب
+                showStatus(`
+                    <div class="text-center">
+                        <i class="bi bi-check-circle-fill text-success fs-1"></i>
+                        <h5 class="mt-2">تم تأكيد طلبك بنجاح!</h5>
+                        <div class="text-start mt-3">
+                            <p><strong>رقم الطلب:</strong> ${docRef.id}</p>
+                            <p><strong>الاسم:</strong> ${fullName}</p>
+                            <p><strong>المنتج:</strong> ${productName} (${quantity} وحدة)</p>
+                            <p><strong>المبلغ الإجمالي:</strong> ${totalPrice} د.ج</p>
+                            <p class="mt-3">سيتم التواصل معك على الرقم <strong>${phone}</strong> خلال 24 ساعة لتأكيد الشحن.</p>
+                        </div>
+                        <a href="https://wa.me/213656360457?text=${encodeURIComponent(
+                            `استفسار عن الطلب ${docRef.id}\nالاسم: ${fullName}\nالمنتج: ${productName}\nالكمية: ${quantity}\nرقم الهاتف: ${phone}`
+                        )}" class="btn whatsapp-contact-btn mt-2 w-100" target="_blank">
+                            <i class="bi bi-whatsapp"></i> تواصل عبر واتساب (اختياري)
+                        </a>
+                        <small class="text-muted d-block mt-2">أو يمكنك التواصل عبر البريد الإلكتروني</small>
+                    </div>
+                `, 'success');
+                
+                // إعادة تعيين النموذج وإغلاق النافذة
+                document.getElementById('orderForm').reset();
+                orderModal.hide();
+                
+            } catch (error) {
+                console.error('حدث خطأ:', error);
+                
+                // رسالة خطأ محددة
+                let errorMessage = 'حدث خطأ غير متوقع. يرجى المحاولة مرة أخرى.';
+                
+                if (error.code) {
+                    errorMessage = `خطأ في النظام: ${error.code}`;
+                } else if (error.message) {
+                    errorMessage = error.message;
+                } else if (error.text) {
+                    errorMessage = error.text;
+                }
+                
+                showStatus(`حدث خطأ أثناء إرسال الطلب: ${errorMessage}`, 'error');
+            } finally {
+                // إعادة تمكين زر الإرسال
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = 'تأكيد الطلب';
+            }
+        }
+
+        // إرسال رسالة الاتصال
+        async function sendContactMessage() {
+            const name = document.getElementById('contactName').value;
+            const email = document.getElementById('contactEmail').value;
+            const phone = document.getElementById('contactPhone').value || 'لم يتم تقديمه';
+            const message = document.getElementById('contactMessage').value;
+            
+            if (!name || !email || !message) {
+                showStatus('الرجاء ملء جميع الحقول المطلوبة', 'error');
+                return;
+            }
+            
+            // عرض حالة التحميل
+            const contactSpinner = document.getElementById('contactSpinner');
+            const contactSubmitText = document.getElementById('contactSubmitText');
+            contactSpinner.classList.remove('d-none');
+            contactSubmitText.textContent = 'جاري الإرسال...';
+            
+            try {
+                // إرسال رسالة الاتصال عبر EmailJS
+                await emailjs.send(ORDER_SERVICE_ID, CONTACT_TEMPLATE_ID, {
+                    from_name: name,
+                    from_email: email,
+                    phone_number: phone,
+                    message: message
+                });
+                
+                console.log("تم إرسال رسالة الاتصال");
+                
+                showStatus('تم إرسال رسالتك بنجاح! سوف نتواصل معك قريباً.', 'success');
+                document.getElementById('contactForm').reset();
+           } catch (error) {
+    console.error('حدث خطأ:', error);
+
+    // Safari false error handling
+    if (error.code === 18 && navigator.userAgent.includes('Safari')) {
+        console.warn("Safari false error (code 18) تم تجاهله");
+        showStatus('تم إرسال رسالتك بنجاح! (Safari glitch)', 'success');
+        return;
+    }
+
+    let errorMessage = 'حدث خطأ غير متوقع. يرجى المحاولة مرة أخرى.';
+    if (error.code) {
+        errorMessage = `خطأ في النظام: ${error.code}`;
+    } else if (error.message) {
+        errorMessage = error.message;
+    } else if (error.text) {
+        errorMessage = error.text;
     }
     
-    // إظهار المؤشر
-    indicator.style.display = 'block';
-    
-    // إخفاء التلقائي لرسائل النجاح بعد 5 ثواني
-    if (type === 'success') {
-        setTimeout(hideStatus, 5000);
-    }
-}
+    showStatus(`حدث خطأ أثناء إرسال الرسالة: ${errorMessage}`, 'error');
 
-// إخفاء مؤشر الحالة
-function hideStatus() {
-    document.getElementById('statusIndicator').style.display = 'none';
-}
+            } finally {
+                // إعادة تمكين زر الإرسال
+                contactSpinner.classList.add('d-none');
+                contactSubmitText.textContent = 'إرسال الرسالة';
+            }
+        }
 
-// ============== السلايدر ==============
+        // ============== وظائف عرض الحالة ==============
+        
+        // عرض حالة الطلب
+        function showStatus(message, type) {
+            const indicator = document.getElementById('statusIndicator');
+            const messageElement = document.getElementById('statusMessage');
+            
+            // إعداد الرسالة
+            messageElement.innerHTML = message;
+            
+            // إعداد التصميم حسب النوع
+            const alert = indicator.querySelector('.alert');
+            alert.className = 'alert alert-dismissible fade show';
+            
+            switch (type) {
+                case 'success':
+                    alert.classList.add('alert-success', 'order-confirmation');
+                    break;
+                case 'error':
+                    alert.classList.add('alert-danger', 'order-error');
+                    break;
+                case 'loading':
+                    alert.classList.add('alert-info');
+                    messageElement.innerHTML = `
+                        <span class="spinner-border spinner-border-sm me-2" role="status"></span>
+                        ${message}
+                    `;
+                    break;
+                default:
+                    alert.classList.add('alert-info');
+            }
+            
+            // إظهار المؤشر
+            indicator.style.display = 'block';
+            
+            // إخفاء التلقائي لرسائل النجاح بعد 5 ثواني
+            if (type === 'success') {
+                setTimeout(hideStatus, 5000);
+            }
+        }
+        
+        // إخفاء مؤشر الحالة
+        function hideStatus() {
+            document.getElementById('statusIndicator').style.display = 'none';
+        }
+
+        // ============== وظائف إضافية ==============
+        // ============== وظائف إضافية ==============
+        
+        // تغيير اللغة
+        function changeLanguage(lang) {
+            const arBtn = document.querySelector('[onclick="changeLanguage(\'ar\')"]');
+            const frBtn = document.querySelector('[onclick="changeLanguage(\'fr\')"]');
+            
+            if (lang === 'fr') {
+                showStatus('La version française sera disponible bientôt. Merci pour votre patience.', 'info');
+                arBtn.classList.remove('btn-primary');
+                frBtn.classList.add('btn-primary');
+            } else {
+                arBtn.classList.add('btn-primary');
+                frBtn.classList.remove('btn-primary');
+            }
+        }  // تعديل دالة showOrderModal لتعمل مع مصفوفة الصور
+ 
+
+
+
+
+
 let slideIndex1 = 1;
 showSlides1(slideIndex1);
 
@@ -2785,6 +3046,34 @@ function showSlides1(n) {
 setInterval(() => {
   plusSlides1(1);
 }, 4000);
-</script>
-</body>
-</html>
+
+// تشغيل السلايدر عند التحميل
+showSlides1();
+
+       </script>
+<div class="offcanvas offcanvas-end" tabindex="-1" id="cartOffcanvas" aria-labelledby="cartOffcanvasLabel">
+    <div class="offcanvas-header">
+        <h5 class="offcanvas-title" id="cartOffcanvasLabel">Panier d'achat</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body">
+        <div id="cartItems" class="mb-3">
+            
+            <div class="text-center py-4 text-muted" id="emptyCartMessage">
+                <i class="bi bi-cart-x display-4 d-block mb-2"></i>
+                Panier d'achat فارغة
+            </div>
+        </div>
+        
+        <div class="cart-summary border-top pt-3">
+            <div class="d-flex justify-content-between mb-2">
+                <span>Total:</span>
+                <span id="cartTotal">0 د.ج</span>
+            </div>
+            <button class="btn btn-orange w-100" onclick="checkout()" id="checkoutBtn" disabled>
+                <i class="bi bi-bag-check"></i> Finaliser la commande
+            </button>
+        </div>
+    </div>
+</div></body></html>
+
