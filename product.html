@@ -33,15 +33,15 @@
 :root {
     --primary: #FF6B35;
     --primary-dark: #E05A2B;
-    --secondary: #FFF8F0;
-    --light: #FFFFFF;
-    --dark: #333333;
+    --secondary: #12100e;
+    --light: #020202;
+    --dark: #f3f1f0;
     --gray: #6C757D;
     --success: #28a745;
     --danger: #dc3545;
     --gradient: linear-gradient(135deg, #FF6B35 0%, #FF8E53 100%);
     --amazon-bg: #EAEDED;
-    --amazon-border: #DDD;
+    --amazon-border: #101212;
     --amazon-text: #0F1111;
     --amazon-price: #B12704;
 }
@@ -54,13 +54,13 @@ body {
 }
 
 .navbar {
-    background-color: var(--light);
+    background-color: var(--dark);
     box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
     transition: all 0.3s ease;
 }
 
 .navbar-brand {
-    color: var(--primary) !important;
+    color: var(--light) !important;
     font-weight: 700;
     font-size: 1.5rem;
 }
@@ -359,7 +359,7 @@ body {
     margin-bottom: 15px;
 }
 
-/* Related products section - FIXED */
+/* Related products section */
 .related-products {
     margin-top: 40px;
     padding: 40px 0;
@@ -387,25 +387,6 @@ body {
     gap: 20px;
     transition: transform 0.5s ease;
     padding: 10px 0;
-    overflow-x: auto;
-    scroll-behavior: smooth;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: thin;
-    scrollbar-color: var(--primary) #f1f1f1;
-}
-
-.products-track::-webkit-scrollbar {
-    height: 8px;
-}
-
-.products-track::-webkit-scrollbar-track {
-    background: #f1f1f1;
-    border-radius: 10px;
-}
-
-.products-track::-webkit-scrollbar-thumb {
-    background: var(--primary);
-    border-radius: 10px;
 }
 
 .product-slide {
@@ -717,24 +698,366 @@ body {
         transform: translateY(0);
     }
 }
+
+/* ============== أنماط سلة المشتريات ============== */
+.offcanvas {
+    font-family: 'Tajawal', sans-serif;
+    transition: transform 0.3s ease-in-out;
+}
+
+.offcanvas-header {
+    background-color: var(--primary);
+    color: white;
+    padding: 1rem 1.5rem;
+    border-bottom: 2px solid var(--primary-dark);
+}
+
+.offcanvas-title {
+    font-weight: 700;
+    font-size: 1.3rem;
+}
+
+.offcanvas-body {
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    background-color: #f8f9fa;
+}
+
+#cartItems {
+    flex: 1;
+    overflow-y: auto;
+    padding: 1rem;
+}
+
+.cart-item {
+    background: white;
+    border-radius: 10px;
+    padding: 15px;
+    margin-bottom: 15px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+    border: 1px solid #eee;
+}
+
+.cart-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+}
+
+.cart-item-img {
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
+    border-radius: 8px;
+    background-color: #f8f8f8;
+    padding: 5px;
+}
+
+.cart-item-details {
+    flex: 1;
+}
+
+.cart-item-title {
+    font-weight: 600;
+    margin-bottom: 5px;
+    color: var(--dark);
+    font-size: 0.95rem;
+}
+
+.cart-item-price {
+    color: var(--primary);
+    font-weight: 700;
+    margin-bottom: 10px;
+    font-size: 1rem;
+}
+
+.quantity-controls {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.quantity-btn {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: 1px solid #ddd;
+    background: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    transition: all 0.2s;
+}
+
+.quantity-btn:hover {
+    background-color: var(--primary);
+    color: white;
+    border-color: var(--primary);
+}
+
+.quantity-input {
+    width: 40px;
+    text-align: center;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 5px;
+    font-weight: 600;
+}
+
+.remove-item {
+    background: none;
+    border: none;
+    color: #dc3545;
+    font-size: 1.1rem;
+    padding: 5px;
+    border-radius: 5px;
+    transition: all 0.2s;
+}
+
+.remove-item:hover {
+    background-color: rgba(220, 53, 69, 0.1);
+    transform: scale(1.1);
+}
+
+.cart-summary {
+    background: white;
+    padding: 1.5rem;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.05);
+    border-top: 2px solid #eee;
+}
+
+.cart-summary .d-flex {
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+}
+
+.cart-summary span:last-child {
+    font-weight: 800;
+    color: var(--primary);
+    font-size: 1.2rem;
+}
+
+#checkoutBtn:disabled {
+    background-color: #ccc;
+    border-color: #ccc;
+    cursor: not-allowed;
+}
+
+#checkoutBtn:not(:disabled):hover {
+    background-color: var(--primary-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(255, 107, 53, 0.3);
+}
+
+/* رسالة السلة الفارغة */
+#emptyCartMessage {
+    color: var(--gray);
+    padding: 3rem 1rem;
+}
+
+#emptyCartMessage i {
+    color: #ddd;
+    font-size: 4rem;
+}
+
+/* تحسينات للجوال */
+@media (max-width: 768px) {
+    .offcanvas {
+        width: 85% !important;
+    }
+    
+    .cart-item {
+        padding: 12px;
+    }
+    
+    .cart-item-img {
+        width: 70px;
+        height: 70px;
+    }
+    
+    .cart-item-title {
+        font-size: 0.9rem;
+    }
+    
+    .quantity-btn {
+        width: 28px;
+        height: 28px;
+    }
+    
+    .quantity-input {
+        width: 35px;
+    }
+}
+
+/* تأثيرات للعناصر عند الإضافة */
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateX(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.cart-item {
+    animation: slideIn 0.3s ease-out;
+}
+
+/* أنماط محسنة لزر السلة */
+.cart-icon-container {
+    position: fixed;
+    top: 80px;
+    left: 20px;
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.cart-btn {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--primary);
+    color: white;
+    border: none;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+    text-decoration: none;
+    position: relative;
+}
+
+.cart-btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+    background-color: var(--primary-dark);
+}
+
+.cart-btn i {
+    font-size: 1.5rem;
+}
+
+#cartCount {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background-color: var(--danger);
+    color: white;
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.8rem;
+    font-weight: bold;
+    border: 2px solid white;
+    animation: pulse 1.5s infinite;
+}
+
+.cart-label {
+    margin-top: 8px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--dark);
+    background: rgba(255, 255, 255, 0.9);
+    padding: 4px 8px;
+    border-radius: 12px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* تأثير النبض للعداد */
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}
+
+/* تحسينات للشاشات الصغيرة */
+@media (max-width: 768px) {
+    .cart-icon-container {
+        top: 70px;
+        left: 15px;
+    }
+    
+    .cart-btn {
+        width: 50px;
+        height: 50px;
+    }
+    
+    .cart-btn i {
+        font-size: 1.3rem;
+    }
+    
+    #cartCount {
+        width: 20px;
+        height: 20px;
+        font-size: 0.7rem;
+    }
+    
+    .cart-label {
+        font-size: 0.8rem;
+        padding: 3px 6px;
+    }
+}
+
+/* تحسينات للشاشات الصغيرة جدًا */
+@media (max-width: 576px) {
+    .cart-icon-container {
+        top: 65px;
+        left: 10px;
+    }
+    
+    .cart-btn {
+        width: 45px;
+        height: 45px;
+    }
+    
+    .cart-btn i {
+        font-size: 1.2rem;
+    }
+    
+    #cartCount {
+        width: 18px;
+        height: 18px;
+        font-size: 0.65rem;
+        top: -3px;
+        right: -3px;
+    }
+    
+    .cart-label {
+        display: none; /* إخفاء النص على الشاشات الصغيرة جدًا */
+    }
+}
+
+/* منع التداخل مع زر القائمة على الجوال */
+@media (max-width: 991px) {
+    .navbar-toggler {
+        z-index: 1001; /* تأكد من أن زر القائمة فوق زر السلة */
+    }
+}
 </style>
 </head>
 
 <body>
     <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-light fixed-top bg-white shadow-sm">
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
         <div class="container">
             <a class="navbar-brand" href="index.html">
                 <img src="https://i.postimg.cc/7P7BK44r/f525e1dd-9f2c-4160-aed1-882a8b28b75c-20250703-131500-0000.png" 
                      alt="Robuste Logo" class="d-inline-block align-top" 
                      style="width: 150px; height: auto; max-height: 40px; object-fit:fill;">
-                <span class="d-none d-lg-inline fw-bold fs-4 ms-2" style="color: #FF6B35;">ROBUSTE eulma</span>
+                <span class="d-none d-lg-inline fw-bold fs-4 ms-2">ROBUSTE eulma</span>
             </a>
             
             <!-- Language switcher -->
-            <div class="language-switcher me-3">
-                <a href="ar/product.html" class="btn btn-sm btn-outline-secondary">العربية</a>
-            </div>
             
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
@@ -751,7 +1074,7 @@ body {
             
             <!-- Cart icon with counter -->
             <div class="cart-icon-container ms-lg-4">
-                <span class="cart-label d-none d-lg-inline">panier</span>
+                <span class="cart-label d-none d-lg-inline text-white">panier</span>
                 <a href="#" class="cart-btn position-relative" onclick="toggleCart(); return false;">
                     <i class="bi bi-cart3"></i>
                     <span class="position-absolute badge rounded-pill bg-danger" id="cartCount">0</span>
@@ -967,6 +1290,84 @@ body {
         </div>
     </div>
 
+    <!-- Order Modal for Cart Checkout -->
+    <div class="modal fade" id="cartOrderModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Commander les produits du panier</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="order-summary mb-4">
+                        <h6 class="mb-3">Résumé de la commande</h6>
+                        <div class="d-flex align-items-center">
+                            <div>
+                                <h5 id="cartProductNameDisplay" class="mb-1">Produits du panier</h5>
+                                <p id="cartProductPrice" class="mb-0 text-primary fw-bold"></p>
+                            </div>
+                        </div>
+                    </div>
+                    <form id="cartOrderForm">
+                        <input type="hidden" id="cartProductName" value="Produits du panier">
+                        <input type="hidden" id="cartProductPriceValue">
+                        <input type="hidden" id="cartProductImageUrl">
+                        
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="cartFullName" class="form-label">Nom complet<span class="text-danger">*</span></label>
+                                <input type="text" class="form-control" id="cartFullName" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="cartPhone" class="form-label">Numéro de téléphone <span class="text-danger">*</span></label>
+                                <input type="tel" class="form-control" id="cartPhone" pattern="[0]{1}[5-7]{1}[0-9]{8}" required>
+                                <small class="text-muted">EX: 0551234566</small>
+                            </div>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="cartEmail" class="form-label">Email (optionnel)</label>
+                                <input type="email" class="form-control" id="cartEmail">
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="cartWilaya" class="form-label">Wilaya <span class="text-danger">*</span></label>
+                                <select class="form-select" id="cartWilaya" required>
+                                    <option value="">Sélectionnez votre wilaya</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="cartAddress" class="form-label">Adresse</label>
+                            <textarea class="form-control" id="cartAddress" rows="2"></textarea>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Méthode de paiement</label>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="cartPaymentMethod" id="cartCashOnDelivery" value="Paiement à la livraison" checked>
+                                    <label class="form-check-label" for="cartCashOnDelivery">Paiement à la livraison</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="cartPaymentMethod" id="cartOnlinePayment" value="Paiement en ligne">
+                                    <label class="form-check-label" for="cartOnlinePayment">Paiement en ligne</label>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                    <button type="button" class="btn btn-orange" id="submitCartOrderBtn" onclick="submitCartOrder()">
+                        Confirmer la commande
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Scripts -->
     <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
@@ -993,7 +1394,7 @@ body {
             emailjs.init("k77vdaUWPpnLrfTnS");
         })();
 
-        // Shopping cart management - UPDATED TO MATCH INDEX.HTML
+        // Shopping cart management
         let cart = [];
         let currentProduct = null;
         let relatedProducts = [];
@@ -1009,8 +1410,6 @@ body {
                 console.error('Erreur lors du chargement du panier:', e);
                 cart = [];
             }
-            updateCartCount();
-            renderCart();
         }
 
         // Update cart counter
@@ -1023,152 +1422,6 @@ body {
             const count = cart.reduce((total, item) => total + (item.quantity || 0), 0);
             cartCount.textContent = count;
             checkoutBtn.disabled = count === 0;
-        }
-
-        // Render cart items
-        function renderCart() {
-            const cartItems = document.getElementById('cartItems');
-            const emptyCartMessage = document.getElementById('emptyCartMessage');
-            const cartTotal = document.getElementById('cartTotal');
-            
-            if (!cartItems || !cartTotal) return;
-            
-            // Clear current content
-            while (cartItems.firstChild) {
-                cartItems.removeChild(cartItems.firstChild);
-            }
-            
-            if (cart.length === 0) {
-                const emptyDiv = document.createElement('div');
-                emptyDiv.className = 'text-center py-4 text-muted';
-                emptyDiv.id = 'emptyCartMessage';
-                emptyDiv.innerHTML = '<i class="bi bi-cart-x display-4 d-block mb-2"></i>سلة المشتريات فارغة';
-                cartItems.appendChild(emptyDiv);
-                cartTotal.textContent = '0 د.ج';
-                return;
-            }
-            
-            let total = 0;
-            cart.forEach((item, index) => {
-                const itemTotal = (item.price || 0) * (item.quantity || 0);
-                total += itemTotal;
-                
-                const itemElement = document.createElement('div');
-                itemElement.className = 'cart-item';
-                itemElement.dataset.id = item.id || '';
-                
-                itemElement.innerHTML = `
-                    <div class="d-flex">
-                        <img src="${item.image || ''}" alt="${item.name || 'منتج'}" class="cart-item-img me-3" style="width: 80px; height: 80px; object-fit: contain; border-radius: 8px; background-color: #f8f8f8; padding: 5px;">
-                        <div class="cart-item-details">
-                            <div class="cart-item-title">${item.name || 'منتج بدون اسم'}</div>
-                            <div class="cart-item-price">${item.price || 0} د.ج</div>
-                            <div class="quantity-controls">
-                                <button class="quantity-btn" data-action="decrease" data-index="${index}">-</button>
-                                <input type="number" class="quantity-input" value="${item.quantity || 1}" min="1" data-index="${index}">
-                                <button class="quantity-btn" data-action="increase" data-index="${index}">+</button>
-                            </div>
-                        </div>
-                        <button class="remove-item align-self-start" data-index="${index}">
-                            <i class="bi bi-trash"></i>
-                        </button>
-                    </div>
-                `;
-                
-                cartItems.appendChild(itemElement);
-            });
-            
-            cartTotal.textContent = `${total.toLocaleString('ar-DZ')} د.ج`;
-            
-            // Add event listeners after rendering
-            attachCartEventListeners();
-        }
-
-        // Add event listeners to cart items
-        function attachCartEventListeners() {
-            // Quantity buttons
-            document.querySelectorAll('.quantity-btn').forEach(btn => {
-                btn.addEventListener('click', function(e) {
-                    const index = parseInt(this.dataset.index);
-                    const action = this.dataset.action;
-                    
-                    if (isNaN(index) || index < 0 || index >= cart.length) return;
-                    
-                    if (action === 'increase') {
-                        updateQuantity(index, cart[index].quantity + 1);
-                    } else if (action === 'decrease') {
-                        updateQuantity(index, cart[index].quantity - 1);
-                    }
-                });
-            });
-            
-            // Quantity inputs
-            document.querySelectorAll('.quantity-input').forEach(input => {
-                input.addEventListener('change', function(e) {
-                    const index = parseInt(this.dataset.index);
-                    if (isNaN(index) || index < 0 || index >= cart.length) return;
-                    
-                    const newQuantity = parseInt(this.value) || 1;
-                    updateQuantity(index, newQuantity);
-                });
-                
-                // Prevent non-numeric input
-                input.addEventListener('keydown', function(e) {
-                    if (!/[\d\b\t\n]|Arrow|Delete|Backspace|Tab/.test(e.key) && 
-                        !(e.ctrlKey || e.metaKey)) {
-                        e.preventDefault();
-                    }
-                });
-            });
-            
-            // Remove buttons
-            document.querySelectorAll('.remove-item').forEach(btn => {
-                btn.addEventListener('click', function(e) {
-                    const index = parseInt(this.dataset.index);
-                    if (isNaN(index) || index < 0 || index >= cart.length) return;
-                    
-                    removeFromCart(index);
-                });
-            });
-        }
-
-        // Update item quantity
-        function updateQuantity(index, newQuantity) {
-            if (isNaN(index) || index < 0 || index >= cart.length) return;
-            
-            if (newQuantity < 1) {
-                removeFromCart(index);
-                return;
-            }
-            
-            cart[index].quantity = newQuantity;
-            
-            try {
-                localStorage.setItem('robuste_cart', JSON.stringify(cart));
-            } catch (e) {
-                console.error('Erreur lors de la mise à jour du panier:', e);
-            }
-            
-            renderCart();
-            updateCartCount();
-        }
-
-        // Remove item from cart
-        function removeFromCart(index) {
-            if (isNaN(index) || index < 0 || index >= cart.length) return;
-            
-            const productName = cart[index].name || 'منتج';
-            cart.splice(index, 1);
-            
-            try {
-                localStorage.setItem('robuste_cart', JSON.stringify(cart));
-            } catch (e) {
-                console.error('Erreur lors de la mise à jour du panier:', e);
-            }
-            
-            renderCart();
-            updateCartCount();
-            showStatus(`تمت إزالة "${productName}" من السلة`, 'success');
         }
 
         // Add product to cart
@@ -1228,10 +1481,324 @@ body {
             }
         }
 
-        // Checkout function
+        // Display cart contents
+        function renderCart() {
+            const cartItems = document.getElementById('cartItems');
+            const cartTotal = document.getElementById('cartTotal');
+            
+            if (!cartItems || !cartTotal) return;
+            
+            // Clear current content
+            while (cartItems.firstChild) {
+                cartItems.removeChild(cartItems.firstChild);
+            }
+            
+            if (cart.length === 0) {
+                const emptyDiv = document.createElement('div');
+                emptyDiv.className = 'text-center py-4 text-muted';
+                emptyDiv.id = 'emptyCartMessage';
+                emptyDiv.innerHTML = '<i class="bi bi-cart-x display-4 d-block mb-2"></i>Panier d\'achat فارغة';
+                cartItems.appendChild(emptyDiv);
+                cartTotal.textContent = '0 د.ج';
+                return;
+            }
+            
+            let total = 0;
+            cart.forEach((item, index) => {
+                const itemTotal = (item.price || 0) * (item.quantity || 0);
+                total += itemTotal;
+                
+                const itemElement = document.createElement('div');
+                itemElement.className = 'cart-item';
+                itemElement.dataset.id = item.id || '';
+                
+                itemElement.innerHTML = `
+                    <div class="d-flex">
+                        <img src="${item.image || ''}" alt="${item.name || 'produit'}" class="cart-item-img me-3">
+                        <div class="cart-item-details">
+                            <div class="cart-item-title">${item.name || 'Produit sans nom'}</div>
+                            <div class="cart-item-price">${item.price || 0} د.ج</div>
+                            <div class="quantity-controls">
+                                <button class="quantity-btn" data-action="decrease" data-index="${index}">-</button>
+                                <input type="number" class="quantity-input" value="${item.quantity || 1}" min="1" data-index="${index}">
+                                <button class="quantity-btn" data-action="increase" data-index="${index}">+</button>
+                            </div>
+                        </div>
+                        <button class="remove-item align-self-start" data-index="${index}">
+                            <i class="bi bi-trash"></i>
+                        </button>
+                    </div>
+                `;
+                
+                cartItems.appendChild(itemElement);
+            });
+            
+            cartTotal.textContent = `${total.toLocaleString('fr-FR')} د.ج`;
+            
+            // Add event listeners after rendering
+            attachCartEventListeners();
+        }
+
+        // Add event listeners to cart items
+        function attachCartEventListeners() {
+            // Handle quantity buttons
+            document.querySelectorAll('.quantity-btn').forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    const index = parseInt(this.dataset.index);
+                    const action = this.dataset.action;
+                    
+                    if (isNaN(index) || index < 0 || index >= cart.length) return;
+                    
+                    if (action === 'increase') {
+                        updateQuantity(index, cart[index].quantity + 1);
+                    } else if (action === 'decrease') {
+                        updateQuantity(index, cart[index].quantity - 1);
+                    }
+                });
+            });
+            
+            // Handle input fields
+            document.querySelectorAll('.quantity-input').forEach(input => {
+                input.addEventListener('change', function(e) {
+                    const index = parseInt(this.dataset.index);
+                    if (isNaN(index) || index < 0 || index >= cart.length) return;
+                    
+                    const newQuantity = parseInt(this.value) || 1;
+                    updateQuantity(index, newQuantity);
+                });
+                
+                // Prevent non-numeric input
+                input.addEventListener('keydown', function(e) {
+                    if (!/[\d\b\t\n]|Arrow|Delete|Backspace|Tab/.test(e.key) && 
+                        !(e.ctrlKey || e.metaKey)) {
+                        e.preventDefault();
+                    }
+                });
+            });
+            
+            // Handle delete buttons
+            document.querySelectorAll('.remove-item').forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    const index = parseInt(this.dataset.index);
+                    if (isNaN(index) || index < 0 || index >= cart.length) return;
+                    
+                    removeFromCart(index);
+                });
+            });
+        }
+
+        // Update product quantity
+        function updateQuantity(index, newQuantity) {
+            if (isNaN(index) || index < 0 || index >= cart.length) return;
+            
+            if (newQuantity < 1) {
+                removeFromCart(index);
+                return;
+            }
+            
+            cart[index].quantity = newQuantity;
+            
+            try {
+                localStorage.setItem('robuste_cart', JSON.stringify(cart));
+            } catch (e) {
+                console.error('Erreur lors de la mise à jour du panier:', e);
+            }
+            
+            renderCart();
+            updateCartCount();
+        }
+
+        // Remove product from cart
+        function removeFromCart(index) {
+            if (isNaN(index) || index < 0 || index >= cart.length) return;
+            
+            const productName = cart[index].name || 'produit';
+            cart.splice(index, 1);
+            
+            try {
+                localStorage.setItem('robuste_cart', JSON.stringify(cart));
+            } catch (e) {
+                console.error('Erreur lors de la mise à jour du panier:', e);
+            }
+            
+            renderCart();
+            updateCartCount();
+            showStatus(`"${productName}" a été retiré du panier`, 'success');
+        }
+
+        // Checkout from cart
         function checkout() {
-            // Redirect to index.html for checkout
-            window.location.href = 'index.html';
+            if (cart.length === 0) {
+                showStatus('Le panier est vide', 'error');
+                return;
+            }
+            
+            // Hide cart
+            const cartOffcanvas = bootstrap.Offcanvas.getInstance(document.getElementById('cartOffcanvas'));
+            if (cartOffcanvas) {
+                cartOffcanvas.hide();
+            }
+            
+            // Calculate total
+            const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            
+            // Fill order form
+            document.getElementById('cartProductPriceValue').value = total;
+            document.getElementById('cartProductPrice').textContent = `${total.toLocaleString()} DA`;
+            
+            // Reset form
+            document.getElementById('cartOrderForm').reset();
+            document.getElementById('cartCashOnDelivery').checked = true;
+            
+            // Populate wilayas if not already done
+            populateCartWilayas();
+            
+            // Show order modal
+            const cartOrderModal = new bootstrap.Modal(document.getElementById('cartOrderModal'));
+            cartOrderModal.show();
+        }
+
+        // Submit cart order
+        async function submitCartOrder() {
+            const fullName = document.getElementById('cartFullName').value;
+            const phone = document.getElementById('cartPhone').value;
+            const email = document.getElementById('cartEmail').value || 'Non fourni';
+            const wilaya = document.getElementById('cartWilaya').value;
+            const address = document.getElementById('cartAddress').value || 'Non spécifiée';
+            const paymentMethod = document.querySelector('input[name="cartPaymentMethod"]:checked').value;
+            
+            // Validate data
+            if (!fullName || !phone || !wilaya) {
+                showStatus('Veuillez remplir tous les champs obligatoires', 'error');
+                return;
+            }
+            
+            const phoneRegex = /^0[5-7][0-9]{8}$/;
+            if (!phoneRegex.test(phone)) {
+                showStatus('Numéro de téléphone invalide. Doit contenir 10 chiffres et commencer par 05, 06 ou 07', 'error');
+                return;
+            }
+            
+            // Calculate total
+            const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            
+            // Prepare order data
+            const orderData = {
+                products: cart,
+                customer: fullName,
+                phone: phone,
+                email: email,
+                wilaya: wilaya,
+                address: address,
+                payment: paymentMethod,
+                totalPrice: total,
+                timestamp: new Date().toISOString(),
+                status: 'Nouveau'
+            };
+            
+            // Show loading status
+            showStatus('Traitement de votre commande...', 'loading');
+            
+            const submitBtn = document.getElementById('submitCartOrderBtn');
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = `
+                <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                Traitement...
+            `;
+            
+            try {
+                // Store order in Firebase
+                const docRef = await db.collection('orders').add(orderData);
+                
+                // Create products list for email
+                const productsList = cart.map(item => `
+                    <div style="margin-bottom: 10px; padding: 8px; border-bottom: 1px solid #eee;">
+                        <strong>Produit:</strong> ${item.name} <br>
+                        <strong>Quantité:</strong> ${item.quantity} <br>
+                        <strong>Prix:</strong> ${item.price.toLocaleString()} DA <br>
+                        <strong>Total:</strong> ${(item.price * item.quantity).toLocaleString()} DA
+                    </div>
+                `).join('');
+                
+                // Send email
+                await emailjs.send("service_lc1q5k8", "template_a15g7yg", {
+                    order_id: docRef.id,
+                    customer_name: fullName,
+                    customer_phone: phone,
+                    customer_email: email,
+                    wilaya: wilaya,
+                    address: address,
+                    total_price: total.toLocaleString(),
+                    payment_method: paymentMethod,
+                    order_date: new Date().toLocaleString('fr-FR'),
+                    products: productsList
+                });
+                
+                // Success message
+                showStatus(`
+                    <div class="text-center">
+                        <i class="bi bi-check-circle-fill text-success fs-1"></i>
+                        <h5 class="mt-2">Commande confirmée!</h5>
+                        <div class="text-start mt-3">
+                            <p><strong>Numéro de commande:</strong> ${docRef.id}</p>
+                            <p><strong>Nom:</strong> ${fullName}</p>
+                            <p><strong>Nombre de produits:</strong> ${cart.length} produits</p>
+                            <p><strong>Montant total:</strong> ${total.toLocaleString()} DA</p>
+                            <p class="mt-3">Nous vous contacterons au <strong>${phone}</strong> dans les 24 heures pour confirmer l'expédition.</p>
+                        </div>
+                        <a href="https://wa.me/213656360457?text=${encodeURIComponent(
+                            `Demande concernant la commande ${docRef.id}\nNom: ${fullName}\nNombre de produits: ${cart.length}\nTotal: ${total.toLocaleString()} DA\nTéléphone: ${phone}`
+                        )}" class="btn whatsapp-contact-btn mt-2 w-100" target="_blank">
+                            <i class="bi bi-whatsapp"></i> Contactez-nous sur WhatsApp (optionnel)
+                        </a>
+                    </div>
+                `, 'success');
+                
+                // Clear cart and reset form
+                cart = [];
+                localStorage.removeItem('robuste_cart');
+                updateCartCount();
+                renderCart();
+                document.getElementById('cartOrderForm').reset();
+                
+                // Hide modal
+                const cartOrderModal = bootstrap.Modal.getInstance(document.getElementById('cartOrderModal'));
+                if (cartOrderModal) {
+                    cartOrderModal.hide();
+                }
+                
+            } catch (error) {
+                console.error('Erreur:', error);
+                showStatus('Erreur lors de l\'envoi de la commande. Veuillez réessayer.', 'error');
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = 'Confirmer la commande';
+            }
+        }
+
+        // Populate wilayas for cart order form
+        function populateCartWilayas() {
+            const wilayas = [
+                "Adrar", "Chlef", "Laghouat", "Oum El Bouaghi", "Batna", "Béjaïa", "Biskra", "Béchar", "Blida",
+                "Bouira", "Tamanrasset", "Tébessa", "Tlemcen", "Tiaret", "Tizi Ouzou", "Alger", "Djelfa", "Jijel",
+                "Sétif", "Saïda", "Skikda", "Sidi Bel Abbès", "Annaba", "Guelma", "Constantine", "Médéa", "Mostaganem",
+                "M'Sila", "Mascara", "Ouargla", "Oran", "El Bayadh", "Illizi", "Bordj Bou Arréridj", "Boumerdès", "El Tarf",
+                "Tindouf", "Tissemsilt", "El Oued", "Khenchela", "Souk Ahras", "Tipaza", "Mila", "Aïn Defla", "Naâma",
+                "Aïn Témouchent", "Ghardaïa", "Relizane"
+            ];
+            
+            const wilayaSelect = document.getElementById('cartWilaya');
+            // Clear existing options except the first one
+            while (wilayaSelect.children.length > 1) {
+                wilayaSelect.removeChild(wilayaSelect.lastChild);
+            }
+            
+            wilayas.forEach(wilaya => {
+                const option = document.createElement('option');
+                option.value = wilaya;
+                option.textContent = wilaya;
+                wilayaSelect.appendChild(option);
+            });
         }
 
         // Load product data
@@ -1614,7 +2181,9 @@ body {
 
         // Page initialization
         document.addEventListener('DOMContentLoaded', function() {
-            loadCart(); // Load cart from localStorage
+            loadCart();
+            updateCartCount();
+            renderCart();
             loadProduct();
         });
     </script>
