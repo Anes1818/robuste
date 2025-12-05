@@ -2722,6 +2722,185 @@ body,
 .product-card.jumia-style .carousel-control-next-icon {
     width: 10px;
     height: 10px;
+}/* تحسينات متقدمة للهواتف */
+@media (max-width: 768px) {
+    .product-card.jumia-style {
+        border-radius: 6px;
+        margin-bottom: 12px;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    }
+    
+    .product-card.jumia-style .card-img-container {
+        height: 160px;
+        padding: 8px;
+    }
+    
+    .product-card.jumia-style .card-img-container img {
+        max-width: 95%;
+        max-height: 95%;
+    }
+    
+    .product-card.jumia-style .card-content {
+        padding: 10px;
+    }
+    
+    .product-card.jumia-style .product-title {
+        font-size: 12px;
+        height: 32px;
+        line-height: 1.3;
+        margin-bottom: 6px;
+    }
+    
+    .product-card.jumia-style .current-price {
+        font-size: 14px;
+        margin-bottom: 2px;
+    }
+    
+    .product-card.jumia-style .old-price {
+        font-size: 11px;
+    }
+    
+    .product-card.jumia-style .add-to-cart-btn-jumia {
+        padding: 10px 8px;
+        font-size: 12px;
+        min-height: 40px;
+        border-radius: 3px;
+    }
+    
+    /* تحسينات اللمس */
+    .product-card.jumia-style {
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        user-select: none;
+    }
+    
+    /* إظهار مؤشرات الكاروسيل على الهواتف */
+    .product-card.jumia-style .carousel-indicators {
+        display: flex;
+        position: absolute;
+        bottom: 5px;
+        left: 0;
+        right: 0;
+        justify-content: center;
+        margin: 0;
+        padding: 0;
+        z-index: 2;
+    }
+    
+    .product-card.jumia-style .carousel-indicators button {
+        width: 5px;
+        height: 5px;
+        margin: 0 2px;
+        border-radius: 50%;
+        background-color: rgba(0, 0, 0, 0.3);
+        border: none;
+        opacity: 0.5;
+    }
+    
+    .product-card.jumia-style .carousel-indicators button.active {
+        opacity: 1;
+        background-color: var(--primary);
+    }
+}
+
+/* شاشات صغيرة جداً */
+@media (max-width: 576px) {
+    .product-card.jumia-style .card-img-container {
+        height: 140px;
+    }
+    
+    .product-card.jumia-style .product-title {
+        font-size: 11px;
+        height: 30px;
+    }
+    
+    .product-card.jumia-style .current-price {
+        font-size: 13px;
+    }
+    
+    .product-card.jumia-style .add-to-cart-btn-jumia {
+        font-size: 11px;
+        padding: 9px 7px;
+        min-height: 38px;
+    }
+    
+    /* مسافات أعمدة أصغر */
+    .col-6 {
+        padding-left: 6px;
+        padding-right: 6px;
+    }
+}
+
+/* أجهزة أيفون X وما فوق */
+@media only screen 
+    and (device-width: 375px) 
+    and (device-height: 812px) 
+    and (-webkit-device-pixel-ratio: 3) {
+    .product-card.jumia-style {
+        margin-bottom: 15px;
+    }
+}
+
+/* أجهزة أندرويد عالية الدقة */
+@media screen and (min-resolution: 2dppx) {
+    .product-card.jumia-style {
+        border-width: 0.5px;
+    }
+}/* تحسينات اللمس المتقدمة */
+@media (hover: none) and (pointer: coarse) {
+    /* زيادة مساحة النقر */
+    .product-card.jumia-style {
+        padding: 1px; /* مساحة للنقر حول الكارد */
+    }
+    
+    .product-card.jumia-style .add-to-cart-btn-jumia {
+        min-height: 44px; /* الحد الأدنى لمساحة اللمس */
+        padding: 12px 8px;
+    }
+    
+    /* تحسين مؤشر النقر */
+    .product-card.jumia-style:active {
+        opacity: 0.8;
+    }
+    
+    /* منع التكبير على النقر المزدوج */
+    .product-card.jumia-style * {
+        touch-action: manipulation;
+    }
+    
+    /* تحسينات للانزلاق في الكاروسيل */
+    .product-card.jumia-style .card-img-container {
+        touch-action: pan-y;
+    }
+}
+
+/* تحسينات للأجهزة ذات الشاشات الصغيرة والدقة العالية */
+@media screen and (max-width: 768px) and (min-resolution: 2dppx) {
+    .product-card.jumia-style {
+        border-radius: 8px;
+    }
+    
+    .product-card.jumia-style .product-title {
+        font-weight: 600; /* نص أكثر وضوحاً */
+    }
+    
+    /* زيادة التباين للقراءة */
+    .product-card.jumia-style .current-price {
+        font-weight: 800;
+    }
+}
+
+/* تحسينات الوصول */
+.product-card.jumia-style:focus-within {
+    outline: 2px solid var(--primary);
+    outline-offset: 2px;
+}
+
+/* إخفاء المؤشرات على الهواتف عند عدم التمرير */
+@media (max-width: 768px) {
+    .product-card.jumia-style .scroll-indicator {
+        display: none;
+    }
 }
 </style>
 </head><body><nav class="navbar navbar-expand-lg navbar-light fixed-top bg-white shadow-sm">
@@ -3074,6 +3253,7 @@ async function loadAndDisplayProducts(category = 'all') {
 
 // دالة عرض المنتجات
 // تحديث دالة عرض المنتجات
+// تحديث دالة عرض المنتجات مع إضافة النقر على الكارد
 function renderProducts(products) {
     const container = document.getElementById('productsContainer');
     if (!container) return;
@@ -3105,17 +3285,18 @@ function renderProducts(products) {
             </div>
         ` : '';
         
-        // إنشاء سلايدر للصور (مبسط)
-        const carouselIndicators = product.images.map((_, index) => `
+        // مؤشر الكاروسيل (للجوال)
+        const carouselIndicators = product.images.length > 1 ? product.images.map((_, index) => `
             <button type="button" data-bs-target="#carousel-${product.id}" data-bs-slide-to="${index}" 
                 ${index === 0 ? 'class="active" aria-current="true"' : ''} 
                 aria-label="صورة ${index + 1}">
             </button>
-        `).join('');
+        `).join('') : '';
         
         const carouselItems = product.images.map((img, index) => `
             <div class="carousel-item ${index === 0 ? 'active' : ''}">
-                <img src="${img}" class="d-block w-100 h-100" alt="${product.title}" loading="lazy">
+                <img src="${img}" class="d-block" alt="${product.title}" loading="lazy" 
+                    onload="this.style.opacity='1'" style="opacity:0; transition: opacity 0.3s;">
             </div>
         `).join('');
         
@@ -3130,9 +3311,16 @@ function renderProducts(products) {
             </button>
         ` : '';
         
+        // مؤشر التمرير (للصور المتعددة)
+        const scrollIndicator = product.images.length > 1 ? `
+            <div class="scroll-indicator">
+                <i class="bi bi-chevron-left"></i> <i class="bi bi-chevron-right"></i>
+            </div>
+        ` : '';
+        
         const productCard = `
             <div class="col-6 col-md-4 col-lg-3 mb-4">
-                <div class="product-card jumia-style">
+                <div class="product-card jumia-style" data-product-id="${product.id}" onclick="openProductPage(${product.id})">
                     ${productBadge}
                     ${discountBadge}
                     
@@ -3146,6 +3334,7 @@ function renderProducts(products) {
                             </div>
                             ${carouselControls}
                         </div>
+                        ${scrollIndicator}
                     </div>
                     
                     <div class="card-content">
@@ -3156,7 +3345,7 @@ function renderProducts(products) {
                             ${oldPrice}
                         </div>
                         
-                        <button class="add-to-cart-btn-jumia add-to-cart-btn" data-id="${product.id}">
+                        <button class="add-to-cart-btn-jumia add-to-cart-btn" data-id="${product.id}" onclick="event.stopPropagation();">
                             <i class="bi bi-cart-plus"></i> Ajouter au panier
                         </button>
                     </div>
@@ -3168,6 +3357,23 @@ function renderProducts(products) {
     });
 }
 
+// دالة لفتح صفحة المنتج
+function openProductPage(productId) {
+    // استخدام الرابط الحالي إذا كان موجوداً في بيانات المنتج
+    // أو يمكنك بناء الرابط يدوياً
+    window.location.href = `product.html?pid=${productId}`;
+}
+
+// دالة لوقف انتشار الحدث لمنع فتح صفحة المنتج عند النقر على الزر
+document.addEventListener('DOMContentLoaded', function() {
+    // إضافة مستمع الحدث لمنع انتشار النقر
+    document.addEventListener('click', function(e) {
+        const addToCartBtn = e.target.closest('.add-to-cart-btn');
+        if (addToCartBtn) {
+            e.stopPropagation();
+        }
+    });
+});
 // دالة تحميل العروض الخاصة
 async function loadSpecialOffers() {
     try {
