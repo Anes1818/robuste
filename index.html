@@ -2447,460 +2447,13 @@ body,
     padding: 10px !important;
     font-size: 0.95rem !important;
 }
-[data-theme="dark"] .text-muted {
+    [data-theme="dark"] .text-muted {
     color: #b0b0b0 !important;
     opacity: 0.9;
 }
 
 [data-theme="dark"] .card-text {
     color: var(--gray) !important;
-}
-/* تأثير النقر على زر إضافة إلى السلة */
-.product-card.jumia-style .add-to-cart-btn-jumia.clicked {
-    background-color: var(--success);
-    transform: scale(0.95);
-}
-
-/* تحسين الدارك مود لكارد المنتج الجديد */
-[data-theme="dark"] .product-card.jumia-style {
-    background: var(--light);
-    border-color: var(--border-color);
-}
-
-[data-theme="dark"] .product-card.jumia-style .card-img-container {
-    background: rgba(255, 255, 255, 0.05);
-}
-
-[data-theme="dark"] .product-card.jumia-style .product-title {
-    color: var(--dark);
-}
-
-[data-theme="dark"] .product-card.jumia-style .current-price {
-    color: var(--primary);
-}
-
-[data-thema="dark"] .product-card.jumia-style .old-price {
-    color: var(--gray);
-}
-
-/* تحسينات الوصول للهواتف */
-@media (max-width: 768px) {
-    .product-card.jumia-style {
-        margin-bottom: 15px;
-    }
-    
-    /* زيادة مساحة اللمس */
-    .product-card.jumia-style .add-to-cart-btn-jumia {
-        min-height: 36px;
-    }
-    
-    .product-card.jumia-style .carousel-control-prev,
-    .product-card.jumia-style .carousel-control-next {
-        opacity: 0.6;
-        width: 30px;
-        height: 30px;
-    }
-}
-
-/* تحسينات التحمل */
-.product-card.jumia-style .carousel-item img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-}
-
-/* إزالة أي أنماط قديمة تتعارض */
-.product-card .card-body,
-.product-card .card-footer,
-.product-card .btn-outline-primary {
-    display: none;
-}/* ============== تصميم كارد المنتج الجديد بأسلوب Jumia ============== */
-.product-card.jumia-style {
-    background: var(--light);
-    border: 1px solid var(--border-color);
-    border-radius: 8px;
-    overflow: hidden;
-    height: auto;
-    transition: all 0.3s ease;
-    position: relative;
-    padding: 0;
-    margin-bottom: 20px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-}
-
-.product-card.jumia-style:hover {
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    border-color: #ddd;
-    transform: translateY(-3px);
-}
-
-/* حاوية الصورة */
-.product-card.jumia-style .card-img-container {
-    position: relative;
-    width: 100%;
-    height: 180px;
-    background: #f8f8f8;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 15px;
-}
-
-.product-card.jumia-style .card-img-container img {
-    max-width: 100%;
-    max-height: 100%;
-    object-fit: contain;
-    transition: transform 0.3s ease;
-}
-
-.product-card.jumia-style:hover .card-img-container img {
-    transform: scale(1.05);
-}
-
-/* بادج الخصم */
-.product-card.jumia-style .discount-badge {
-    position: absolute;
-    top: 8px;
-    left: 8px;
-    background: #ff4444;
-    color: white;
-    padding: 3px 8px;
-    font-size: 11px;
-    font-weight: 700;
-    border-radius: 3px;
-    z-index: 2;
-    line-height: 1.2;
-}
-
-.product-card.jumia-style .product-badge {
-    position: absolute;
-    top: 8px;
-    right: 8px;
-    background: var(--primary);
-    color: white;
-    padding: 3px 8px;
-    font-size: 11px;
-    font-weight: 700;
-    border-radius: 3px;
-    z-index: 2;
-    line-height: 1.2;
-}
-
-/* محتوى الكارد */
-.product-card.jumia-style .card-content {
-    padding: 12px;
-}
-
-/* العنوان */
-.product-card.jumia-style .product-title {
-    font-size: 13px;
-    line-height: 1.4;
-    color: var(--dark);
-    font-weight: 500;
-    margin-bottom: 8px;
-    height: 36px;
-    overflow: hidden;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-}
-
-/* الأسعار */
-.product-card.jumia-style .price-container {
-    margin-bottom: 10px;
-}
-
-.product-card.jumia-style .current-price {
-    font-size: 16px;
-    font-weight: 700;
-    color: var(--primary);
-    margin-bottom: 2px;
-}
-
-.product-card.jumia-style .old-price {
-    font-size: 12px;
-    color: var(--gray);
-    text-decoration: line-through;
-}
-
-/* زر إضافة إلى السلة */
-.product-card.jumia-style .add-to-cart-btn-jumia {
-    background: var(--primary);
-    color: white;
-    border: none;
-    border-radius: 4px;
-    width: 100%;
-    padding: 8px;
-    font-size: 13px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 5px;
-}
-
-.product-card.jumia-style .add-to-cart-btn-jumia:hover {
-    background: var(--primary-dark);
-    transform: translateY(-1px);
-}
-
-.product-card.jumia-style .add-to-cart-btn-jumia:active {
-    transform: translateY(0);
-}
-
-/* تحسينات للهواتف */
-@media (max-width: 768px) {
-    .product-card.jumia-style .card-img-container {
-        height: 150px;
-        padding: 10px;
-    }
-    
-    .product-card.jumia-style .product-title {
-        font-size: 12px;
-        height: 34px;
-    }
-    
-    .product-card.jumia-style .current-price {
-        font-size: 15px;
-    }
-    
-    .product-card.jumia-style .add-to-cart-btn-jumia {
-        padding: 7px;
-        font-size: 12px;
-    }
-}
-
-@media (max-width: 576px) {
-    .product-card.jumia-style .card-img-container {
-        height: 130px;
-        padding: 8px;
-    }
-    
-    .product-card.jumia-style .product-title {
-        font-size: 11px;
-        height: 32px;
-    }
-    
-    .product-card.jumia-style .current-price {
-        font-size: 14px;
-    }
-}
-
-/* الكاروسيل داخلي بسيط */
-.product-card.jumia-style .carousel-indicators {
-    display: none;
-}
-
-.product-card.jumia-style .carousel-control-prev,
-.product-card.jumia-style .carousel-control-next {
-    opacity: 0;
-    transition: opacity 0.3s;
-    width: 25px;
-    height: 25px;
-    top: 50%;
-    transform: translateY(-50%);
-    background: rgba(255, 255, 255, 0.8);
-    border-radius: 50%;
-}
-
-.product-card.jumia-style:hover .carousel-control-prev,
-.product-card.jumia-style:hover .carousel-control-next {
-    opacity: 0.8;
-}
-
-.product-card.jumia-style .carousel-control-prev {
-    left: 5px;
-}
-
-.product-card.jumia-style .carousel-control-next {
-    right: 5px;
-}
-
-.product-card.jumia-style .carousel-control-prev-icon,
-.product-card.jumia-style .carousel-control-next-icon {
-    width: 10px;
-    height: 10px;
-}/* تحسينات متقدمة للهواتف */
-@media (max-width: 768px) {
-    .product-card.jumia-style {
-        border-radius: 6px;
-        margin-bottom: 12px;
-        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
-    }
-    
-    .product-card.jumia-style .card-img-container {
-        height: 160px;
-        padding: 8px;
-    }
-    
-    .product-card.jumia-style .card-img-container img {
-        max-width: 95%;
-        max-height: 95%;
-    }
-    
-    .product-card.jumia-style .card-content {
-        padding: 10px;
-    }
-    
-    .product-card.jumia-style .product-title {
-        font-size: 12px;
-        height: 32px;
-        line-height: 1.3;
-        margin-bottom: 6px;
-    }
-    
-    .product-card.jumia-style .current-price {
-        font-size: 14px;
-        margin-bottom: 2px;
-    }
-    
-    .product-card.jumia-style .old-price {
-        font-size: 11px;
-    }
-    
-    .product-card.jumia-style .add-to-cart-btn-jumia {
-        padding: 10px 8px;
-        font-size: 12px;
-        min-height: 40px;
-        border-radius: 3px;
-    }
-    
-    /* تحسينات اللمس */
-    .product-card.jumia-style {
-        -webkit-touch-callout: none;
-        -webkit-user-select: none;
-        user-select: none;
-    }
-    
-    /* إظهار مؤشرات الكاروسيل على الهواتف */
-    .product-card.jumia-style .carousel-indicators {
-        display: flex;
-        position: absolute;
-        bottom: 5px;
-        left: 0;
-        right: 0;
-        justify-content: center;
-        margin: 0;
-        padding: 0;
-        z-index: 2;
-    }
-    
-    .product-card.jumia-style .carousel-indicators button {
-        width: 5px;
-        height: 5px;
-        margin: 0 2px;
-        border-radius: 50%;
-        background-color: rgba(0, 0, 0, 0.3);
-        border: none;
-        opacity: 0.5;
-    }
-    
-    .product-card.jumia-style .carousel-indicators button.active {
-        opacity: 1;
-        background-color: var(--primary);
-    }
-}
-
-/* شاشات صغيرة جداً */
-@media (max-width: 576px) {
-    .product-card.jumia-style .card-img-container {
-        height: 140px;
-    }
-    
-    .product-card.jumia-style .product-title {
-        font-size: 11px;
-        height: 30px;
-    }
-    
-    .product-card.jumia-style .current-price {
-        font-size: 13px;
-    }
-    
-    .product-card.jumia-style .add-to-cart-btn-jumia {
-        font-size: 11px;
-        padding: 9px 7px;
-        min-height: 38px;
-    }
-    
-    /* مسافات أعمدة أصغر */
-    .col-6 {
-        padding-left: 6px;
-        padding-right: 6px;
-    }
-}
-
-/* أجهزة أيفون X وما فوق */
-@media only screen 
-    and (device-width: 375px) 
-    and (device-height: 812px) 
-    and (-webkit-device-pixel-ratio: 3) {
-    .product-card.jumia-style {
-        margin-bottom: 15px;
-    }
-}
-
-/* أجهزة أندرويد عالية الدقة */
-@media screen and (min-resolution: 2dppx) {
-    .product-card.jumia-style {
-        border-width: 0.5px;
-    }
-}/* تحسينات اللمس المتقدمة */
-@media (hover: none) and (pointer: coarse) {
-    /* زيادة مساحة النقر */
-    .product-card.jumia-style {
-        padding: 1px; /* مساحة للنقر حول الكارد */
-    }
-    
-    .product-card.jumia-style .add-to-cart-btn-jumia {
-        min-height: 44px; /* الحد الأدنى لمساحة اللمس */
-        padding: 12px 8px;
-    }
-    
-    /* تحسين مؤشر النقر */
-    .product-card.jumia-style:active {
-        opacity: 0.8;
-    }
-    
-    /* منع التكبير على النقر المزدوج */
-    .product-card.jumia-style * {
-        touch-action: manipulation;
-    }
-    
-    /* تحسينات للانزلاق في الكاروسيل */
-    .product-card.jumia-style .card-img-container {
-        touch-action: pan-y;
-    }
-}
-
-/* تحسينات للأجهزة ذات الشاشات الصغيرة والدقة العالية */
-@media screen and (max-width: 768px) and (min-resolution: 2dppx) {
-    .product-card.jumia-style {
-        border-radius: 8px;
-    }
-    
-    .product-card.jumia-style .product-title {
-        font-weight: 600; /* نص أكثر وضوحاً */
-    }
-    
-    /* زيادة التباين للقراءة */
-    .product-card.jumia-style .current-price {
-        font-weight: 800;
-    }
-}
-
-/* تحسينات الوصول */
-.product-card.jumia-style:focus-within {
-    outline: 2px solid var(--primary);
-    outline-offset: 2px;
-}
-
-/* إخفاء المؤشرات على الهواتف عند عدم التمرير */
-@media (max-width: 768px) {
-    .product-card.jumia-style .scroll-indicator {
-        display: none;
-    }
 }
 </style>
 </head><body><nav class="navbar navbar-expand-lg navbar-light fixed-top bg-white shadow-sm">
@@ -3252,8 +2805,6 @@ async function loadAndDisplayProducts(category = 'all') {
 }
 
 // دالة عرض المنتجات
-// تحديث دالة عرض المنتجات
-// تحديث دالة عرض المنتجات مع إضافة النقر على الكارد
 function renderProducts(products) {
     const container = document.getElementById('productsContainer');
     if (!container) return;
@@ -3266,17 +2817,14 @@ function renderProducts(products) {
     }
     
     products.forEach(product => {
-        const discountPercentage = product.old_price && product.old_price > product.price ? 
-            Math.round(((product.old_price - product.price) / product.old_price) * 100) : 0;
-        
-        const discountBadge = discountPercentage > 0 ? `
+        const discountBadge = product.old_price && product.old_price > product.price ? `
             <div class="discount-badge">
-                -${discountPercentage}%
+                خصم ${Math.round(((product.old_price - product.price) / product.old_price) * 100)}%
             </div>
         ` : '';
         
         const oldPrice = product.old_price && product.old_price > product.price ? `
-            <div class="old-price">${product.old_price.toLocaleString()} DA</div>
+            <small dir="ltr" class="text-decoration-line-through text-muted me-2">${product.old_price.toLocaleString()} DA</small>
         ` : '';
         
         const productBadge = product.badge ? `
@@ -3285,18 +2833,17 @@ function renderProducts(products) {
             </div>
         ` : '';
         
-        // مؤشر الكاروسيل (للجوال)
-        const carouselIndicators = product.images.length > 1 ? product.images.map((_, index) => `
+        // إنشاء سلايدر للصور
+        const carouselIndicators = product.images.map((_, index) => `
             <button type="button" data-bs-target="#carousel-${product.id}" data-bs-slide-to="${index}" 
                 ${index === 0 ? 'class="active" aria-current="true"' : ''} 
                 aria-label="صورة ${index + 1}">
             </button>
-        `).join('') : '';
+        `).join('');
         
         const carouselItems = product.images.map((img, index) => `
             <div class="carousel-item ${index === 0 ? 'active' : ''}">
-                <img src="${img}" class="d-block" alt="${product.title}" loading="lazy" 
-                    onload="this.style.opacity='1'" style="opacity:0; transition: opacity 0.3s;">
+                <img src="${img}" class="d-block w-100" alt="${product.title}" loading="lazy">
             </div>
         `).join('');
         
@@ -3311,43 +2858,35 @@ function renderProducts(products) {
             </button>
         ` : '';
         
-        // مؤشر التمرير (للصور المتعددة)
-        const scrollIndicator = product.images.length > 1 ? `
-            <div class="scroll-indicator">
-                <i class="bi bi-chevron-left"></i> <i class="bi bi-chevron-right"></i>
-            </div>
-        ` : '';
-        
         const productCard = `
             <div class="col-6 col-md-4 col-lg-3 mb-4">
-                <div class="product-card jumia-style" data-product-id="${product.id}" onclick="openProductPage(${product.id})">
+                <div class="product-card card h-100 position-relative">
                     ${productBadge}
                     ${discountBadge}
-                    
-                    <div class="card-img-container">
-                        <div id="carousel-${product.id}" class="carousel slide" data-bs-ride="carousel" data-bs-interval="false">
-                            <div class="carousel-indicators">
-                                ${carouselIndicators}
-                            </div>
-                            <div class="carousel-inner">
-                                ${carouselItems}
-                            </div>
-                            ${carouselControls}
+                    <div id="carousel-${product.id}" class="carousel slide product-carousel" data-bs-ride="carousel">
+                        <div class="carousel-indicators">
+                            ${carouselIndicators}
                         </div>
-                        ${scrollIndicator}
+                        <div class="carousel-inner">
+                            ${carouselItems}
+                        </div>
+                        ${carouselControls}
                     </div>
-                    
-                    <div class="card-content">
-                        <h5 class="product-title">${product.title}</h5>
-                        
-                        <div class="price-container">
-                            <div class="current-price">${product.price.toLocaleString()} DA</div>
+                    <div class="card-body">
+                        <h5 class="card-title">${product.title}</h5>
+                        <p class="card-text text-muted small">${product.description_short}</p>
+                        <div class="d-flex align-items-center mt-3">
                             ${oldPrice}
+                            <p dir="ltr" class="fw-bold text-primary mb-0">${product.price.toLocaleString()} DA</p>
                         </div>
-                        
-                        <button class="add-to-cart-btn-jumia add-to-cart-btn" data-id="${product.id}" onclick="event.stopPropagation();">
+                    </div>
+                    <div class="card-footer bg-transparent border-0">
+                        <button class="btn btn-orange w-100 add-to-cart-btn" data-id="${product.id}">
                             <i class="bi bi-cart-plus"></i> Ajouter au panier
                         </button>
+                        <a href="product.html?pid=${product.id}" class="btn btn-outline-primary w-100 mt-2">
+                            <i class="bi bi-eye"></i> Voir détails
+                        </a>
                     </div>
                 </div>
             </div>
@@ -3357,23 +2896,6 @@ function renderProducts(products) {
     });
 }
 
-// دالة لفتح صفحة المنتج
-function openProductPage(productId) {
-    // استخدام الرابط الحالي إذا كان موجوداً في بيانات المنتج
-    // أو يمكنك بناء الرابط يدوياً
-    window.location.href = `product.html?pid=${productId}`;
-}
-
-// دالة لوقف انتشار الحدث لمنع فتح صفحة المنتج عند النقر على الزر
-document.addEventListener('DOMContentLoaded', function() {
-    // إضافة مستمع الحدث لمنع انتشار النقر
-    document.addEventListener('click', function(e) {
-        const addToCartBtn = e.target.closest('.add-to-cart-btn');
-        if (addToCartBtn) {
-            e.stopPropagation();
-        }
-    });
-});
 // دالة تحميل العروض الخاصة
 async function loadSpecialOffers() {
     try {
@@ -3395,7 +2917,6 @@ async function loadSpecialOffers() {
 }
 
 // دالة عرض العروض الخاصة
-// دالة عرض العروض الخاصة (محدثة)
 function renderSpecialOffers(offers) {
     const offersContainer = document.getElementById('specialOffersContainer');
     if (!offersContainer) return;
@@ -3410,23 +2931,38 @@ function renderSpecialOffers(offers) {
         
         return `
             <div class="col-md-4">
-                <div class="offer-product" style="max-width: 320px;">
-                    <div class="offer-product-discount" style="font-size: 12px; padding: 2px 8px;">-${discountPercentage}%</div>
-                    
-                    ${product.badge ? `<div class="offer-product-badge" style="font-size: 12px; padding: 2px 8px;">${product.badge}</div>` : ''}
+                <div class="offer-product">
+                    <div class="offer-product-discount">-${discountPercentage}%</div>
+                    ${product.badge ? `<div class="offer-product-badge">${product.badge}</div>` : ''}
 
-                    <div class="card-img-container" style="height: 180px; background: #f8f8f8;">
-                        <img src="${product.images[0]}" class="d-block w-100 h-100 object-fit-contain" alt="${product.title}" loading="lazy">
-                    </div>
-
-                    <div style="padding: 12px;">
-                        <h4 class="offer-product-title" style="font-size: 13px; margin-bottom: 8px;">${product.title}</h4>
-                        <div class="offer-product-price" style="font-size: 16px;">${product.price.toLocaleString()} DA</div>
-                        <div class="offer-product-old-price" style="font-size: 12px;">${product.old_price.toLocaleString()} DA</div>
-                        <button class="offer-btn add-to-cart-btn" data-id="${product.id}" style="margin-top: 10px; padding: 8px; font-size: 13px;">
-                            <i class="bi bi-cart-plus"></i> Acheter maintenant
+                    <div id="carousel-offer-${product.id}" class="carousel slide" data-bs-ride="carousel">
+                        <div class="carousel-indicators">
+                            ${product.images.map((_, i) => `
+                                <button type="button" data-bs-target="#carousel-offer-${product.id}" data-bs-slide-to="${i}" 
+                                    ${i === 0 ? 'class="active"' : ''}></button>
+                            `).join('')}
+                        </div>
+                        <div class="carousel-inner">
+                            ${product.images.map((img, i) => `
+                                <div class="carousel-item ${i === 0 ? 'active' : ''}">
+                                    <img src="${img}" class="d-block w-100" alt="${product.title}" height="300" loading="lazy">
+                                </div>
+                            `).join('')}
+                        </div>
+                        <button class="carousel-control-prev" type="button" data-bs-target="#carousel-offer-${product.id}" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon"></span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#carousel-offer-${product.id}" data-bs-slide="next">
+                            <span class="carousel-control-next-icon"></span>
                         </button>
                     </div>
+
+                    <h4 class="offer-product-title">${product.title}</h4>
+                    <div class="offer-product-price">${product.price.toLocaleString()} DA</div>
+                    <div class="offer-product-old-price">${product.old_price.toLocaleString()} DA</div>
+                    <button class="offer-btn add-to-cart-btn" data-id="${product.id}">
+                        <i class="bi bi-cart-plus"></i> Acheter maintenant
+                    </button>
                 </div>
             </div>
         `;
@@ -3453,22 +2989,15 @@ function setupCategoryFilters() {
 }
 
 // ============== إعداد أزرار إضافة إلى السلة ==============
-// إعداد أزرار إضافة إلى السلة (محدثة)
 function setupAddToCartButtons() {
     document.addEventListener('click', function(e) {
-        // البحث عن زر إضافة إلى السلة (التصميم الجديد)
-        const addToCartBtn = e.target.closest('.add-to-cart-btn');
-        
-        if (addToCartBtn) {
+        // البحث عن زر إضافة إلى السلة
+        if (e.target.classList.contains('add-to-cart-btn') || 
+            e.target.closest('.add-to-cart-btn')) {
             e.preventDefault();
             
-            const productId = addToCartBtn.getAttribute('data-id');
-            
-            // إضافة تأثير للنقر
-            addToCartBtn.classList.add('clicked');
-            setTimeout(() => {
-                addToCartBtn.classList.remove('clicked');
-            }, 300);
+            const button = e.target.classList.contains('add-to-cart-btn') ? e.target : e.target.closest('.add-to-cart-btn');
+            const productId = button.getAttribute('data-id');
             
             // جلب بيانات المنتج من JSON
             fetch('products.json')
