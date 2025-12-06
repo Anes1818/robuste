@@ -2855,6 +2855,7 @@ async function loadAndDisplayProducts(category = 'all') {
 }
 
 // دالة عرض المنتجات
+// دالة عرض المنتجات
 function renderProducts(products) {
     const container = document.getElementById('productsContainer');
     if (!container) return;
@@ -2866,7 +2867,7 @@ function renderProducts(products) {
         return;
     }
     
-        products.forEach(product => {
+    products.forEach(product => {
         const discountBadge = product.old_price && product.old_price > product.price ? `
             <div class="discount-badge">
                 خصم ${Math.round(((product.old_price - product.price) / product.old_price) * 100)}%
@@ -2908,10 +2909,9 @@ function renderProducts(products) {
             </button>
         ` : '';
         
-        // المنتج مع إمكانية النقر الكامل
         const productCard = `
             <div class="col-6 col-md-4 col-lg-3 mb-4">
-                <div class="product-card card h-100 position-relative" onclick="window.location.href='product.html?pid=${product.id}'" style="cursor: pointer;">
+                <div class="product-card card h-100 position-relative">
                     ${productBadge}
                     ${discountBadge}
                     <div id="carousel-${product.id}" class="carousel slide product-carousel" data-bs-ride="carousel">
@@ -2932,7 +2932,7 @@ function renderProducts(products) {
                         </div>
                     </div>
                     <div class="card-footer bg-transparent border-0">
-                        <button class="btn btn-orange w-100 add-to-cart-btn" data-id="${product.id}" onclick="event.stopPropagation()">
+                        <button class="btn btn-orange w-100 add-to-cart-btn" data-id="${product.id}">
                             <i class="bi bi-cart-plus"></i> Ajouter au panier
                         </button>
                     </div>
