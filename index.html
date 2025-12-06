@@ -2923,7 +2923,7 @@ function renderProducts(products) {
                         </div>
                         ${carouselControls}
                     </div>
-                    <div class="card-body">
+                    <div class="card-body product-card-body">
                         <h5 class="card-title">${product.title}</h5>
                         <p class="card-text text-muted small">${product.description_short}</p>
                         <div class="d-flex align-items-center mt-3">
@@ -2935,6 +2935,9 @@ function renderProducts(products) {
                         <button class="btn btn-orange w-100 add-to-cart-btn" data-id="${product.id}">
                             <i class="bi bi-cart-plus"></i> Ajouter au panier
                         </button>
+                        <a href="product.html?pid=${product.id}" class="btn btn-outline-primary w-100 mt-2 view-details-btn">
+                            <i class="bi bi-eye"></i> Voir détails
+                        </a>
                     </div>
                 </div>
             </div>
@@ -2942,7 +2945,84 @@ function renderProducts(products) {
         
         container.innerHTML += productCard;
     });
+    
+    // إضافة event listeners بعد إنشاء جميع البطاقات
+    attachProductCardListeners();
 }
+
+function attachProductCardListeners() {
+    // جلب جميع بطاقات المنتجات
+    const productCards = document.querySelectorAll('.product-card');
+    
+    productCards.forEach(card => {
+        // عند النقر على بطاقة المنتج (عدا الأزرار)
+        card.addEventListener('click', function(event) {
+            // منع الانتقال إذا كان النقر على زر "إضافة إلى السلة" أو زر "عرض التفاصيل"
+            if (event.target.closest('.add-to-cart-btn') || 
+                event.target.closest('.view-details-btn') ||
+                event.target.closest('.carousel-control-prev') ||
+                event.target.closest('.carousel-control-next') ||
+                event.target.closest('.carousel-indicators button')) {
+                return;
+            }
+            
+            // البحث عن رابط عرض التفاصيل داخل البطاقة
+            const detailsLink = this.querySelector('.view-details-btn');
+            if (detailsLink) {
+                window.location.href = detailsLink.getAttribute('href');
+            }
+        });
+        
+        // إضافة مؤشر المؤشر عند التحويم
+        card.style.cursor = 'pointer';
+    });
+    
+    // إضافة event listeners لأزرار إضافة إلى السلة
+    const addToCartButtons = document.querySelectorAll('.add-to-cart-btn');
+    addToCartButtons.forEach(button => {
+        button.addEventListener('click', function(event) {
+            event.stopPropagation(); // منع انتشار الحدث إلى البطاقة
+            const productId = this.getAttribute('data-id');
+            addToCart(productId);
+        });
+    });
+}
+
+// دالة إضافة إلى السلة (مثال)
+function addToCart(productId) {
+    // هنا يمكنك إضافة منطق إضافة المنتج إلى السلة
+    console.log(`تمت إضافة المنتج ${productId} إلى السلة`);
+    
+    // يمكنك إضافة تأثير مرئي
+    const button = document.querySelector(`.add-to-cart-btn[data-id="${productId}"]`);
+    const originalText = button.innerHTML;
+    button.innerHTML = '<i class="bi bi-check2"></i> تمت الإضافة';
+    button.classList.remove('btn-orange');
+    button.classList.add('btn-success');
+    
+    setTimeout(() => {
+        button.innerHTML = originalText;
+        button.classList.remove('btn-success');
+        button.classList.add('btn-orange');
+    }, 2000);
+}
+
+// إذا كنت تستخدم AJAX لإعادة تحميل المنتجات، تأكد من إعادة إرفاق المستمعين
+document.addEventListener('DOMContentLoaded', function() {
+    // إعادة إرفاق المستمعين عند تغيير المحتوى (للتحديث الديناميكي)
+    const observer = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+            if (mutation.addedNodes.length > 0) {
+                attachProductCardListeners();
+            }
+        });
+    });
+    
+    const container = document.getElementById('productsContainer');
+    if (container) {
+        observer.observe(container, { childList: true, subtree: true });
+    }
+});
 // دالة تحميل العروض الخاصة
 async function loadSpecialOffers() {
     try {
