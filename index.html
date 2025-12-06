@@ -2454,6 +2454,56 @@ body,
 
 [data-theme="dark"] .card-text {
     color: var(--gray) !important;
+}/* تحسينات للهواتف */
+@media (max-width: 768px) {
+    .product-card {
+        margin-bottom: 15px;
+    }
+    
+    .product-card .card-title {
+        font-size: 0.9rem;
+        height: auto;
+        min-height: 40px;
+    }
+    
+    .product-card .card-text {
+        font-size: 0.8rem;
+        height: auto;
+        min-height: 40px;
+    }
+    
+    .product-card .btn-orange {
+        padding: 8px 12px;
+        font-size: 0.8rem;
+        min-height: 36px;
+    }
+    
+    /* تحسين تجربة اللمس */
+    .product-card {
+        -webkit-tap-highlight-color: rgba(0,0,0,0.1);
+        touch-action: manipulation;
+    }
+    
+    .product-card:active {
+        transform: scale(0.98);
+        transition: transform 0.1s;
+    }
+}
+
+/* تحسينات إضافية للشاشات الصغيرة جداً */
+@media (max-width: 576px) {
+    .product-card .card-body {
+        padding: 12px;
+    }
+    
+    .product-card .card-footer {
+        padding: 12px;
+    }
+    
+    .product-card .btn-orange {
+        font-size: 0.75rem;
+        padding: 6px 10px;
+    }
 }
 </style>
 </head><body><nav class="navbar navbar-expand-lg navbar-light fixed-top bg-white shadow-sm">
@@ -2816,7 +2866,7 @@ function renderProducts(products) {
         return;
     }
     
-    products.forEach(product => {
+        products.forEach(product => {
         const discountBadge = product.old_price && product.old_price > product.price ? `
             <div class="discount-badge">
                 خصم ${Math.round(((product.old_price - product.price) / product.old_price) * 100)}%
@@ -2858,9 +2908,10 @@ function renderProducts(products) {
             </button>
         ` : '';
         
+        // المنتج مع إمكانية النقر الكامل
         const productCard = `
             <div class="col-6 col-md-4 col-lg-3 mb-4">
-                <div class="product-card card h-100 position-relative">
+                <div class="product-card card h-100 position-relative" onclick="window.location.href='product.html?pid=${product.id}'" style="cursor: pointer;">
                     ${productBadge}
                     ${discountBadge}
                     <div id="carousel-${product.id}" class="carousel slide product-carousel" data-bs-ride="carousel">
@@ -2881,12 +2932,9 @@ function renderProducts(products) {
                         </div>
                     </div>
                     <div class="card-footer bg-transparent border-0">
-                        <button class="btn btn-orange w-100 add-to-cart-btn" data-id="${product.id}">
+                        <button class="btn btn-orange w-100 add-to-cart-btn" data-id="${product.id}" onclick="event.stopPropagation()">
                             <i class="bi bi-cart-plus"></i> Ajouter au panier
                         </button>
-                        <a href="product.html?pid=${product.id}" class="btn btn-outline-primary w-100 mt-2">
-                            <i class="bi bi-eye"></i> Voir détails
-                        </a>
                     </div>
                 </div>
             </div>
@@ -2895,7 +2943,6 @@ function renderProducts(products) {
         container.innerHTML += productCard;
     });
 }
-
 // دالة تحميل العروض الخاصة
 async function loadSpecialOffers() {
     try {
@@ -2989,12 +3036,14 @@ function setupCategoryFilters() {
 }
 
 // ============== إعداد أزرار إضافة إلى السلة ==============
+// ============== إعداد أزرار إضافة إلى السلة ==============
 function setupAddToCartButtons() {
     document.addEventListener('click', function(e) {
         // البحث عن زر إضافة إلى السلة
         if (e.target.classList.contains('add-to-cart-btn') || 
             e.target.closest('.add-to-cart-btn')) {
             e.preventDefault();
+            e.stopPropagation(); // منع فتح صفحة المنتج
             
             const button = e.target.classList.contains('add-to-cart-btn') ? e.target : e.target.closest('.add-to-cart-btn');
             const productId = button.getAttribute('data-id');
@@ -3021,7 +3070,6 @@ function setupAddToCartButtons() {
         }
     });
 }
-
 // ============== إدارة سلة المشتريات ==============
 
 // تحميل السلة من localStorage
@@ -3724,4 +3772,5 @@ document.addEventListener('DOMContentLoaded', function() {
         </div>
     </div>
 </div></body></html>
+
 
