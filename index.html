@@ -2454,56 +2454,6 @@ body,
 
 [data-theme="dark"] .card-text {
     color: var(--gray) !important;
-}/* تحسينات للهواتف */
-@media (max-width: 768px) {
-    .product-card {
-        margin-bottom: 15px;
-    }
-    
-    .product-card .card-title {
-        font-size: 0.9rem;
-        height: auto;
-        min-height: 40px;
-    }
-    
-    .product-card .card-text {
-        font-size: 0.8rem;
-        height: auto;
-        min-height: 40px;
-    }
-    
-    .product-card .btn-orange {
-        padding: 8px 12px;
-        font-size: 0.8rem;
-        min-height: 36px;
-    }
-    
-    /* تحسين تجربة اللمس */
-    .product-card {
-        -webkit-tap-highlight-color: rgba(0,0,0,0.1);
-        touch-action: manipulation;
-    }
-    
-    .product-card:active {
-        transform: scale(0.98);
-        transition: transform 0.1s;
-    }
-}
-
-/* تحسينات إضافية للشاشات الصغيرة جداً */
-@media (max-width: 576px) {
-    .product-card .card-body {
-        padding: 12px;
-    }
-    
-    .product-card .card-footer {
-        padding: 12px;
-    }
-    
-    .product-card .btn-orange {
-        font-size: 0.75rem;
-        padding: 6px 10px;
-    }
 }
 </style>
 </head><body><nav class="navbar navbar-expand-lg navbar-light fixed-top bg-white shadow-sm">
@@ -2855,8 +2805,6 @@ async function loadAndDisplayProducts(category = 'all') {
 }
 
 // دالة عرض المنتجات
-// دالة عرض المنتجات
-// دالة عرض المنتجات
 function renderProducts(products) {
     const container = document.getElementById('productsContainer');
     if (!container) return;
@@ -2910,133 +2858,44 @@ function renderProducts(products) {
             </button>
         ` : '';
         
-        // إنشاء عنصر المنتج
-        const productCard = document.createElement('div');
-        productCard.className = 'col-6 col-md-4 col-lg-3 mb-4';
-        productCard.innerHTML = `
-            <div class="product-card card h-100 position-relative" style="cursor: pointer;">
-                ${productBadge}
-                ${discountBadge}
-                <div id="carousel-${product.id}" class="carousel slide product-carousel" data-bs-ride="carousel">
-                    <div class="carousel-indicators">
-                        ${carouselIndicators}
+        const productCard = `
+            <div class="col-6 col-md-4 col-lg-3 mb-4">
+                <div class="product-card card h-100 position-relative">
+                    ${productBadge}
+                    ${discountBadge}
+                    <div id="carousel-${product.id}" class="carousel slide product-carousel" data-bs-ride="carousel">
+                        <div class="carousel-indicators">
+                            ${carouselIndicators}
+                        </div>
+                        <div class="carousel-inner">
+                            ${carouselItems}
+                        </div>
+                        ${carouselControls}
                     </div>
-                    <div class="carousel-inner">
-                        ${carouselItems}
+                    <div class="card-body">
+                        <h5 class="card-title">${product.title}</h5>
+                        <p class="card-text text-muted small">${product.description_short}</p>
+                        <div class="d-flex align-items-center mt-3">
+                            ${oldPrice}
+                            <p dir="ltr" class="fw-bold text-primary mb-0">${product.price.toLocaleString()} DA</p>
+                        </div>
                     </div>
-                    ${carouselControls}
-                </div>
-                <div class="card-body">
-                    <h5 class="card-title">${product.title}</h5>
-                    <p class="card-text text-muted small">${product.description_short}</p>
-                    <div class="d-flex align-items-center mt-3">
-                        ${oldPrice}
-                        <p dir="ltr" class="fw-bold text-primary mb-0">${product.price.toLocaleString()} DA</p>
+                    <div class="card-footer bg-transparent border-0">
+                        <button class="btn btn-orange w-100 add-to-cart-btn" data-id="${product.id}">
+                            <i class="bi bi-cart-plus"></i> Ajouter au panier
+                        </button>
+                        <a href="product.html?pid=${product.id}" class="btn btn-outline-primary w-100 mt-2">
+                            <i class="bi bi-eye"></i> Voir détails
+                        </a>
                     </div>
-                </div>
-                <div class="card-footer bg-transparent border-0">
-                    <button class="btn btn-orange w-100 add-to-cart-btn" data-id="${product.id}">
-                        <i class="bi bi-cart-plus"></i> Ajouter au panier
-                    </button>
                 </div>
             </div>
         `;
         
-        // إضافة حدث النقر للبطاقة بأكملها
-        const cardElement = productCard.querySelector('.product-card');
-        cardElement.addEventListener('click', (e) => {
-            // منع فتح الصفحة إذا تم النقر على زر إضافة إلى السلة
-            if (e.target.closest('.add-to-cart-btn')) {
-                return;
-            }
-            window.location.href = `product.html?pid=${product.id}`;
-        });
-        
-        container.appendChild(productCard);
-    });
-}
-    
-    // تعيين HTML دفعة واحدة
-    container.innerHTML = productsHTML;
-    console.log(`تم عرض ${products.length} منتجًا بنجاح`);
-
-    // إضافة event listeners بعد إنشاء جميع البطاقات
-    attachProductCardListeners();
-
-
-function attachProductCardListeners() {
-    // جلب جميع بطاقات المنتجات
-    const productCards = document.querySelectorAll('.product-card');
-    
-    productCards.forEach(card => {
-        // عند النقر على بطاقة المنتج (عدا الأزرار)
-        card.addEventListener('click', function(event) {
-            // منع الانتقال إذا كان النقر على زر "إضافة إلى السلة" أو زر "عرض التفاصيل"
-            if (event.target.closest('.add-to-cart-btn') || 
-                event.target.closest('.view-details-btn') ||
-                event.target.closest('.carousel-control-prev') ||
-                event.target.closest('.carousel-control-next') ||
-                event.target.closest('.carousel-indicators button')) {
-                return;
-            }
-            
-            // البحث عن رابط عرض التفاصيل داخل البطاقة
-            const detailsLink = this.querySelector('.view-details-btn');
-            if (detailsLink) {
-                window.location.href = detailsLink.getAttribute('href');
-            }
-        });
-        
-        // إضافة مؤشر المؤشر عند التحويم
-        card.style.cursor = 'pointer';
-    });
-    
-    // إضافة event listeners لأزرار إضافة إلى السلة
-    const addToCartButtons = document.querySelectorAll('.add-to-cart-btn');
-    addToCartButtons.forEach(button => {
-        button.addEventListener('click', function(event) {
-            event.stopPropagation(); // منع انتشار الحدث إلى البطاقة
-            const productId = this.getAttribute('data-id');
-            addToCart(productId);
-        });
+        container.innerHTML += productCard;
     });
 }
 
-// دالة إضافة إلى السلة (مثال)
-function addToCart(productId) {
-    // هنا يمكنك إضافة منطق إضافة المنتج إلى السلة
-    console.log(`تمت إضافة المنتج ${productId} إلى السلة`);
-    
-    // يمكنك إضافة تأثير مرئي
-    const button = document.querySelector(`.add-to-cart-btn[data-id="${productId}"]`);
-    const originalText = button.innerHTML;
-    button.innerHTML = '<i class="bi bi-check2"></i> تمت الإضافة';
-    button.classList.remove('btn-orange');
-    button.classList.add('btn-success');
-    
-    setTimeout(() => {
-        button.innerHTML = originalText;
-        button.classList.remove('btn-success');
-        button.classList.add('btn-orange');
-    }, 2000);
-}
-
-// إذا كنت تستخدم AJAX لإعادة تحميل المنتجات، تأكد من إعادة إرفاق المستمعين
-document.addEventListener('DOMContentLoaded', function() {
-    // إعادة إرفاق المستمعين عند تغيير المحتوى (للتحديث الديناميكي)
-    const observer = new MutationObserver(function(mutations) {
-        mutations.forEach(function(mutation) {
-            if (mutation.addedNodes.length > 0) {
-                attachProductCardListeners();
-            }
-        });
-    });
-    
-    const container = document.getElementById('productsContainer');
-    if (container) {
-        observer.observe(container, { childList: true, subtree: true });
-    }
-});
 // دالة تحميل العروض الخاصة
 async function loadSpecialOffers() {
     try {
@@ -3130,14 +2989,12 @@ function setupCategoryFilters() {
 }
 
 // ============== إعداد أزرار إضافة إلى السلة ==============
-// ============== إعداد أزرار إضافة إلى السلة ==============
 function setupAddToCartButtons() {
     document.addEventListener('click', function(e) {
         // البحث عن زر إضافة إلى السلة
         if (e.target.classList.contains('add-to-cart-btn') || 
             e.target.closest('.add-to-cart-btn')) {
             e.preventDefault();
-            e.stopPropagation(); // منع فتح صفحة المنتج
             
             const button = e.target.classList.contains('add-to-cart-btn') ? e.target : e.target.closest('.add-to-cart-btn');
             const productId = button.getAttribute('data-id');
@@ -3164,6 +3021,7 @@ function setupAddToCartButtons() {
         }
     });
 }
+
 // ============== إدارة سلة المشتريات ==============
 
 // تحميل السلة من localStorage
@@ -3866,5 +3724,4 @@ document.addEventListener('DOMContentLoaded', function() {
         </div>
     </div>
 </div></body></html>
-
 
