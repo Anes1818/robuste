@@ -2860,80 +2860,143 @@ function renderProducts(products) {
     const container = document.getElementById('productsContainer');
     if (!container) return;
     
+    // مسح المحتوى القديم
     container.innerHTML = '';
     
-    if (products.length === 0) {
+    if (!products || !Array.isArray(products) || products.length === 0) {
         container.innerHTML = '<div class="col-12 text-center text-muted py-5">Aucun produit trouvé</div>';
+        console.log("لا توجد منتجات للعرض");
         return;
     }
     
-    products.forEach(product => {
-        const discountBadge = product.old_price && product.old_price > product.price ? `
-            <div class="discount-badge">
-                خصم ${Math.round(((product.old_price - product.price) / product.old_price) * 100)}%
-            </div>
-        ` : '';
+    console.log(`جاري عرض ${products.length} منتجًا`);
+    
+    let productsHTML = ''; // استخدام متغير لتجميع HTML
+    
+    products.forEach((product, index) => {
+        console.log(`معالجة المنتج ${index + 1}: ${product.title}`);
         
-        const oldPrice = product.old_price && product.old_price > product.price ? `
-            <small dir="ltr" class="text-decoration-line-through text-muted me-2">${product.old_price.toLocaleString()} DA</small>
-        ` : '';
+        // التحقق من وجود البيانات الأساسية
+        if (!product || !product.id || !product.title) {
+            console.warn(`منتج غير صالح في الفهرس ${index}`);
+            return; // تخطي هذا المنتج
+        }
         
-        const productBadge = product.badge ? `
-            <div class="product-badge">
-                ${product.badge}
-            </div>
-        ` : '';
+        // حساب الخصم إن وجد
+        let discountBadge = '';
+        if (product.old_price && product.old_price > product.price) {
+            const discountPercent = Math.round(((product.old_price - product.price) / product.old_price) * 100);
+            discountBadge = `
+                <div class="discount-badge">
+                    خصم ${discountPercent}%
+                </div>
+            `;
+        }
+        
+        // السعر القديم إن وجد
+        let oldPrice = '';
+        if (product.old_price && product.old_price > product.price) {
+            oldPrice = `
+                <small dir="ltr" class="text-decoration-line-through text-muted me-2">
+                    ${product.old_price.toLocaleString()} DA
+                </small>
+            `;
+        }
+        
+        // البادج إن وجد
+        let productBadge = '';
+        if (product.badge) {
+            productBadge = `
+                <div class="product-badge">
+                    ${product.badge}
+                </div>
+            `;
+        }
         
         // إنشاء سلايدر للصور
-        const carouselIndicators = product.images.map((_, index) => `
-            <button type="button" data-bs-target="#carousel-${product.id}" data-bs-slide-to="${index}" 
-                ${index === 0 ? 'class="active" aria-current="true"' : ''} 
-                aria-label="صورة ${index + 1}">
-            </button>
-        `).join('');
+        let carouselHTML = '';
+        if (product.images && product.images.length > 0) {
+            const carouselId = `carousel-${product.id}-${index}`;
+            
+            // المؤشرات
+            const indicators = product.images.map((_, imgIndex) => `
+                <button type="button" data-bs-target="#${carouselId}" 
+                        data-bs-slide-to="${imgIndex}" 
+                        ${imgIndex === 0 ? 'class="active" aria-current="true"' : ''} 
+                        aria-label="صورة ${imgIndex + 1}">
+                </button>
+            `).join('');
+            
+            // العناصر
+            const items = product.images.map((img, imgIndex) => `
+                <div class="carousel-item ${imgIndex === 0 ? 'active' : ''}">
+                    <img src="${img}" class="d-block w-100" alt="${product.title}" 
+                         loading="lazy" style="height: 200px; object-fit: contain;">
+                </div>
+            `).join('');
+            
+            // عناصر التحكم
+            const controls = product.images.length > 1 ? `
+                <button class="carousel-control-prev" type="button" 
+                        data-bs-target="#${carouselId}" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">السابق</span>
+                </button>
+                <button class="carousel-control-next" type="button" 
+                        data-bs-target="#${carouselId}" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">التالي</span>
+                </button>
+            ` : '';
+            
+            carouselHTML = `
+                <div id="${carouselId}" class="carousel slide product-carousel" data-bs-ride="carousel">
+                    <div class="carousel-indicators">
+                        ${indicators}
+                    </div>
+                    <div class="carousel-inner">
+                        ${items}
+                    </div>
+                    ${controls}
+                </div>
+            `;
+        } else {
+            // صورة افتراضية إذا لم توجد صور
+            carouselHTML = `
+                <div class="text-center py-4" style="height: 200px; background: #f8f9fa;">
+                    <i class="bi bi-image text-muted" style="font-size: 3rem;"></i>
+                    <p class="text-muted small mt-2">لا توجد صورة</p>
+                </div>
+            `;
+        }
         
-        const carouselItems = product.images.map((img, index) => `
-            <div class="carousel-item ${index === 0 ? 'active' : ''}">
-                <img src="${img}" class="d-block w-100" alt="${product.title}" loading="lazy">
-            </div>
-        `).join('');
-        
-        const carouselControls = product.images.length > 1 ? `
-            <button class="carousel-control-prev" type="button" data-bs-target="#carousel-${product.id}" data-bs-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">السابق</span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#carousel-${product.id}" data-bs-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">التالي</span>
-            </button>
-        ` : '';
-        
-        // المنتج مع إمكانية النقر الكامل
+        // إنشاء بطاقة المنتج
         const productCard = `
             <div class="col-6 col-md-4 col-lg-3 mb-4">
-                <div class="product-card card h-100 position-relative" onclick="window.location.href='product.html?pid=${product.id}'" style="cursor: pointer;">
+                <div class="product-card card h-100 position-relative" 
+                     onclick="window.location.href='product.html?pid=${product.id}'" 
+                     style="cursor: pointer; transition: transform 0.3s;">
                     ${productBadge}
                     ${discountBadge}
-                    <div id="carousel-${product.id}" class="carousel slide product-carousel" data-bs-ride="carousel">
-                        <div class="carousel-indicators">
-                            ${carouselIndicators}
-                        </div>
-                        <div class="carousel-inner">
-                            ${carouselItems}
-                        </div>
-                        ${carouselControls}
-                    </div>
+                    ${carouselHTML}
                     <div class="card-body">
-                        <h5 class="card-title">${product.title}</h5>
-                        <p class="card-text text-muted small">${product.description_short}</p>
+                        <h5 class="card-title" style="height: 2.5em; overflow: hidden; text-overflow: ellipsis;">
+                            ${product.title}
+                        </h5>
+                        <p class="card-text text-muted small" style="height: 3em; overflow: hidden; text-overflow: ellipsis;">
+                            ${product.description_short || 'لا يوجد وصف'}
+                        </p>
                         <div class="d-flex align-items-center mt-3">
                             ${oldPrice}
-                            <p dir="ltr" class="fw-bold text-primary mb-0">${product.price.toLocaleString()} DA</p>
+                            <p dir="ltr" class="fw-bold text-primary mb-0">
+                                ${product.price ? product.price.toLocaleString() : '0'} DA
+                            </p>
                         </div>
                     </div>
-                    <div class="card-footer bg-transparent border-0">
-                        <button class="btn btn-orange w-100 add-to-cart-btn" data-id="${product.id}" onclick="event.stopPropagation()">
+                    <div class="card-footer bg-transparent border-0 pt-0">
+                        <button class="btn btn-orange w-100 add-to-cart-btn" 
+                                data-id="${product.id}" 
+                                onclick="event.stopPropagation()">
                             <i class="bi bi-cart-plus"></i> Ajouter au panier
                         </button>
                     </div>
@@ -2941,8 +3004,12 @@ function renderProducts(products) {
             </div>
         `;
         
-        container.innerHTML += productCard;
+        productsHTML += productCard;
     });
+    
+    // تعيين HTML دفعة واحدة
+    container.innerHTML = productsHTML;
+    console.log(`تم عرض ${products.length} منتجًا بنجاح`);
 }
     // إضافة event listeners بعد إنشاء جميع البطاقات
     attachProductCardListeners();
