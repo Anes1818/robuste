@@ -2909,9 +2909,10 @@ function renderProducts(products) {
             </button>
         ` : '';
         
+        // المنتج مع إمكانية النقر الكامل
         const productCard = `
             <div class="col-6 col-md-4 col-lg-3 mb-4">
-                <div class="product-card card h-100 position-relative">
+                <div class="product-card card h-100 position-relative" onclick="window.location.href='product.html?pid=${product.id}'" style="cursor: pointer;">
                     ${productBadge}
                     ${discountBadge}
                     <div id="carousel-${product.id}" class="carousel slide product-carousel" data-bs-ride="carousel">
@@ -2923,7 +2924,7 @@ function renderProducts(products) {
                         </div>
                         ${carouselControls}
                     </div>
-                    <div class="card-body product-card-body">
+                    <div class="card-body">
                         <h5 class="card-title">${product.title}</h5>
                         <p class="card-text text-muted small">${product.description_short}</p>
                         <div class="d-flex align-items-center mt-3">
@@ -2932,12 +2933,9 @@ function renderProducts(products) {
                         </div>
                     </div>
                     <div class="card-footer bg-transparent border-0">
-                        <button class="btn btn-orange w-100 add-to-cart-btn" data-id="${product.id}">
+                        <button class="btn btn-orange w-100 add-to-cart-btn" data-id="${product.id}" onclick="event.stopPropagation()">
                             <i class="bi bi-cart-plus"></i> Ajouter au panier
                         </button>
-                        <a href="product.html?pid=${product.id}" class="btn btn-outline-primary w-100 mt-2 view-details-btn">
-                            <i class="bi bi-eye"></i> Voir détails
-                        </a>
                     </div>
                 </div>
             </div>
@@ -2945,10 +2943,10 @@ function renderProducts(products) {
         
         container.innerHTML += productCard;
     });
-    
+}
     // إضافة event listeners بعد إنشاء جميع البطاقات
     attachProductCardListeners();
-}
+
 
 function attachProductCardListeners() {
     // جلب جميع بطاقات المنتجات
