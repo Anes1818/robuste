@@ -2435,10 +2435,7 @@ body,
         margin-right: 0.3rem;
     }
 }
-/* تحسين خاص لقائمة الولايات في وضع الدارك */
-[data-theme="dark"] .form-select {
-    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23fff' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3e%3c/svg%3e") !important;
-}
+
 
 /* حل مشكلة خيارات قائمة الولايات في وضع الدارك */
 [data-theme="dark"] .form-select option {
@@ -2514,7 +2511,6 @@ body,
                  style="width: 180px; height: auto; max-height: 50px; object-fit:fill;">
             <span class="d-none d-lg-inline fw-bold fs-4 ms-2" style="color: #FF6B35;">ROBUSTE eulma</span>
         </a>
-        
        
         <!-- زر دارك مود محترف -->
         <div class="d-flex align-items-center me-3">
@@ -2522,7 +2518,6 @@ body,
                 <i class="bi bi-moon"></i>
             </button>
         </div>
-        
         
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
             <span class="navbar-toggler-icon"></span>
@@ -2855,8 +2850,6 @@ async function loadAndDisplayProducts(category = 'all') {
 }
 
 // دالة عرض المنتجات
-// دالة عرض المنتجات
-// دالة عرض المنتجات
 function renderProducts(products) {
     const container = document.getElementById('productsContainer');
     if (!container) return;
@@ -2910,181 +2903,44 @@ function renderProducts(products) {
             </button>
         ` : '';
         
-        // إنشاء عنصر المنتج
-        const productCard = document.createElement('div');
-        productCard.className = 'col-6 col-md-4 col-lg-3 mb-4';
-        productCard.innerHTML = `
-            <div class="product-card card h-100 position-relative" style="cursor: pointer;">
-                ${productBadge}
-                ${discountBadge}
-                <div id="carousel-${product.id}" class="carousel slide product-carousel" data-bs-ride="carousel">
-                    <div class="carousel-indicators">
-                        ${carouselIndicators}
+        const productCard = `
+            <div class="col-6 col-md-4 col-lg-3 mb-4">
+                <div class="product-card card h-100 position-relative">
+                    ${productBadge}
+                    ${discountBadge}
+                    <div id="carousel-${product.id}" class="carousel slide product-carousel" data-bs-ride="carousel">
+                        <div class="carousel-indicators">
+                            ${carouselIndicators}
+                        </div>
+                        <div class="carousel-inner">
+                            ${carouselItems}
+                        </div>
+                        ${carouselControls}
                     </div>
-                    <div class="carousel-inner">
-                        ${carouselItems}
+                    <div class="card-body">
+                        <h5 class="card-title">${product.title}</h5>
+                        <p class="card-text text-muted small">${product.description_short}</p>
+                        <div class="d-flex align-items-center mt-3">
+                            ${oldPrice}
+                            <p dir="ltr" class="fw-bold text-primary mb-0">${product.price.toLocaleString()} DA</p>
+                        </div>
                     </div>
-                    ${carouselControls}
-                </div>
-                <div class="card-body">
-                    <h5 class="card-title">${product.title}</h5>
-                    <p class="card-text text-muted small">${product.description_short}</p>
-                    <div class="d-flex align-items-center mt-3">
-                        ${oldPrice}
-                        <p dir="ltr" class="fw-bold text-primary mb-0">${product.price.toLocaleString()} DA</p>
+                    <div class="card-footer bg-transparent border-0">
+                        <button class="btn btn-orange w-100 add-to-cart-btn" data-id="${product.id}">
+                            <i class="bi bi-cart-plus"></i> Ajouter au panier
+                        </button>
+                        <a href="product.html?pid=${product.id}" class="btn btn-outline-primary w-100 mt-2">
+                            <i class="bi bi-eye"></i> Voir détails
+                        </a>
                     </div>
-                </div>
-                <div class="card-footer bg-transparent border-0">
-                    <button class="btn btn-orange w-100 add-to-cart-btn" data-id="${product.id}">
-                        <i class="bi bi-cart-plus"></i> Ajouter au panier
-                    </button>
                 </div>
             </div>
         `;
         
-        // إضافة حدث النقر للبطاقة بأكملها
-        const cardElement = productCard.querySelector('.product-card');
-        cardElement.addEventListener('click', (e) => {
-            // منع فتح الصفحة إذا تم النقر على زر إضافة إلى السلة
-            if (e.target.closest('.add-to-cart-btn')) {
-                return;
-            }
-            window.location.href = `product.html?pid=${product.id}`;
-        });
-        
-        container.appendChild(productCard);
-    });
-}
-    
-    // تعيين HTML دفعة واحدة
-    container.innerHTML = productsHTML;
-    console.log(`تم عرض ${products.length} منتجًا بنجاح`);
-
-    // إضافة event listeners بعد إنشاء جميع البطاقات
-    attachProductCardListeners();
-
-
-function attachProductCardListeners() {
-    // جلب جميع بطاقات المنتجات
-    const productCards = document.querySelectorAll('.product-card');
-    
-    productCards.forEach(card => {
-        // عند النقر على بطاقة المنتج (عدا الأزرار)
-        card.addEventListener('click', function(event) {
-            // منع الانتقال إذا كان النقر على زر "إضافة إلى السلة" أو زر "عرض التفاصيل"
-            if (event.target.closest('.add-to-cart-btn') || 
-                event.target.closest('.view-details-btn') ||
-                event.target.closest('.carousel-control-prev') ||
-                event.target.closest('.carousel-control-next') ||
-                event.target.closest('.carousel-indicators button')) {
-                return;
-            }
-            
-            // البحث عن رابط عرض التفاصيل داخل البطاقة
-            const detailsLink = this.querySelector('.view-details-btn');
-            if (detailsLink) {
-                window.location.href = detailsLink.getAttribute('href');
-            }
-        });
-        
-        // إضافة مؤشر المؤشر عند التحويم
-        card.style.cursor = 'pointer';
-    });
-    
-    // إضافة event listeners لأزرار إضافة إلى السلة
-    const addToCartButtons = document.querySelectorAll('.add-to-cart-btn');
-    addToCartButtons.forEach(button => {
-        button.addEventListener('click', function(event) {
-            event.stopPropagation(); // منع انتشار الحدث إلى البطاقة
-            const productId = this.getAttribute('data-id');
-            addToCart(productId);
-        });
+        container.innerHTML += productCard;
     });
 }
 
-// دالة إضافة إلى السلة (مثال)
-// إضافة منتج إلى السلة
-function addToCart(productName, productPrice, priceValue, productImages, productId) {
-    // Check if this product was recently added (within last second)
-    const recentAddKey = `recent_add_${productId}`;
-    const recentAdd = sessionStorage.getItem(recentAddKey);
-    
-    if (recentAdd) {
-        console.log('Skipping duplicate add for product:', productId);
-        return;
-    }
-    
-    const name = typeof productName === 'string' ? productName : 'منتج بدون اسم';
-    const price = typeof priceValue === 'number' ? priceValue : 
-                 typeof productPrice === 'number' ? productPrice : 0;
-    const id = productId || Date.now().toString();
-    
-    let image = '';
-    if (Array.isArray(productImages) && productImages.length > 0) {
-        image = productImages[0];
-    } else if (typeof productImages === 'string') {
-        image = productImages;
-    }
-    
-    const existingItemIndex = cart.findIndex(item => item.id === id);
-    
-    if (existingItemIndex >= 0) {
-        cart[existingItemIndex].quantity += 1;
-    } else {
-        cart.push({
-            id: id,
-            name: name,
-            price: price,
-            image: image,
-            quantity: 1
-        });
-    }
-    
-    // Set recent add flag to prevent duplicates
-    sessionStorage.setItem(recentAddKey, 'true');
-    setTimeout(() => {
-        sessionStorage.removeItem(recentAddKey);
-    }, 1000);
-    
-    // حفظ السلة في localStorage
-    try {
-        localStorage.setItem('robuste_cart', JSON.stringify(cart));
-    } catch (e) {
-        console.error('خطأ في حفظ السلة:', e);
-        showStatus('تعذر حفظ السلة، قد تكون ذاكرة التخزين ممتلئة', 'error');
-    }
-    
-    // تحديث الواجهة
-    updateCartCount();
-    renderCart();
-    
-    // إظهار تأكيد الإضافة
-    showStatus(`تمت إضافة "${name}" إلى السلة`, 'success');
-
-    
-    setTimeout(() => {
-        button.innerHTML = originalText;
-        button.classList.remove('btn-success');
-        button.classList.add('btn-orange');
-    }, 2000);
-}
-
-// إذا كنت تستخدم AJAX لإعادة تحميل المنتجات، تأكد من إعادة إرفاق المستمعين
-document.addEventListener('DOMContentLoaded', function() {
-    // إعادة إرفاق المستمعين عند تغيير المحتوى (للتحديث الديناميكي)
-    const observer = new MutationObserver(function(mutations) {
-        mutations.forEach(function(mutation) {
-            if (mutation.addedNodes.length > 0) {
-                attachProductCardListeners();
-            }
-        });
-    });
-    
-    const container = document.getElementById('productsContainer');
-    if (container) {
-        observer.observe(container, { childList: true, subtree: true });
-    }
-});
 // دالة تحميل العروض الخاصة
 async function loadSpecialOffers() {
     try {
@@ -3178,33 +3034,15 @@ function setupCategoryFilters() {
 }
 
 // ============== إعداد أزرار إضافة إلى السلة ==============
-// ============== إعداد أزرار إضافة إلى السلة ==============
-// ============== إعداد أزرار إضافة إلى السلة ==============
-// ============== إعداد أزرار إضافة إلى السلة ==============
-let addToCartInitialized = false;
-
 function setupAddToCartButtons() {
-    // Prevent multiple initializations
-    if (addToCartInitialized) {
-        return;
-    }
-    
     document.addEventListener('click', function(e) {
         // البحث عن زر إضافة إلى السلة
         if (e.target.classList.contains('add-to-cart-btn') || 
             e.target.closest('.add-to-cart-btn')) {
             e.preventDefault();
-            e.stopPropagation(); // منع فتح صفحة المنتج
             
             const button = e.target.classList.contains('add-to-cart-btn') ? e.target : e.target.closest('.add-to-cart-btn');
             const productId = button.getAttribute('data-id');
-            
-            // Prevent multiple clicks
-            if (button.hasAttribute('data-processing')) {
-                return;
-            }
-            
-            button.setAttribute('data-processing', 'true');
             
             // جلب بيانات المنتج من JSON
             fetch('products.json')
@@ -3224,18 +3062,11 @@ function setupAddToCartButtons() {
                 .catch(error => {
                     console.error('Error loading product:', error);
                     showStatus('Error loading product details', 'error');
-                })
-                .finally(() => {
-                    // Remove processing flag after a delay
-                    setTimeout(() => {
-                        button.removeAttribute('data-processing');
-                    }, 1000);
                 });
         }
     });
-    
-    addToCartInitialized = true; // Mark as initialized
 }
+
 // ============== إدارة سلة المشتريات ==============
 
 // تحميل السلة من localStorage
@@ -3911,6 +3742,443 @@ document.addEventListener('DOMContentLoaded', function() {
     renderCart();
 });
 
+// ============== تكييف حجم نموذج الطلب للأجهزة الصغيرة ==============
+
+// دالة لتقليل حجم وتكييف النموذج للأجهزة الصغيرة
+function adjustOrderModalForMobile() {
+    const modal = document.getElementById('orderModal');
+    if (!modal) return;
+    
+    // التأكد من أن النموذج متاح
+    if (typeof bootstrap !== 'undefined' && bootstrap.Modal) {
+        const modalInstance = bootstrap.Modal.getInstance(modal);
+        if (modalInstance) {
+            // تحديث موقع النموذج
+            modal.classList.add('modal-mobile-optimized');
+        }
+    }
+    
+    // التحقق إذا كنا على جهاز محمول
+    const isMobile = window.innerWidth <= 768;
+    
+    if (isMobile) {
+        // تكييف النموذج للأجهزة المحمولة
+        optimizeModalForMobile();
+        
+        // تكييف حقول الإدخال
+        adjustInputFieldsForMobile();
+        
+        // تكييف أزرار الراديو
+        adjustRadioButtonsForMobile();
+        
+        // تكييف قائمة الولايات
+        adjustWilayaSelectForMobile();
+        
+        // تكييف الأزرار
+        adjustButtonsForMobile();
+        
+        // تكييف ملخص الطلب
+        adjustOrderSummaryForMobile();
+    } else {
+        // إعادة التعيين للشاشات الكبيرة
+        resetModalForDesktop();
+    }
+}
+
+// تكييف النموذج للأجهزة المحمولة
+function optimizeModalForMobile() {
+    const modal = document.getElementById('orderModal');
+    const modalContent = modal.querySelector('.modal-content');
+    const modalBody = modal.querySelector('.modal-body');
+    const modalFooter = modal.querySelector('.modal-footer');
+    
+    // إضافة فئات التكييف
+    modal.classList.add('mobile-optimized');
+    if (modalContent) modalContent.classList.add('mobile-content');
+    if (modalBody) modalBody.classList.add('mobile-body');
+    if (modalFooter) modalFooter.classList.add('mobile-footer');
+    
+    // تعديل الهوامش والحشوات
+    if (modalBody) {
+        modalBody.style.padding = '15px';
+        modalBody.style.maxHeight = '70vh';
+        modalBody.style.overflowY = 'auto';
+    }
+    
+    // إضافة شريط تمرير مخصص
+    addCustomScrollbar(modalBody);
+}
+
+// تكييف حقول الإدخال للأجهزة المحمولة
+function adjustInputFieldsForMobile() {
+    const inputs = document.querySelectorAll('#orderForm .form-control, #orderForm .form-select');
+    
+    inputs.forEach(input => {
+        // إضافة فئة خاصة للأجهزة المحمولة
+        input.classList.add('mobile-input');
+        
+        // ضبط الحشوات والارتفاع
+        input.style.padding = '10px 12px';
+        input.style.height = '44px';
+        input.style.fontSize = '16px'; // منع تكبير iOS
+        
+        // إضافة تأثير التركيز المحسن
+        input.addEventListener('focus', function() {
+            this.style.borderColor = 'var(--primary)';
+            this.style.boxShadow = '0 0 0 2px rgba(255, 107, 53, 0.2)';
+        });
+        
+        input.addEventListener('blur', function() {
+            this.style.borderColor = '';
+            this.style.boxShadow = '';
+        });
+    });
+    
+    // تكييف خاص لحقول النصوص الكبيرة
+    const textarea = document.getElementById('address');
+    if (textarea) {
+        textarea.style.minHeight = '80px';
+        textarea.style.maxHeight = '120px';
+        textarea.style.resize = 'vertical';
+    }
+}
+
+// تكييف أزرار الراديو للأجهزة المحمولة
+function adjustRadioButtonsForMobile() {
+    const radioButtons = document.querySelectorAll('#orderForm .form-check');
+    
+    radioButtons.forEach(radio => {
+        radio.classList.add('mobile-radio');
+        
+        // تكبير مساحة اللمس
+        const label = radio.querySelector('.form-check-label');
+        const input = radio.querySelector('.form-check-input');
+        
+        if (label && input) {
+            // جعل التسمية قابلة للنقر بالكامل
+            label.style.padding = '10px 15px 10px 35px';
+            label.style.borderRadius = '8px';
+            label.style.backgroundColor = 'rgba(0, 0, 0, 0.03)';
+            label.style.display = 'block';
+            label.style.marginBottom = '5px';
+            label.style.cursor = 'pointer';
+            label.style.transition = 'all 0.2s ease';
+            
+            // إضافة تأثير hover
+            label.addEventListener('mouseenter', function() {
+                this.style.backgroundColor = 'rgba(255, 107, 53, 0.1)';
+            });
+            
+            label.addEventListener('mouseleave', function() {
+                if (!input.checked) {
+                    this.style.backgroundColor = 'rgba(0, 0, 0, 0.03)';
+                }
+            });
+            
+            // تحديث التصميم عند التحديد
+            input.addEventListener('change', function() {
+                const allLabels = document.querySelectorAll('#orderForm .form-check-label');
+                allLabels.forEach(l => {
+                    l.style.backgroundColor = 'rgba(0, 0, 0, 0.03)';
+                    l.style.color = '';
+                });
+                
+                if (this.checked) {
+                    label.style.backgroundColor = 'rgba(255, 107, 53, 0.15)';
+                    label.style.color = 'var(--primary)';
+                    label.style.fontWeight = '600';
+                }
+            });
+            
+            // تحسين وضع الراديو
+            input.style.width = '20px';
+            input.style.height = '20px';
+            input.style.marginTop = '0';
+            input.style.position = 'absolute';
+            input.style.left = '10px';
+            input.style.top = '50%';
+            input.style.transform = 'translateY(-50%)';
+        }
+    });
+}
+
+// تكييف قائمة الولايات للأجهزة المحمولة
+function adjustWilayaSelectForMobile() {
+    const wilayaSelect = document.getElementById('wilaya');
+    if (!wilayaSelect) return;
+    
+    wilayaSelect.classList.add('mobile-select');
+    
+    // تحسين مظهر القائمة
+    wilayaSelect.style.padding = '10px 35px 10px 12px';
+    wilayaSelect.style.backgroundPosition = 'left 12px center';
+    wilayaSelect.style.fontSize = '16px';
+    
+    // تحسين خيارات القائمة
+    const options = wilayaSelect.options;
+    for (let i = 0; i < options.length; i++) {
+        options[i].style.padding = '8px 12px';
+        options[i].style.fontSize = '14px';
+    }
+    
+    // إضافة تأثير التركيز
+    wilayaSelect.addEventListener('focus', function() {
+        this.style.borderColor = 'var(--primary)';
+        this.style.boxShadow = '0 0 0 2px rgba(255, 107, 53, 0.2)';
+    });
+    
+    wilayaSelect.addEventListener('blur', function() {
+        this.style.borderColor = '';
+        this.style.boxShadow = '';
+    });
+}
+
+// تكييف الأزرار للأجهزة المحمولة
+function adjustButtonsForMobile() {
+    const submitBtn = document.getElementById('submitOrderBtn');
+    const cancelBtn = document.querySelector('#orderModal .btn-secondary');
+    
+    // تكييف زر التأكيد
+    if (submitBtn) {
+        submitBtn.classList.add('mobile-submit-btn');
+        submitBtn.style.padding = '12px 20px';
+        submitBtn.style.fontSize = '1rem';
+        submitBtn.style.fontWeight = '600';
+        submitBtn.style.borderRadius = '8px';
+        submitBtn.style.marginBottom = '8px';
+        submitBtn.style.width = '100%';
+        submitBtn.style.height = '48px';
+        submitBtn.style.display = 'flex';
+        submitBtn.style.alignItems = 'center';
+        submitBtn.style.justifyContent = 'center';
+        submitBtn.style.gap = '8px';
+        
+        // منع مشاكل اللمس على iOS
+        submitBtn.style.webkitTapHighlightColor = 'transparent';
+        submitBtn.style.userSelect = 'none';
+        submitBtn.style.touchAction = 'manipulation';
+    }
+    
+    // تكييف زر الإلغاء
+    if (cancelBtn) {
+        cancelBtn.classList.add('mobile-cancel-btn');
+        cancelBtn.style.padding = '12px 20px';
+        cancelBtn.style.fontSize = '1rem';
+        cancelBtn.style.fontWeight = '500';
+        cancelBtn.style.borderRadius = '8px';
+        cancelBtn.style.width = '100%';
+        cancelBtn.style.height = '48px';
+        
+        // منع مشاكل اللمس على iOS
+        cancelBtn.style.webkitTapHighlightColor = 'transparent';
+        cancelBtn.style.userSelect = 'none';
+        cancelBtn.style.touchAction = 'manipulation';
+    }
+}
+
+// تكييف ملخص الطلب للأجهزة المحمولة
+function adjustOrderSummaryForMobile() {
+    const orderSummary = document.querySelector('.order-summary');
+    if (!orderSummary) return;
+    
+    orderSummary.classList.add('mobile-summary');
+    orderSummary.style.padding = '12px';
+    orderSummary.style.marginBottom = '15px';
+    orderSummary.style.borderRadius = '10px';
+    
+    // تكييف صورة المنتج
+    const productImage = document.getElementById('productImage');
+    if (productImage) {
+        productImage.style.width = '50px';
+        productImage.style.height = '50px';
+        productImage.style.objectFit = 'cover';
+    }
+    
+    // تكييف نص المنتج
+    const productName = document.getElementById('productNameDisplay');
+    if (productName) {
+        productName.style.fontSize = '0.95rem';
+        productName.style.lineHeight = '1.3';
+        productName.style.marginBottom = '4px';
+    }
+    
+    const productPrice = document.getElementById('productPrice');
+    if (productPrice) {
+        productPrice.style.fontSize = '0.9rem';
+        productPrice.style.fontWeight = '700';
+    }
+}
+
+// إضافة شريط تمرير مخصص
+function addCustomScrollbar(element) {
+    if (!element) return;
+    
+    // إضافة أنماط شريط التمرير
+    const scrollbarStyles = `
+        .mobile-body::-webkit-scrollbar {
+            width: 4px;
+        }
+        
+        .mobile-body::-webkit-scrollbar-track {
+            background: rgba(0, 0, 0, 0.05);
+            border-radius: 2px;
+        }
+        
+        .mobile-body::-webkit-scrollbar-thumb {
+            background: var(--primary);
+            border-radius: 2px;
+        }
+        
+        .mobile-body::-webkit-scrollbar-thumb:hover {
+            background: var(--primary-dark);
+        }
+        
+        [data-theme="dark"] .mobile-body::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.05);
+        }
+        
+        [data-theme="dark"] .mobile-body::-webkit-scrollbar-thumb {
+            background: var(--primary);
+        }
+    `;
+    
+    // إضافة الأنماط إذا لم تكن موجودة
+    if (!document.getElementById('mobile-scrollbar-styles')) {
+        const styleEl = document.createElement('style');
+        styleEl.id = 'mobile-scrollbar-styles';
+        styleEl.textContent = scrollbarStyles;
+        document.head.appendChild(styleEl);
+    }
+}
+
+// إعادة تعيين النموذج للشاشات الكبيرة
+function resetModalForDesktop() {
+    const modal = document.getElementById('orderModal');
+    
+    // إزالة فئات التكييف
+    modal.classList.remove('mobile-optimized', 'mobile-optimized');
+    
+    // إزالة الأنماط المضافة
+    const mobileElements = document.querySelectorAll('.mobile-input, .mobile-radio, .mobile-select, .mobile-submit-btn, .mobile-cancel-btn, .mobile-summary');
+    mobileElements.forEach(el => {
+        el.classList.remove('mobile-input', 'mobile-radio', 'mobile-select', 'mobile-submit-btn', 'mobile-cancel-btn', 'mobile-summary');
+        el.removeAttribute('style');
+    });
+    
+    // إزالة معالجات الأحداث
+    const inputs = document.querySelectorAll('#orderForm .form-control, #orderForm .form-select');
+    inputs.forEach(input => {
+        const newInput = input.cloneNode(true);
+        input.parentNode.replaceChild(newInput, input);
+    });
+    
+    // إزالة معالجات أزرار الراديو
+    const radios = document.querySelectorAll('#orderForm .form-check-input');
+    radios.forEach(radio => {
+        const newRadio = radio.cloneNode(true);
+        radio.parentNode.replaceChild(newRadio, radio);
+    });
+}
+
+// ============== إدارة أحداث النموذج ==============
+
+// استدعاء التكييف عند فتح النموذج
+document.addEventListener('DOMContentLoaded', function() {
+    const orderModal = document.getElementById('orderModal');
+    
+    if (orderModal) {
+        orderModal.addEventListener('show.bs.modal', function() {
+            setTimeout(() => {
+                adjustOrderModalForMobile();
+            }, 50);
+        });
+        
+        orderModal.addEventListener('shown.bs.modal', function() {
+            // إعادة حساب الأحجام بعد عرض النموذج
+            adjustOrderModalForMobile();
+        });
+    }
+    
+    // تكييف عند تغيير حجم النافذة
+    window.addEventListener('resize', function() {
+        if (document.getElementById('orderModal').classList.contains('show')) {
+            adjustOrderModalForMobile();
+        }
+    });
+    
+    // تكييف عند تغيير وضع Dark Mode
+    const observer = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+            if (mutation.attributeName === 'data-theme') {
+                if (document.getElementById('orderModal').classList.contains('show')) {
+                    setTimeout(adjustOrderModalForMobile, 100);
+                }
+            }
+        });
+    });
+    
+    observer.observe(document.documentElement, {
+        attributes: true,
+        attributeFilter: ['data-theme']
+    });
+});
+
+// ============== منع مشاكل الأزرار الكبيرة ==============
+
+// منع التكبير عند النقر على الأزرار في iOS
+document.addEventListener('touchstart', function(e) {
+    if (e.target.classList.contains('btn') || 
+        e.target.closest('.btn') || 
+        e.target.classList.contains('form-check-label') ||
+        e.target.closest('.form-check-label')) {
+        // إضافة تأثير النقر بدون تكبير
+        e.target.style.transform = 'scale(0.98)';
+        
+        setTimeout(() => {
+            if (e.target && e.target.style) {
+                e.target.style.transform = '';
+            }
+        }, 150);
+    }
+}, { passive: true });
+
+// منع السلوك الافتراضي على الأزرار في الأجهزة المحمولة
+document.addEventListener('touchend', function(e) {
+    const target = e.target;
+    if (target.tagName === 'BUTTON' || 
+        target.classList.contains('btn') || 
+        target.closest('.btn')) {
+        e.preventDefault();
+    }
+}, { passive: false });
+
+// تحسين استجابة الأزرار
+document.addEventListener('DOMContentLoaded', function() {
+    const buttons = document.querySelectorAll('#orderModal .btn, #orderForm .form-check-label');
+    
+    buttons.forEach(btn => {
+        btn.style.touchAction = 'manipulation';
+        btn.style.webkitTapHighlightColor = 'transparent';
+        btn.style.userSelect = 'none';
+    });
+});
+
+// ============== التحسينات النهائية ==============
+
+// تشغيل التكييف الأولي
+setTimeout(() => {
+    if (document.getElementById('orderModal').classList.contains('show')) {
+        adjustOrderModalForMobile();
+    }
+}, 1000);
+
+// إضافة دعم لـ Fast Click (تحسين الاستجابة على الهواتف)
+document.addEventListener('DOMContentLoaded', function() {
+    // تقليل تأخير النقر على الروابط والأزرار
+    if ('ontouchstart' in window) {
+        document.documentElement.style.cursor = 'pointer';
+    }
+});
 
 </script>
 <div class="offcanvas offcanvas-end" tabindex="-1" id="cartOffcanvas" aria-labelledby="cartOffcanvasLabel">
@@ -3938,5 +4206,4 @@ document.addEventListener('DOMContentLoaded', function() {
         </div>
     </div>
 </div></body></html>
-
 
