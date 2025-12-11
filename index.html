@@ -3039,34 +3039,33 @@ function setupCategoryFilters() {
 // ============== إعداد أزرار إضافة إلى السلة ==============
 function setupAddToCartButtons() {
     document.addEventListener('click', function(e) {
-        // البحث عن زر إضافة إلى السلة
-        if (e.target.classList.contains('add-to-cart-btn') || 
-            e.target.closest('.add-to-cart-btn')) {
-            e.preventDefault();
-            
-            const button = e.target.classList.contains('add-to-cart-btn') ? e.target : e.target.closest('.add-to-cart-btn');
-            const productId = button.getAttribute('data-id');
-            
-            // جلب بيانات المنتج من JSON
-            fetch('products.json')
-                .then(response => response.json())
-                .then(products => {
-                    const product = products.find(p => p.id == productId);
-                    if (product) {
-                        addToCart(
-                            product.title,
-                            `${product.price.toLocaleString()} DA`,
-                            product.price,
-                            product.images,
-                            product.id
-                        );
-                    }
-                })
-                .catch(error => {
-                    console.error('Error loading product:', error);
-                    showStatus('Error loading product details', 'error');
-                });
-        }
+
+        // اكتشاف الزر الحقيقي فقط
+        const button = e.target.closest('.add-to-cart-btn');
+        if (!button) return;
+
+        e.preventDefault();
+
+        const productId = button.getAttribute('data-id');
+
+        fetch('products.json')
+            .then(response => response.json())
+            .then(products => {
+                const product = products.find(p => p.id == productId);
+                if (product) {
+                    addToCart(
+                        product.title,
+                        `${product.price.toLocaleString()} DA`,
+                        product.price,
+                        product.images,
+                        product.id
+                    );
+                }
+            })
+            .catch(error => {
+                console.error('Error loading product:', error);
+                showStatus('Error loading product details', 'error');
+            });
     });
 }
 
@@ -4210,4 +4209,3 @@ document.addEventListener('DOMContentLoaded', function() {
         </div>
     </div>
 </div></body></html>
-
