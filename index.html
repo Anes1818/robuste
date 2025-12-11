@@ -2793,6 +2793,9 @@ body,
                                     <script>// ============== تهيئة Firebase ==============
       
                                       // ============== تهيئة Firebase ==============
+// ============== تهيئة Firebase ==============
+      
+// ============== تهيئة Firebase ==============
 const firebaseConfig = {
     apiKey: "AIzaSyBTrnKCYOtfSSDYtmVQbzP2HcwgkLT565Y",
     authDomain: "robuste-c8e0f.firebaseapp.com",
@@ -3200,7 +3203,7 @@ function attachCartEventListeners() {
     });
 }
 
-// إضافة منتج إلى السلة
+// إضافة منتج إلى السلة - التصحيح هنا
 function addToCart(productName, productPrice, priceValue, productImages, productId) {
     const name = typeof productName === 'string' ? productName : 'منتج بدون اسم';
     const price = typeof priceValue === 'number' ? priceValue : 
@@ -3217,8 +3220,10 @@ function addToCart(productName, productPrice, priceValue, productImages, product
     const existingItemIndex = cart.findIndex(item => item.id === id);
     
     if (existingItemIndex >= 0) {
+        // إذا المنتج موجود في السلة، نزيد الكمية بواحدة فقط
         cart[existingItemIndex].quantity += 1;
     } else {
+        // إذا المنتج غير موجود، نضيفه بكمية واحدة فقط
         cart.push({
             id: id,
             name: name,
@@ -3227,7 +3232,7 @@ function addToCart(productName, productPrice, priceValue, productImages, product
             quantity: 1
         });
     }
-
+    
     // حفظ السلة في localStorage
     try {
         localStorage.setItem('robuste_cart', JSON.stringify(cart));
@@ -4179,7 +4184,6 @@ document.addEventListener('DOMContentLoaded', function() {
         document.documentElement.style.cursor = 'pointer';
     }
 });
-
 </script>
 <div class="offcanvas offcanvas-end" tabindex="-1" id="cartOffcanvas" aria-labelledby="cartOffcanvasLabel">
     <div class="offcanvas-header">
