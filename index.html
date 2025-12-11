@@ -2435,10 +2435,7 @@ body,
         margin-right: 0.3rem;
     }
 }
-/* تحسين خاص لقائمة الولايات في وضع الدارك */
-[data-theme="dark"] .form-select {
-    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23fff' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3e%3c/svg%3e") !important;
-}
+
 
 /* حل مشكلة خيارات قائمة الولايات في وضع الدارك */
 [data-theme="dark"] .form-select option {
@@ -2514,7 +2511,6 @@ body,
                  style="width: 180px; height: auto; max-height: 50px; object-fit:fill;">
             <span class="d-none d-lg-inline fw-bold fs-4 ms-2" style="color: #FF6B35;">ROBUSTE eulma</span>
         </a>
-        
        
         <!-- زر دارك مود محترف -->
         <div class="d-flex align-items-center me-3">
@@ -2522,7 +2518,6 @@ body,
                 <i class="bi bi-moon"></i>
             </button>
         </div>
-        
         
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
             <span class="navbar-toggler-icon"></span>
@@ -2773,11 +2768,10 @@ body,
     
 
 </section>
-                               <div class="row" id="productsContainer"></div></div></section><section id="reviews" class="py-5 bg-light"><div class="container"><h2 class="section-title">Avis clients</h2><div class="row"><div class="col-md-4 mb-4"><div class="review-card"><div class="d-flex"><img src="https://api.dicebear.com/7.x/initials/svg?seed=Ahmed%20Ben" class="rounded-circle me-3" width="60" height="60" alt="عميل"><div><h5 class="mb-0">عمر</h5><div class="text-warning"><i class="bi bi-star-fill"></i> <i class="bi bi-star-fill"></i> <i class="bi bi-star-fill"></i> <i class="bi bi-star-fill"></i> <i class="bi bi-star-fill"></i></div></div></div><p class="mt-3">"جودة المنتج ممتازة والتوصيل كان في الوقت المحدد، شكراً لفريق Robuste!"</p></div></div><div class="col-md-4 mb-4"><div class="review-card"><div class="d-flex"><img src="https://api.dicebear.com/7.x/initials/svg?seed=Rhmed%20Bn" class="rounded-circle me-3" width="60" height="60" alt="عميل"><div><h5 class="mb-0">Rose Blanch</h5><div class="text-warning"><i class="bi bi-star-fill"></i> <i class="bi bi-star-fill"></i> <i class="bi bi-star-fill"></i> <i class="bi bi-star-fill"></i> <i class="bi bi-star-half"></i></div></div></div><p class="mt-3">"Je suis ravie de la marque Robuste, j'utilise vos produits depuis pas mal d'années."</p></div></div><div class="col-md-4 mb-4"><div class="review-card"><div class="d-flex"><img src="https://api.dicebear.com/7.x/initials/svg?seed=Ahmed%20Hen" class="rounded-circle me-3" width="60" height="60" alt="عميل"><div><h5 class="mb-0">محمد</h5><div class="text-warning"><i class="bi bi-star-fill"></i> <i class="bi bi-star-fill"></i> <i class="bi bi-star-fill"></i> <i class="bi bi-star-fill"></i> <i class="bi bi-star-fill"></i></div></div></div><p class="mt-3">"الدفع عند الاستلام مريح جداً، والمنتج يعمل بكفاءة عالية، أنصح بالتعامل معهم."</p></div></div></div></div></section><div class="modal fade" id="orderModal" tabindex="-1" aria-hidden="true"><div class="modal-dialog modal-lg"><div class="modal-content"><div class="modal-header"><h5 class="modal-title">طلب منتج</h5><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div><div class="modal-body"><div class="order-summary mb-4"><h6 class="mb-3">ملخص الطلب</h6><div class="d-flex align-items-center"><img id="productImage" class="product-image-thumb me-3" src="" alt="صورة المنتج"><div><h5 id="productNameDisplay" class="mb-1"></h5><p id="productPrice" class="mb-0 text-primary fw-bold"></p></div></div></div><form id="orderForm"><input type="hidden" id="productName"> <input type="hidden" id="productPriceValue"> <input type="hidden" id="productImageUrl"><div class="row"><div class="col-md-6 mb-3"><label for="fullName" class="form-label">nom et prénom<span class="text-danger">*</span></label> <input type="text" class="form-control" id="fullName" required></div><div class="col-md-6 mb-3"><label for="phone" class="form-label">Numéro de téléphone <span class="text-danger">*</span></label> <input type="tel" class="form-control" id="phone" pattern="[0]{1}[5-7]{1}[0-9]{8}" required> <small class="text-muted">EX: 0551234566</small></div></div><div class="row"><div class="col-md-6 mb-3"><label for="اختياري" class="form-label"> اختياري email</label> <input type="email" class="form-control" id="email"></div><div class="col-md-6 mb-3"><label for="wilaya" class="form-label">الولاية <span class="text-danger">*</span></label> <select class="form-select" id="wilaya" required><option value="">Choisissez votre état</option></select></div></div><div class="mb-3"><label for="address" class="form-label">Adresse </label> <textarea class="form-control" id="address" rows="2"></textarea></div><div class="row"><div class="col-md-6 mb-3">
+                            <div class="row" id="productsContainer"></div></div></section><section id="reviews" class="py-5 bg-light"><div class="container"><h2 class="section-title">Avis clients</h2><div class="row"><div class="col-md-4 mb-4"><div class="review-card"><div class="d-flex"><img src="https://api.dicebear.com/7.x/initials/svg?seed=Ahmed%20Ben" class="rounded-circle me-3" width="60" height="60" alt="عميل"><div><h5 class="mb-0">عمر</h5><div class="text-warning"><i class="bi bi-star-fill"></i> <i class="bi bi-star-fill"></i> <i class="bi bi-star-fill"></i> <i class="bi bi-star-fill"></i> <i class="bi bi-star-fill"></i></div></div></div><p class="mt-3">"جودة المنتج ممتازة والتوصيل كان في الوقت المحدد، شكراً لفريق Robuste!"</p></div></div><div class="col-md-4 mb-4"><div class="review-card"><div class="d-flex"><img src="https://api.dicebear.com/7.x/initials/svg?seed=Rhmed%20Bn" class="rounded-circle me-3" width="60" height="60" alt="عميل"><div><h5 class="mb-0">Rose Blanch</h5><div class="text-warning"><i class="bi bi-star-fill"></i> <i class="bi bi-star-fill"></i> <i class="bi bi-star-fill"></i> <i class="bi bi-star-fill"></i> <i class="bi bi-star-half"></i></div></div></div><p class="mt-3">"Je suis ravie de la marque Robuste, j'utilise vos produits depuis pas mal d'années."</p></div></div><div class="col-md-4 mb-4"><div class="review-card"><div class="d-flex"><img src="https://api.dicebear.com/7.x/initials/svg?seed=Ahmed%20Hen" class="rounded-circle me-3" width="60" height="60" alt="عميل"><div><h5 class="mb-0">محمد</h5><div class="text-warning"><i class="bi bi-star-fill"></i> <i class="bi bi-star-fill"></i> <i class="bi bi-star-fill"></i> <i class="bi bi-star-fill"></i> <i class="bi bi-star-fill"></i></div></div></div><p class="mt-3">"الدفع عند الاستلام مريح جداً، والمنتج يعمل بكفاءة عالية، أنصح بالتعامل معهم."</p></div></div></div></div></section><div class="modal fade" id="orderModal" tabindex="-1" aria-hidden="true"><div class="modal-dialog modal-lg"><div class="modal-content"><div class="modal-header"><h5 class="modal-title">طلب منتج</h5><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div><div class="modal-body"><div class="order-summary mb-4"><h6 class="mb-3">ملخص الطلب</h6><div class="d-flex align-items-center"><img id="productImage" class="product-image-thumb me-3" src="" alt="صورة المنتج"><div><h5 id="productNameDisplay" class="mb-1"></h5><p id="productPrice" class="mb-0 text-primary fw-bold"></p></div></div></div><form id="orderForm"><input type="hidden" id="productName"> <input type="hidden" id="productPriceValue"> <input type="hidden" id="productImageUrl"><div class="row"><div class="col-md-6 mb-3"><label for="fullName" class="form-label">nom et prénom<span class="text-danger">*</span></label> <input type="text" class="form-control" id="fullName" required></div><div class="col-md-6 mb-3"><label for="phone" class="form-label">Numéro de téléphone <span class="text-danger">*</span></label> <input type="tel" class="form-control" id="phone" pattern="[0]{1}[5-7]{1}[0-9]{8}" required> <small class="text-muted">EX: 0551234566</small></div></div><div class="row"><div class="col-md-6 mb-3"><label for="اختياري" class="form-label"> اختياري email</label> <input type="email" class="form-control" id="email"></div><div class="col-md-6 mb-3"><label for="wilaya" class="form-label">الولاية <span class="text-danger">*</span></label> <select class="form-select" id="wilaya" required><option value="">Choisissez votre état</option></select></div></div><div class="mb-3"><label for="address" class="form-label">Adresse </label> <textarea class="form-control" id="address" rows="2"></textarea></div><div class="row"><div class="col-md-6 mb-3">
                                 </div><div class="col-md-6 mb-3"><label class="form-label">طريقة الدفع</label><div class="form-check"><input class="form-check-input" type="radio" name="paymentMethod" id="cashOnDelivery" value="الدفع عند الاستلام" checked="checked"> <label class="form-check-label" for="cashOnDelivery">الدفع عند الاستلام</label></div><div class="form-check"><input class="form-check-input" type="radio" name="paymentMethod" id="onlinePayment" value="الدفع الإلكتروني"> <label class="form-check-label" for="onlinePayment">الدفع الإلكتروني</label></div></div></div></form></div><div class="modal-footer"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">إلغاء</button> <button type="button" class="btn btn-orange" id="submitOrderBtn" onclick="submitOrder()">Confirmer la commande</button></div></div></div></div><section id="contact" class="py-5"><div class="container"><h2 class="section-title">Contactez-nous</h2><div class="row"><div class="col-md-6 mb-4"><div class="contact-card h-100"><h4 class="mb-4">Coordonnées</h4><div class="d-flex mb-3"><div class="me-3 text-primary"><i class="bi bi-geo-alt fs-4"></i></div><div><h5>Adresse</h5><p class="mb-0">شارع بورقعة المنور، 426 قطعة، العلمة، سطيف، الجزائر</p></div></div><div class="d-flex mb-3"><div class="me-3 text-primary"><i class="bi bi-telephone fs-4"></i></div><div><h5>Téléphone</h5><p class="mb-0">0656360457</p></div></div><div class="d-flex mb-3"><div class="me-3 text-primary"><i class="bi bi-envelope fs-4"></i></div><div><h5>E-mail</h5><p class="mb-0">laidaouih@gmail.com</p></div></div><div class="d-flex"><div class="me-3 text-primary"><i class="bi bi-clock fs-4"></i></div><div><h5>Heures d'ouverture</h5><p class="mb-0">Tous les jours de 7h00 à 16h00</p></div></div><div class="mt-4"><h5>Suivez-nous sur</h5><div class="d-flex mt-3"><a href="https://www.facebook.com/share/19QooaXfy8/" class="social-icon"><i class="bi bi-facebook"></i> </a></i></a></div></div></div></div><div class="col-md-6 mb-4"><div class="contact-card h-100"><h4 class="mb-4">Envoyez-nous un message</h4><form id="contactForm"><div class="mb-3"><label for="contactName" class="form-label">Votre nom <span class="text-danger">*</span></label> <input type="text" class="form-control" id="contactName" required></div><div class="mb-3"><label for="contactEmail" class="form-label">Votre e-mail <span class="text-danger">*</span></label> <input type="email" class="form-control" id="contactEmail" required></div><div class="mb-3"><label for="contactPhone" class="form-label">Numéro de téléphone</label> <input type="tel" class="form-control" id="contactPhone"></div><div class="mb-3"><label for="contactMessage" class="form-label">Votre message <span class="text-danger">*</span></label> <textarea class="form-control" id="contactMessage" rows="4" required></textarea></div><button type="submit" class="btn btn-orange w-100"><span id="contactSubmitText">Envoyer le message</span> <span id="contactSpinner" class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span></button></form></div></div></div><div class="row mt-4"><div class="col-12">
                                     <div class="contact-card" style="cursor: pointer;">
   <h4 class="mb-4">Emplacement du magasin</h4>
-  
   
   <!-- نلف الخريطة داخل رابط -->
   <a href="https://maps.app.goo.gl/Cpk1L8fAadgE9pB76" target="_blank" style="display: block; text-decoration: none;">
@@ -2797,9 +2791,6 @@ body,
 </div></iframe>
                                     </div></div></div></div></div></section><footer class="py-5 bg-dark text-white"><div class="container"><div class="row"><div class="col-lg-4 mb-4"><h5 class="mb-3">À propos de ROBUSTE</h5><p>Magasin spécialisé dans l'électroménager de haute qualité à prix compétitifs. Nous proposons les meilleurs produits et une livraison rapide.</p></p><div class="mt-3"><a href="https://www.facebook.com/share/19QooaXfy8/" class="social-icon"><i class="bi bi-facebook"></i> </a><a href="https://www.facebook.com/share/19QooaXfy8/" class="social-icon"></a></div></div><div class="col-lg-2 col-md-4 mb-4"><h5 class="mb-3">Liens rapides</h5><ul class="list-unstyled"><li class="mb-2"><a href="#" class="text-white text-decoration-none">Accueil</a></li><li class="mb-2"><a href="#products" class="text-white text-decoration-none">Produits</a></li><li class="mb-2"><a href="#reviews" class="text-white text-decoration-none">آراء العملاء</a></li><li class="mb-2"><a href="#contact" class="text-white text-decoration-none">Contactez-nous</a></li></ul></div><div class="col-lg-3 col-md-4 mb-4"><h5 class="mb-3">Service client</h5><ul class="list-unstyled"><li class="mb-2"><a href="#" class="text-white text-decoration-none">FAQ</a></li><li class="mb-2"><a href="#" class="text-white text-decoration-none">Modes de paiement</a></li><li class="mb-2"><a href="#" class="text-white text-decoration-none">Conditions de garantie</a></li></ul></div><div class="col-lg-3 col-md-4 mb-4"><div class="col-lg-3 col-md-4 mb-4"><h5 class="mb-3">Abonnez-vous à notre page</h5><p>Abonnez-vous pour recevoir les dernières offres</p><div class="mt-3"><a href="https://www.facebook.com/share/19QooaXfy8/" class="btn btn-orange w-100" target="_blank">S'abonner</a></div></div></div></div><hr class="my-4 bg-light"><div class="row"><div class="col-md-6 text-center text-md-start mb-3 mb-md-0"><p class="mb-0">&copy; 2025 ROBUSTE. Tous droits réservés.</p></div><div class="col-md-6 text-center text-md-end"><div class="d-flex flex-column flex-md-row align-items-center justify-content-md-end"><p class="mb-2 mb-md-0 me-md-3">Paiement par carte gold disponible</p><img src="https://i.postimg.cc/bY06X2YN/logo-round.png" alt="Modes de paiement" style="width: 30px; height: auto;"></div></div></div></div></footer><a href="https://wa.me/213656360457" class="whatsapp-btn" target="_blank"><i class="bi bi-whatsapp"></i></a><script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script><script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script><script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
                                     <script>// ============== تهيئة Firebase ==============
-      
-                                      // ============== تهيئة Firebase ==============
-// ============== تهيئة Firebase ==============
       
                                       // ============== تهيئة Firebase ==============
 const firebaseConfig = {
@@ -3214,9 +3205,7 @@ function addToCart(productName, productPrice, priceValue, productImages, product
     const name = typeof productName === 'string' ? productName : 'منتج بدون اسم';
     const price = typeof priceValue === 'number' ? priceValue : 
                  typeof productPrice === 'number' ? productPrice : 0;
-    
-    // تأكد من أن كل منتج له ID فريد
-    const id = productId || name + '-' + price.toString(); // استخدم مزيج من الاسم والسعر كـ ID فريد
+    const id = productId || Date.now().toString();
     
     let image = '';
     if (Array.isArray(productImages) && productImages.length > 0) {
@@ -3228,10 +3217,8 @@ function addToCart(productName, productPrice, priceValue, productImages, product
     const existingItemIndex = cart.findIndex(item => item.id === id);
     
     if (existingItemIndex >= 0) {
-        // إذا كان المنتج موجود بالفعل، زد الكمية فقط
         cart[existingItemIndex].quantity += 1;
     } else {
-        // إذا كان المنتج غير موجود، أضفه جديدًا
         cart.push({
             id: id,
             name: name,
@@ -3240,23 +3227,7 @@ function addToCart(productName, productPrice, priceValue, productImages, product
             quantity: 1
         });
     }
-    
-    // تحديث واجهة المستخدم والتخزين المحلي
-    updateCartUI();
-    saveCartToLocalStorage();
-}
 
-// دالة لتحديث واجهة المستخدم
-function updateCartUI() {
-    console.log('عدد المنتجات في السلة:', cart.length);
-    console.log('المحتوى:', cart);
-}
-
-// دالة لحفظ السلة في التخزين المحلي
-function saveCartToLocalStorage() {
-    localStorage.setItem('shoppingCart', JSON.stringify(cart));
-}
-    
     // حفظ السلة في localStorage
     try {
         localStorage.setItem('robuste_cart', JSON.stringify(cart));
@@ -3271,7 +3242,7 @@ function saveCartToLocalStorage() {
     
     // إظهار تأكيد الإضافة
     showStatus(`تمت إضافة "${name}" إلى السلة`, 'success');
-
+}
 
 // تحديث كمية المنتج
 function updateQuantity(index, newQuantity) {
@@ -4209,7 +4180,6 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 
-
 </script>
 <div class="offcanvas offcanvas-end" tabindex="-1" id="cartOffcanvas" aria-labelledby="cartOffcanvasLabel">
     <div class="offcanvas-header">
@@ -4236,5 +4206,4 @@ document.addEventListener('DOMContentLoaded', function() {
         </div>
     </div>
 </div></body></html>
-
 
