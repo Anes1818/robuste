@@ -2118,20 +2118,6 @@ body,
     border-radius: 3px;
 }
 
-/* تحسينات اللمس */
-@media (max-width: 768px) {
-    #orderModal .btn,
-    #orderModal .form-check-input {
-        min-height: 44px;
-        min-width: 44px;
-    }
-    
-    #orderModal .form-check-input {
-        width: 20px;
-        height: 20px;
-        margin-top: 0.2rem;
-    }
-}
 
 /* ============== تحسينات الرسائل والتأكيدات ============== */
 /* رسائل التحقق على الهواتف */
