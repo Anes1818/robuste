@@ -1326,35 +1326,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // ============== منع مشاكل الأزرار الكبيرة ==============
 
-// منع التكبير عند النقر على الأزرار في iOS
-document.addEventListener('touchstart', function(e) {
-    if (e.target.classList.contains('btn') || 
-        e.target.closest('.btn') || 
-        e.target.classList.contains('form-check-label') ||
-        e.target.closest('.form-check-label')) {
-        // إضافة تأثير النقر بدون تكبير
-        e.target.style.transform = 'scale(0.98)';
-        
-        setTimeout(() => {
-            if (e.target && e.target.style) {
-                e.target.style.transform = '';
-            }
-        }, 150);
-    }
-}, { passive: true });
-
-
-// تحسين استجابة الأزرار
-document.addEventListener('DOMContentLoaded', function() {
-    const buttons = document.querySelectorAll('#orderModal .btn, #orderForm .form-check-label');
-    
-    buttons.forEach(btn => {
-        btn.style.touchAction = 'manipulation';
-        btn.style.webkitTapHighlightColor = 'transparent';
-        btn.style.userSelect = 'none';
-    });
-});
-
 // ============== التحسينات النهائية ==============
 
 // تشغيل التكييف الأولي
