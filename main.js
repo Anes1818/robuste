@@ -1343,15 +1343,6 @@ document.addEventListener('touchstart', function(e) {
     }
 }, { passive: true });
 
-// منع السلوك الافتراضي على الأزرار في الأجهزة المحمولة
-document.addEventListener('touchend', function(e) {
-    const target = e.target;
-    if (target.tagName === 'BUTTON' || 
-        target.classList.contains('btn') || 
-        target.closest('.btn')) {
-        e.preventDefault();
-    }
-}, { passive: false });
 
 // تحسين استجابة الأزرار
 document.addEventListener('DOMContentLoaded', function() {
