@@ -50,7 +50,8 @@ async function loadAndDisplayProducts(category = 'all') {
             ? products 
             : products.filter(product => product.category === category);
         
-        renderProducts(filteredProducts);
+       renderProducts(filteredProducts);
+setupClickableCards();
     } catch (error) {
         console.error('Erreur:', error);
         showStatus('Erreur lors du chargement des produits', 'error');
@@ -89,44 +90,42 @@ function renderProducts(products) {
         
         // تصميم بطاقة المنتج المحدثة
         const productCard = `
-            <div class="col-6 col-md-4 col-lg-3 mb-4">
-                <div class="product-card clickable-card" data-product-id="${product.id}">
-                    ${productBadge}
-                    ${discountBadge}
-                    
-                    <!-- الجزء القابل للنقر بالكامل (باستثناء زر الإضافة) -->
-                    <div class="card-click-area">
-                        <!-- صورة المنتج -->
-                        <div class="product-card-image-container">
-                            <img src="${product.images[0] || ''}" 
-                                 alt="${product.title}" 
-                                 class="product-card-image"
-                                 loading="lazy">
-                        </div>
-                        
-                        <!-- معلومات المنتج -->
-                        <div class="product-info p-3">
-                            <h5 class="product-title">${product.title}</h5>
-                            <div class="product-price-container mt-2">
-                                ${oldPrice}
-                                <div class="product-price">${product.price.toLocaleString()} DA</div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- زر الإضافة للسلة فقط (غير قابل للانتقال للصفحة) -->
-                    <div class="card-footer p-3 bg-transparent border-top">
-                        <button class="product-action-btn add-to-cart-btn w-100" 
-                                data-id="${product.id}"
-                                onclick="event.stopPropagation()">
-                            <i class="bi bi-cart-plus"></i>
-                            <span>Ajouter au panier</span>
-                        </button>
-                    </div>
-                </div>
-            </div>
-        `;
-        
+<div class="col-6 col-md-4 col-lg-3 mb-4">
+  <div class="product-card clickable-card h-100 position-relative"
+       data-href="product.html?pid=${product.id}">
+
+    ${productBadge}
+    ${discountBadge}
+
+    <div id="carousel-${product.id}" 
+         class="carousel slide product-carousel"
+         data-bs-ride="carousel">
+      <div class="carousel-inner">
+        ${carouselItems}
+      </div>
+    </div>
+
+    <div class="card-body py-2">
+      <h6 class="card-title mb-1">${product.title}</h6>
+
+      <div class="price-row d-flex align-items-center gap-1">
+        ${oldPrice}
+        <span class="fw-bold text-primary">
+          ${product.price.toLocaleString()} DA
+        </span>
+      </div>
+    </div>
+
+    <div class="card-footer bg-transparent border-0 pt-0">
+      <button class="btn btn-orange w-100 add-to-cart-btn"
+              data-id="${product.id}">
+        <i class="bi bi-cart-plus"></i> Ajouter au panier
+      </button>
+    </div>
+
+  </div>
+</div>
+`;
         container.innerHTML += productCard;
     });
     
@@ -1392,4 +1391,24 @@ function setupAddToCartButtons() {
                 showStatus('Error loading product details', 'error');
             });
     });
+}
+
+function setupClickableCards() {
+  document.addEventListener('click', function (e) {
+
+    // لو ضغط على زر الإضافة → نوقف الانتشار
+    if (e.target.closest('.add-to-cart-btn')) {
+      e.stopPropagation();
+      return;
+    }
+
+    // لو ضغط على البطاقة
+    const card = e.target.closest('.clickable-card');
+    if (!card) return;
+
+    const href = card.getAttribute('data-href');
+    if (href) {
+      window.location.href = href;
+    }
+  });
 }

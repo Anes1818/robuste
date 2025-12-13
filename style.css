@@ -2653,3 +2653,32 @@ button,
 .product-card:active {
     transform: scale(0.98);
 }
+/* clickable card */
+.clickable-card {
+  cursor: pointer;
+}
+
+/* hover خفيف */
+.clickable-card:hover {
+  box-shadow: 0 6px 18px rgba(0,0,0,.12);
+  transform: translateY(-2px);
+}
+
+/* ترتيب السعر */
+.price-row small {
+  font-size: 12px;
+}
+
+/* زر الإضافة – mobile first */
+.add-to-cart-btn {
+  min-height: 44px;
+  font-weight: 700;
+}
+
+/* إلغاء hover مبالغ فيه على الهاتف */
+@media (hover: none) {
+  .clickable-card:hover {
+    transform: none;
+    box-shadow: none;
+  }
+}
