@@ -112,48 +112,42 @@ function renderProducts(products) {
             </button>
         ` : '';
         
-        // في دالة renderProducts، استبدال productCard بـ:
-const productCard = `
-    <div class="col-6 col-md-4 col-lg-3 mb-3">
-        <div class="product-card card h-100 position-relative clickable-card" 
-             data-id="${product.id}" 
-             data-pid="${product.id}"
-             onclick="handleProductCardClick(event, ${product.id})">
-            ${productBadge}
-            ${discountBadge}
-            
-            <!-- الصورة -->
-            <div id="carousel-${product.id}" class="carousel slide product-carousel" data-bs-ride="carousel">
-                <div class="carousel-inner">
-                    ${product.images.slice(0, 1).map((img, index) => `
-                        <div class="carousel-item ${index === 0 ? 'active' : ''}">
-                            <img src="${img}" class="d-block w-100 product-card-image" alt="${product.title}" loading="lazy">
+        const productCard = `
+            <div class="col-6 col-md-4 col-lg-3 mb-4">
+                <div class="product-card card h-100 position-relative">
+                    ${productBadge}
+                    ${discountBadge}
+                    
+                    <!-- ربط البطاقة بالكامل بصفحة المنتج -->
+                    <a href="product.html?pid=${product.id}" class="product-card-link">
+                        <div id="carousel-${product.id}" class="carousel slide product-carousel" data-bs-ride="carousel">
+                            <div class="carousel-indicators">
+                                ${carouselIndicators}
+                            </div>
+                            <div class="carousel-inner">
+                                ${carouselItems}
+                            </div>
+                            ${carouselControls}
                         </div>
-                    `).join('')}
+                        <div class="card-body">
+                            <h5 class="card-title">${product.title}</h5>
+                            <p class="card-text text-muted small">${product.description_short}</p>
+                            <div class="d-flex align-items-center mt-3">
+                                ${oldPrice}
+                                <p dir="ltr" class="fw-bold text-primary mb-0">${product.price.toLocaleString()} DA</p>
+                            </div>
+                        </div>
+                    </a>
+                    
+                    <div class="card-footer bg-transparent border-0">
+                        <!-- زر إضافة إلى السلة فقط (خارج الرابط) -->
+                        <button class="btn btn-orange w-100 add-to-cart-btn" data-id="${product.id}">
+                            <i class="bi bi-cart-plus"></i> Ajouter au panier
+                        </button>
+                    </div>
                 </div>
             </div>
-            
-            <!-- محتوى البطاقة -->
-            <div class="card-body p-3">
-                <!-- العنوان -->
-                <h6 class="card-title product-title mb-2">${product.title}</h6>
-                
-                <!-- السعر -->
-                <div class="product-price-container mb-3">
-                    ${oldPrice}
-                    <div dir="ltr" class="fw-bold text-primary product-price">${product.price.toLocaleString()} DA</div>
-                </div>
-                
-                <!-- زر الإضافة الوحيد -->
-                <button class="btn btn-orange w-100 add-to-cart-btn product-action-btn" 
-                        data-id="${product.id}"
-                        onclick="event.stopPropagation(); addToCartFromButton(this);">
-                    <i class="bi bi-cart-plus"></i> Ajouter au panier
-                </button>
-            </div>
-        </div>
-    </div>
-`;
+        `;
         
         container.innerHTML += productCard;
     });
@@ -1351,76 +1345,4 @@ document.addEventListener('DOMContentLoaded', function() {
     if ('ontouchstart' in window) {
         document.documentElement.style.cursor = 'pointer';
     }
-});
-// ============== نظام النقر على البطاقات ==============
-
-// معالجة النقر على البطاقة
-function handleProductCardClick(event, productId) {
-    // منع التنفيذ إذا كان النقر على زر الإضافة
-    if (event.target.closest('.add-to-cart-btn') || 
-        event.target.classList.contains('add-to-cart-btn')) {
-        return;
-    }
-    
-    // التوجيه إلى صفحة المنتج
-    window.location.href = `product.html?pid=${productId}`;
-}
-
-// دالة إضافة للسلة من الزر
-function addToCartFromButton(button) {
-    const productId = button.getAttribute('data-id');
-    
-    fetch('products.json')
-        .then(response => {
-            if (!response.ok) throw new Error('Failed to load products.json');
-            return response.json();
-        })
-        .then(products => {
-            const product = products.find(p => p.id == productId);
-            if (product) {
-                addToCart(
-                    product.title,
-                    `${product.price.toLocaleString()} DA`,
-                    product.price,
-                    product.images,
-                    product.id
-                );
-                
-                // تأثير بسيط للتأكيد
-                button.innerHTML = '<i class="bi bi-check"></i> Ajouté';
-                button.classList.add('btn-success');
-                button.classList.remove('btn-orange');
-                
-                setTimeout(() => {
-                    button.innerHTML = '<i class="bi bi-cart-plus"></i> Ajouter au panier';
-                    button.classList.remove('btn-success');
-                    button.classList.add('btn-orange');
-                }, 1500);
-            }
-        })
-        .catch(error => {
-            console.error('Error loading product:', error);
-            showStatus('Error loading product details', 'error');
-        });
-}
-
-// منع النقر المزدوج على البطاقات
-let lastClickTime = 0;
-let lastCardId = null;
-
-document.addEventListener('click', function(e) {
-    const card = e.target.closest('.clickable-card');
-    if (!card) return;
-    
-    const currentTime = new Date().getTime();
-    const cardId = card.dataset.id;
-    
-    if (cardId === lastCardId && (currentTime - lastClickTime) < 1000) {
-        e.preventDefault();
-        e.stopPropagation();
-        return;
-    }
-    
-    lastClickTime = currentTime;
-    lastCardId = cardId;
 });
