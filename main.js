@@ -73,7 +73,7 @@ function renderProducts(products) {
     products.forEach(product => {
         const discountBadge = product.old_price && product.old_price > product.price ? `
             <div class="discount-badge">
-                خصم ${Math.round(((product.old_price - product.price) / product.old_price) * 100)}%
+                -${Math.round(((product.old_price - product.price) / product.old_price) * 100)}%
             </div>
         ` : '';
         
@@ -87,62 +87,40 @@ function renderProducts(products) {
             </div>
         ` : '';
         
-        // إنشاء سلايدر للصور
-        const carouselIndicators = product.images.map((_, index) => `
-            <button type="button" data-bs-target="#carousel-${product.id}" data-bs-slide-to="${index}" 
-                ${index === 0 ? 'class="active" aria-current="true"' : ''} 
-                aria-label="صورة ${index + 1}">
-            </button>
-        `).join('');
-        
-        const carouselItems = product.images.map((img, index) => `
-            <div class="carousel-item ${index === 0 ? 'active' : ''}">
-                <img src="${img}" class="d-block w-100" alt="${product.title}" loading="lazy">
-            </div>
-        `).join('');
-        
-        const carouselControls = product.images.length > 1 ? `
-            <button class="carousel-control-prev" type="button" data-bs-target="#carousel-${product.id}" data-bs-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">السابق</span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#carousel-${product.id}" data-bs-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">التالي</span>
-            </button>
-        ` : '';
-        
+        // تصميم بطاقة المنتج المحدثة
         const productCard = `
             <div class="col-6 col-md-4 col-lg-3 mb-4">
-                <div class="product-card card h-100 position-relative">
+                <div class="product-card clickable-card" data-product-id="${product.id}">
                     ${productBadge}
                     ${discountBadge}
                     
-                    <!-- ربط البطاقة بالكامل بصفحة المنتج -->
-                    <a href="product.html?pid=${product.id}" class="product-card-link">
-                        <div id="carousel-${product.id}" class="carousel slide product-carousel" data-bs-ride="carousel">
-                            <div class="carousel-indicators">
-                                ${carouselIndicators}
-                            </div>
-                            <div class="carousel-inner">
-                                ${carouselItems}
-                            </div>
-                            ${carouselControls}
+                    <!-- الجزء القابل للنقر بالكامل (باستثناء زر الإضافة) -->
+                    <div class="card-click-area">
+                        <!-- صورة المنتج -->
+                        <div class="product-card-image-container">
+                            <img src="${product.images[0] || ''}" 
+                                 alt="${product.title}" 
+                                 class="product-card-image"
+                                 loading="lazy">
                         </div>
-                        <div class="card-body">
-                            <h5 class="card-title">${product.title}</h5>
-                            <p class="card-text text-muted small">${product.description_short}</p>
-                            <div class="d-flex align-items-center mt-3">
+                        
+                        <!-- معلومات المنتج -->
+                        <div class="product-info p-3">
+                            <h5 class="product-title">${product.title}</h5>
+                            <div class="product-price-container mt-2">
                                 ${oldPrice}
-                                <p dir="ltr" class="fw-bold text-primary mb-0">${product.price.toLocaleString()} DA</p>
+                                <div class="product-price">${product.price.toLocaleString()} DA</div>
                             </div>
                         </div>
-                    </a>
+                    </div>
                     
-                    <div class="card-footer bg-transparent border-0">
-                        <!-- زر إضافة إلى السلة فقط (خارج الرابط) -->
-                        <button class="btn btn-orange w-100 add-to-cart-btn" data-id="${product.id}">
-                            <i class="bi bi-cart-plus"></i> Ajouter au panier
+                    <!-- زر الإضافة للسلة فقط (غير قابل للانتقال للصفحة) -->
+                    <div class="card-footer p-3 bg-transparent border-top">
+                        <button class="product-action-btn add-to-cart-btn w-100" 
+                                data-id="${product.id}"
+                                onclick="event.stopPropagation()">
+                            <i class="bi bi-cart-plus"></i>
+                            <span>Ajouter au panier</span>
                         </button>
                     </div>
                 </div>
@@ -151,8 +129,10 @@ function renderProducts(products) {
         
         container.innerHTML += productCard;
     });
+    
+    // إضافة مستمعات الأحداث للبطاقات القابلة للنقر
+    setupClickableCards();
 }
-
 // دالة تحميل العروض الخاصة
 async function loadSpecialOffers() {
     try {
@@ -1346,3 +1326,70 @@ document.addEventListener('DOMContentLoaded', function() {
         document.documentElement.style.cursor = 'pointer';
     }
 });
+// دالة إعداد البطاقات القابلة للنقر
+function setupClickableCards() {
+    document.querySelectorAll('.clickable-card').forEach(card => {
+        card.addEventListener('click', function(e) {
+            // منع الانتقال إذا النقر كان على زر الإضافة إلى السلة
+            if (e.target.closest('.add-to-cart-btn')) {
+                return;
+            }
+            
+            const productId = this.getAttribute('data-product-id');
+            if (productId) {
+                window.location.href = `product.html?pid=${productId}`;
+            }
+        });
+    });
+}
+
+// تعديل دالة تهيئة أزرار الإضافة إلى السلة
+function setupAddToCartButtons() {
+    document.addEventListener('click', function(e) {
+        const button = e.target.closest('.add-to-cart-btn');
+        if (!button) return;
+
+        // منع انتشار الحدث إلى البطاقة الأصلية
+        e.stopPropagation();
+        
+        const productId = button.getAttribute('data-id');
+        if (!productId) return;
+
+        // منع النقرات المتكررة السريعة
+        if (button.dataset.processing === 'true') return;
+        button.dataset.processing = 'true';
+        
+        setTimeout(() => {
+            delete button.dataset.processing;
+        }, 300);
+
+        // جلب بيانات المنتج وإضافته إلى السلة
+        fetch('products.json')
+            .then(response => response.json())
+            .then(products => {
+                const product = products.find(p => p.id == productId);
+                if (product) {
+                    addToCart(
+                        product.title,
+                        `${product.price.toLocaleString()} DA`,
+                        product.price,
+                        product.images,
+                        product.id
+                    );
+                    
+                    // تأثير بسيط لتأكيد الإضافة
+                    button.innerHTML = '<i class="bi bi-check"></i> Ajouté!';
+                    button.style.background = '#28a745';
+                    
+                    setTimeout(() => {
+                        button.innerHTML = '<i class="bi bi-cart-plus"></i> Ajouter au panier';
+                        button.style.background = '';
+                    }, 1000);
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                showStatus('Error loading product details', 'error');
+            });
+    });
+}
