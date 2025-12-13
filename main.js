@@ -58,6 +58,7 @@ async function loadAndDisplayProducts(category = 'all') {
 }
 
 // دالة عرض المنتجات
+// في دالة renderProducts، نعدل كود البطاقات
 function renderProducts(products) {
     const container = document.getElementById('productsContainer');
     if (!container) return;
@@ -116,77 +117,39 @@ function renderProducts(products) {
                 <div class="product-card card h-100 position-relative">
                     ${productBadge}
                     ${discountBadge}
-                    <div id="carousel-${product.id}" class="carousel slide product-carousel" data-bs-ride="carousel">
-                        <div class="carousel-indicators">
-                            ${carouselIndicators}
+                    
+                    <!-- ربط البطاقة بالكامل بصفحة المنتج -->
+                    <a href="product.html?pid=${product.id}" class="product-card-link">
+                        <div id="carousel-${product.id}" class="carousel slide product-carousel" data-bs-ride="carousel">
+                            <div class="carousel-indicators">
+                                ${carouselIndicators}
+                            </div>
+                            <div class="carousel-inner">
+                                ${carouselItems}
+                            </div>
+                            ${carouselControls}
                         </div>
-                        <div class="carousel-inner">
-                            ${carouselItems}
+                        <div class="card-body">
+                            <h5 class="card-title">${product.title}</h5>
+                            <p class="card-text text-muted small">${product.description_short}</p>
+                            <div class="d-flex align-items-center mt-3">
+                                ${oldPrice}
+                                <p dir="ltr" class="fw-bold text-primary mb-0">${product.price.toLocaleString()} DA</p>
+                            </div>
                         </div>
-                        ${carouselControls}
-                    </div>
-                    <div class="card-body">
-                        <h5 class="card-title">${product.title}</h5>
-                        <p class="card-text text-muted small">${product.description_short}</p>
-                        <div class="d-flex align-items-center mt-3">
-                            ${oldPrice}
-                            <p dir="ltr" class="fw-bold text-primary mb-0">${product.price.toLocaleString()} DA</p>
-                        </div>
-                    </div>
+                    </a>
+                    
                     <div class="card-footer bg-transparent border-0">
+                        <!-- زر إضافة إلى السلة فقط (خارج الرابط) -->
                         <button class="btn btn-orange w-100 add-to-cart-btn" data-id="${product.id}">
                             <i class="bi bi-cart-plus"></i> Ajouter au panier
                         </button>
-                        <a href="product.html?pid=${product.id}" class="btn btn-outline-primary w-100 mt-2">
-                            <i class="bi bi-eye"></i> Voir détails
-                        </a>
                     </div>
                 </div>
             </div>
         `;
         
-       productCard.innerHTML = `
-  <div class="product-card card h-100 position-relative" 
-       role="link" 
-       tabindex="0" 
-       data-pid="${product.id}">
-
-    ${productBadge}
-    ${discountBadge}
-
-    <div id="carousel-${product.id}" class="carousel slide product-carousel" data-bs-ride="carousel">
-      <div class="carousel-indicators">
-        ${carouselIndicators}
-      </div>
-
-      <div class="carousel-inner">
-        ${carouselItems}
-      </div>
-
-      ${carouselControls}
-    </div>
-
-    <div class="card-body">
-      <h5 class="product-title card-title">${product.title}</h5>
-
-      <div class="price-section d-flex align-items-center mt-2">
-        ${oldPrice}
-        <p dir="ltr" class="current-price fw-bold mb-0">
-          ${product.price.toLocaleString()} DA
-        </p>
-      </div>
-    </div>
-
-    <div class="card-footer bg-transparent border-0">
-      <button 
-        class="btn btn-orange w-100 add-to-cart-btn"
-        data-id="${product.id}">
-        <i class="bi bi-cart-plus"></i> Ajouter au panier
-      </button>
-    </div>
-
-  </div>
-`;
+        container.innerHTML += productCard;
     });
 }
 
