@@ -2099,225 +2099,256 @@ body,
         min-height: 44px;
     }
 }
+/* ============== أنماط صفحة المنتج ============== */
+.product-page {
+    padding-top: 30px;
+}
 
-/* ============== تحسينات التخطيط العام ============== */
+/* معرض الصور */
+.product-gallery {
+    position: relative;
+}
+
+.main-image-container {
+    background: #f8f9fa;
+    border-radius: 12px;
+    overflow: hidden;
+    margin-bottom: 15px;
+}
+
+.main-image-container img {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+}
+
+.thumbnail {
+    border: 2px solid transparent;
+    transition: all 0.3s ease;
+    border-radius: 8px;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.thumbnail.active {
+    border-color: var(--primary);
+}
+
+.thumbnail:hover {
+    border-color: var(--primary);
+    transform: scale(1.05);
+}
+
+/* معلومات المنتج */
+.product-info {
+    background: white;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.product-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--dark);
+    margin-bottom: 10px;
+}
+
+.price-section {
+    background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+    border-radius: 10px;
+    padding: 15px;
+    margin-bottom: 20px;
+}
+
+.current-price {
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: var(--primary);
+}
+
+/* أزرار الشراء */
+.action-buttons .btn-warning {
+    background: linear-gradient(to bottom, #FFD814, #F7CA00);
+    border: none;
+    color: #111;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.action-buttons .btn-warning:hover {
+    background: linear-gradient(to bottom, #F7CA00, #F0B800);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(247, 202, 0, 0.3);
+}
+
+.action-buttons .btn-orange {
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+    border: none;
+    color: white;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.action-buttons .btn-orange:hover {
+    background: linear-gradient(135deg, var(--primary-dark), #E05A2B);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(255, 107, 53, 0.3);
+}
+
+/* معلومات المخزون */
+.stock-info {
+    padding: 15px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+/* بطاقات الشحن والضمان */
+.guarantee-cards .border {
+    border-color: #dee2e6 !important;
+    transition: all 0.3s ease;
+}
+
+.guarantee-cards .border:hover {
+    border-color: var(--primary) !important;
+    transform: translateY(-3px);
+}
+
+/* تبويبات التفاصيل */
+.nav-tabs .nav-link {
+    color: var(--gray);
+    font-weight: 600;
+    border: none;
+    padding: 10px 20px;
+}
+
+.nav-tabs .nav-link.active {
+    color: var(--primary);
+    border-bottom: 3px solid var(--primary);
+    background: transparent;
+}
+
+/* التقييمات */
+.stars {
+    color: #FFD700;
+}
+
+.review-item {
+    padding: 15px;
+    border-bottom: 1px solid #eee;
+}
+
+.review-item:last-child {
+    border-bottom: none;
+}
+
+/* تحسينات للهاتف */
 @media (max-width: 768px) {
-    /* جعل النموذج يأخذ معظم الشاشة */
-    #orderModal.modal {
-        padding-left: 0 !important;
-        padding-right: 0 !important;
+    .product-page {
+        padding-top: 20px;
     }
-
-    /* إزالة الهامش الزائد */
-    #orderModal .modal-dialog-centered {
-        min-height: 100vh;
-        margin: 0;
-        display: flex;
-        align-items: flex-end;
+    
+    .product-title {
+        font-size: 1.3rem;
     }
-
-    /* جعل النموذج يبدأ من الأسفل على الهواتف */
-    #orderModal .modal-dialog {
-        margin: 0;
-        width: 100%;
-        max-width: 100%;
-        transform: translateY(100%);
-        transition: transform 0.3s ease-out;
+    
+    .current-price {
+        font-size: 1.5rem;
     }
-
-    #orderModal.modal.show .modal-dialog {
-        transform: translateY(0);
-    }
-}
-
-/* ============== تحسينات الكيبورد على الهواتف ============== */
-@media (max-width: 768px) {
-    /* منع تكبير النص تلقائياً */
-    #orderModal input[type="text"],
-    #orderModal input[type="tel"],
-    #orderModal input[type="email"],
-    #orderModal select,
-    #orderModal textarea {
-        font-size: 16px !important;
-    }
-
-    /* تحسين حقول الهاتف */
-    #orderModal input[type="tel"] {
-        direction: ltr;
-        text-align: left;
-    }
-
-    /* تحسين textarea */
-    #orderModal textarea {
-        min-height: 80px;
-        resize: vertical;
-    }
-}
-
-/* ============== تحسينات التحميل على الهواتف ============== */
-@media (max-width: 768px) {
-    #orderModal .spinner-border {
-        width: 1rem;
-        height: 1rem;
-        border-width: 0.15em;
-    }
-
-    #submitOrderBtn .spinner-border {
-        margin-right: 0.3rem;
-    }
-}
-
-/* حل مشكلة خيارات قائمة الولايات في وضع الدارك */
-[data-theme="dark"] .form-select option {
-    background-color: var(--light) !important;
-    color: var(--dark) !important;
-    padding: 10px !important;
-    font-size: 0.95rem !important;
-}
-
-[data-theme="dark"] .text-muted {
-    color: #b0b0b0 !important;
-    opacity: 0.9;
-}
-
-[data-theme="dark"] .card-text {
-    color: var(--gray) !important;
-}
-
-/* تحسينات للهواتف */
-@media (max-width: 768px) {
-    .product-card {
-        margin-bottom: 15px;
-    }
-
-    .product-card .card-title {
+    
+    .action-buttons .btn {
+        padding: 12px !important;
         font-size: 0.9rem;
-        height: auto;
-        min-height: 40px;
     }
-
-    .product-card .card-text {
-        font-size: 0.8rem;
-        height: auto;
-        min-height: 40px;
+    
+    .main-image-container img {
+        height: 300px;
     }
-
-    .product-card .btn-orange {
+    
+    .thumbnail {
+        width: 60px;
+        height: 60px;
+    }
+    
+    .nav-tabs .nav-link {
         padding: 8px 12px;
-        font-size: 0.8rem;
-        min-height: 36px;
-    }
-
-    /* تحسين تجربة اللمس */
-    .product-card {
-        -webkit-tap-highlight-color: transparent;
-        touch-action: manipulation;
-    }
-
-    .product-card:active {
-        transform: scale(0.98);
-        transition: transform 0.1s;
+        font-size: 0.9rem;
     }
 }
 
-/* تحسينات إضافية للشاشات الصغيرة جداً */
+/* إزالة الفجوات البيضاء من الصور */
+.product-gallery img,
+.thumbnail img {
+    display: block;
+    margin: 0;
+    padding: 0;
+}
+
+.main-image-container {
+    padding: 0 !important;
+}
+
+/* تصميم أمازون للجوال */
 @media (max-width: 576px) {
-    .product-card .card-body {
+    .product-info {
+        padding: 15px;
+        margin-top: 15px;
+    }
+    
+    .price-section {
         padding: 12px;
     }
-
-    .product-card .card-footer {
-        padding: 12px;
+    
+    .action-buttons {
+        position: sticky;
+        bottom: 0;
+        background: white;
+        padding: 15px 0;
+        border-top: 1px solid #eee;
+        margin: 0 -15px;
+        padding: 15px;
     }
-
-    .product-card .btn-orange {
-        font-size: 0.75rem;
-        padding: 6px 10px;
-        min-height: 36px;
+    
+    .guarantee-cards {
+        margin-bottom: 70px; /* مساحة للأزرار الثابتة */
     }
-}
-
-/* تحسينات إضافية لجميع الأزرار */
-button,
-.btn,
-.buy-btn,
-.offer-btn,
-.category-btn,
-.quantity-btn,
-.remove-item,
-.social-icon,
-.navbar-toggler,
-.form-check-input,
-.carousel-control-prev,
-.carousel-control-next,
-.prev1,
-.next1 {
-    -webkit-tap-highlight-color: transparent !important;
-    touch-action: manipulation !important;
-}
-
-/* تحسين الـ z-index للعناصر المتداخلة */
-.navbar {
-    z-index: 1030;
-}
-
-.whatsapp-btn {
-    z-index: 1001;
-}
-
-.cart-icon-container {
-    z-index: 1003;
-}
-
-.theme-toggle {
-    z-index: 1002;
-}
-
-.navbar-toggler {
-    z-index: 1004;
-}
-
-.status-indicator {
-    z-index: 2000;
-}
-
-/* تحسين حجم نقاط اللمس للهواتف */
-@media (max-width: 768px) {
-
-    .theme-toggle,
-    .cart-btn,
-    .whatsapp-btn,
-    .quantity-btn,
-    .remove-item,
-    .carousel-control-prev,
-    .carousel-control-next,
-    .prev1,
-    .next1,
-    .social-icon {
-        min-width: 44px;
-        min-height: 44px;
-    }
-
-    .buy-btn,
-    .offer-btn,
-    .btn-orange,
-    .category-btn,
-    .whatsapp-contact-btn {
-        min-height: 44px;
-    }
-
-    .form-check-input {
-        width: 20px;
-        height: 20px;
+    
+    /* أزرار ثابتة في الأسفل للجوال */
+    .sticky-buttons {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: white;
+        padding: 10px;
+        border-top: 1px solid #eee;
+        z-index: 1000;
+        box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
     }
 }
-/* منع الطبقات الزخرفية من حجب اللمس */
-.offers-section::before,
-.image-overlay {
-  pointer-events: none;
+
+/* تحسينات دارك مود */
+[data-theme="dark"] .product-info {
+    background: var(--light);
+    border: 1px solid var(--border-color);
 }
 
-/* تحسين استجابة اللمس على الأزرار */
-.btn {
-  touch-action: manipulation;
+[data-theme="dark"] .price-section {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+[data-theme="dark"] .nav-tabs .nav-link {
+    color: var(--gray);
+}
+
+[data-theme="dark"] .nav-tabs .nav-link.active {
+    color: var(--primary);
+}
+
+[data-theme="dark"] .guarantee-cards .border {
+    border-color: var(--border-color) !important;
+}
+
+[data-theme="dark"] .review-item {
+    border-bottom-color: var(--border-color);
 }
