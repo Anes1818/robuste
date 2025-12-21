@@ -2351,3 +2351,166 @@ body,
 [data-theme="dark"] .review-item {
     border-bottom-color: var(--border-color);
 }
+
+/* ============== تحسينات الدارك مود لبطاقات المنتجات ============== */
+[data-theme="dark"] .product-card {
+    background-color: #1e1e1e;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+[data-theme="dark"] .product-card:hover {
+    border-color: var(--primary);
+    box-shadow: 0 8px 25px rgba(255, 107, 53, 0.15);
+}
+
+[data-theme="dark"] .product-title {
+    color: #f0f0f0 !important;
+    font-weight: 600;
+}
+
+[data-theme="dark"] .card-text {
+    color: #b0b0b0 !important;
+}
+
+[data-theme="dark"] .current-price {
+    color: var(--primary) !important;
+}
+
+[data-theme="dark"] .old-price {
+    color: #888 !important;
+}
+
+[data-theme="dark"] .product-card .card-body {
+    background-color: transparent;
+}
+
+[data-theme="dark"] .product-card .card-footer {
+    background-color: rgba(255, 255, 255, 0.05);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+[data-theme="dark"] .btn-orange {
+    background-color: var(--primary);
+    border-color: var(--primary);
+    color: white;
+}
+
+[data-theme="dark"] .btn-orange:hover {
+    background-color: var(--primary-dark);
+    border-color: var(--primary-dark);
+}
+
+/* ============== دارك مود لسلة المشتريات ============== */
+[data-theme="dark"] .offcanvas {
+    background-color: #1a1a1a !important;
+    color: #f0f0f0;
+}
+
+[data-theme="dark"] .offcanvas-header {
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+    color: white;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+}
+
+[data-theme="dark"] .offcanvas-title {
+    color: white;
+}
+
+[data-theme="dark"] .offcanvas-body {
+    background-color: #1a1a1a;
+}
+
+[data-theme="dark"] .cart-item {
+    background-color: #2a2a2a;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+[data-theme="dark"] .cart-item-title {
+    color: #f0f0f0;
+}
+
+[data-theme="dark"] .cart-item-price {
+    color: var(--primary);
+}
+
+[data-theme="dark"] .cart-item-details {
+    color: #d0d0d0;
+}
+
+[data-theme="dark"] .quantity-btn {
+    background-color: #333;
+    border-color: rgba(255, 255, 255, 0.2);
+    color: #f0f0f0;
+}
+
+[data-theme="dark"] .quantity-btn:hover {
+    background-color: var(--primary);
+    border-color: var(--primary);
+    color: white;
+}
+
+[data-theme="dark"] .quantity-input {
+    background-color: #333;
+    border-color: rgba(255, 255, 255, 0.2);
+    color: #f0f0f0;
+}
+
+[data-theme="dark"] .remove-item {
+    color: #ff6b6b;
+}
+
+[data-theme="dark"] .remove-item:hover {
+    background-color: rgba(255, 107, 107, 0.1);
+}
+
+[data-theme="dark"] .cart-summary {
+    background-color: #2a2a2a;
+    border-top: 2px solid rgba(255, 255, 255, 0.1);
+    color: #f0f0f0;
+}
+
+[data-theme="dark"] .cart-summary span:last-child {
+    color: var(--primary);
+}
+
+[data-theme="dark"] #emptyCartMessage {
+    color: #888;
+}
+
+[data-theme="dark"] #emptyCartMessage i {
+    color: #444;
+}
+
+[data-theme="dark"] .btn-close {
+    filter: invert(1) brightness(2);
+}
+
+/* تحسينات إضافية لسلة المشتريات */
+[data-theme="dark"] .cart-item-img {
+    background-color: #333;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+[data-theme="dark"] #checkoutBtn:not(:disabled):hover {
+    background-color: var(--primary-dark);
+    box-shadow: 0 4px 12px rgba(255, 107, 53, 0.3);
+}
+
+[data-theme="dark"] #checkoutBtn:disabled {
+    background-color: #444;
+    color: #777;
+    border-color: #555;
+}
+
+/* ============== تحسينات للهاتف في وضع الدارك ============== */
+@media (max-width: 768px) {
+    [data-theme="dark"] .product-card {
+        border-color: rgba(255, 255, 255, 0.08);
+    }
+    
+    [data-theme="dark"] .cart-item {
+        padding: 10px;
+    }
+}
