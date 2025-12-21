@@ -1137,37 +1137,28 @@ body {
     100% { transform: scale(1); }
 }
 
-/* ============== سلايدر المنتجات المقترحة بتصميم أمازون ============== */
+/* ============== سلايدر المنتجات المقترحة ============== */
 .recommended-section {
     margin-top: 50px;
-    margin-bottom: 40px;
-    background: var(--light);
-    border-radius: 12px;
-    padding: 25px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-    border: 1px solid var(--border-color);
-}
-
-[data-theme="dark"] .recommended-section {
-    background: var(--light);
-    border: 1px solid var(--border-color);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    margin-bottom: 30px;
 }
 
 .recommended-section h2 {
-    font-size: 1.5rem;
+    font-size: 1.8rem;
     font-weight: 700;
     color: var(--dark);
+    margin-bottom: 30px;
+    padding-bottom: 15px;
+    border-bottom: 2px solid var(--primary);
     position: relative;
-    display: inline-block;
 }
 
 .recommended-section h2::after {
     content: '';
     position: absolute;
-    bottom: -5px;
+    bottom: -2px;
     right: 0;
-    width: 40px;
+    width: 60px;
     height: 2px;
     background-color: var(--primary);
 }
@@ -1175,108 +1166,78 @@ body {
 .recommended-slider-container {
     position: relative;
     overflow: hidden;
-    padding: 10px 0 20px;
-    touch-action: pan-y pinch-zoom;
+    padding: 10px 0;
 }
 
 .recommended-slider {
     display: flex;
-    transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-    cursor: grab;
-    user-select: none;
-}
-
-.recommended-slider:active {
-    cursor: grabbing;
+    transition: transform 0.5s ease;
+    gap: 20px;
+    padding: 10px 5px;
 }
 
 .recommended-slider-track {
     display: flex;
-    gap: 15px;
-    padding: 5px;
+    gap: 20px;
+    min-width: 100%;
 }
 
-/* بطاقة المنتج */
 .recommended-card {
     background: white;
-    border-radius: 8px;
+    border-radius: 12px;
     overflow: hidden;
     transition: all 0.3s ease;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
     border: 1px solid #eee;
     min-width: 220px;
     max-width: 220px;
     flex-shrink: 0;
-    position: relative;
 }
 
 [data-theme="dark"] .recommended-card {
     background: var(--light);
     border: 1px solid var(--border-color);
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
 }
 
 .recommended-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.12);
-    border-color: var(--primary);
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.12);
 }
 
-/* صورة المنتج */
-.recommended-card .product-image-container {
+.recommended-card .image-container {
     width: 100%;
     height: 180px;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 15px;
-    background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+    padding: 20px;
+    background: #f8f9fa;
     border-bottom: 1px solid #eee;
-    position: relative;
-    overflow: hidden;
 }
 
-[data-theme="dark"] .recommended-card .product-image-container {
-    background: linear-gradient(135deg, #2a2a2a, #333333);
+[data-theme="dark"] .recommended-card .image-container {
+    background: #2a2a2a;
     border-bottom: 1px solid var(--border-color);
 }
 
-.recommended-card .product-image-container img {
+.recommended-card .image-container img {
     max-width: 100%;
     max-height: 100%;
     width: auto;
     height: auto;
     object-fit: contain;
-    transition: transform 0.3s ease;
 }
 
-.recommended-card:hover .product-image-container img {
-    transform: scale(1.05);
-}
-
-/* علامة الخصم */
-.product-badge {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    background: linear-gradient(135deg, #ff4444, #cc0000);
-    color: white;
-    padding: 3px 8px;
-    border-radius: 12px;
-    font-size: 0.7rem;
-    font-weight: 600;
-    z-index: 1;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-}
-
-/* محتوى البطاقة */
-.recommended-card .card-content {
+.recommended-card .card-body {
     padding: 15px;
+    display: flex;
+    flex-direction: column;
 }
 
 .recommended-card .product-title {
     font-size: 0.9rem;
-    font-weight: 500;
+    font-weight: 600;
     color: var(--dark);
     margin-bottom: 10px;
     line-height: 1.4;
@@ -1287,146 +1248,121 @@ body {
     -webkit-box-orient: vertical;
 }
 
-.recommended-card .product-rating {
+.recommended-card .rating {
     display: flex;
     align-items: center;
     margin-bottom: 10px;
 }
 
-.recommended-card .product-stars {
+.recommended-card .stars {
     color: #FFD700;
-    font-size: 0.8rem;
+    font-size: 0.9rem;
 }
 
-.recommended-card .rating-count {
-    font-size: 0.75rem;
+.recommended-card .rating-text {
+    font-size: 0.8rem;
     color: var(--gray);
     margin-right: 5px;
 }
 
-/* السعر */
-.recommended-card .price-container {
-    margin-bottom: 10px;
+.recommended-card .price-section {
+    margin-top: auto;
+    padding-top: 10px;
+    background: none;
+    padding: 0;
 }
 
 .recommended-card .current-price {
     font-size: 1.2rem;
     font-weight: 700;
     color: var(--primary);
-    display: block;
 }
 
 .recommended-card .old-price {
-    font-size: 0.85rem;
+    font-size: 0.9rem;
     color: var(--gray);
     text-decoration: line-through;
-    margin-top: 2px;
+    margin-right: 5px;
 }
 
-/* زر الإضافة للسلة */
 .recommended-card .add-to-cart-btn {
     width: 100%;
-    background: linear-gradient(to bottom, #FFD814, #F7CA00);
-    border: 1px solid #FCD200;
-    color: #111;
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+    border: none;
+    color: white;
     font-weight: 600;
-    padding: 8px 12px;
-    border-radius: 6px;
-    font-size: 0.85rem;
+    padding: 10px;
+    border-radius: 8px;
+    margin-top: 10px;
+    transition: all 0.3s ease;
+    font-size: 0.9rem;
     cursor: pointer;
-    transition: all 0.2s ease;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 6px;
 }
 
 .recommended-card .add-to-cart-btn:hover {
-    background: linear-gradient(to bottom, #F7CA00, #F0B800);
-    border-color: #F0B800;
-    transform: translateY(-1px);
+    background: linear-gradient(135deg, var(--primary-dark), #E05A2B);
 }
 
-[data-theme="dark"] .recommended-card .add-to-cart-btn {
-    color: #111;
+/* أزرار التحكم بالسلايدر */
+.slider-controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    margin-top: 25px;
 }
 
-/* أزرار التنقل */
-.slider-nav-btn {
-    width: 36px;
-    height: 36px;
+.slider-btn {
+    width: 44px;
+    height: 44px;
     border-radius: 50%;
-    background: white;
-    color: var(--dark);
-    border: 1px solid var(--border-color);
+    background: var(--primary);
+    color: white;
+    border: none;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1rem;
+    font-size: 1.2rem;
     cursor: pointer;
-    transition: all 0.2s ease;
-    margin-right: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    box-shadow: 0 3px 10px rgba(255, 107, 53, 0.2);
 }
 
-.slider-nav-btn:last-child {
-    margin-right: 0;
-}
-
-.slider-nav-btn:hover:not(:disabled) {
-    background: var(--primary);
-    color: white;
-    border-color: var(--primary);
+.slider-btn:hover:not(:disabled) {
+    background: var(--primary-dark);
     transform: scale(1.1);
-    box-shadow: 0 4px 8px rgba(255, 107, 53, 0.2);
+    box-shadow: 0 5px 15px rgba(255, 107, 53, 0.3);
 }
 
-.slider-nav-btn:disabled {
-    opacity: 0.5;
+.slider-btn:disabled {
+    background: var(--gray);
     cursor: not-allowed;
-    background: #f8f9fa;
+    opacity: 0.5;
 }
 
-[data-theme="dark"] .slider-nav-btn {
-    background: var(--light);
-    border: 1px solid var(--border-color);
-    color: var(--dark);
+.slider-dots {
+    display: flex;
+    gap: 8px;
 }
 
-[data-theme="dark"] .slider-nav-btn:hover:not(:disabled) {
+.slider-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #ddd;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.slider-dot.active {
     background: var(--primary);
-    color: white;
+    transform: scale(1.2);
 }
 
-/* شريط التقدم */
-.slider-progress {
-    margin-top: 15px;
-}
-
-.slider-progress .progress {
-    background-color: #f0f0f0;
-    border-radius: 3px;
-    overflow: hidden;
-}
-
-[data-theme="dark"] .slider-progress .progress {
-    background-color: rgba(255, 255, 255, 0.1);
-}
-
-.slider-progress .progress-bar {
-    transition: width 0.3s ease;
-}
-
-/* تحسينات للهاتف */
+/* تحسينات للجوال */
 @media (max-width: 768px) {
-    .recommended-section {
-        padding: 20px;
-        margin-top: 40px;
-        margin-bottom: 30px;
-    }
-    
     .recommended-section h2 {
-        font-size: 1.3rem;
+        font-size: 1.5rem;
     }
     
     .recommended-card {
@@ -1434,53 +1370,40 @@ body {
         max-width: 180px;
     }
     
-    .recommended-card .product-image-container {
-        height: 150px;
-        padding: 10px;
+    .recommended-card .image-container {
+        height: 140px;
+        padding: 15px;
     }
     
-    .recommended-card .product-title {
-        font-size: 0.85rem;
-        height: 36px;
-    }
-    
-    .recommended-card .current-price {
-        font-size: 1.1rem;
-    }
-    
-    .slider-nav-btn {
-        width: 32px;
-        height: 32px;
-        font-size: 0.9rem;
+    .slider-btn {
+        width: 40px;
+        height: 40px;
+        font-size: 1rem;
     }
 }
 
 @media (max-width: 576px) {
     .recommended-card {
-        min-width: 160px;
-        max-width: 160px;
+        min-width: 150px;
+        max-width: 150px;
     }
     
-    .recommended-card .product-image-container {
-        height: 130px;
+    .recommended-card .image-container {
+        height: 120px;
+        padding: 10px;
     }
     
-    .recommended-card .card-content {
-        padding: 12px;
+    .recommended-card .card-body {
+        padding: 10px;
     }
     
     .recommended-card .product-title {
         font-size: 0.8rem;
-        height: 32px;
+        height: 36px;
     }
     
     .recommended-card .current-price {
         font-size: 1rem;
-    }
-    
-    .recommended-card .add-to-cart-btn {
-        padding: 6px 10px;
-        font-size: 0.8rem;
     }
 }
 
@@ -1530,16 +1453,6 @@ body,
 [data-theme="dark"] ::-webkit-scrollbar-thumb:hover {
     background: rgba(255, 255, 255, 0.2);
 }
- /* هذا هو التعديل الأبسط والأسرع: */
-#checkoutBtn {
-    background: linear-gradient(135deg, #FF6B35, #E05A2B) !important;
-    color: white !important;
-    border: none !important;
-}
-
-#checkoutBtn:hover:not(:disabled) {
-    background: linear-gradient(135deg, #E05A2B, #D04A1B) !important;
-}   
 </style>
 </head>
 
@@ -1602,50 +1515,6 @@ body,
                     <span class="visually-hidden">Chargement...</span>
                 </div>
                 <p class="mt-3">Chargement du produit...</p>
-            </div>
-        </div>
-    </div>
-
-    <!-- قسم المنتجات المقترحة بتصميم شبيه بأمازون -->
-    <div class="container">
-        <div class="row">
-            <div class="col-12">
-                <div class="recommended-section">
-                    <div class="d-flex justify-content-between align-items-center mb-4">
-                        <h2 class="mb-0">Produits recommandés</h2>
-                        <div class="slider-controls">
-                            <button class="slider-nav-btn" id="prevBtn" onclick="prevSlide()" disabled>
-                                <i class="bi bi-chevron-right"></i>
-                            </button>
-                            <button class="slider-nav-btn" id="nextBtn" onclick="nextSlide()">
-                                <i class="bi bi-chevron-left"></i>
-                            </button>
-                        </div>
-                    </div>
-                    
-                    <div class="recommended-slider-container" id="sliderContainer">
-                        <div class="recommended-slider" id="recommendedSlider">
-                            <div class="recommended-slider-track" id="sliderTrack">
-                                <!-- سيتم تعبئة المنتجات هنا ديناميكيًا -->
-                            </div>
-                        </div>
-                        
-                        <!-- مؤشر التحميل -->
-                        <div class="text-center py-4" id="sliderLoader">
-                            <div class="spinner-border text-primary" role="status">
-                                <span class="visually-hidden">Chargement...</span>
-                            </div>
-                            <p class="mt-2 text-muted">Chargement des produits...</p>
-                        </div>
-                    </div>
-                    
-                    <!-- مؤشر التقدم -->
-                    <div class="slider-progress mt-3">
-                        <div class="progress" style="height: 3px;">
-                            <div class="progress-bar bg-primary" id="sliderProgress" style="width: 0%"></div>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
     </div>
@@ -2452,11 +2321,7 @@ body,
             currentSlide: 0,
             slidesPerView: 4,
             products: [],
-            sliderElement: null,
-            isDragging: false,
-            startX: 0,
-            currentX: 0,
-            dragDistance: 0
+            sliderElement: null
         };
 
         async function loadRecommendedSlider(currentProductId) {
@@ -2476,143 +2341,124 @@ body,
                 
                 if (recommendedSlider.products.length > 0) {
                     renderRecommendedSlider();
-                    setupSliderDrag();
                     updateSliderControls();
                 }
             } catch (error) {
                 console.error('Erreur lors du chargement des produits recommandés:', error);
-            } finally {
-                // إخفاء مؤشر التحميل
-                const loader = document.getElementById('sliderLoader');
-                if (loader) loader.style.display = 'none';
             }
         }
 
         // عرض سلايدر المنتجات المقترحة
         function renderRecommendedSlider() {
-            const sliderTrack = document.getElementById('sliderTrack');
-            if (!sliderTrack || recommendedSlider.products.length === 0) return;
+            const container = document.getElementById('productContainer');
+            if (!container || recommendedSlider.products.length === 0) return;
             
-            sliderTrack.innerHTML = recommendedSlider.products.map(product => {
-                const hasDiscount = product.old_price && product.old_price > product.price;
-                const discountPercentage = hasDiscount ? 
-                    Math.round(((product.old_price - product.price) / product.old_price) * 100) : 0;
-                
-                return `
-                    <div class="recommended-card">
-                        ${hasDiscount ? `
-                            <div class="product-badge">-${discountPercentage}%</div>
-                        ` : ''}
+            // حساب عدد الشرائح
+            const totalSlides = Math.ceil(recommendedSlider.products.length / recommendedSlider.slidesPerView);
+            
+            const sliderHTML = `
+                <div class="col-12">
+                    <div class="recommended-section">
+                        <h2>Produits recommandés</h2>
                         
-                        <div class="product-image-container">
-                            <img src="${product.images[0]}" alt="${product.title}" loading="lazy">
+                        <div class="recommended-slider-container">
+                            <div class="recommended-slider" id="recommendedSlider">
+                                <div class="recommended-slider-track" id="sliderTrack">
+                                    ${recommendedSlider.products.map(product => {
+                                        const hasDiscount = product.old_price && product.old_price > product.price;
+                                        const discountPercentage = hasDiscount ? 
+                                            Math.round(((product.old_price - product.price) / product.old_price) * 100) : 0;
+                                        
+                                        return `
+                                            <div class="recommended-card">
+                                                <div class="image-container">
+                                                    <img src="${product.images[0]}" alt="${product.title}" loading="lazy">
+                                                </div>
+                                                <div class="card-body">
+                                                    <h3 class="product-title">${product.title}</h3>
+                                                    
+                                                    <div class="rating">
+                                                        <div class="stars">
+                                                            <i class="bi bi-star-fill"></i>
+                                                            <i class="bi bi-star-fill"></i>
+                                                            <i class="bi bi-star-fill"></i>
+                                                            <i class="bi bi-star-fill"></i>
+                                                            <i class="bi bi-star-half"></i>
+                                                        </div>
+                                                        <span class="rating-text">(4.2)</span>
+                                                    </div>
+                                                    
+                                                    <div class="price-section">
+                                                        ${hasDiscount ? `
+                                                            <div class="d-flex align-items-center">
+                                                                <span class="old-price">${product.old_price.toLocaleString()} د.ج</span>
+                                                            </div>
+                                                        ` : ''}
+                                                        <span class="current-price">${product.price.toLocaleString()} د.ج</span>
+                                                    </div>
+                                                    
+                                                    <button class="add-to-cart-btn" onclick="addToCart('${product.title}', '${product.price.toLocaleString()} د.ج', ${product.price}, ['${product.images.join("','")}'], ${product.id})">
+                                                        <i class="bi bi-cart-plus"></i> Ajouter
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        `;
+                                    }).join('')}
+                                </div>
+                            </div>
                         </div>
                         
-                        <div class="card-content">
-                            <h3 class="product-title">${product.title}</h3>
+                        <div class="slider-controls">
+                            <button class="slider-btn" id="prevBtn" onclick="prevSlide()">
+                                <i class="bi bi-chevron-right"></i>
+                            </button>
                             
-                            <div class="product-rating">
-                                <div class="product-stars">
-                                    <i class="bi bi-star-fill"></i>
-                                    <i class="bi bi-star-fill"></i>
-                                    <i class="bi bi-star-fill"></i>
-                                    <i class="bi bi-star-fill"></i>
-                                    <i class="bi bi-star-half"></i>
-                                </div>
-                                <span class="rating-count">(4.2)</span>
+                            <div class="slider-dots" id="sliderDots">
+                                ${Array.from({length: totalSlides}, (_, i) => `
+                                    <div class="slider-dot ${i === 0 ? 'active' : ''}" onclick="goToSlide(${i})"></div>
+                                `).join('')}
                             </div>
                             
-                            <div class="price-container">
-                                <span class="current-price">${product.price.toLocaleString()} د.ج</span>
-                                ${hasDiscount ? `
-                                    <span class="old-price">${product.old_price.toLocaleString()} د.ج</span>
-                                ` : ''}
-                            </div>
-                            
-                            <button class="add-to-cart-btn" onclick="addToCart('${product.title}', '${product.price.toLocaleString()} د.ج', ${product.price}, ['${product.images.join("','")}'], ${product.id})">
-                                <i class="bi bi-cart-plus"></i> Ajouter au panier
+                            <button class="slider-btn" id="nextBtn" onclick="nextSlide()">
+                                <i class="bi bi-chevron-left"></i>
                             </button>
                         </div>
                     </div>
-                `;
-            }).join('');
-        }
-
-        // إعداد خاصية السحب للسلايدر
-        function setupSliderDrag() {
-            const slider = document.getElementById('recommendedSlider');
-            if (!slider) return;
+                </div>
+            `;
             
-            recommendedSlider.sliderElement = slider;
+            // إضافة السلايدر بعد محتوى المنتج الحالي
+            container.insertAdjacentHTML('beforeend', sliderHTML);
             
-            // أحداث الماوس
-            slider.addEventListener('mousedown', startDrag);
-            slider.addEventListener('touchstart', startDrag);
+            // حفظ العنصر
+            recommendedSlider.sliderElement = document.getElementById('recommendedSlider');
             
-            // أحداث الحركة
-            slider.addEventListener('mousemove', drag);
-            slider.addEventListener('touchmove', drag);
-            
-            // أحداث الإفلات
-            slider.addEventListener('mouseup', endDrag);
-            slider.addEventListener('mouseleave', endDrag);
-            slider.addEventListener('touchend', endDrag);
-        }
-
-        function startDrag(e) {
-            recommendedSlider.isDragging = true;
-            recommendedSlider.startX = e.type.includes('mouse') ? e.pageX : e.touches[0].pageX;
-            recommendedSlider.currentX = recommendedSlider.startX;
-            recommendedSlider.sliderElement.style.cursor = 'grabbing';
-        }
-
-        function drag(e) {
-            if (!recommendedSlider.isDragging) return;
-            e.preventDefault();
-            
-            const currentX = e.type.includes('mouse') ? e.pageX : e.touches[0].pageX;
-            recommendedSlider.dragDistance = currentX - recommendedSlider.startX;
-            
-            // تحديث موضع السلايدر أثناء السحب
-            const cardWidth = 220 + 15; // عرض البطاقة + المسافة
-            const translateX = -(recommendedSlider.currentSlide * cardWidth * recommendedSlider.slidesPerView) + (recommendedSlider.dragDistance / 5);
-            recommendedSlider.sliderElement.style.transform = `translateX(${translateX}px)`;
-        }
-
-        function endDrag(e) {
-            if (!recommendedSlider.isDragging) return;
-            recommendedSlider.isDragging = false;
-            recommendedSlider.sliderElement.style.cursor = 'grab';
-            
-            // تحديد إذا كان السحب كافيًا لتغيير الشريحة
-            const threshold = 50;
-            if (Math.abs(recommendedSlider.dragDistance) > threshold) {
-                if (recommendedSlider.dragDistance > 0) {
-                    prevSlide();
-                } else {
-                    nextSlide();
-                }
-            } else {
-                // العودة للشريحة الحالية
-                goToSlide(recommendedSlider.currentSlide);
-            }
-            
-            recommendedSlider.dragDistance = 0;
+            // تحديث السلايدر للشاشات الصغيرة
+            updateSlidesPerView();
+            window.addEventListener('resize', updateSlidesPerView);
         }
 
         // تحديث عدد المنتجات المعروضة حسب حجم الشاشة
         function updateSlidesPerView() {
             const width = window.innerWidth;
             if (width < 576) {
-                recommendedSlider.slidesPerView = 2;
+                recommendedSlider.slidesPerView = 1;
             } else if (width < 768) {
-                recommendedSlider.slidesPerView = 3;
+                recommendedSlider.slidesPerView = 2;
             } else if (width < 992) {
-                recommendedSlider.slidesPerView = 4;
+                recommendedSlider.slidesPerView = 3;
             } else {
-                recommendedSlider.slidesPerView = 5;
+                recommendedSlider.slidesPerView = 4;
             }
             
+            // تحديث عرض العناصر
+            const cards = document.querySelectorAll('.recommended-card');
+            cards.forEach(card => {
+                card.style.minWidth = `${100 / recommendedSlider.slidesPerView}%`;
+                card.style.maxWidth = `${100 / recommendedSlider.slidesPerView}%`;
+            });
+            
+            // إعادة حساب الوضع الحالي
             goToSlide(recommendedSlider.currentSlide);
         }
 
@@ -2643,17 +2489,18 @@ body,
                 recommendedSlider.currentSlide = slideIndex;
                 
                 if (recommendedSlider.sliderElement) {
-                    const cardWidth = 220 + 15; // عرض البطاقة + المسافة
-                    const translateX = -(recommendedSlider.currentSlide * cardWidth * recommendedSlider.slidesPerView);
-                    recommendedSlider.sliderElement.style.transform = `translateX(${translateX}px)`;
+                    const slideWidth = 100 / recommendedSlider.slidesPerView;
+                    const translateX = -(recommendedSlider.currentSlide * slideWidth);
+                    recommendedSlider.sliderElement.style.transform = `translateX(${translateX}%)`;
                 }
                 
-                // تحديث شريط التقدم
-                const progress = document.getElementById('sliderProgress');
-                if (progress) {
-                    const progressPercentage = ((recommendedSlider.currentSlide + 1) / totalSlides) * 100;
-                    progress.style.width = `${progressPercentage}%`;
-                }
+                // تحديث النقاط
+                const dots = document.querySelectorAll('.slider-dot');
+                dots.forEach((dot, index) => {
+                    dot.classList.toggle('active', index === slideIndex);
+                });
+                
+                updateSliderControls();
             }
         }
 
@@ -2757,9 +2604,6 @@ body,
             renderCart();
             loadProduct();
             orderModal = new bootstrap.Modal(document.getElementById('orderModal'));
-            
-            // إعداد استماع لتغيير حجم النافذة
-            window.addEventListener('resize', updateSlidesPerView);
         });
     </script>
 </body>
