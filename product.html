@@ -121,6 +121,10 @@ body {
     border-radius: 12px;
     overflow: hidden;
     margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 400px;
 }
 
 [data-theme="dark"] .main-image-container {
@@ -128,18 +132,26 @@ body {
 }
 
 .main-image-container img {
-    width: 100%;
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
     height: auto;
     object-fit: contain;
 }
 
 .thumbnail {
+    width: 80px;
+    height: 80px;
     border: 2px solid transparent;
     transition: all 0.3s ease;
     border-radius: 8px;
     overflow: hidden;
     cursor: pointer;
     background: #f8f9fa;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
 }
 
 [data-theme="dark"] .thumbnail {
@@ -153,6 +165,14 @@ body {
 .thumbnail:hover {
     border-color: var(--primary);
     transform: scale(1.05);
+}
+
+.thumbnail img {
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+    object-fit: contain;
 }
 
 /* معلومات المنتج */
@@ -175,6 +195,23 @@ body {
     font-weight: 700;
     color: var(--dark);
     margin-bottom: 10px;
+}
+
+.rating {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.stars {
+    color: #FFD700;
+    font-size: 0.9rem;
+    margin-left: 5px;
+}
+
+.rating-text {
+    font-size: 0.9rem;
+    color: var(--gray);
 }
 
 .price-section {
@@ -200,6 +237,16 @@ body {
     font-size: 1.2rem;
     color: var(--gray);
     text-decoration: line-through;
+    margin-left: 10px;
+}
+
+.discount {
+    background: var(--danger);
+    color: white;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    font-weight: 600;
     margin-left: 10px;
 }
 
@@ -251,84 +298,126 @@ body {
     border: 1px solid var(--border-color);
 }
 
-/* بطاقات الشحن والضمان */
-.guarantee-cards .border {
-    border-color: #dee2e6 !important;
-    transition: all 0.3s ease;
-    background: #f8f9fa;
+.stock-info i {
+    color: var(--success);
+    margin-left: 8px;
 }
 
-[data-theme="dark"] .guarantee-cards .border {
-    background: var(--light);
-    border-color: var(--border-color) !important;
+.stock-info.in-stock i {
+    color: var(--success);
 }
 
-.guarantee-cards .border:hover {
-    border-color: var(--primary) !important;
-    transform: translateY(-3px);
+.stock-info:not(.in-stock) i {
+    color: var(--danger);
 }
 
-/* تبويبات التفاصيل */
-.nav-tabs .nav-link {
-    color: var(--gray);
-    font-weight: 600;
-    border: none;
-    padding: 10px 20px;
-    transition: all 0.3s ease;
+/* مميزات المنتج */
+.features-list ul {
+    list-style: none;
+    padding: 0;
+    margin: 20px 0;
 }
 
-[data-theme="dark"] .nav-tabs .nav-link {
-    color: var(--gray);
+.features-list li {
+    padding: 8px 0;
+    padding-right: 30px;
+    position: relative;
 }
 
-.nav-tabs .nav-link.active {
+.features-list li:before {
+    content: "✓";
+    position: absolute;
+    right: 0;
+    color: var(--success);
+    font-weight: bold;
+}
+
+/* معلومات الشحن */
+.shipping-info {
+    margin-top: 25px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border-color);
+}
+
+.shipping-info .item {
+    margin-bottom: 12px;
+}
+
+.shipping-info i {
     color: var(--primary);
-    border-bottom: 3px solid var(--primary);
-    background: transparent;
+    font-size: 1.2rem;
 }
 
-[data-theme="dark"] .nav-tabs .nav-link.active {
-    color: var(--primary);
-}
-
-/* التقييمات */
-.stars {
-    color: #FFD700;
-}
-
-.review-item {
-    padding: 15px;
-    border-bottom: 1px solid #eee;
-    transition: all 0.3s ease;
-}
-
-[data-theme="dark"] .review-item {
-    border-bottom: 1px solid var(--border-color);
-}
-
-.review-item:last-child {
-    border-bottom: none;
-}
-
-/* قسم التبويبات */
-.product-details {
+/* قسم الوصف */
+.product-description {
     background: white;
     border-radius: 12px;
     padding: 30px;
     box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-    margin-top: 50px;
+    margin-top: 30px;
     transition: all 0.3s ease;
 }
 
-[data-theme="dark"] .product-details {
+[data-theme="dark"] .product-description {
     background: var(--light);
     border: 1px solid var(--border-color);
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
+.description-title {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--dark);
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 2px solid var(--primary);
+    position: relative;
+}
+
+.description-title::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    right: 0;
+    width: 60px;
+    height: 2px;
+    background-color: var(--primary);
+}
+
+.description-content {
+    line-height: 1.8;
+    color: var(--dark);
+}
+
+.description-content p {
+    margin-bottom: 15px;
+}
+
+.description-content ul {
+    margin-right: 20px;
+    margin-bottom: 15px;
+}
+
+.description-content li {
+    margin-bottom: 8px;
+    position: relative;
+    padding-right: 20px;
+}
+
+.description-content li:before {
+    content: "•";
+    position: absolute;
+    right: 0;
+    color: var(--primary);
+    font-size: 1.2rem;
+}
+
 /* نماذج الطلب */
 .modal-content {
     transition: all 0.3s ease;
+    border-radius: 15px;
+    border: none;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
 }
 
 [data-theme="dark"] .modal-content {
@@ -339,6 +428,23 @@ body {
 [data-theme="dark"] .modal-header {
     background: linear-gradient(135deg, var(--primary), var(--primary-dark));
     color: white;
+}
+
+.modal-header {
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+    color: white;
+    border-radius: 15px 15px 0 0;
+    padding: 1rem 1.5rem;
+    border-bottom: none;
+}
+
+.modal-header .btn-close {
+    filter: invert(1);
+    opacity: 0.8;
+}
+
+.modal-body {
+    padding: 1.5rem;
 }
 
 /* الفوتر */
@@ -391,9 +497,8 @@ body {
         height: 60px;
     }
     
-    .nav-tabs .nav-link {
-        padding: 8px 12px;
-        font-size: 0.9rem;
+    .product-description {
+        padding: 20px;
     }
 }
 
@@ -528,35 +633,10 @@ body {
 }
 
 /* ============== تحسينات نموذج الطلب ============== */
-.modal-content {
-    border-radius: 15px;
-    border: none;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-}
-
-.modal-header {
-    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-    color: white;
-    border-radius: 15px 15px 0 0;
-    padding: 1rem 1.5rem;
-    border-bottom: none;
-}
-
-.modal-header .btn-close {
-    filter: invert(1);
-    opacity: 0.8;
-}
-
-.modal-body {
-    padding: 1.5rem;
-}
-
-/* جعل نموذج الطلب أصغر */
 .modal-dialog.modal-lg {
     max-width: 600px;
 }
 
-/* تحسين ملخص الطلب */
 .order-summary {
     background: linear-gradient(135deg, #f8f9fa, #e9ecef);
     border-radius: 10px;
@@ -575,7 +655,7 @@ body {
     margin-bottom: 1rem;
 }
 
-/* تصغير حقول الإدخال */
+/* حقول الإدخال */
 .modal-body .form-control,
 .modal-body .form-select {
     padding: 0.5rem 0.75rem;
@@ -600,7 +680,7 @@ body {
     box-shadow: 0 0 0 0.2rem rgba(255, 107, 53, 0.25);
 }
 
-/* تصغير التسميات */
+/* التسميات */
 .modal-body .form-label {
     font-size: 0.85rem;
     font-weight: 600;
@@ -612,7 +692,7 @@ body {
     color: var(--dark);
 }
 
-/* زر التأكيد الأخضر الجذاب */
+/* زر التأكيد */
 #submitOrderBtn {
     background: linear-gradient(135deg, #28a745, #20c997);
     border: none;
@@ -643,7 +723,7 @@ body {
     box-shadow: none;
 }
 
-/* تحسين أزرار الدفع */
+/* أزرار الدفع */
 .form-check-input:checked {
     background-color: var(--primary);
     border-color: var(--primary);
@@ -658,7 +738,7 @@ body {
     color: var(--dark);
 }
 
-/* تعديل صورة المنتج */
+/* صورة المنتج */
 .product-image-thumb {
     width: 80px;
     height: 80px;
@@ -697,116 +777,7 @@ body {
     }
 }
 
-/* إزالة الرسوم المتحركة غير الضرورية */
-.modal.fade .modal-dialog {
-    transform: translate(0, -50px);
-    transition: transform 0.3s ease-out;
-}
-
-/* ============== أنماط البطاقات ============== */
-.feature-card {
-    background: #f8f9fa;
-    padding: 20px;
-    border-radius: 8px;
-    text-align: center;
-    transition: all 0.3s ease;
-}
-
-[data-theme="dark"] .feature-card {
-    background: var(--light);
-    border: 1px solid var(--border-color);
-}
-
-.feature-card i {
-    font-size: 2rem;
-    color: var(--primary);
-    margin-bottom: 15px;
-}
-
-.feature-card h5 {
-    color: var(--dark);
-    margin-bottom: 10px;
-}
-
-.feature-card p {
-    color: var(--gray);
-}
-
-/* ============== بطاقات الضمان ============== */
-.guarantee-card {
-    background: #f8f9fa;
-    padding: 20px;
-    border-radius: 8px;
-    text-align: center;
-    border: 1px solid #dee2e6;
-    transition: all 0.3s ease;
-}
-
-[data-theme="dark"] .guarantee-card {
-    background: var(--light);
-    border: 1px solid var(--border-color);
-}
-
-.guarantee-card:hover {
-    border-color: var(--primary);
-    transform: translateY(-3px);
-}
-
-.guarantee-card i {
-    font-size: 2rem;
-    color: var(--primary);
-    margin-bottom: 15px;
-}
-
-/* ============== التأثيرات الانتقالية ============== */
-body,
-.navbar,
-.product-info,
-.product-details,
-.modal-content,
-.feature-card,
-.guarantee-card,
-.review-item,
-.stock-info,
-.price-section {
-    transition: background-color 0.3s ease,
-                border-color 0.3s ease,
-                color 0.3s ease,
-                transform 0.3s ease,
-                box-shadow 0.3s ease;
-}
-
-/* ============== شريط التمرير ============== */
-::-webkit-scrollbar {
-    width: 10px;
-}
-
-::-webkit-scrollbar-track {
-    background: rgba(0, 0, 0, 0.05);
-}
-
-[data-theme="dark"] ::-webkit-scrollbar-track {
-    background: rgba(255, 255, 255, 0.05);
-}
-
-::-webkit-scrollbar-thumb {
-    background: rgba(0, 0, 0, 0.1);
-    border-radius: 5px;
-}
-
-[data-theme="dark"] ::-webkit-scrollbar-thumb {
-    background: rgba(255, 255, 255, 0.1);
-}
-
-::-webkit-scrollbar-thumb:hover {
-    background: rgba(0, 0, 0, 0.2);
-}
-
-[data-theme="dark"] ::-webkit-scrollbar-thumb:hover {
-    background: rgba(255, 255, 255, 0.2);
-}
-
-/* ============== أنماط سلة المشتريات (مطابقة لـ INDEX) ============== */
+/* ============== أنماط سلة المشتريات ============== */
 .cart-icon-container {
     position: fixed;
     top: 80px;
@@ -881,14 +852,7 @@ body,
     color: var(--dark);
 }
 
-/* منع التداخل مع زر القائمة على الجوال */
-@media (max-width: 991px) {
-    .navbar-toggler {
-        z-index: 1004;
-    }
-}
-
-/* ============== أنماط سلة المشتريات ============== */
+/* أوفسكانفاس السلة */
 .offcanvas {
     font-family: 'Tajawal', sans-serif;
     transition: transform 0.3s ease-in-out;
@@ -1083,7 +1047,6 @@ body,
     box-shadow: 0 4px 8px rgba(255, 107, 53, 0.3);
 }
 
-/* رسالة السلة الفارغة */
 #emptyCartMessage {
     color: var(--gray);
     padding: 3rem 1rem;
@@ -1172,6 +1135,249 @@ body,
     0% { transform: scale(1); }
     50% { transform: scale(1.1); }
     100% { transform: scale(1); }
+}
+
+/* ============== المنتجات المقترحة ============== */
+.recommended-products {
+    margin-top: 50px;
+    margin-bottom: 30px;
+}
+
+.recommended-products h2 {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--dark);
+    margin-bottom: 30px;
+    padding-bottom: 15px;
+    border-bottom: 2px solid var(--primary);
+    position: relative;
+}
+
+.recommended-products h2::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    right: 0;
+    width: 60px;
+    height: 2px;
+    background-color: var(--primary);
+}
+
+.recommended-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.recommended-card {
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+    border: 1px solid #eee;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+[data-theme="dark"] .recommended-card {
+    background: var(--light);
+    border: 1px solid var(--border-color);
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+}
+
+.recommended-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.12);
+}
+
+.recommended-card .image-container {
+    width: 100%;
+    height: 180px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    background: #f8f9fa;
+    border-bottom: 1px solid #eee;
+}
+
+[data-theme="dark"] .recommended-card .image-container {
+    background: #2a2a2a;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.recommended-card .image-container img {
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+}
+
+.recommended-card .card-body {
+    padding: 15px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.recommended-card .product-title {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--dark);
+    margin-bottom: 10px;
+    line-height: 1.4;
+    height: 40px;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+
+.recommended-card .rating {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.recommended-card .stars {
+    color: #FFD700;
+    font-size: 0.9rem;
+}
+
+.recommended-card .rating-text {
+    font-size: 0.8rem;
+    color: var(--gray);
+    margin-right: 5px;
+}
+
+.recommended-card .price-section {
+    margin-top: auto;
+    padding-top: 10px;
+    background: none;
+    padding: 0;
+}
+
+.recommended-card .current-price {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--primary);
+}
+
+.recommended-card .old-price {
+    font-size: 0.9rem;
+    color: var(--gray);
+    text-decoration: line-through;
+    margin-right: 5px;
+}
+
+.recommended-card .add-to-cart-btn {
+    width: 100%;
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+    border: none;
+    color: white;
+    font-weight: 600;
+    padding: 10px;
+    border-radius: 8px;
+    margin-top: 10px;
+    transition: all 0.3s ease;
+    font-size: 0.9rem;
+}
+
+.recommended-card .add-to-cart-btn:hover {
+    background: linear-gradient(135deg, var(--primary-dark), #E05A2B);
+}
+
+/* تحسينات للجوال */
+@media (max-width: 768px) {
+    .recommended-grid {
+        grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+        gap: 15px;
+    }
+    
+    .recommended-card .image-container {
+        height: 140px;
+        padding: 15px;
+    }
+    
+    .recommended-products h2 {
+        font-size: 1.5rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .recommended-grid {
+        grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+        gap: 10px;
+    }
+    
+    .recommended-card .image-container {
+        height: 120px;
+        padding: 10px;
+    }
+    
+    .recommended-card .card-body {
+        padding: 10px;
+    }
+    
+    .recommended-card .product-title {
+        font-size: 0.8rem;
+        height: 36px;
+    }
+    
+    .recommended-card .current-price {
+        font-size: 1rem;
+    }
+}
+
+/* التأثيرات الانتقالية */
+body,
+.navbar,
+.product-info,
+.product-description,
+.modal-content,
+.recommended-card,
+.cart-item,
+.stock-info,
+.price-section {
+    transition: background-color 0.3s ease,
+                border-color 0.3s ease,
+                color 0.3s ease,
+                transform 0.3s ease,
+                box-shadow 0.3s ease;
+}
+
+/* شريط التمرير */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.05);
+}
+
+[data-theme="dark"] ::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+}
+
+[data-theme="dark"] ::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 0, 0, 0.2);
+}
+
+[data-theme="dark"] ::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.2);
 }
 </style>
 </head>
@@ -1488,7 +1694,7 @@ body,
             });
         }
 
-        // ============== إدارة سلة المشتريات (مطابقة لـ INDEX) ==============
+        // ============== إدارة سلة المشتريات ==============
         let cart = [];
         let orderModal = null;
 
@@ -1917,6 +2123,8 @@ body,
                 }
                 
                 renderProduct(product);
+                // تحميل المنتجات المقترحة
+                loadRecommendedProducts(productId);
             } catch (error) {
                 console.error('Erreur:', error);
                 showProductError('Erreur lors du chargement du produit');
@@ -2024,102 +2232,99 @@ body,
                 </div>
                 
                 <div class="col-12">
-                    <div class="product-details">
-                        <ul class="nav nav-tabs details-tabs" id="productTabs" role="tablist">
-                            <li class="nav-item" role="presentation">
-                                <button class="nav-link active" id="description-tab" data-bs-toggle="tab" data-bs-target="#description" type="button" role="tab">Description</button>
-                            </li>
-                            <li class="nav-item" role="presentation">
-                                <button class="nav-link" id="features-tab" data-bs-toggle="tab" data-bs-target="#features" type="button" role="tab">Caractéristiques</button>
-                            </li>
-                            <li class="nav-item" role="presentation">
-                                <button class="nav-link" id="reviews-tab" data-bs-toggle="tab" data-bs-target="#reviews" type="button" role="tab">Avis</button>
-                            </li>
-                        </ul>
-                        
-                        <div class="tab-content mt-4" id="productTabsContent">
-                            <div class="tab-pane fade show active" id="description" role="tabpanel">
-                                <div class="description-content">
-                                    ${product.description_long || product.description_short || 'Aucune description disponible.'}
-                                </div>
-                            </div>
-                            
-                            <div class="tab-pane fade" id="features" role="tabpanel">
-                                <div class="features-grid row g-4">
-                                    <div class="col-md-6">
-                                        <div class="feature-card">
-                                            <i class="bi bi-lightning-charge"></i>
-                                            <h5>Haute performance</h5>
-                                            <p>Technologie avancée pour des résultats optimaux</p>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="feature-card">
-                                            <i class="bi bi-shield-check"></i>
-                                            <h5>Sécurité garantie</h5>
-                                            <p>Normes de sécurité internationales</p>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="feature-card">
-                                            <i class="bi bi-award"></i>
-                                            <h5>Qualité Robuste</h5>
-                                            <p>Fabriqué avec des matériaux durables</p>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="feature-card">
-                                            <i class="bi bi-heart"></i>
-                                            <h5>Conception ergonomique</h5>
-                                            <p>Facile à utiliser au quotidien</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <div class="tab-pane fade" id="reviews" role="tabpanel">
-                                <div class="review-item mb-4">
-                                    <div class="d-flex align-items-center mb-2">
-                                        <div class="stars me-2">
-                                            <i class="bi bi-star-fill"></i>
-                                            <i class="bi bi-star-fill"></i>
-                                            <i class="bi bi-star-fill"></i>
-                                            <i class="bi bi-star-fill"></i>
-                                            <i class="bi bi-star-fill"></i>
-                                        </div>
-                                        <strong>Omar</strong>
-                                    </div>
-                                    <p>"Produit de très bonne qualité, je recommande!"</p>
-                                </div>
+                    <div class="product-description">
+                        <h3 class="description-title">Description du produit</h3>
+                        <div class="description-content">
+                            ${product.description_long || product.description_short || 'Aucune description disponible.'}
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        // ============== المنتجات المقترحة ==============
+        async function loadRecommendedProducts(currentProductId) {
+            try {
+                const response = await fetch('products.json');
+                
+                if (!response.ok) {
+                    throw new Error('Erreur lors du chargement des produits');
+                }
+                
+                const products = await response.json();
+                
+                // تصفية المنتجات (استبعاد المنتج الحالي)
+                const recommended = products
+                    .filter(product => product.id !== currentProductId)
+                    .slice(0, 8); // عرض أول 8 منتجات فقط
+                
+                renderRecommendedProducts(recommended);
+            } catch (error) {
+                console.error('Erreur lors du chargement des produits recommandés:', error);
+            }
+        }
+
+        // عرض المنتجات المقترحة
+        function renderRecommendedProducts(products) {
+            const container = document.getElementById('productContainer');
+            if (!container) return;
+            
+            if (products.length === 0) {
+                return;
+            }
+            
+            const recommendedHTML = `
+                <div class="col-12">
+                    <div class="recommended-products">
+                        <h2>Produits recommandés</h2>
+                        <div class="recommended-grid" id="recommendedProductsGrid">
+                            ${products.map(product => {
+                                const hasDiscount = product.old_price && product.old_price > product.price;
+                                const discountPercentage = hasDiscount ? 
+                                    Math.round(((product.old_price - product.price) / product.old_price) * 100) : 0;
                                 
-                                <div class="review-item mb-4">
-                                    <div class="d-flex align-items-center mb-2">
-                                        <div class="stars me-2">
-                                            <i class="bi bi-star-fill"></i>
-                                            <i class="bi bi-star-fill"></i>
-                                            <i class="bi bi-star-fill"></i>
-                                            <i class="bi bi-star-fill"></i>
-                                            <i class="bi bi-star-half"></i>
+                                return `
+                                    <div class="recommended-card">
+                                        <div class="image-container">
+                                            <img src="${product.images[0]}" alt="${product.title}" loading="lazy">
                                         </div>
-                                        <strong>Sarah</strong>
+                                        <div class="card-body">
+                                            <h3 class="product-title">${product.title}</h3>
+                                            
+                                            <div class="rating">
+                                                <div class="stars">
+                                                    <i class="bi bi-star-fill"></i>
+                                                    <i class="bi bi-star-fill"></i>
+                                                    <i class="bi bi-star-fill"></i>
+                                                    <i class="bi bi-star-fill"></i>
+                                                    <i class="bi bi-star-half"></i>
+                                                </div>
+                                                <span class="rating-text">(4.2)</span>
+                                            </div>
+                                            
+                                            <div class="price-section">
+                                                ${hasDiscount ? `
+                                                    <div class="d-flex align-items-center">
+                                                        <span class="old-price">${product.old_price.toLocaleString()} د.ج</span>
+                                                    </div>
+                                                ` : ''}
+                                                <span class="current-price">${product.price.toLocaleString()} د.ج</span>
+                                            </div>
+                                            
+                                            <button class="add-to-cart-btn" onclick="addToCart('${product.title}', '${product.price.toLocaleString()} د.ج', ${product.price}, ['${product.images.join("','")}'], ${product.id})">
+                                                <i class="bi bi-cart-plus"></i> Ajouter
+                                            </button>
+                                        </div>
                                     </div>
-                                    <p>"Très satisfaite de mon achat, livraison rapide."</p>
-                                </div>
-                            </div>
+                                `;
+                            }).join('')}
                         </div>
                     </div>
                 </div>
             `;
             
-            // تهيئة التبويبات
-            const triggerTabList = [].slice.call(document.querySelectorAll('#productTabs button'));
-            triggerTabList.forEach(function (triggerEl) {
-                var tabTrigger = new bootstrap.Tab(triggerEl);
-                triggerEl.addEventListener('click', function (event) {
-                    event.preventDefault();
-                    tabTrigger.show();
-                });
-            });
+            // إضافة المنتجات المقترحة بعد محتوى المنتج الحالي
+            container.insertAdjacentHTML('beforeend', recommendedHTML);
         }
 
         // تغيير الصورة الرئيسية
@@ -2201,7 +2406,7 @@ body,
         // ============== تهيئة الصفحة ==============
         document.addEventListener('DOMContentLoaded', function() {
             initDarkMode();
-            populateWilayas(); // تعبئة قائمة الولايات
+            populateWilayas();
             loadCart();
             updateCartCount();
             renderCart();
