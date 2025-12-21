@@ -1137,106 +1137,196 @@ body {
     100% { transform: scale(1); }
 }
 
-/* ============== سلايدر المنتجات المقترحة ============== */
+/* ============== سلايدر المنتجات المقترحة المحسنة ============== */
 .recommended-section {
-    margin-top: 50px;
-    margin-bottom: 30px;
+    margin-top: 60px;
+    margin-bottom: 40px;
+    padding: 20px 0;
 }
 
-.recommended-section h2 {
+.recommended-section .section-title {
     font-size: 1.8rem;
     font-weight: 700;
     color: var(--dark);
-    margin-bottom: 30px;
-    padding-bottom: 15px;
-    border-bottom: 2px solid var(--primary);
     position: relative;
+    display: inline-block;
 }
 
-.recommended-section h2::after {
+.recommended-section .section-title::after {
     content: '';
     position: absolute;
-    bottom: -2px;
+    bottom: -8px;
     right: 0;
     width: 60px;
-    height: 2px;
-    background-color: var(--primary);
+    height: 3px;
+    background: linear-gradient(90deg, var(--primary), transparent);
+    border-radius: 3px;
 }
 
-.recommended-slider-container {
-    position: relative;
-    overflow: hidden;
-    padding: 10px 0;
-}
-
-.recommended-slider {
+.view-all-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
     display: flex;
-    transition: transform 0.5s ease;
-    gap: 20px;
-    padding: 10px 5px;
+    align-items: center;
 }
 
+.view-all-link:hover {
+    color: var(--primary-dark);
+    transform: translateX(-3px);
+}
+
+/* حاوية السلايدر الرئيسية */
+.recommended-products-container {
+    position: relative;
+    padding: 0 50px;
+    margin: 20px 0;
+    overflow: hidden;
+}
+
+@media (max-width: 768px) {
+    .recommended-products-container {
+        padding: 0 40px;
+    }
+}
+
+@media (max-width: 576px) {
+    .recommended-products-container {
+        padding: 0 15px;
+    }
+}
+
+/* غلاف السلايدر */
+.recommended-slider-wrapper {
+    overflow: hidden;
+    border-radius: 16px;
+    position: relative;
+    touch-action: pan-y pinch-zoom;
+}
+
+/* مسار السلايدر */
 .recommended-slider-track {
     display: flex;
+    transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    will-change: transform;
     gap: 20px;
-    min-width: 100%;
+    padding: 10px 5px;
+    user-select: none;
 }
 
-.recommended-card {
-    background: white;
+/* بطاقة المنتج المحسنة */
+.recommended-product-card {
+    background: var(--light);
     border-radius: 12px;
     overflow: hidden;
-    transition: all 0.3s ease;
-    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
-    border: 1px solid #eee;
-    min-width: 220px;
-    max-width: 220px;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    border: 1px solid var(--border-color);
+    min-width: 250px;
+    max-width: 250px;
     flex-shrink: 0;
+    position: relative;
+    cursor: pointer;
 }
 
-[data-theme="dark"] .recommended-card {
+[data-theme="dark"] .recommended-product-card {
     background: var(--light);
     border: 1px solid var(--border-color);
-    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
 }
 
-.recommended-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.12);
+.recommended-product-card:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+    border-color: var(--primary);
 }
 
-.recommended-card .image-container {
+.recommended-product-card:active {
+    transform: translateY(-4px) scale(1.01);
+    transition: transform 0.2s ease;
+}
+
+/* علامة الخصم */
+.product-badge {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background: linear-gradient(135deg, #ff4444, #ff6b35);
+    color: white;
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 4px 10px;
+    border-radius: 20px;
+    z-index: 2;
+    box-shadow: 0 3px 8px rgba(255, 107, 53, 0.3);
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+/* حاوية الصورة */
+.recommended-product-card .product-image-container {
     width: 100%;
-    height: 180px;
+    height: 200px;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 20px;
-    background: #f8f9fa;
-    border-bottom: 1px solid #eee;
-}
-
-[data-theme="dark"] .recommended-card .image-container {
-    background: #2a2a2a;
+    padding: 25px;
+    background: linear-gradient(135deg, #f8f9fa, #e9ecef);
     border-bottom: 1px solid var(--border-color);
+    position: relative;
+    overflow: hidden;
 }
 
-.recommended-card .image-container img {
+[data-theme="dark"] .recommended-product-card .product-image-container {
+    background: linear-gradient(135deg, #2a2a2a, #333333);
+}
+
+.recommended-product-card .product-image-container::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, var(--primary), transparent);
+    transform: translateX(-100%);
+    transition: transform 0.5s ease;
+}
+
+.recommended-product-card:hover .product-image-container::after {
+    transform: translateX(0);
+}
+
+.recommended-product-card .product-image-container img {
     max-width: 100%;
     max-height: 100%;
     width: auto;
     height: auto;
     object-fit: contain;
+    transition: transform 0.4s ease;
 }
 
-.recommended-card .card-body {
-    padding: 15px;
+.recommended-product-card:hover .product-image-container img {
+    transform: scale(1.05);
+}
+
+/* تفاصيل المنتج */
+.recommended-product-card .product-details {
+    padding: 20px;
     display: flex;
     flex-direction: column;
+    height: 180px;
 }
 
-.recommended-card .product-title {
-    font-size: 0.9rem;
+.recommended-product-card .product-title {
+    font-size: 0.95rem;
     font-weight: 600;
     color: var(--dark);
     margin-bottom: 10px;
@@ -1246,136 +1336,253 @@ body {
     display: -webkit-box;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
+    transition: color 0.3s ease;
 }
 
-.recommended-card .rating {
-    display: flex;
-    align-items: center;
-    margin-bottom: 10px;
-}
-
-.recommended-card .stars {
-    color: #FFD700;
-    font-size: 0.9rem;
-}
-
-.recommended-card .rating-text {
-    font-size: 0.8rem;
-    color: var(--gray);
-    margin-right: 5px;
-}
-
-.recommended-card .price-section {
-    margin-top: auto;
-    padding-top: 10px;
-    background: none;
-    padding: 0;
-}
-
-.recommended-card .current-price {
-    font-size: 1.2rem;
-    font-weight: 700;
+.recommended-product-card:hover .product-title {
     color: var(--primary);
 }
 
-.recommended-card .old-price {
+/* التقييمات */
+.recommended-product-card .product-rating {
+    display: flex;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.recommended-product-card .stars {
+    color: #FFD700;
+    font-size: 0.9rem;
+    margin-left: 4px;
+}
+
+.recommended-product-card .rating-text {
+    font-size: 0.85rem;
+    color: var(--gray);
+    margin-right: 6px;
+}
+
+/* السعر */
+.recommended-product-card .product-price {
+    margin-top: auto;
+}
+
+.recommended-product-card .current-price {
+    font-size: 1.3rem;
+    font-weight: 800;
+    color: var(--primary);
+    display: block;
+    margin-bottom: 4px;
+}
+
+.recommended-product-card .old-price {
     font-size: 0.9rem;
     color: var(--gray);
     text-decoration: line-through;
-    margin-right: 5px;
+    margin-left: 8px;
 }
 
-.recommended-card .add-to-cart-btn {
+/* زر الإضافة للسلة */
+.add-to-cart-mini {
     width: 100%;
     background: linear-gradient(135deg, var(--primary), var(--primary-dark));
     border: none;
     color: white;
     font-weight: 600;
-    padding: 10px;
-    border-radius: 8px;
-    margin-top: 10px;
+    padding: 12px;
+    border-radius: 10px;
+    margin-top: 15px;
     transition: all 0.3s ease;
     font-size: 0.9rem;
     cursor: pointer;
-}
-
-.recommended-card .add-to-cart-btn:hover {
-    background: linear-gradient(135deg, var(--primary-dark), #E05A2B);
-}
-
-/* أزرار التحكم بالسلايدر */
-.slider-controls {
     display: flex;
-    justify-content: center;
     align-items: center;
-    gap: 15px;
-    margin-top: 25px;
+    justify-content: center;
+    gap: 8px;
+    position: relative;
+    overflow: hidden;
 }
 
-.slider-btn {
+.add-to-cart-mini::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.6s;
+}
+
+.add-to-cart-mini:hover::before {
+    left: 100%;
+}
+
+.add-to-cart-mini:hover {
+    background: linear-gradient(135deg, var(--primary-dark), #E05A2B);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(255, 107, 53, 0.3);
+}
+
+.add-to-cart-mini:active {
+    transform: translateY(0);
+}
+
+.add-to-cart-mini .cart-icon {
+    transition: transform 0.3s ease;
+}
+
+.add-to-cart-mini:hover .cart-icon {
+    transform: translateX(3px);
+}
+
+/* أزرار التنقل */
+.slider-nav-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
     width: 44px;
     height: 44px;
     border-radius: 50%;
-    background: var(--primary);
-    color: white;
-    border: none;
+    background: var(--light);
+    color: var(--dark);
+    border: 1px solid var(--border-color);
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 1.2rem;
     cursor: pointer;
     transition: all 0.3s ease;
-    box-shadow: 0 3px 10px rgba(255, 107, 53, 0.2);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    z-index: 10;
+    opacity: 0.9;
 }
 
-.slider-btn:hover:not(:disabled) {
-    background: var(--primary-dark);
-    transform: scale(1.1);
-    box-shadow: 0 5px 15px rgba(255, 107, 53, 0.3);
+[data-theme="dark"] .slider-nav-btn {
+    background: var(--light);
+    border: 1px solid var(--border-color);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
 
-.slider-btn:disabled {
-    background: var(--gray);
+.slider-nav-btn:hover {
+    background: var(--primary);
+    color: white;
+    border-color: var(--primary);
+    opacity: 1;
+    transform: translateY(-50%) scale(1.1);
+    box-shadow: 0 6px 20px rgba(255, 107, 53, 0.3);
+}
+
+.slider-nav-btn:disabled {
+    opacity: 0.3;
     cursor: not-allowed;
-    opacity: 0.5;
+    transform: translateY(-50%) scale(1);
 }
 
-.slider-dots {
+.slider-nav-btn:disabled:hover {
+    background: var(--light);
+    color: var(--dark);
+    border-color: var(--border-color);
+}
+
+.slider-nav-btn.prev-btn {
+    right: 0;
+}
+
+.slider-nav-btn.next-btn {
+    left: 0;
+}
+
+/* شريط التقدم */
+.slider-progress {
+    width: 100%;
+    height: 3px;
+    background: rgba(0, 0, 0, 0.1);
+    border-radius: 3px;
+    margin-top: 20px;
+    overflow: hidden;
+}
+
+[data-theme="dark"] .slider-progress {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.slider-progress .progress-bar {
+    height: 100%;
+    background: linear-gradient(90deg, var(--primary), var(--primary-dark));
+    border-radius: 3px;
+    width: 0%;
+    transition: width 0.3s ease;
+}
+
+/* النقاط الدالة */
+.slider-dots-container {
     display: flex;
-    gap: 8px;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 25px;
 }
 
 .slider-dot {
-    width: 10px;
-    height: 10px;
+    width: 12px;
+    height: 12px;
     border-radius: 50%;
-    background: #ddd;
+    background: rgba(0, 0, 0, 0.1);
     cursor: pointer;
     transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+[data-theme="dark"] .slider-dot {
+    background: rgba(255, 255, 255, 0.2);
 }
 
 .slider-dot.active {
     background: var(--primary);
     transform: scale(1.2);
+    box-shadow: 0 0 0 3px rgba(255, 107, 53, 0.2);
+}
+
+.slider-dot:hover:not(.active) {
+    background: rgba(255, 107, 53, 0.5);
+    transform: scale(1.1);
 }
 
 /* تحسينات للجوال */
+@media (max-width: 992px) {
+    .recommended-product-card {
+        min-width: 220px;
+        max-width: 220px;
+    }
+    
+    .recommended-product-card .product-image-container {
+        height: 180px;
+        padding: 20px;
+    }
+    
+    .recommended-product-card .product-details {
+        height: 170px;
+        padding: 16px;
+    }
+}
+
 @media (max-width: 768px) {
-    .recommended-section h2 {
+    .recommended-section .section-title {
         font-size: 1.5rem;
     }
     
-    .recommended-card {
-        min-width: 180px;
-        max-width: 180px;
+    .recommended-product-card {
+        min-width: 200px;
+        max-width: 200px;
     }
     
-    .recommended-card .image-container {
-        height: 140px;
-        padding: 15px;
+    .recommended-product-card .product-image-container {
+        height: 160px;
+        padding: 18px;
     }
     
-    .slider-btn {
+    .slider-nav-btn {
         width: 40px;
         height: 40px;
         font-size: 1rem;
@@ -1383,28 +1590,70 @@ body {
 }
 
 @media (max-width: 576px) {
-    .recommended-card {
-        min-width: 150px;
-        max-width: 150px;
+    .recommended-section .section-title {
+        font-size: 1.3rem;
     }
     
-    .recommended-card .image-container {
-        height: 120px;
-        padding: 10px;
+    .recommended-product-card {
+        min-width: 170px;
+        max-width: 170px;
     }
     
-    .recommended-card .card-body {
-        padding: 10px;
+    .recommended-product-card .product-image-container {
+        height: 140px;
+        padding: 15px;
     }
     
-    .recommended-card .product-title {
-        font-size: 0.8rem;
+    .recommended-product-card .product-details {
+        height: 160px;
+        padding: 14px;
+    }
+    
+    .recommended-product-card .product-title {
+        font-size: 0.85rem;
         height: 36px;
     }
     
-    .recommended-card .current-price {
-        font-size: 1rem;
+    .recommended-product-card .current-price {
+        font-size: 1.1rem;
     }
+    
+    .add-to-cart-mini {
+        padding: 10px;
+        font-size: 0.85rem;
+    }
+    
+    .slider-nav-btn {
+        width: 36px;
+        height: 36px;
+        font-size: 0.9rem;
+    }
+}
+
+/* تأثيرات للسحب على الأجهزة المحمولة */
+.recommended-slider-track {
+    cursor: grab;
+}
+
+.recommended-slider-track:active {
+    cursor: grabbing;
+}
+
+.recommended-slider-track.dragging {
+    transition: none;
+}
+
+/* فاصل بين المنتجات */
+.recommended-slider-track::after {
+    content: '';
+    min-width: 20px;
+    flex-shrink: 0;
+}
+
+/* تحسين الأداء */
+.recommended-product-card * {
+    backface-visibility: hidden;
+    -webkit-font-smoothing: antialiased;
 }
 
 /* التأثيرات الانتقالية */
@@ -1413,7 +1662,7 @@ body,
 .product-info,
 .product-description,
 .modal-content,
-.recommended-card,
+.recommended-product-card,
 .cart-item,
 .stock-info,
 .price-section {
@@ -1453,6 +1702,7 @@ body,
 [data-theme="dark"] ::-webkit-scrollbar-thumb:hover {
     background: rgba(255, 255, 255, 0.2);
 }
+
  /* هذا هو التعديل الأبسط والأسرع: */
 #checkoutBtn {
     background: linear-gradient(135deg, #FF6B35, #E05A2B) !important;
@@ -2207,8 +2457,8 @@ body,
                 }
                 
                 renderProduct(product);
-                // تحميل المنتجات المقترحة في سلايدر
-                loadRecommendedSlider(productId);
+                // تحميل المنتجات المقترحة في سلايدر محسن
+                setTimeout(() => loadRecommendedSlider(productId), 100);
             } catch (error) {
                 console.error('Erreur:', error);
                 showProductError('Erreur lors du chargement du produit');
@@ -2326,14 +2576,22 @@ body,
             `;
         }
 
-        // ============== سلايدر المنتجات المقترحة ==============
+        // ============== نظام سلايدر المنتجات المقترحة المحسن ==============
         let recommendedSlider = {
-            currentSlide: 0,
+            track: null,
+            isDragging: false,
+            startPos: 0,
+            currentTranslate: 0,
+            prevTranslate: 0,
+            animationID: null,
+            currentIndex: 0,
             slidesPerView: 4,
-            products: [],
-            sliderElement: null
+            totalSlides: 0,
+            autoSlideInterval: null,
+            isAutoSliding: true
         };
 
+        // تحميل وعرض المنتجات المقترحة
         async function loadRecommendedSlider(currentProductId) {
             try {
                 const response = await fetch('products.json');
@@ -2345,112 +2603,116 @@ body,
                 const products = await response.json();
                 
                 // تصفية المنتجات (استبعاد المنتج الحالي)
-                recommendedSlider.products = products
+                const recommendedProducts = products
                     .filter(product => product.id !== currentProductId)
-                    .slice(0, 12); // عرض أول 12 منتج فقط
+                    .slice(0, 16); // عرض أول 16 منتج
                 
-                if (recommendedSlider.products.length > 0) {
-                    renderRecommendedSlider();
-                    updateSliderControls();
+                if (recommendedProducts.length > 0) {
+                    renderRecommendedProducts(recommendedProducts);
+                    initSliderControls();
+                    setupTouchEvents();
+                    startAutoSlide();
                 }
             } catch (error) {
                 console.error('Erreur lors du chargement des produits recommandés:', error);
             }
         }
 
-        // عرض سلايدر المنتجات المقترحة
-        function renderRecommendedSlider() {
-            const container = document.getElementById('productContainer');
-            if (!container || recommendedSlider.products.length === 0) return;
+        // عرض المنتجات المقترحة
+        function renderRecommendedProducts(products) {
+            const sliderTrack = document.getElementById('recommendedSliderTrack');
+            const dotsContainer = document.getElementById('sliderDotsContainer');
+            
+            if (!sliderTrack || !dotsContainer) return;
+            
+            // مسح المحتوى الحالي
+            sliderTrack.innerHTML = '';
+            dotsContainer.innerHTML = '';
             
             // حساب عدد الشرائح
-            const totalSlides = Math.ceil(recommendedSlider.products.length / recommendedSlider.slidesPerView);
+            recommendedSlider.totalSlides = Math.ceil(products.length / recommendedSlider.slidesPerView);
+            recommendedSlider.currentIndex = 0;
             
-            const sliderHTML = `
-                <div class="col-12">
-                    <div class="recommended-section">
-                        <h2>Produits recommandés</h2>
-                        
-                        <div class="recommended-slider-container">
-                            <div class="recommended-slider" id="recommendedSlider">
-                                <div class="recommended-slider-track" id="sliderTrack">
-                                    ${recommendedSlider.products.map(product => {
-                                        const hasDiscount = product.old_price && product.old_price > product.price;
-                                        const discountPercentage = hasDiscount ? 
-                                            Math.round(((product.old_price - product.price) / product.old_price) * 100) : 0;
-                                        
-                                        return `
-                                            <div class="recommended-card">
-                                                <div class="image-container">
-                                                    <img src="${product.images[0]}" alt="${product.title}" loading="lazy">
-                                                </div>
-                                                <div class="card-body">
-                                                    <h3 class="product-title">${product.title}</h3>
-                                                    
-                                                    <div class="rating">
-                                                        <div class="stars">
-                                                            <i class="bi bi-star-fill"></i>
-                                                            <i class="bi bi-star-fill"></i>
-                                                            <i class="bi bi-star-fill"></i>
-                                                            <i class="bi bi-star-fill"></i>
-                                                            <i class="bi bi-star-half"></i>
-                                                        </div>
-                                                        <span class="rating-text">(4.2)</span>
-                                                    </div>
-                                                    
-                                                    <div class="price-section">
-                                                        ${hasDiscount ? `
-                                                            <div class="d-flex align-items-center">
-                                                                <span class="old-price">${product.old_price.toLocaleString()} د.ج</span>
-                                                            </div>
-                                                        ` : ''}
-                                                        <span class="current-price">${product.price.toLocaleString()} د.ج</span>
-                                                    </div>
-                                                    
-                                                    <button class="add-to-cart-btn" onclick="addToCart('${product.title}', '${product.price.toLocaleString()} د.ج', ${product.price}, ['${product.images.join("','")}'], ${product.id})">
-                                                        <i class="bi bi-cart-plus"></i> Ajouter
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        `;
-                                    }).join('')}
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="slider-controls">
-                            <button class="slider-btn" id="prevBtn" onclick="prevSlide()">
-                                <i class="bi bi-chevron-right"></i>
-                            </button>
-                            
-                            <div class="slider-dots" id="sliderDots">
-                                ${Array.from({length: totalSlides}, (_, i) => `
-                                    <div class="slider-dot ${i === 0 ? 'active' : ''}" onclick="goToSlide(${i})"></div>
-                                `).join('')}
-                            </div>
-                            
-                            <button class="slider-btn" id="nextBtn" onclick="nextSlide()">
-                                <i class="bi bi-chevron-left"></i>
-                            </button>
-                        </div>
+            // عرض المنتجات
+            products.forEach(product => {
+                const hasDiscount = product.old_price && product.old_price > product.price;
+                const discountPercentage = hasDiscount ? 
+                    Math.round(((product.old_price - product.price) / product.old_price) * 100) : 0;
+                
+                const productCard = document.createElement('div');
+                productCard.className = 'recommended-product-card';
+                productCard.dataset.productId = product.id;
+                
+                productCard.innerHTML = `
+                    ${hasDiscount ? `<span class="product-badge">-${discountPercentage}%</span>` : ''}
+                    
+                    <div class="product-image-container">
+                        <img src="${product.images[0]}" alt="${product.title}" loading="lazy">
                     </div>
-                </div>
-            `;
+                    
+                    <div class="product-details">
+                        <h3 class="product-title">${product.title}</h3>
+                        
+                        <div class="product-rating">
+                            <div class="stars">
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-half"></i>
+                            </div>
+                            <span class="rating-text">(4.2)</span>
+                        </div>
+                        
+                        <div class="product-price">
+                            ${hasDiscount ? `
+                                <span class="old-price">${product.old_price.toLocaleString()} د.ج</span>
+                            ` : ''}
+                            <span class="current-price">${product.price.toLocaleString()} د.ج</span>
+                        </div>
+                        
+                        <button class="add-to-cart-mini" 
+                                onclick="addToCartQuick('${product.title}', ${product.price}, '${product.images[0]}', ${product.id})">
+                            <i class="bi bi-cart-plus cart-icon"></i>
+                            <span>Ajouter</span>
+                        </button>
+                    </div>
+                `;
+                
+                // إضافة حدث النقر على البطاقة
+                productCard.addEventListener('click', function(e) {
+                    if (!recommendedSlider.isDragging) {
+                        window.location.href = `product.html?pid=${product.id}`;
+                    }
+                });
+                
+                sliderTrack.appendChild(productCard);
+            });
             
-            // إضافة السلايدر بعد محتوى المنتج الحالي
-            container.insertAdjacentHTML('beforeend', sliderHTML);
+            // إنشاء النقاط الدالة
+            for (let i = 0; i < recommendedSlider.totalSlides; i++) {
+                const dot = document.createElement('div');
+                dot.className = `slider-dot ${i === 0 ? 'active' : ''}`;
+                dot.dataset.slide = i;
+                dot.addEventListener('click', () => goToSlide(i));
+                dotsContainer.appendChild(dot);
+            }
             
-            // حفظ العنصر
-            recommendedSlider.sliderElement = document.getElementById('recommendedSlider');
+            // حفظ المرجع للمسار
+            recommendedSlider.track = sliderTrack;
             
-            // تحديث السلايدر للشاشات الصغيرة
+            // تحديث عرض الشريحة حسب حجم الشاشة
             updateSlidesPerView();
             window.addEventListener('resize', updateSlidesPerView);
+            
+            // تحديث العرض الأولي
+            updateSlider();
         }
 
-        // تحديث عدد المنتجات المعروضة حسب حجم الشاشة
+        // تحديث عدد الشرائح المعروضة حسب حجم الشاشة
         function updateSlidesPerView() {
             const width = window.innerWidth;
+            
             if (width < 576) {
                 recommendedSlider.slidesPerView = 1;
             } else if (width < 768) {
@@ -2461,71 +2723,240 @@ body,
                 recommendedSlider.slidesPerView = 4;
             }
             
-            // تحديث عرض العناصر
-            const cards = document.querySelectorAll('.recommended-card');
-            cards.forEach(card => {
-                card.style.minWidth = `${100 / recommendedSlider.slidesPerView}%`;
-                card.style.maxWidth = `${100 / recommendedSlider.slidesPerView}%`;
-            });
-            
-            // إعادة حساب الوضع الحالي
-            goToSlide(recommendedSlider.currentSlide);
-        }
-
-        // الانتقال للشريحة التالية
-        function nextSlide() {
-            const totalSlides = Math.ceil(recommendedSlider.products.length / recommendedSlider.slidesPerView);
-            if (recommendedSlider.currentSlide < totalSlides - 1) {
-                recommendedSlider.currentSlide++;
-                goToSlide(recommendedSlider.currentSlide);
-            }
-            updateSliderControls();
-        }
-
-        // الانتقال للشريحة السابقة
-        function prevSlide() {
-            if (recommendedSlider.currentSlide > 0) {
-                recommendedSlider.currentSlide--;
-                goToSlide(recommendedSlider.currentSlide);
-            }
-            updateSliderControls();
-        }
-
-        // الانتقال لشريحة محددة
-        function goToSlide(slideIndex) {
-            const totalSlides = Math.ceil(recommendedSlider.products.length / recommendedSlider.slidesPerView);
-            
-            if (slideIndex >= 0 && slideIndex < totalSlides) {
-                recommendedSlider.currentSlide = slideIndex;
+            // إعادة حساب عدد الشرائح
+            const cards = document.querySelectorAll('.recommended-product-card');
+            if (cards.length > 0) {
+                recommendedSlider.totalSlides = Math.ceil(cards.length / recommendedSlider.slidesPerView);
                 
-                if (recommendedSlider.sliderElement) {
-                    const slideWidth = 100 / recommendedSlider.slidesPerView;
-                    const translateX = -(recommendedSlider.currentSlide * slideWidth);
-                    recommendedSlider.sliderElement.style.transform = `translateX(${translateX}%)`;
-                }
-                
-                // تحديث النقاط
-                const dots = document.querySelectorAll('.slider-dot');
-                dots.forEach((dot, index) => {
-                    dot.classList.toggle('active', index === slideIndex);
+                // تحديث عرض البطاقات
+                cards.forEach(card => {
+                    card.style.minWidth = `calc((100% - ${(recommendedSlider.slidesPerView - 1) * 20}px) / ${recommendedSlider.slidesPerView})`;
+                    card.style.maxWidth = `calc((100% - ${(recommendedSlider.slidesPerView - 1) * 20}px) / ${recommendedSlider.slidesPerView})`;
                 });
                 
-                updateSliderControls();
+                // تحديث النقاط
+                updateDots();
+                
+                // الانتقال للشريحة المناسبة
+                goToSlide(Math.min(recommendedSlider.currentIndex, recommendedSlider.totalSlides - 1));
             }
         }
 
-        // تحديث أزرار التحكم
-        function updateSliderControls() {
-            const totalSlides = Math.ceil(recommendedSlider.products.length / recommendedSlider.slidesPerView);
-            const prevBtn = document.getElementById('prevBtn');
-            const nextBtn = document.getElementById('nextBtn');
+        // تهيئة أزرار التحكم
+        function initSliderControls() {
+            const prevBtn = document.querySelector('.prev-btn');
+            const nextBtn = document.querySelector('.next-btn');
             
             if (prevBtn) {
-                prevBtn.disabled = recommendedSlider.currentSlide === 0;
+                prevBtn.addEventListener('click', prevRecommendedSlide);
             }
             
             if (nextBtn) {
-                nextBtn.disabled = recommendedSlider.currentSlide === totalSlides - 1;
+                nextBtn.addEventListener('click', nextRecommendedSlide);
+            }
+        }
+
+        // إعداد أحداث اللمس
+        function setupTouchEvents() {
+            if (!recommendedSlider.track) return;
+            
+            const track = recommendedSlider.track;
+            
+            // بدء السحب
+            track.addEventListener('mousedown', startDrag);
+            track.addEventListener('touchstart', startDrag, { passive: true });
+            
+            // أثناء السحب
+            track.addEventListener('mousemove', drag);
+            track.addEventListener('touchmove', drag, { passive: false });
+            
+            // إنهاء السحب
+            track.addEventListener('mouseup', endDrag);
+            track.addEventListener('mouseleave', endDrag);
+            track.addEventListener('touchend', endDrag);
+            
+            // منع السلوك الافتراضي لسحب الصور
+            track.addEventListener('dragstart', (e) => e.preventDefault());
+        }
+
+        // بدء السحب
+        function startDrag(event) {
+            recommendedSlider.isDragging = true;
+            stopAutoSlide();
+            
+            if (event.type === 'touchstart') {
+                recommendedSlider.startPos = event.touches[0].clientX;
+            } else {
+                event.preventDefault();
+                recommendedSlider.startPos = event.clientX;
+            }
+            
+            recommendedSlider.track.classList.add('dragging');
+        }
+
+        // أثناء السحب
+        function drag(event) {
+            if (!recommendedSlider.isDragging) return;
+            
+            let currentPosition;
+            if (event.type === 'touchmove') {
+                currentPosition = event.touches[0].clientX;
+                event.preventDefault();
+            } else {
+                currentPosition = event.clientX;
+            }
+            
+            const diff = currentPosition - recommendedSlider.startPos;
+            recommendedSlider.currentTranslate = recommendedSlider.prevTranslate + diff;
+            
+            requestAnimationFrame(() => {
+                recommendedSlider.track.style.transform = `translateX(${recommendedSlider.currentTranslate}px)`;
+            });
+        }
+
+        // إنهاء السحب
+        function endDrag() {
+            if (!recommendedSlider.isDragging) return;
+            
+            recommendedSlider.isDragging = false;
+            recommendedSlider.track.classList.remove('dragging');
+            
+            const movedBy = recommendedSlider.currentTranslate - recommendedSlider.prevTranslate;
+            const slideWidth = recommendedSlider.track.querySelector('.recommended-product-card').offsetWidth + 20;
+            
+            // إذا تحرك المستخدم بما يكفي، انتقل للشريحة التالية أو السابقة
+            if (Math.abs(movedBy) > slideWidth / 4) {
+                if (movedBy > 0 && recommendedSlider.currentIndex > 0) {
+                    goToSlide(recommendedSlider.currentIndex - 1);
+                } else if (movedBy < 0 && recommendedSlider.currentIndex < recommendedSlider.totalSlides - 1) {
+                    goToSlide(recommendedSlider.currentIndex + 1);
+                } else {
+                    goToSlide(recommendedSlider.currentIndex);
+                }
+            } else {
+                goToSlide(recommendedSlider.currentIndex);
+            }
+            
+            startAutoSlide();
+        }
+
+        // الانتقال للشريحة السابقة
+        function prevRecommendedSlide() {
+            if (recommendedSlider.currentIndex > 0) {
+                goToSlide(recommendedSlider.currentIndex - 1);
+            }
+        }
+
+        // الانتقال للشريحة التالية
+        function nextRecommendedSlide() {
+            if (recommendedSlider.currentIndex < recommendedSlider.totalSlides - 1) {
+                goToSlide(recommendedSlider.currentIndex + 1);
+            }
+        }
+
+        // الانتقال لشريحة محددة
+        function goToSlide(index) {
+            if (index < 0 || index >= recommendedSlider.totalSlides) return;
+            
+            recommendedSlider.currentIndex = index;
+            updateSlider();
+            updateDots();
+            updateProgress();
+            updateNavButtons();
+        }
+
+        // تحديث عرض السلايدر
+        function updateSlider() {
+            if (!recommendedSlider.track) return;
+            
+            const slideWidth = recommendedSlider.track.querySelector('.recommended-product-card').offsetWidth + 20;
+            const translateX = -(recommendedSlider.currentIndex * slideWidth * recommendedSlider.slidesPerView);
+            
+            recommendedSlider.currentTranslate = translateX;
+            recommendedSlider.prevTranslate = translateX;
+            
+            recommendedSlider.track.style.transform = `translateX(${translateX}px)`;
+        }
+
+        // تحديث النقاط الدالة
+        function updateDots() {
+            const dots = document.querySelectorAll('.slider-dot');
+            dots.forEach((dot, index) => {
+                dot.classList.toggle('active', index === recommendedSlider.currentIndex);
+            });
+        }
+
+        // تحديث شريط التقدم
+        function updateProgress() {
+            const progressBar = document.querySelector('.progress-bar');
+            if (!progressBar) return;
+            
+            const progress = ((recommendedSlider.currentIndex + 1) / recommendedSlider.totalSlides) * 100;
+            progressBar.style.width = `${progress}%`;
+        }
+
+        // تحديث أزرار التنقل
+        function updateNavButtons() {
+            const prevBtn = document.querySelector('.prev-btn');
+            const nextBtn = document.querySelector('.next-btn');
+            
+            if (prevBtn) {
+                prevBtn.disabled = recommendedSlider.currentIndex === 0;
+            }
+            
+            if (nextBtn) {
+                nextBtn.disabled = recommendedSlider.currentIndex === recommendedSlider.totalSlides - 1;
+            }
+        }
+
+        // بدء السلايدر التلقائي
+        function startAutoSlide() {
+            if (!recommendedSlider.isAutoSliding) return;
+            
+            stopAutoSlide();
+            
+            recommendedSlider.autoSlideInterval = setInterval(() => {
+                if (recommendedSlider.currentIndex < recommendedSlider.totalSlides - 1) {
+                    nextRecommendedSlide();
+                } else {
+                    goToSlide(0);
+                }
+            }, 5000); // تغيير كل 5 ثواني
+        }
+
+        // إيقاف السلايدر التلقائي
+        function stopAutoSlide() {
+            if (recommendedSlider.autoSlideInterval) {
+                clearInterval(recommendedSlider.autoSlideInterval);
+                recommendedSlider.autoSlideInterval = null;
+            }
+        }
+
+        // تبديل السلايدر التلقائي
+        function toggleAutoSlide() {
+            recommendedSlider.isAutoSliding = !recommendedSlider.isAutoSliding;
+            
+            if (recommendedSlider.isAutoSliding) {
+                startAutoSlide();
+            } else {
+                stopAutoSlide();
+            }
+        }
+
+        // إضافة سريعة للسلة
+        function addToCartQuick(productName, price, image, productId) {
+            addToCart(productName, price.toLocaleString() + ' د.ج', price, [image], productId);
+            
+            // تأثير بسيط
+            const button = event.target.closest('.add-to-cart-mini');
+            if (button) {
+                button.innerHTML = '<i class="bi bi-check-lg"></i> Ajouté';
+                button.style.background = 'linear-gradient(135deg, #28a745, #20c997)';
+                
+                setTimeout(() => {
+                    button.innerHTML = '<i class="bi bi-cart-plus cart-icon"></i><span>Ajouter</span>';
+                    button.style.background = 'linear-gradient(135deg, var(--primary), var(--primary-dark))';
+                }, 1500);
             }
         }
 
