@@ -43,32 +43,6 @@
     --border-color: #e7e7e7;
     --shadow-color: rgba(0, 0, 0, 0.1);
 }
-/* كرت منتج عصري */
-.recommended-card {
-    border-radius: 6px; /* حاد مش دائري */
-    border: 1px solid rgba(0,0,0,0.08);
-    box-shadow: 0 8px 20px rgba(0,0,0,0.08);
-    transition: all 0.25s ease;
-}
-
-/* تأثير هوفر محترم */
-.recommended-card:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 16px 35px rgba(0,0,0,0.15);
-}
-
-/* صورة المنتج */
-.recommended-card .image-container {
-    border-radius: 0;
-    background: linear-gradient(135deg, #f8f9fa, #ececec);
-}
-
-/* زر الشراء */
-.add-to-cart-btn {
-    border-radius: 4px;
-    font-weight: 700;
-    letter-spacing: 0.3px;
-}
 
 /* نظام دارك مود محترف */
 :root[data-theme="dark"] {
@@ -1477,7 +1451,77 @@ body,
 
 #checkoutBtn:hover:not(:disabled) {
     background: linear-gradient(135deg, #E05A2B, #D04A1B) !important;
-}   
+} 
+  .amazon-like-section {
+  margin: 40px 0;
+}
+
+.amazon-like-section h2 {
+  font-size: 22px;
+  margin-bottom: 16px;
+}
+
+.product-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 16px;
+}
+
+.product-card {
+  background: #fff;
+  border: 1px solid #e3e3e3;
+  border-radius: 6px; /* sharp, not round */
+  padding: 12px;
+  transition: 0.25s ease;
+}
+
+.product-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 30px rgba(0,0,0,0.12);
+}
+
+.product-card img {
+  width: 100%;
+  height: 160px;
+  object-fit: contain;
+}
+
+.product-card h3 {
+  font-size: 14px;
+  margin: 10px 0;
+  height: 38px;
+  overflow: hidden;
+}
+
+.price {
+  margin-bottom: 10px;
+}
+
+.price .new {
+  font-weight: 700;
+}
+
+.price .old {
+  text-decoration: line-through;
+  color: #888;
+  font-size: 12px;
+  margin-left: 6px;
+}
+
+.product-card button {
+  width: 100%;
+  padding: 8px;
+  background: #ffd814;
+  border: none;
+  border-radius: 4px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.product-card button:hover {
+  background: #f7ca00;
+}
+
 </style>
 </head>
 
@@ -1543,7 +1587,10 @@ body,
             </div>
         </div>
     </div>
-
+<section class="amazon-like-section">
+  <h2>Recommended for you</h2>
+  <div id="recommendedProducts" class="product-row"></div>
+</section>
     <!-- فوتر مطابق للموقع الأصلي -->
     <footer class="py-5 bg-dark text-white">
         <div class="container">
@@ -1703,6 +1750,7 @@ body,
             </div>
         </div>
     </div>
+
 
     <!-- Scripts -->
     <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
@@ -2650,8 +2698,35 @@ body,
             renderCart();
             loadProduct();
             orderModal = new bootstrap.Modal(document.getElementById('orderModal'));
-        });
+        }
+    );
+fetch('products.json')
+  .then(res => res.json())
+  .then(products => {
+    // Shuffle products
+    const shuffled = products.sort(() => 0.5 - Math.random());
+
+    // Take 8 random products (like Amazon)
+    const selected = shuffled.slice(0, 8);
+
+    const container = document.getElementById('recommendedProducts');
+
+    container.innerHTML = selected.map(p => `
+      <div class="product-card">
+        <img src="${p.images[0]}" alt="${p.title}">
+        
+        <h3>${p.title}</h3>
+
+        <div class="price">
+          <span class="new">${p.price} DA</span>
+          ${p.old_price ? `<span class="old">${p.old_price} DA</span>` : ''}
+        </div>
+
+        <button>Add to cart</button>
+      </div>
+    `).join('');});
+
+
     </script>
 </body>
 </html>
-
