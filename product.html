@@ -43,6 +43,32 @@
     --border-color: #e7e7e7;
     --shadow-color: rgba(0, 0, 0, 0.1);
 }
+/* كرت منتج عصري */
+.recommended-card {
+    border-radius: 6px; /* حاد مش دائري */
+    border: 1px solid rgba(0,0,0,0.08);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+    transition: all 0.25s ease;
+}
+
+/* تأثير هوفر محترم */
+.recommended-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 16px 35px rgba(0,0,0,0.15);
+}
+
+/* صورة المنتج */
+.recommended-card .image-container {
+    border-radius: 0;
+    background: linear-gradient(135deg, #f8f9fa, #ececec);
+}
+
+/* زر الشراء */
+.add-to-cart-btn {
+    border-radius: 4px;
+    font-weight: 700;
+    letter-spacing: 0.3px;
+}
 
 /* نظام دارك مود محترف */
 :root[data-theme="dark"] {
@@ -2628,3 +2654,4 @@ body,
     </script>
 </body>
 </html>
+
