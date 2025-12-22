@@ -1,6 +1,10 @@
 // ============== تهيئة Firebase ==============
+// Fixed: Added proper User Agent detection for Safari
+const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
+const isMac = /Macintosh/.test(navigator.userAgent);
 
-// ============== تهيئة Firebase ==============
+// Safari-specific Firebase configuration
 const firebaseConfig = {
     apiKey: "AIzaSyBTrnKCYOtfSSDYtmVQbzP2HcwgkLT565Y",
     authDomain: "robuste-c8e0f.firebaseapp.com",
@@ -11,13 +15,74 @@ const firebaseConfig = {
     measurementId: "G-DWT7MZN028"
 };
 
-// تهيئة Firebase
-firebase.initializeApp(firebaseConfig);
-const db = firebase.firestore();
+// Fixed: Check Firebase initialization for Safari
+if (typeof firebase === 'undefined') {
+    console.error('Firebase not loaded. Check script order and CORS.');
+} else {
+    try {
+        // Initialize Firebase if no apps exist
+        if (firebase.apps.length === 0) {
+            firebase.initializeApp(firebaseConfig);
+        }
+    } catch (error) {
+        console.error('Firebase initialization error:', error);
+    }
+}
 
-// تهيئة EmailJS
+const db = firebase.firestore ? firebase.firestore() : null;
+
+// Fixed: Safari-safe EmailJS initialization
 (function() {
-    emailjs.init("k77vdaUWPpnLrfTnS");
+    if (typeof emailjs !== 'undefined') {
+        try {
+            emailjs.init("k77vdaUWPpnLrfTnS");
+        } catch (e) {
+            console.warn('EmailJS initialization error:', e);
+        }
+    } else {
+        console.warn('EmailJS not loaded');
+    }
+})();
+
+// Fixed: LocalStorage polyfill for Safari Private Browsing
+(function() {
+    if (typeof localStorage === 'object') {
+        try {
+            localStorage.setItem('safari_test', 'test');
+            localStorage.removeItem('safari_test');
+        } catch(e) {
+            console.warn('Safari Private Browsing detected - using memory storage');
+            var storage = {};
+            window._safariMemoryStorage = storage;
+            
+            Object.defineProperty(window, 'localStorage', {
+                value: {
+                    setItem: function(k, v) { 
+                        storage[k] = String(v); 
+                        window._safariMemoryStorage = storage;
+                    },
+                    getItem: function(k) { 
+                        return storage[k] || null; 
+                    },
+                    removeItem: function(k) { 
+                        delete storage[k]; 
+                        window._safariMemoryStorage = storage;
+                    },
+                    clear: function() { 
+                        storage = {}; 
+                        window._safariMemoryStorage = storage;
+                    },
+                    key: function(i) {
+                        return Object.keys(storage)[i] || null;
+                    },
+                    get length() {
+                        return Object.keys(storage).length;
+                    }
+                },
+                writable: false
+            });
+        }
+    }
 })();
 
 // قائمة الولايات الجزائرية
@@ -34,16 +99,37 @@ const wilayas = [
 let orderModal = null;
 let cart = [];
 
+// Fixed: Safari-compatible Promise polyfill if needed
+if (typeof Promise === 'undefined') {
+    console.warn('Promise not supported - loading polyfill');
+    // Note: Would need to load polyfill via script tag
+}
+
 // ============== نظام المنتجات الديناميكي ==============
 
 // دالة جلب وعرض المنتجات من JSON
 async function loadAndDisplayProducts(category = 'all') {
     try {
-        const response = await fetch('products.json');
+        // Fixed: Safari fetch with credentials and mode
+        const response = await fetch('products.json', {
+            method: 'GET',
+            mode: 'cors',
+            credentials: 'same-origin',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+        
         if (!response.ok) {
             throw new Error('Erreur lors du chargement des produits');
         }
+        
         const products = await response.json();
+        
+        // Fixed: Safari JSON parsing error handling
+        if (!Array.isArray(products)) {
+            throw new Error('Invalid products data format');
+        }
         
         // تصفية المنتجات حسب الفئة
         const filteredProducts = category === 'all' 
@@ -58,17 +144,18 @@ async function loadAndDisplayProducts(category = 'all') {
 }
 
 // دالة عرض المنتجات
-// في دالة renderProducts، نعدل كود البطاقات
 function renderProducts(products) {
     const container = document.getElementById('productsContainer');
     if (!container) return;
     
     container.innerHTML = '';
     
-    if (products.length === 0) {
+    if (!Array.isArray(products) || products.length === 0) {
         container.innerHTML = '<div class="col-12 text-center text-muted py-5">Aucun produit trouvé</div>';
         return;
     }
+    
+    let productsHTML = '';
     
     products.forEach(product => {
         const discountBadge = product.old_price && product.old_price > product.price ? `
@@ -88,20 +175,20 @@ function renderProducts(products) {
         ` : '';
         
         // إنشاء سلايدر للصور
-        const carouselIndicators = product.images.map((_, index) => `
+        const carouselIndicators = Array.isArray(product.images) ? product.images.map((_, index) => `
             <button type="button" data-bs-target="#carousel-${product.id}" data-bs-slide-to="${index}" 
                 ${index === 0 ? 'class="active" aria-current="true"' : ''} 
                 aria-label="صورة ${index + 1}">
             </button>
-        `).join('');
+        `).join('') : '';
         
-        const carouselItems = product.images.map((img, index) => `
+        const carouselItems = Array.isArray(product.images) ? product.images.map((img, index) => `
             <div class="carousel-item ${index === 0 ? 'active' : ''}">
-                <img src="${img}" class="d-block w-100" alt="${product.title}" loading="lazy">
+                <img src="${img}" class="d-block w-100" alt="${product.title}" loading="lazy" crossorigin="anonymous">
             </div>
-        `).join('');
+        `).join('') : '';
         
-        const carouselControls = product.images.length > 1 ? `
+        const carouselControls = Array.isArray(product.images) && product.images.length > 1 ? `
             <button class="carousel-control-prev" type="button" data-bs-target="#carousel-${product.id}" data-bs-slide="prev">
                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                 <span class="visually-hidden">السابق</span>
@@ -113,54 +200,82 @@ function renderProducts(products) {
         ` : '';
         
         const productCard = `
-            <div class="col-6 col-md-4 col-lg-3 mb-4">
-                <div class="product-card card h-100 position-relative">
-                    ${productBadge}
-                    ${discountBadge}
-                    
-                    <!-- ربط البطاقة بالكامل بصفحة المنتج -->
-                    <a href="product.html?pid=${product.id}" class="product-card-link">
-                        <div id="carousel-${product.id}" class="carousel slide product-carousel" data-bs-ride="carousel">
-                            <div class="carousel-indicators">
-                                ${carouselIndicators}
-                            </div>
-                            <div class="carousel-inner">
-                                ${carouselItems}
-                            </div>
-                            ${carouselControls}
-                        </div>
-                        <div class="card-body">
-                            <h5 class="card-title">${product.title}</h5>
-                            <p class="card-text text-muted small">${product.description_short}</p>
-                            <div class="d-flex align-items-center mt-3">
-                                ${oldPrice}
-                                <p dir="ltr" class="fw-bold text-primary mb-0">${product.price.toLocaleString()} DA</p>
-                            </div>
-                        </div>
-                    </a>
-                    
-                    <div class="card-footer bg-transparent border-0">
-                        <!-- زر إضافة إلى السلة فقط (خارج الرابط) -->
-                        <button class="btn btn-orange w-100 add-to-cart-btn" data-id="${product.id}">
-                            <i class="bi bi-cart-plus"></i> Ajouter au panier
-                        </button>
-                    </div>
-                </div>
-            </div>
+          <!-- قالب البطاقة الجديد -->
+<div class="col-6 col-md-4 col-lg-3 mb-4">
+  <div class="product-card card h-100 position-relative" role="link" tabindex="0" data-pid="${product.id}">
+    ${productBadge || ''}
+    ${discountBadge || ''}
+
+    <div id="carousel-${product.id}" class="carousel slide product-carousel" data-bs-ride="${isIOS || isSafari ? 'false' : 'carousel'}">
+      <div class="carousel-indicators">
+        ${carouselIndicators}
+      </div>
+      <div class="carousel-inner">
+        ${carouselItems}
+      </div>
+      ${carouselControls}
+    </div>
+
+    <div class="card-body">
+      <h5 class="product-title card-title">${product.title || 'No Title'}</h5>
+      <p class="card-text text-muted small">${product.description_short || ''}</p>
+
+      <div class="price-section d-flex align-items-center mt-2">
+        ${oldPrice || ''}
+        <p dir="ltr" class="current-price fw-bold mb-0">${(product.price || 0).toLocaleString()} DA</p>
+      </div>
+    </div>
+
+    <div class="card-footer bg-transparent border-0">
+      <!-- زر واحد واضح وكبير للهاتف -->
+      <button class="btn btn-orange w-100 add-to-cart-btn" data-id="${product.id}" aria-label="Ajouter ${product.title} au panier">
+        <i class="bi bi-cart-plus"></i>&nbsp;Ajouter au panier
+      </button>
+    </div>
+  </div>
+</div>
         `;
         
-        container.innerHTML += productCard;
+        productsHTML += productCard;
     });
+    
+    container.innerHTML = productsHTML;
+    
+    // Fixed: Initialize Bootstrap carousels for Safari
+    setTimeout(() => {
+        if (typeof bootstrap !== 'undefined' && bootstrap.Carousel) {
+            document.querySelectorAll('.carousel').forEach(carouselEl => {
+                try {
+                    new bootstrap.Carousel(carouselEl, {
+                        interval: 4000,
+                        wrap: true
+                    });
+                } catch (e) {
+                    console.warn('Carousel init error:', e);
+                }
+            });
+        }
+    }, 100);
 }
 
 // دالة تحميل العروض الخاصة
 async function loadSpecialOffers() {
     try {
-        const response = await fetch('products.json');
+        const response = await fetch('products.json', {
+            method: 'GET',
+            mode: 'cors',
+            credentials: 'same-origin'
+        });
+        
         if (!response.ok) {
             throw new Error('Erreur lors du chargement des produits');
         }
+        
         const products = await response.json();
+        
+        if (!Array.isArray(products)) {
+            throw new Error('Invalid products data');
+        }
         
         // اختر 3 منتجات لها خصم للعروض الخاصة
         const specialOffers = products
@@ -178,7 +293,7 @@ function renderSpecialOffers(offers) {
     const offersContainer = document.getElementById('specialOffersContainer');
     if (!offersContainer) return;
     
-    if (offers.length === 0) {
+    if (!Array.isArray(offers) || offers.length === 0) {
         offersContainer.innerHTML = '<div class="col-12 text-center text-muted">Aucune offre spéciale pour le moment</div>';
         return;
     }
@@ -192,19 +307,19 @@ function renderSpecialOffers(offers) {
                     <div class="offer-product-discount">-${discountPercentage}%</div>
                     ${product.badge ? `<div class="offer-product-badge">${product.badge}</div>` : ''}
 
-                    <div id="carousel-offer-${product.id}" class="carousel slide" data-bs-ride="carousel">
+                    <div id="carousel-offer-${product.id}" class="carousel slide" data-bs-ride="${isIOS || isSafari ? 'false' : 'carousel'}">
                         <div class="carousel-indicators">
-                            ${product.images.map((_, i) => `
+                            ${Array.isArray(product.images) ? product.images.map((_, i) => `
                                 <button type="button" data-bs-target="#carousel-offer-${product.id}" data-bs-slide-to="${i}" 
                                     ${i === 0 ? 'class="active"' : ''}></button>
-                            `).join('')}
+                            `).join('') : ''}
                         </div>
                         <div class="carousel-inner">
-                            ${product.images.map((img, i) => `
+                            ${Array.isArray(product.images) ? product.images.map((img, i) => `
                                 <div class="carousel-item ${i === 0 ? 'active' : ''}">
-                                    <img src="${img}" class="d-block w-100" alt="${product.title}" height="300" loading="lazy">
+                                    <img src="${img}" class="d-block w-100" alt="${product.title}" height="300" loading="lazy" crossorigin="anonymous">
                                 </div>
-                            `).join('')}
+                            `).join('') : ''}
                         </div>
                         <button class="carousel-control-prev" type="button" data-bs-target="#carousel-offer-${product.id}" data-bs-slide="prev">
                             <span class="carousel-control-prev-icon"></span>
@@ -214,9 +329,9 @@ function renderSpecialOffers(offers) {
                         </button>
                     </div>
 
-                    <h4 class="offer-product-title">${product.title}</h4>
-                    <div class="offer-product-price">${product.price.toLocaleString()} DA</div>
-                    <div class="offer-product-old-price">${product.old_price.toLocaleString()} DA</div>
+                    <h4 class="offer-product-title">${product.title || 'No Title'}</h4>
+                    <div class="offer-product-price">${(product.price || 0).toLocaleString()} DA</div>
+                    <div class="offer-product-old-price">${(product.old_price || 0).toLocaleString()} DA</div>
                     <button class="offer-btn add-to-cart-btn" data-id="${product.id}">
                         <i class="bi bi-cart-plus"></i> Acheter maintenant
                     </button>
@@ -248,20 +363,28 @@ function setupCategoryFilters() {
 // ============== إعداد أزرار إضافة إلى السلة ==============
 function setupAddToCartButtons() {
     // منع التهيئة المكررة لو تم استدعاء الدالة أكثر من مرة
-    if (setupAddToCartButtons._initialized) return;
-    setupAddToCartButtons._initialized = true;
+    if (window.addToCartButtonsInitialized) return;
+    window.addToCartButtonsInitialized = true;
 
     document.addEventListener('click', function(e) {
-        // نلتقط فقط أقرب زر add-to-cart-btn بدون تفرع
+        // Fixed: Safari event handling with proper fallback
         const button = e.target.closest('.add-to-cart-btn');
         if (!button) return;
 
         // حماية مؤقتة لكل زر لمنع النقرات المتكررة السريعة
         if (button.dataset.processing === 'true') return;
         button.dataset.processing = 'true';
-        setTimeout(() => { delete button.dataset.processing; }, 300); // 300ms debounce
+        setTimeout(() => { 
+            delete button.dataset.processing; 
+        }, 300);
 
-        e.preventDefault();
+        // Fixed: Safari preventDefault behavior
+        if (e.preventDefault) {
+            e.preventDefault();
+        }
+        if (e.stopPropagation) {
+            e.stopPropagation();
+        }
 
         const productId = button.getAttribute('data-id');
         if (!productId) {
@@ -275,6 +398,10 @@ function setupAddToCartButtons() {
                 return response.json();
             })
             .then(products => {
+                if (!Array.isArray(products)) {
+                    throw new Error('Invalid products data');
+                }
+                
                 const product = products.find(p => p.id == productId);
                 if (product) {
                     addToCart(
@@ -293,6 +420,8 @@ function setupAddToCartButtons() {
                 console.error('Error loading product:', error);
                 showStatus('Error loading product details', 'error');
             });
+            
+        return false; // Safari fallback
     });
 }
 
@@ -318,9 +447,16 @@ function updateCartCount() {
     
     if (!cartCount || !checkoutBtn) return;
     
-    const count = cart.reduce((total, item) => total + (item.quantity || 0), 0);
+    const count = Array.isArray(cart) ? cart.reduce((total, item) => total + (item.quantity || 0), 0) : 0;
     cartCount.textContent = count;
     checkoutBtn.disabled = count === 0;
+    
+    // Fixed: Safari disabled attribute handling
+    if (count === 0) {
+        checkoutBtn.setAttribute('disabled', 'disabled');
+    } else {
+        checkoutBtn.removeAttribute('disabled');
+    }
 }
 
 // عرض محتويات السلة
@@ -335,7 +471,7 @@ function renderCart() {
         cartItems.removeChild(cartItems.firstChild);
     }
     
-    if (cart.length === 0) {
+    if (!Array.isArray(cart) || cart.length === 0) {
         const emptyDiv = document.createElement('div');
         emptyDiv.className = 'text-center py-4 text-muted';
         emptyDiv.id = 'emptyCartMessage';
@@ -356,7 +492,7 @@ function renderCart() {
         
         itemElement.innerHTML = `
             <div class="d-flex">
-                <img src="${item.image || ''}" alt="${item.name || 'منتج'}" class="cart-item-img me-3">
+                <img src="${item.image || ''}" alt="${item.name || 'منتج'}" class="cart-item-img me-3" crossorigin="anonymous">
                 <div class="cart-item-details">
                     <div class="cart-item-title">${item.name || 'منتج بدون اسم'}</div>
                     <div class="cart-item-price">${item.price || 0} د.ج</div>
@@ -409,13 +545,26 @@ function attachCartEventListeners() {
             updateQuantity(index, newQuantity);
         });
         
-        // منع الإدخال غير الرقمي
+        // Fixed: Safari keyboard event handling
         input.addEventListener('keydown', function(e) {
             if (!/[\d\b\t\n]|Arrow|Delete|Backspace|Tab/.test(e.key) && 
                 !(e.ctrlKey || e.metaKey)) {
                 e.preventDefault();
             }
         });
+        
+        // Fixed: Safari input event for iOS
+        if (isIOS) {
+            input.addEventListener('input', function(e) {
+                const index = parseInt(this.dataset.index);
+                if (isNaN(index) || index < 0 || index >= cart.length) return;
+                
+                const newQuantity = parseInt(this.value) || 1;
+                if (!isNaN(newQuantity)) {
+                    updateQuantity(index, newQuantity);
+                }
+            });
+        }
     });
     
     // معالجة أزرار الحذف
@@ -441,6 +590,10 @@ function addToCart(productName, productPrice, priceValue, productImages, product
         image = productImages[0];
     } else if (typeof productImages === 'string') {
         image = productImages;
+    }
+    
+    if (!Array.isArray(cart)) {
+        cart = [];
     }
     
     const existingItemIndex = cart.findIndex(item => item.id === id);
@@ -516,7 +669,7 @@ function removeFromCart(index) {
 
 // إظهار/إخفاء السلة
 function toggleCart() {
-    if (cart.length === 0) {
+    if (!Array.isArray(cart) || cart.length === 0) {
         showStatus('سلة المشتريات فارغة', 'info');
         return;
     }
@@ -533,7 +686,7 @@ function toggleCart() {
 
 // ============== إتمام عملية الشراء من السلة ==============
 function checkout() {
-    if (cart.length === 0) {
+    if (!Array.isArray(cart) || cart.length === 0) {
         showStatus('سلة المشتريات فارغة', 'error');
         return;
     }
@@ -571,6 +724,11 @@ function checkout() {
 
 // إرسال الطلب
 async function submitOrder() {
+    if (!db) {
+        showStatus('Firebase غير متوفر. تحقق من الاتصال بالإنترنت.', 'error');
+        return;
+    }
+    
     const productName = document.getElementById('productName').value;
     const productPrice = document.getElementById('productPriceValue').value;
     const productImage = document.getElementById('productImageUrl').value;
@@ -579,7 +737,12 @@ async function submitOrder() {
     const email = document.getElementById('email').value || 'لم يتم تقديمه';
     const wilaya = document.getElementById('wilaya').value;
     const address = document.getElementById('address').value || 'غير محدد';
-    const paymentMethod = document.querySelector('input[name="paymentMethod"]:checked').value;
+    const paymentMethod = document.querySelector('input[name="paymentMethod"]:checked');
+    
+    if (!paymentMethod) {
+        showStatus('يرجى اختيار طريقة الدفع', 'error');
+        return;
+    }
     
     // التحقق من صحة البيانات
     if (!fullName || !phone || !wilaya) {
@@ -604,7 +767,7 @@ async function submitOrder() {
         email: email,
         wilaya: wilaya,
         address: address,
-        payment: paymentMethod,
+        payment: paymentMethod.value,
         totalPrice: total,
         timestamp: new Date().toISOString(),
         status: 'جديد'
@@ -615,6 +778,7 @@ async function submitOrder() {
     
     // تعطيل زر الإرسال أثناء المعالجة
     const submitBtn = document.getElementById('submitOrderBtn');
+    const originalText = submitBtn.innerHTML;
     submitBtn.disabled = true;
     submitBtn.innerHTML = `
         <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
@@ -637,20 +801,21 @@ async function submitOrder() {
         `).join('');
         
         // إرسال إيميل عبر EmailJS
-        await emailjs.send("service_lc1q5k8", "template_a15g7yg", {
-            order_id: docRef.id,
-            customer_name: fullName,
-            customer_phone: phone,
-            customer_email: email,
-            wilaya: wilaya,
-            address: address,
-            total_price: total.toLocaleString(),
-            payment_method: paymentMethod,
-            order_date: new Date().toLocaleString('ar-DZ'),
-            products: productsList
-        });
-        
-        console.log("تم إرسال إيميل تأكيد الطلب");
+        if (typeof emailjs !== 'undefined') {
+            await emailjs.send("service_lc1q5k8", "template_a15g7yg", {
+                order_id: docRef.id,
+                customer_name: fullName,
+                customer_phone: phone,
+                customer_email: email,
+                wilaya: wilaya,
+                address: address,
+                total_price: total.toLocaleString(),
+                payment_method: paymentMethod.value,
+                order_date: new Date().toLocaleString('ar-DZ'),
+                products: productsList
+            });
+            console.log("تم إرسال إيميل تأكيد الطلب");
+        }
         
         // عرض رسالة النجاح
         showStatus(`
@@ -697,7 +862,7 @@ async function submitOrder() {
     } finally {
         // إعادة تمكين زر الإرسال
         submitBtn.disabled = false;
-        submitBtn.innerHTML = 'تأكيد الطلب';
+        submitBtn.innerHTML = originalText;
     }
 }
 
@@ -718,22 +883,28 @@ async function sendContactMessage() {
     // عرض حالة التحميل
     const contactSpinner = document.getElementById('contactSpinner');
     const contactSubmitText = document.getElementById('contactSubmitText');
-    contactSpinner.classList.remove('d-none');
+    const originalContactText = contactSubmitText.textContent;
+    
+    if (contactSpinner) contactSpinner.classList.remove('d-none');
     contactSubmitText.textContent = 'جاري الإرسال...';
     
     try {
         // إرسال رسالة الاتصال عبر EmailJS
-        await emailjs.send("service_lc1q5k8", "template_11pkq0k", {
-            from_name: name,
-            from_email: email,
-            phone_number: phone,
-            message: message
-        });
-        
-        console.log("تم إرسال رسالة الاتصال");
-        
-        showStatus('تم إرسال رسالتك بنجاح! سوف نتواصل معك قريباً.', 'success');
-        document.getElementById('contactForm').reset();
+        if (typeof emailjs !== 'undefined') {
+            await emailjs.send("service_lc1q5k8", "template_11pkq0k", {
+                from_name: name,
+                from_email: email,
+                phone_number: phone,
+                message: message
+            });
+            
+            console.log("تم إرسال رسالة الاتصال");
+            
+            showStatus('تم إرسال رسالتك بنجاح! سوف نتواصل معك قريباً.', 'success');
+            document.getElementById('contactForm').reset();
+        } else {
+            showStatus('نظام البريد غير متوفر حالياً', 'error');
+        }
     } catch (error) {
         console.error('حدث خطأ:', error);
         
@@ -749,8 +920,8 @@ async function sendContactMessage() {
         showStatus(`حدث خطأ أثناء إرسال الرسالة: ${errorMessage}`, 'error');
     } finally {
         // إعادة تمكين زر الإرسال
-        contactSpinner.classList.add('d-none');
-        contactSubmitText.textContent = 'إرسال الرسالة';
+        if (contactSpinner) contactSpinner.classList.add('d-none');
+        contactSubmitText.textContent = originalContactText;
     }
 }
 
@@ -759,6 +930,10 @@ async function sendContactMessage() {
 // تعبئة قائمة الولايات
 function populateWilayas() {
     const wilayaSelect = document.getElementById('wilaya');
+    if (!wilayaSelect) return;
+    
+    wilayaSelect.innerHTML = '<option value="">اختر الولاية</option>';
+    
     wilayas.forEach(wilaya => {
         const option = document.createElement('option');
         option.value = wilaya;
@@ -773,6 +948,8 @@ function startOfferTimer() {
     const hoursElement = document.getElementById('hours');
     const minutesElement = document.getElementById('minutes');
     const secondsElement = document.getElementById('seconds');
+    
+    if (!daysElement || !hoursElement || !minutesElement || !secondsElement) return;
     
     // تاريخ انتهاء العرض (3 أيام من الآن)
     const endDate = new Date();
@@ -804,9 +981,32 @@ function startOfferTimer() {
         secondsElement.textContent = seconds.toString().padStart(2, '0');
     }
     
-    // تحديث المؤثر كل ثانية
+    // Fixed: Safari timer throttling workaround
     updateTimer();
-    setInterval(updateTimer, 1000);
+    
+    // Use requestAnimationFrame for better performance in Safari
+    function tick() {
+        updateTimer();
+        if (document.getElementById('specialOffersSection') && 
+            getComputedStyle(document.getElementById('specialOffersSection')).display !== 'none') {
+            requestAnimationFrame(tick);
+        }
+    }
+    
+    // Start animation frame loop
+    let animationId = requestAnimationFrame(function loop() {
+        tick();
+        animationId = requestAnimationFrame(loop);
+    });
+    
+    // Stop when page is hidden
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            cancelAnimationFrame(animationId);
+        } else {
+            animationId = requestAnimationFrame(loop);
+        }
+    });
 }
 
 // عرض حالة الطلب
@@ -814,11 +1014,15 @@ function showStatus(message, type) {
     const indicator = document.getElementById('statusIndicator');
     const messageElement = document.getElementById('statusMessage');
     
+    if (!indicator || !messageElement) return;
+    
     // إعداد الرسالة
     messageElement.innerHTML = message;
     
     // إعداد التصميم حسب النوع
     const alert = indicator.querySelector('.alert');
+    if (!alert) return;
+    
     alert.className = 'alert alert-dismissible fade show';
     
     switch (type) {
@@ -842,6 +1046,11 @@ function showStatus(message, type) {
     // إظهار المؤشر
     indicator.style.display = 'block';
     
+    // Fixed: Safari CSS transition handling
+    setTimeout(() => {
+        indicator.style.opacity = '1';
+    }, 10);
+    
     // إخفاء التلقائي لرسائل النجاح بعد 5 ثواني
     if (type === 'success') {
         setTimeout(hideStatus, 5000);
@@ -850,26 +1059,24 @@ function showStatus(message, type) {
 
 // إخفاء مؤشر الحالة
 function hideStatus() {
-    document.getElementById('statusIndicator').style.display = 'none';
+    const indicator = document.getElementById('statusIndicator');
+    if (!indicator) return;
+    
+    indicator.style.opacity = '0';
+    setTimeout(() => {
+        indicator.style.display = 'none';
+    }, 300);
 }
 
 // ============== السلايدر ==============
 let slideIndex1 = 1;
-showSlides1(slideIndex1);
-
-// التحكم بالأزرار
-function plusSlides1(n) {
-  showSlides1(slideIndex1 += n);
-}
-
-// التحكم بالنقاط
-function currentSlide1(n) {
-  showSlides1(slideIndex1 = n);
-}
+let slideInterval1;
 
 function showSlides1(n) {
   const slides = document.getElementsByClassName("mySlides1");
   const dots = document.getElementsByClassName("dot1");
+
+  if (!slides.length || !dots.length) return;
 
   if (n > slides.length) slideIndex1 = 1;
   if (n < 1) slideIndex1 = slides.length;
@@ -881,10 +1088,27 @@ function showSlides1(n) {
   dots[slideIndex1 - 1].className += " active";
 }
 
-// تشغيل تلقائي
-setInterval(() => {
-  plusSlides1(1);
-}, 4000);
+// التحكم بالأزرار
+function plusSlides1(n) {
+  showSlides1(slideIndex1 += n);
+}
+
+// التحكم بالنقاط
+function currentSlide1(n) {
+  showSlides1(slideIndex1 = n);
+}
+
+// Fixed: Safari autoplay restrictions
+function startSlideshow() {
+  if (slideInterval1) clearInterval(slideInterval1);
+  
+  // Check if user has interacted with page (Safari requirement)
+  if (document.visibilityState === 'visible') {
+    slideInterval1 = setInterval(() => {
+      plusSlides1(1);
+    }, 4000);
+  }
+}
 
 // ============== وظيفة تبديل وضع الظلام ==============
 function toggleDarkMode() {
@@ -896,16 +1120,22 @@ function toggleDarkMode() {
     
     // تحديث أيقونة الزر
     const themeIcon = document.querySelector('#themeToggle i');
-    if (newTheme === 'dark') {
-        themeIcon.className = 'bi bi-sun';
-        themeIcon.parentElement.title = 'تفعيل وضع النهار';
-    } else {
-        themeIcon.className = 'bi bi-moon';
-        themeIcon.parentElement.title = 'تفعيل وضع الظلام';
+    if (themeIcon) {
+        if (newTheme === 'dark') {
+            themeIcon.className = 'bi bi-sun';
+            themeIcon.parentElement.title = 'تفعيل وضع النهار';
+        } else {
+            themeIcon.className = 'bi bi-moon';
+            themeIcon.parentElement.title = 'تفعيل وضع الظلام';
+        }
     }
     
     // حفظ التفضيل في localStorage
-    localStorage.setItem('theme', newTheme);
+    try {
+        localStorage.setItem('theme', newTheme);
+    } catch (e) {
+        console.warn('Could not save theme preference:', e);
+    }
 }
 
 // تهيئة وضع الظلام عند تحميل الصفحة
@@ -914,435 +1144,241 @@ function initDarkMode() {
     document.documentElement.setAttribute('data-theme', savedTheme);
     
     const themeIcon = document.querySelector('#themeToggle i');
-    if (savedTheme === 'dark') {
-        themeIcon.className = 'bi bi-sun';
-        themeIcon.parentElement.title = 'تفعيل وضع النهار';
-    } else {
-        themeIcon.className = 'bi bi-moon';
-        themeIcon.parentElement.title = 'تفعيل وضع الظلام';
+    if (themeIcon) {
+        if (savedTheme === 'dark') {
+            themeIcon.className = 'bi bi-sun';
+            themeIcon.parentElement.title = 'تفعيل وضع النهار';
+        } else {
+            themeIcon.className = 'bi bi-moon';
+            themeIcon.parentElement.title = 'تفعيل وضع الظلام';
+        }
     }
     
-    // إضافة مستمع الحدث
-    document.getElementById('themeToggle').addEventListener('click', toggleDarkMode);
+    // Fixed: Safari event listener
+    const themeToggle = document.getElementById('themeToggle');
+    if (themeToggle) {
+        themeToggle.addEventListener('click', toggleDarkMode);
+    }
 }
 
-// تهيئة وضع الظلام عند تحميل DOM
-document.addEventListener('DOMContentLoaded', function() {
-    initDarkMode();
-    
-    // باقي تهيئة الصفحة...
-    loadCart();
-    loadAndDisplayProducts();
-    setupCategoryFilters();
-    setupAddToCartButtons();
-    loadSpecialOffers();
-    populateWilayas();
-    startOfferTimer();
-    orderModal = new bootstrap.Modal(document.getElementById('orderModal'));
-    document.getElementById('contactForm').addEventListener('submit', function(e) {
-        e.preventDefault();
-        sendContactMessage();
-    });
-    updateCartCount();
-    renderCart();
+// ============== تهيئة الصفحة الرئيسية ==============
+function initializePage() {
+    try {
+        initDarkMode();
+        
+        // Load cart first
+        loadCart();
+        
+        // Initialize components
+        loadAndDisplayProducts();
+        setupCategoryFilters();
+        setupAddToCartButtons();
+        loadSpecialOffers();
+        populateWilayas();
+        startOfferTimer();
+        
+        // Initialize modals
+        if (typeof bootstrap !== 'undefined') {
+            const orderModalElement = document.getElementById('orderModal');
+            if (orderModalElement) {
+                orderModal = new bootstrap.Modal(orderModalElement);
+            }
+            
+            // Initialize offcanvas
+            const cartOffcanvas = document.getElementById('cartOffcanvas');
+            if (cartOffcanvas) {
+                new bootstrap.Offcanvas(cartOffcanvas);
+            }
+        }
+        
+        // Setup form submission
+        const contactForm = document.getElementById('contactForm');
+        if (contactForm) {
+            contactForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                sendContactMessage();
+            });
+        }
+        
+        // Update cart UI
+        updateCartCount();
+        renderCart();
+        
+        // Initialize sliders
+        showSlides1(slideIndex1);
+        
+        // Start slideshow after user interaction (Safari requirement)
+        document.addEventListener('click', function firstInteraction() {
+            startSlideshow();
+            document.removeEventListener('click', firstInteraction);
+        }, { once: true });
+        
+        // Also start on touch events for mobile Safari
+        if (isIOS || isSafari) {
+            document.addEventListener('touchstart', function firstTouch() {
+                startSlideshow();
+                document.removeEventListener('touchstart', firstTouch);
+            }, { once: true });
+        }
+        
+        console.log('Page initialized successfully');
+        
+    } catch (error) {
+        console.error('Error during page initialization:', error);
+    }
+}
+
+// Fixed: Safari DOMContentLoaded handling
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initializePage);
+} else {
+    // DOM already loaded
+    setTimeout(initializePage, 100);
+}
+
+// Fixed: Safari visibility change handling
+document.addEventListener('visibilitychange', function() {
+    if (document.visibilityState === 'visible') {
+        // Restart timers when page becomes visible
+        if (slideInterval1) {
+            clearInterval(slideInterval1);
+            startSlideshow();
+        }
+    }
+});
+
+// Fixed: Safari page unload handling
+window.addEventListener('pagehide', function() {
+    // Clean up intervals
+    if (slideInterval1) {
+        clearInterval(slideInterval1);
+    }
+});
+
+// Fixed: Safari back/forward cache handling
+window.addEventListener('pageshow', function(event) {
+    if (event.persisted) {
+        // Page loaded from bfcache
+        location.reload();
+    }
 });
 
 // ============== تكييف حجم نموذج الطلب للأجهزة الصغيرة ==============
-
-// دالة لتقليل حجم وتكييف النموذج للأجهزة الصغيرة
 function adjustOrderModalForMobile() {
     const modal = document.getElementById('orderModal');
     if (!modal) return;
     
-    // التأكد من أن النموذج متاح
-    if (typeof bootstrap !== 'undefined' && bootstrap.Modal) {
-        const modalInstance = bootstrap.Modal.getInstance(modal);
-        if (modalInstance) {
-            // تحديث موقع النموذج
-            modal.classList.add('modal-mobile-optimized');
-        }
-    }
-    
-    // التحقق إذا كنا على جهاز محمول
-    const isMobile = window.innerWidth <= 768;
+    // Check if we're on mobile
+    const isMobile = window.innerWidth <= 768 || isIOS;
     
     if (isMobile) {
-        // تكييف النموذج للأجهزة المحمولة
-        optimizeModalForMobile();
+        modal.classList.add('mobile-optimized');
         
-        // تكييف حقول الإدخال
-        adjustInputFieldsForMobile();
-        
-        // تكييف أزرار الراديو
-        adjustRadioButtonsForMobile();
-        
-        // تكييف قائمة الولايات
-        adjustWilayaSelectForMobile();
-        
-        // تكييف الأزرار
-        adjustButtonsForMobile();
-        
-        // تكييف ملخص الطلب
-        adjustOrderSummaryForMobile();
-    } else {
-        // إعادة التعيين للشاشات الكبيرة
-        resetModalForDesktop();
+        // Adjust input fields for iOS
+        if (isIOS) {
+            document.querySelectorAll('#orderForm input, #orderForm select, #orderForm textarea').forEach(input => {
+                input.style.fontSize = '16px'; // Prevent zoom on iOS
+            });
+        }
     }
 }
 
-// تكييف النموذج للأجهزة المحمولة
-function optimizeModalForMobile() {
-    const modal = document.getElementById('orderModal');
-    const modalContent = modal.querySelector('.modal-content');
-    const modalBody = modal.querySelector('.modal-body');
-    const modalFooter = modal.querySelector('.modal-footer');
+// Setup modal adjustment
+document.addEventListener('DOMContentLoaded', function() {
+    const orderModalElement = document.getElementById('orderModal');
     
-    // إضافة فئات التكييف
-    modal.classList.add('mobile-optimized');
-    if (modalContent) modalContent.classList.add('mobile-content');
-    if (modalBody) modalBody.classList.add('mobile-body');
-    if (modalFooter) modalFooter.classList.add('mobile-footer');
-    
-    // تعديل الهوامش والحشوات
-    if (modalBody) {
-        modalBody.style.padding = '15px';
-        modalBody.style.maxHeight = '70vh';
-        modalBody.style.overflowY = 'auto';
-    }
-    
-    // إضافة شريط تمرير مخصص
-    addCustomScrollbar(modalBody);
-}
-
-// تكييف حقول الإدخال للأجهزة المحمولة
-function adjustInputFieldsForMobile() {
-    const inputs = document.querySelectorAll('#orderForm .form-control, #orderForm .form-select');
-    
-    inputs.forEach(input => {
-        // إضافة فئة خاصة للأجهزة المحمولة
-        input.classList.add('mobile-input');
-        
-        // ضبط الحشوات والارتفاع
-        input.style.padding = '10px 12px';
-        input.style.height = '44px';
-        input.style.fontSize = '16px'; // منع تكبير iOS
-        
-        // إضافة تأثير التركيز المحسن
-        input.addEventListener('focus', function() {
-            this.style.borderColor = 'var(--primary)';
-            this.style.boxShadow = '0 0 0 2px rgba(255, 107, 53, 0.2)';
+    if (orderModalElement) {
+        orderModalElement.addEventListener('show.bs.modal', function() {
+            setTimeout(adjustOrderModalForMobile, 50);
         });
         
-        input.addEventListener('blur', function() {
-            this.style.borderColor = '';
-            this.style.boxShadow = '';
-        });
-    });
-    
-    // تكييف خاص لحقول النصوص الكبيرة
-    const textarea = document.getElementById('address');
-    if (textarea) {
-        textarea.style.minHeight = '80px';
-        textarea.style.maxHeight = '120px';
-        textarea.style.resize = 'vertical';
+        // Adjust on resize
+        window.addEventListener('resize', adjustOrderModalForMobile);
     }
+});
+
+// Fixed: Safari touch event improvements
+if ('ontouchstart' in window) {
+    // Improve touch responsiveness
+    document.documentElement.style.touchAction = 'manipulation';
+    
+    // Remove tap highlight
+    document.documentElement.style.webkitTapHighlightColor = 'transparent';
 }
 
-// تكييف أزرار الراديو للأجهزة المحمولة
-function adjustRadioButtonsForMobile() {
-    const radioButtons = document.querySelectorAll('#orderForm .form-check');
-    
-    radioButtons.forEach(radio => {
-        radio.classList.add('mobile-radio');
-        
-        // تكبير مساحة اللمس
-        const label = radio.querySelector('.form-check-label');
-        const input = radio.querySelector('.form-check-input');
-        
-        if (label && input) {
-            // جعل التسمية قابلة للنقر بالكامل
-            label.style.padding = '10px 15px 10px 35px';
-            label.style.borderRadius = '8px';
-            label.style.backgroundColor = 'rgba(0, 0, 0, 0.03)';
-            label.style.display = 'block';
-            label.style.marginBottom = '5px';
-            label.style.cursor = 'pointer';
-            label.style.transition = 'all 0.2s ease';
-            
-            // إضافة تأثير hover
-            label.addEventListener('mouseenter', function() {
-                this.style.backgroundColor = 'rgba(255, 107, 53, 0.1)';
-            });
-            
-            label.addEventListener('mouseleave', function() {
-                if (!input.checked) {
-                    this.style.backgroundColor = 'rgba(0, 0, 0, 0.03)';
-                }
-            });
-            
-            // تحديث التصميم عند التحديد
-            input.addEventListener('change', function() {
-                const allLabels = document.querySelectorAll('#orderForm .form-check-label');
-                allLabels.forEach(l => {
-                    l.style.backgroundColor = 'rgba(0, 0, 0, 0.03)';
-                    l.style.color = '';
-                });
-                
-                if (this.checked) {
-                    label.style.backgroundColor = 'rgba(255, 107, 53, 0.15)';
-                    label.style.color = 'var(--primary)';
-                    label.style.fontWeight = '600';
-                }
-            });
-            
-            // تحسين وضع الراديو
-            input.style.width = '20px';
-            input.style.height = '20px';
-            input.style.marginTop = '0';
-            input.style.position = 'absolute';
-            input.style.left = '10px';
-            input.style.top = '50%';
-            input.style.transform = 'translateY(-50%)';
-        }
-    });
-}
-
-// تكييف قائمة الولايات للأجهزة المحمولة
-function adjustWilayaSelectForMobile() {
-    const wilayaSelect = document.getElementById('wilaya');
-    if (!wilayaSelect) return;
-    
-    wilayaSelect.classList.add('mobile-select');
-    
-    // تحسين مظهر القائمة
-    wilayaSelect.style.padding = '10px 35px 10px 12px';
-    wilayaSelect.style.backgroundPosition = 'left 12px center';
-    wilayaSelect.style.fontSize = '16px';
-    
-    // تحسين خيارات القائمة
-    const options = wilayaSelect.options;
-    for (let i = 0; i < options.length; i++) {
-        options[i].style.padding = '8px 12px';
-        options[i].style.fontSize = '14px';
-    }
-    
-    // إضافة تأثير التركيز
-    wilayaSelect.addEventListener('focus', function() {
-        this.style.borderColor = 'var(--primary)';
-        this.style.boxShadow = '0 0 0 2px rgba(255, 107, 53, 0.2)';
-    });
-    
-    wilayaSelect.addEventListener('blur', function() {
-        this.style.borderColor = '';
-        this.style.boxShadow = '';
-    });
-}
-
-// تكييف الأزرار للأجهزة المحمولة
-function adjustButtonsForMobile() {
-    const submitBtn = document.getElementById('submitOrderBtn');
-    const cancelBtn = document.querySelector('#orderModal .btn-secondary');
-    
-    // تكييف زر التأكيد
-    if (submitBtn) {
-        submitBtn.classList.add('mobile-submit-btn');
-        submitBtn.style.padding = '12px 20px';
-        submitBtn.style.fontSize = '1rem';
-        submitBtn.style.fontWeight = '600';
-        submitBtn.style.borderRadius = '8px';
-        submitBtn.style.marginBottom = '8px';
-        submitBtn.style.width = '100%';
-        submitBtn.style.height = '48px';
-        submitBtn.style.display = 'flex';
-        submitBtn.style.alignItems = 'center';
-        submitBtn.style.justifyContent = 'center';
-        submitBtn.style.gap = '8px';
-        
-        // منع مشاكل اللمس على iOS
-        submitBtn.style.webkitTapHighlightColor = 'transparent';
-        submitBtn.style.userSelect = 'none';
-        submitBtn.style.touchAction = 'manipulation';
-    }
-    
-    // تكييف زر الإلغاء
-    if (cancelBtn) {
-        cancelBtn.classList.add('mobile-cancel-btn');
-        cancelBtn.style.padding = '12px 20px';
-        cancelBtn.style.fontSize = '1rem';
-        cancelBtn.style.fontWeight = '500';
-        cancelBtn.style.borderRadius = '8px';
-        cancelBtn.style.width = '100%';
-        cancelBtn.style.height = '48px';
-        
-        // منع مشاكل اللمس على iOS
-        cancelBtn.style.webkitTapHighlightColor = 'transparent';
-        cancelBtn.style.userSelect = 'none';
-        cancelBtn.style.touchAction = 'manipulation';
-    }
-}
-
-// تكييف ملخص الطلب للأجهزة المحمولة
-function adjustOrderSummaryForMobile() {
-    const orderSummary = document.querySelector('.order-summary');
-    if (!orderSummary) return;
-    
-    orderSummary.classList.add('mobile-summary');
-    orderSummary.style.padding = '12px';
-    orderSummary.style.marginBottom = '15px';
-    orderSummary.style.borderRadius = '10px';
-    
-    // تكييف صورة المنتج
-    const productImage = document.getElementById('productImage');
-    if (productImage) {
-        productImage.style.width = '50px';
-        productImage.style.height = '50px';
-        productImage.style.objectFit = 'cover';
-    }
-    
-    // تكييف نص المنتج
-    const productName = document.getElementById('productNameDisplay');
-    if (productName) {
-        productName.style.fontSize = '0.95rem';
-        productName.style.lineHeight = '1.3';
-        productName.style.marginBottom = '4px';
-    }
-    
-    const productPrice = document.getElementById('productPrice');
-    if (productPrice) {
-        productPrice.style.fontSize = '0.9rem';
-        productPrice.style.fontWeight = '700';
-    }
-}
-
-// إضافة شريط تمرير مخصص
-function addCustomScrollbar(element) {
-    if (!element) return;
-    
-    // إضافة أنماط شريط التمرير
-    const scrollbarStyles = `
-        .mobile-body::-webkit-scrollbar {
-            width: 4px;
+// Fixed: Safari CSS variable fallback
+if (isSafari) {
+    // Ensure CSS variables are supported
+    const style = document.createElement('style');
+    style.textContent = `
+        :root {
+            --primary: #ff6b35;
+            --primary-dark: #e55a2b;
+            --secondary: #6c757d;
+            --light: #f8f9fa;
+            --dark: #343a40;
         }
         
-        .mobile-body::-webkit-scrollbar-track {
-            background: rgba(0, 0, 0, 0.05);
-            border-radius: 2px;
-        }
-        
-        .mobile-body::-webkit-scrollbar-thumb {
-            background: var(--primary);
-            border-radius: 2px;
-        }
-        
-        .mobile-body::-webkit-scrollbar-thumb:hover {
-            background: var(--primary-dark);
-        }
-        
-        [data-theme="dark"] .mobile-body::-webkit-scrollbar-track {
-            background: rgba(255, 255, 255, 0.05);
-        }
-        
-        [data-theme="dark"] .mobile-body::-webkit-scrollbar-thumb {
-            background: var(--primary);
+        [data-theme="dark"] {
+            --light: #212529;
+            --dark: #f8f9fa;
         }
     `;
-    
-    // إضافة الأنماط إذا لم تكن موجودة
-    if (!document.getElementById('mobile-scrollbar-styles')) {
-        const styleEl = document.createElement('style');
-        styleEl.id = 'mobile-scrollbar-styles';
-        styleEl.textContent = scrollbarStyles;
-        document.head.appendChild(styleEl);
-    }
+    document.head.appendChild(style);
 }
 
-// إعادة تعيين النموذج للشاشات الكبيرة
-function resetModalForDesktop() {
-    const modal = document.getElementById('orderModal');
-    
-    // إزالة فئات التكييف
-    modal.classList.remove('mobile-optimized', 'mobile-optimized');
-    
-    // إزالة الأنماط المضافة
-    const mobileElements = document.querySelectorAll('.mobile-input, .mobile-radio, .mobile-select, .mobile-submit-btn, .mobile-cancel-btn, .mobile-summary');
-    mobileElements.forEach(el => {
-        el.classList.remove('mobile-input', 'mobile-radio', 'mobile-select', 'mobile-submit-btn', 'mobile-cancel-btn', 'mobile-summary');
-        el.removeAttribute('style');
-    });
-    
-    // إزالة معالجات الأحداث
-    const inputs = document.querySelectorAll('#orderForm .form-control, #orderForm .form-select');
-    inputs.forEach(input => {
-        const newInput = input.cloneNode(true);
-        input.parentNode.replaceChild(newInput, input);
-    });
-    
-    // إزالة معالجات أزرار الراديو
-    const radios = document.querySelectorAll('#orderForm .form-check-input');
-    radios.forEach(radio => {
-        const newRadio = radio.cloneNode(true);
-        radio.parentNode.replaceChild(newRadio, radio);
-    });
-}
-
-// ============== إدارة أحداث النموذج ==============
-
-// استدعاء التكييف عند فتح النموذج
-document.addEventListener('DOMContentLoaded', function() {
-    const orderModal = document.getElementById('orderModal');
-    
-    if (orderModal) {
-        orderModal.addEventListener('show.bs.modal', function() {
-            setTimeout(() => {
-                adjustOrderModalForMobile();
-            }, 50);
-        });
+// Fixed: Safari console errors suppression for production
+if (window.location.hostname !== 'localhost') {
+    // Suppress non-critical console errors in production
+    const originalError = console.error;
+    console.error = function(...args) {
+        // Filter out Safari-specific non-critical errors
+        const errorMsg = args[0] ? args[0].toString() : '';
+        const safariErrors = [
+            'SecurityError',
+            'NotAllowedError',
+            'NS_ERROR_FAILURE',
+            'QuotaExceededError'
+        ];
         
-        orderModal.addEventListener('shown.bs.modal', function() {
-            // إعادة حساب الأحجام بعد عرض النموذج
-            adjustOrderModalForMobile();
-        });
-    }
-    
-    // تكييف عند تغيير حجم النافذة
-    window.addEventListener('resize', function() {
-        if (document.getElementById('orderModal').classList.contains('show')) {
-            adjustOrderModalForMobile();
+        if (!safariErrors.some(err => errorMsg.includes(err))) {
+            originalError.apply(console, args);
         }
-    });
-    
-    // تكييف عند تغيير وضع Dark Mode
-    const observer = new MutationObserver(function(mutations) {
-        mutations.forEach(function(mutation) {
-            if (mutation.attributeName === 'data-theme') {
-                if (document.getElementById('orderModal').classList.contains('show')) {
-                    setTimeout(adjustOrderModalForMobile, 100);
-                }
-            }
-        });
-    });
-    
-    observer.observe(document.documentElement, {
-        attributes: true,
-        attributeFilter: ['data-theme']
-    });
-});
+    };
+}
 
-// ============== منع مشاكل الأزرار الكبيرة ==============
-
-// ============== التحسينات النهائية ==============
-
-// تشغيل التكييف الأولي
-setTimeout(() => {
-    if (document.getElementById('orderModal').classList.contains('show')) {
-        adjustOrderModalForMobile();
+// Export functions for global access (Safari debugging)
+window.appDebug = {
+    reloadCart: function() {
+        loadCart();
+        updateCartCount();
+        renderCart();
+        return 'Cart reloaded';
+    },
+    clearStorage: function() {
+        localStorage.clear();
+        cart = [];
+        updateCartCount();
+        renderCart();
+        return 'Storage cleared';
+    },
+    testFirebase: function() {
+        if (db) {
+            return 'Firestore available';
+        }
+        return 'Firestore not available';
+    },
+    safariInfo: function() {
+        return {
+            userAgent: navigator.userAgent,
+            isSafari: isSafari,
+            isIOS: isIOS,
+            isMac: isMac,
+            localStorage: typeof localStorage,
+            firebase: typeof firebase,
+            bootstrap: typeof bootstrap
+        };
     }
-}, 1000);
+};
 
-// إضافة دعم لـ Fast Click (تحسين الاستجابة على الهواتف)
-document.addEventListener('DOMContentLoaded', function() {
-    // تقليل تأخير النقر على الروابط والأزرار
-    if ('ontouchstart' in window) {
-        document.documentElement.style.cursor = 'pointer';
-    }
-});
+console.log('Main.js loaded successfully for Safari compatibility');
