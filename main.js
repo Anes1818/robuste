@@ -1,4 +1,3 @@
-// ============== تهيئة Firebase ==============
 
 // ============== تهيئة Firebase ==============
 const firebaseConfig = {
@@ -150,89 +149,6 @@ function renderProducts(products) {
       `
     ;})}
 
-/* ===== clickable cards & accessibility ===== */
-
-/* 1) منع تداخل: عندما يضغط المستخدم زر الإضافة، نوقف انتشار الحدث
-   (setupAddToCartButtons() مُعدّة بالفعل كـ delegated listener؛ فقط نُضيف stopPropagation داخلها).
-   إذا لم تكن قد عدّلتها بعد، استخدم التعديل التالي: */
-
-function setupAddToCartButtons() {
-  if (setupAddToCartButtons._initialized) return;
-  setupAddToCartButtons._initialized = true;
-
-  document.addEventListener('click', function(e) {
-    const button = e.target.closest('.add-to-cart-btn');
-    if (!button) return;
-
-    // مهم: لا تدع حدث النقر يفقأ لوالد البطاقة
-    e.stopPropagation();
-    e.preventDefault();
-
-    // الحماية من النقر السريع المتكرر (debounce)
-    if (button.dataset.processing === 'true') return;
-    button.dataset.processing = 'true';
-    setTimeout(() => { delete button.dataset.processing; }, 300);
-
-    const productId = button.getAttribute('data-id');
-    if (!productId) return;
-
-    // تحميل المنتج وإضافته إلى السلة (الحالة الحالية من الكود تبقى كما هي)
-    fetch('products.json')
-      .then(response => {
-        if (!response.ok) throw new Error('Failed to load products.json');
-        return response.json();
-      })
-      .then(products => {
-        const product = products.find(p => p.id == productId);
-        if (product) {
-          addToCart(
-            product.title,
-            `${product.price.toLocaleString()} DA`,
-            product.price,
-            product.images,
-            product.id
-          );
-        } else {
-          showStatus('Produit introuvable', 'error');
-        }
-      })
-      .catch(err => {
-        console.error(err);
-        showStatus('Error loading product details', 'error');
-      });
-  });
-}
-
-/* 2) نُفعِّل النقر على كامل البطاقة (ما عدا عناصر تفاعلية) */
-document.addEventListener('click', function(e) {
-  // أقرب بطاقة
-  const card = e.target.closest('.product-card');
-  if (!card) return;
-
-  // إذا النقر جاء من عنصر تفاعلي (button, a, input, select, textarea, عناصر carousel controls...) نتجاهل
-  if (e.target.closest('button, a, input, select, textarea, .carousel-control, .carousel-indicators')) return;
-
-  const pid = card.dataset.pid || card.querySelector('.add-to-cart-btn')?.dataset.id;
-  if (!pid) return;
-
-  // توجيه آمن
-  window.location.href = `product.html?pid=${encodeURIComponent(pid)}`;
-});
-
-/* 3) دعم لوحة المفاتيح (accessibility): Enter / Space على البطاقة تؤدي نفس الفعل */
-document.addEventListener('keydown', function(e) {
-  const focused = document.activeElement;
-  if (!focused || !focused.classList.contains('product-card')) return;
-
-  if (e.key === 'Enter' || e.key === ' ') {
-    e.preventDefault();
-    const pid = focused.dataset.pid || focused.querySelector('.add-to-cart-btn')?.dataset.id;
-    if (pid) window.location.href = `product.html?pid=${encodeURIComponent(pid)}`;
-  }
-});
-
-/* أخيراً: تأكد من استدعاء setupAddToCartButtons() مرة واحدة أثناء التهيئة */
-setupAddToCartButtons();
 
 
 // دالة تحميل العروض الخاصة
@@ -1427,4 +1343,4 @@ document.addEventListener('DOMContentLoaded', function() {
     if ('ontouchstart' in window) {
         document.documentElement.style.cursor = 'pointer';
     }
-});)
+});
