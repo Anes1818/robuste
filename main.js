@@ -41,6 +41,8 @@
     var touchStartY = 0;
     var lastTapTime = 0;
     var lastTapTarget = null;
+    var isScrolling = false;
+    var scrollTimeout;
 
     // ============== نظام المنتجات الديناميكي ==============
 
@@ -67,6 +69,7 @@
                 }
                 
                 renderProducts(filteredProducts);
+                setupProductCardTaps(); // إعداد النقرات بعد عرض المنتجات
             })
             .catch(function(error) {
                 console.error('Erreur:', error);
@@ -130,6 +133,7 @@
             
             var productCard = '<div class="col-6 col-md-4 col-lg-3 mb-4">' +
                 '<div class="product-card card h-100 position-relative" role="link" tabindex="0" data-pid="' + product.id + '">' +
+                '<div class="product-card-tap-area">' + // إضافة منطقة النقر
                 productBadge + discountBadge +
                 '<div id="carousel-' + product.id + '" class="carousel slide product-carousel" data-bs-ride="carousel">' +
                 '<div class="carousel-indicators">' + carouselIndicators + '</div>' +
@@ -144,7 +148,8 @@
                 '<p dir="ltr" class="current-price fw-bold mb-0">' + product.price.toLocaleString() + ' DA</p>' +
                 '</div>' +
                 '</div>' +
-                '<div class="card-footer bg-transparent border-0">' +
+                '</div>' + // نهاية منطقة النقر
+                '<div class="card-footer bg-transparent border-0 pt-0">' +
                 '<button class="btn btn-orange w-100 add-to-cart-btn" data-id="' + product.id + '" aria-label="Ajouter ' + product.title + ' au panier">' +
                 '<i class="bi bi-cart-plus"></i>&nbsp;Ajouter au panier' +
                 '</button>' +
@@ -153,6 +158,130 @@
                 '</div>';
             
             container.innerHTML += productCard;
+        }
+    }
+
+    // ============== نظام النقر السلس للبطاقات ==============
+    function setupProductCardTaps() {
+        var productCards = document.querySelectorAll('.product-card');
+        
+        for (var i = 0; i < productCards.length; i++) {
+            var card = productCards[i];
+            
+            // إعداد خصائص CSS لللمس
+            card.style.cursor = 'pointer';
+            card.style.userSelect = 'none';
+            card.style.webkitTapHighlightColor = 'transparent';
+            
+            // إعداد معالجات اللمس
+            setupTouchHandlersForCard(card);
+            
+            // إعداد معالج النقر
+            card.addEventListener('click', handleProductCardClick);
+            
+            // إعداد معالج الضغط على المفتاح
+            card.addEventListener('keydown', function(e) {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    navigateToProductPage(this);
+                }
+            });
+        }
+    }
+
+    function setupTouchHandlersForCard(card) {
+        var tapArea = card.querySelector('.product-card-tap-area');
+        if (!tapArea) return;
+        
+        tapArea.style.cursor = 'pointer';
+        tapArea.style.userSelect = 'none';
+        tapArea.style.webkitTapHighlightColor = 'transparent';
+        tapArea.style.position = 'relative';
+        tapArea.style.zIndex = '1';
+        
+        var startX, startY, startTime;
+        var moved = false;
+        
+        card.addEventListener('touchstart', function(e) {
+            if (isScrolling) return;
+            
+            startX = e.touches[0].clientX;
+            startY = e.touches[0].clientY;
+            startTime = Date.now();
+            moved = false;
+            
+            // إضافة تأثير اللمس
+            this.classList.add('product-card-touch');
+            
+            // منع السلوك الافتراضي للنقر
+            e.preventDefault();
+        }, { passive: false });
+        
+        card.addEventListener('touchmove', function(e) {
+            if (!startX || !startY) return;
+            
+            var currentX = e.touches[0].clientX;
+            var currentY = e.touches[0].clientY;
+            
+            // إذا تحرك المستخدم كثيراً، نعتبره تمريراً وليس نقراً
+            if (Math.abs(currentX - startX) > 10 || Math.abs(currentY - startY) > 10) {
+                moved = true;
+                this.classList.remove('product-card-touch');
+            }
+        }, { passive: true });
+        
+        card.addEventListener('touchend', function(e) {
+            var endTime = Date.now();
+            
+            // إزالة تأثير اللمس
+            this.classList.remove('product-card-touch');
+            
+            // إذا لم يتحرك وكان الوقت قصيراً (أقل من 500ms)
+            if (!moved && (endTime - startTime) < 500) {
+                e.preventDefault();
+                e.stopPropagation();
+                
+                // تجنب النقرات المزدوجة
+                var currentTime = Date.now();
+                if (currentTime - lastTapTime < 500 && this === lastTapTarget) {
+                    return;
+                }
+                
+                lastTapTime = currentTime;
+                lastTapTarget = this;
+                
+                // تأخير بسيط لتحسين الاستجابة
+                setTimeout(function(card) {
+                    navigateToProductPage(card);
+                }.bind(null, this), 50);
+            }
+        }, { passive: false });
+        
+        card.addEventListener('touchcancel', function() {
+            this.classList.remove('product-card-touch');
+        });
+    }
+
+    function handleProductCardClick(e) {
+        // إذا كان النقر على زر إضافة للسلة، نتجاهله
+        if (e.target.closest('.add-to-cart-btn')) {
+            return;
+        }
+        
+        // إذا كان النقر على عناصر تحكم السلايدر، نتجاهله
+        if (e.target.closest('.carousel-control-prev') || 
+            e.target.closest('.carousel-control-next') ||
+            e.target.closest('.carousel-indicators')) {
+            return;
+        }
+        
+        navigateToProductPage(this);
+    }
+
+    function navigateToProductPage(card) {
+        var productId = card.getAttribute('data-pid');
+        if (productId) {
+            window.location.href = 'product.html?pid=' + encodeURIComponent(productId);
         }
     }
 
@@ -249,6 +378,7 @@
 
     function handleCategoryClick(e) {
         e.preventDefault();
+        e.stopPropagation();
         
         var currentTime = Date.now();
         if (currentTime - lastTapTime < 500 && this === lastTapTarget) {
@@ -282,7 +412,7 @@
         setupAddToCartButtons._initialized = true;
 
         // استخدام event delegation لجميع أزرار إضافة إلى السلة
-        document.addEventListener('touchend', handleAddToCart, { passive: true });
+        document.addEventListener('touchend', handleAddToCart, { passive: false });
         document.addEventListener('click', handleAddToCart);
     }
 
@@ -437,7 +567,7 @@
     function attachCartEventListeners() {
         var quantityBtns = document.querySelectorAll('.quantity-btn');
         for (var i = 0; i < quantityBtns.length; i++) {
-            quantityBtns[i].addEventListener('touchend', handleQuantityTouch, { passive: true });
+            quantityBtns[i].addEventListener('touchend', handleQuantityTouch, { passive: false });
             quantityBtns[i].addEventListener('click', handleQuantityClick);
         }
         
@@ -452,7 +582,7 @@
         
         var removeBtns = document.querySelectorAll('.remove-item');
         for (var k = 0; k < removeBtns.length; k++) {
-            removeBtns[k].addEventListener('touchend', handleRemoveTouch, { passive: true });
+            removeBtns[k].addEventListener('touchend', handleRemoveTouch, { passive: false });
             removeBtns[k].addEventListener('click', handleRemoveClick);
         }
     }
@@ -1119,6 +1249,15 @@
 
     // ============== إعدادات اللمس للأجهزة المحمولة ==============
     function setupTouchHandlers() {
+        // كشف التمرير
+        window.addEventListener('scroll', function() {
+            isScrolling = true;
+            clearTimeout(scrollTimeout);
+            scrollTimeout = setTimeout(function() {
+                isScrolling = false;
+            }, 100);
+        });
+        
         document.addEventListener('touchstart', function(e) {
             touchStartTime = Date.now();
             touchStartX = e.touches[0].clientX;
@@ -1141,7 +1280,6 @@
             
             // منع النقرات السريعة المتتالية
             if (currentTime - touchStartTime < 50) {
-                e.preventDefault();
                 return;
             }
             
@@ -1152,19 +1290,17 @@
             var deltaY = Math.abs(touchEndY - touchStartY);
             
             if (deltaX > 10 || deltaY > 10) {
-                e.preventDefault();
                 return;
             }
             
             // منع النقر المزدوج
             if (currentTime - lastTapTime < 300 && target === lastTapTarget) {
-                e.preventDefault();
                 return;
             }
             
             lastTapTime = currentTime;
             lastTapTarget = target;
-        }, { passive: false });
+        }, { passive: true });
         
         // تحسين أداء اللمس للأزرار
         var interactiveElements = document.querySelectorAll('button, .btn, [role="button"], a');
@@ -1172,36 +1308,6 @@
             interactiveElements[i].style.touchAction = 'manipulation';
             interactiveElements[i].style.webkitTapHighlightColor = 'transparent';
         }
-    }
-
-    // ============== المنتجات القابلة للنقر ==============
-    function setupProductCardClicks() {
-        document.addEventListener('click', function(e) {
-            var card = e.target.closest('.product-card');
-            if (!card) return;
-            
-            if (e.target.matches('button, a, input, select, textarea, .carousel-control, .carousel-indicators')) {
-                return;
-            }
-            
-            var pid = card.getAttribute('data-pid') || (card.querySelector('.add-to-cart-btn') && card.querySelector('.add-to-cart-btn').getAttribute('data-id'));
-            if (!pid) return;
-            
-            window.location.href = 'product.html?pid=' + encodeURIComponent(pid);
-        });
-        
-        document.addEventListener('keydown', function(e) {
-            var focused = document.activeElement;
-            if (!focused || !focused.classList.contains('product-card')) return;
-            
-            if (e.key === 'Enter' || e.key === ' ') {
-                e.preventDefault();
-                var pid = focused.getAttribute('data-pid') || (focused.querySelector('.add-to-cart-btn') && focused.querySelector('.add-to-cart-btn').getAttribute('data-id'));
-                if (pid) {
-                    window.location.href = 'product.html?pid=' + encodeURIComponent(pid);
-                }
-            }
-        });
     }
 
     // ============== تهيئة الصفحة ==============
@@ -1215,7 +1321,6 @@
                 loadAndDisplayProducts();
                 setupCategoryFilters();
                 setupAddToCartButtons();
-                setupProductCardClicks();
             }
             
             if (document.getElementById('specialOffersContainer')) {
