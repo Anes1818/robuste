@@ -2514,3 +2514,58 @@ body,
         padding: 10px;
     }
 }
+/* Add to your existing CSS */
+.product-card {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    overflow: hidden;
+}
+
+.product-card-touch {
+    transform: scale(0.98);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1) !important;
+}
+
+.product-card-tap-area {
+    flex: 1;
+}
+
+.add-to-cart-btn {
+    position: relative;
+    z-index: 2;
+    touch-action: manipulation;
+}
+
+/* Improved button tap feedback */
+.touch-start {
+    opacity: 0.9;
+    transform: translateY(1px);
+}
+
+/* Prevent text selection on tap */
+.product-card,
+.product-card-tap-area,
+.add-to-cart-btn {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+/* Safari-specific fixes */
+@supports (-webkit-touch-callout: none) {
+    .product-card {
+        -webkit-touch-callout: none;
+    }
+}
+
+/* Better hover states for desktop */
+@media (hover: hover) {
+    .product-card:hover:not(.product-card-touch) {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+    
+    .add-to-cart-btn:hover {
+        opacity: 0.9;
+    }
+}
