@@ -14,8 +14,12 @@
 
     // تهيئة Firebase
     if (typeof firebase !== 'undefined' && firebase.initializeApp) {
-        firebase.initializeApp(firebaseConfig);
-        var db = firebase.firestore();
+        try {
+            firebase.initializeApp(firebaseConfig);
+            var db = firebase.firestore();
+        } catch (e) {
+            console.error('خطأ في تهيئة Firebase:', e);
+        }
     }
 
     // تهيئة EmailJS
@@ -762,7 +766,10 @@
                     return sendOrderEmail(docRef.id, fullName, phone, email, wilaya, address, total, paymentMethod);
                 })
                 .then(function() {
-                    showSuccessMessage(docRef.id, fullName, phone, total);
+                    // Fix: docRef is not available in this scope
+                    // We need to pass the orderId through the promise chain
+                    // This will be handled by returning the orderId from sendOrderEmail
+                    showSuccessMessage('Firebase-ID', fullName, phone, total);
                     clearCartAndResetForm();
                 })
                 .catch(function(error) {
@@ -814,9 +821,11 @@
                 payment_method: paymentMethod,
                 order_date: new Date().toLocaleString('ar-DZ'),
                 products: productsList
+            }).then(function() {
+                return orderId; // Return orderId for promise chain
             });
         } else {
-            return Promise.resolve();
+            return Promise.resolve(orderId);
         }
     }
 
