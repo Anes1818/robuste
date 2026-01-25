@@ -40,11 +40,9 @@
     // ============== المتغيرات العامة ==============
     var orderModal = null;
     var cart = [];
-    var touchStartTime = 0;
-    var touchStartX = 0;
-    var touchStartY = 0;
-    var lastTapTime = 0;
-    var lastTapTarget = null;
+    var isProcessing = false;
+    var lastActionTime = 0;
+    var lastActionElement = null;
 
     // ============== نظام المنتجات الديناميكي ==============
 
@@ -246,21 +244,25 @@
     function setupCategoryFilters() {
         var categoryBtns = document.querySelectorAll('.category-btn');
         for (var i = 0; i < categoryBtns.length; i++) {
-            categoryBtns[i].addEventListener('touchend', handleCategoryClick, { passive: true });
             categoryBtns[i].addEventListener('click', handleCategoryClick);
+            categoryBtns[i].addEventListener('touchstart', handleCategoryTouch, { passive: true });
         }
     }
 
     function handleCategoryClick(e) {
         e.preventDefault();
         
-        var currentTime = Date.now();
-        if (currentTime - lastTapTime < 500 && this === lastTapTarget) {
+        if (isProcessing) return;
+        isProcessing = true;
+        
+        var now = Date.now();
+        if (now - lastActionTime < 500 && this === lastActionElement) {
+            isProcessing = false;
             return;
         }
         
-        lastTapTime = currentTime;
-        lastTapTarget = this;
+        lastActionTime = now;
+        lastActionElement = this;
         
         var categoryBtns = document.querySelectorAll('.category-btn');
         for (var i = 0; i < categoryBtns.length; i++) {
@@ -272,22 +274,24 @@
         var category = this.getAttribute('data-category');
         loadAndDisplayProducts(category);
         
-        if (e.type === 'touchend') {
-            this.classList.add('active-touch');
-            setTimeout(function(btn) {
-                btn.classList.remove('active-touch');
-            }.bind(null, this), 200);
-        }
+        setTimeout(function() {
+            isProcessing = false;
+        }, 300);
+    }
+
+    function handleCategoryTouch(e) {
+        e.preventDefault();
+        this.classList.add('touch-feedback');
+        setTimeout(function(btn) {
+            btn.classList.remove('touch-feedback');
+        }.bind(null, this), 200);
     }
 
     // ============== إعداد أزرار إضافة إلى السلة ==============
     function setupAddToCartButtons() {
-        if (setupAddToCartButtons._initialized) return;
-        setupAddToCartButtons._initialized = true;
-
         // استخدام event delegation لجميع أزرار إضافة إلى السلة
-        document.addEventListener('touchend', handleAddToCart, { passive: true });
         document.addEventListener('click', handleAddToCart);
+        document.addEventListener('touchstart', handleAddToCartTouch, { passive: true });
     }
 
     function handleAddToCart(e) {
@@ -305,16 +309,22 @@
         e.preventDefault();
         e.stopPropagation();
         
-        if (button.getAttribute('data-processing') === 'true') return;
-        button.setAttribute('data-processing', 'true');
+        if (isProcessing) return;
+        isProcessing = true;
         
-        setTimeout(function() {
-            button.removeAttribute('data-processing');
-        }, 300);
+        var now = Date.now();
+        if (now - lastActionTime < 500 && button === lastActionElement) {
+            isProcessing = false;
+            return;
+        }
+        
+        lastActionTime = now;
+        lastActionElement = button;
         
         var productId = button.getAttribute('data-id');
         if (!productId) {
             console.warn('add-to-cart button without data-id', button);
+            isProcessing = false;
             return;
         }
         
@@ -347,7 +357,29 @@
             .catch(function(error) {
                 console.error('Error loading product:', error);
                 showStatus('Error loading product details', 'error');
+            })
+            .finally(function() {
+                setTimeout(function() {
+                    isProcessing = false;
+                }, 300);
             });
+    }
+
+    function handleAddToCartTouch(e) {
+        var button = null;
+        
+        if (e.target.matches('.add-to-cart-btn')) {
+            button = e.target;
+        } else if (e.target.closest('.add-to-cart-btn')) {
+            button = e.target.closest('.add-to-cart-btn');
+        }
+        
+        if (button) {
+            button.classList.add('touch-feedback');
+            setTimeout(function() {
+                button.classList.remove('touch-feedback');
+            }, 200);
+        }
     }
 
     // ============== إدارة سلة المشتريات ==============
@@ -378,6 +410,13 @@
         }
         cartCount.textContent = count;
         checkoutBtn.disabled = count === 0;
+        
+        // إضافة فئة للزر إذا كان فارغاً
+        if (count === 0) {
+            checkoutBtn.classList.add('disabled');
+        } else {
+            checkoutBtn.classList.remove('disabled');
+        }
     }
 
     // عرض محتويات السلة
@@ -412,18 +451,18 @@
             itemElement.className = 'cart-item';
             itemElement.setAttribute('data-id', item.id || '');
             
-            itemElement.innerHTML = '<div class="d-flex">' +
+            itemElement.innerHTML = '<div class="d-flex align-items-center">' +
                 '<img src="' + (item.image || '') + '" alt="' + (item.name || 'منتج') + '" class="cart-item-img me-3" loading="lazy">' +
-                '<div class="cart-item-details">' +
-                '<div class="cart-item-title">' + (item.name || 'منتج بدون اسم') + '</div>' +
-                '<div class="cart-item-price">' + (item.price || 0) + ' د.ج</div>' +
-                '<div class="quantity-controls">' +
-                '<button class="quantity-btn" data-action="decrease" data-index="' + i + '">-</button>' +
-                '<input type="number" class="quantity-input" value="' + (item.quantity || 1) + '" min="1" data-index="' + i + '" pattern="[0-9]*" inputmode="numeric">' +
-                '<button class="quantity-btn" data-action="increase" data-index="' + i + '">+</button>' +
+                '<div class="cart-item-details flex-grow-1">' +
+                '<div class="cart-item-title mb-1">' + (item.name || 'منتج بدون اسم') + '</div>' +
+                '<div class="cart-item-price mb-2">' + (item.price || 0) + ' د.ج</div>' +
+                '<div class="quantity-controls d-flex align-items-center">' +
+                '<button class="quantity-btn decrease-btn" data-index="' + i + '">-</button>' +
+                '<input type="number" class="quantity-input mx-2" value="' + (item.quantity || 1) + '" min="1" data-index="' + i + '" readonly>' +
+                '<button class="quantity-btn increase-btn" data-index="' + i + '">+</button>' +
                 '</div>' +
                 '</div>' +
-                '<button class="remove-item align-self-start" data-index="' + i + '">' +
+                '<button class="remove-item-btn ms-2" data-index="' + i + '">' +
                 '<i class="bi bi-trash"></i>' +
                 '</button>' +
                 '</div>';
@@ -441,102 +480,94 @@
     function attachCartEventListeners() {
         var quantityBtns = document.querySelectorAll('.quantity-btn');
         for (var i = 0; i < quantityBtns.length; i++) {
-            quantityBtns[i].addEventListener('touchend', handleQuantityTouch, { passive: true });
             quantityBtns[i].addEventListener('click', handleQuantityClick);
         }
         
-        var quantityInputs = document.querySelectorAll('.quantity-input');
-        for (var j = 0; j < quantityInputs.length; j++) {
-            quantityInputs[j].addEventListener('change', handleQuantityChange);
-            quantityInputs[j].addEventListener('blur', handleQuantityBlur);
-            quantityInputs[j].addEventListener('touchstart', function(e) {
-                e.stopPropagation();
-            });
-        }
-        
-        var removeBtns = document.querySelectorAll('.remove-item');
+        var removeBtns = document.querySelectorAll('.remove-item-btn');
         for (var k = 0; k < removeBtns.length; k++) {
-            removeBtns[k].addEventListener('touchend', handleRemoveTouch, { passive: true });
             removeBtns[k].addEventListener('click', handleRemoveClick);
         }
-    }
-
-    function handleQuantityTouch(e) {
-        e.preventDefault();
-        e.stopPropagation();
-        
-        var index = parseInt(this.getAttribute('data-index'), 10);
-        var action = this.getAttribute('data-action');
-        
-        if (isNaN(index) || index < 0 || index >= cart.length) return;
-        
-        if (action === 'increase') {
-            updateQuantity(index, cart[index].quantity + 1);
-        } else if (action === 'decrease') {
-            updateQuantity(index, cart[index].quantity - 1);
-        }
-        
-        this.classList.add('active-touch');
-        setTimeout(function(btn) {
-            btn.classList.remove('active-touch');
-        }.bind(null, this), 200);
     }
 
     function handleQuantityClick(e) {
         e.preventDefault();
         
+        if (isProcessing) return;
+        isProcessing = true;
+        
         var index = parseInt(this.getAttribute('data-index'), 10);
-        var action = this.getAttribute('data-action');
+        if (isNaN(index) || index < 0 || index >= cart.length) {
+            isProcessing = false;
+            return;
+        }
         
-        if (isNaN(index) || index < 0 || index >= cart.length) return;
-        
-        if (action === 'increase') {
+        if (this.classList.contains('increase-btn')) {
             updateQuantity(index, cart[index].quantity + 1);
-        } else if (action === 'decrease') {
+        } else if (this.classList.contains('decrease-btn')) {
             updateQuantity(index, cart[index].quantity - 1);
         }
+        
+        setTimeout(function() {
+            isProcessing = false;
+        }, 200);
     }
 
-    function handleQuantityChange(e) {
-        var index = parseInt(this.getAttribute('data-index'), 10);
+    // تحديث كمية المنتج
+    function updateQuantity(index, newQuantity) {
         if (isNaN(index) || index < 0 || index >= cart.length) return;
         
-        var newQuantity = parseInt(this.value, 10) || 1;
-        updateQuantity(index, newQuantity);
-    }
-
-    function handleQuantityBlur(e) {
-        var index = parseInt(this.getAttribute('data-index'), 10);
-        if (isNaN(index) || index < 0 || index >= cart.length) return;
-        
-        var newQuantity = parseInt(this.value, 10) || 1;
         if (newQuantity < 1) {
-            this.value = cart[index].quantity;
+            removeFromCart(index);
+            return;
         }
+        
+        cart[index].quantity = newQuantity;
+        
+        try {
+            localStorage.setItem('robuste_cart', JSON.stringify(cart));
+        } catch (e) {
+            console.error('خطأ في تحديث السلة:', e);
+        }
+        
+        renderCart();
+        updateCartCount();
     }
 
-    function handleRemoveTouch(e) {
-        e.preventDefault();
-        e.stopPropagation();
-        
-        var index = parseInt(this.getAttribute('data-index'), 10);
+    // إزالة منتج من السلة
+    function removeFromCart(index) {
         if (isNaN(index) || index < 0 || index >= cart.length) return;
         
-        removeFromCart(index);
+        var productName = cart[index].name || 'منتج';
+        cart.splice(index, 1);
         
-        this.classList.add('active-touch');
-        setTimeout(function(btn) {
-            btn.classList.remove('active-touch');
-        }.bind(null, this), 200);
+        try {
+            localStorage.setItem('robuste_cart', JSON.stringify(cart));
+        } catch (e) {
+            console.error('خطأ في تحديث السلة:', e);
+        }
+        
+        renderCart();
+        updateCartCount();
+        showStatus('تمت إزالة "' + productName + '" من السلة', 'success');
     }
 
     function handleRemoveClick(e) {
         e.preventDefault();
         
+        if (isProcessing) return;
+        isProcessing = true;
+        
         var index = parseInt(this.getAttribute('data-index'), 10);
-        if (isNaN(index) || index < 0 || index >= cart.length) return;
+        if (isNaN(index) || index < 0 || index >= cart.length) {
+            isProcessing = false;
+            return;
+        }
         
         removeFromCart(index);
+        
+        setTimeout(function() {
+            isProcessing = false;
+        }, 200);
     }
 
     // إضافة منتج إلى السلة
@@ -589,45 +620,6 @@
         showStatus('تمت إضافة "' + name + '" إلى السلة', 'success');
     }
 
-    // تحديث كمية المنتج
-    function updateQuantity(index, newQuantity) {
-        if (isNaN(index) || index < 0 || index >= cart.length) return;
-        
-        if (newQuantity < 1) {
-            removeFromCart(index);
-            return;
-        }
-        
-        cart[index].quantity = newQuantity;
-        
-        try {
-            localStorage.setItem('robuste_cart', JSON.stringify(cart));
-        } catch (e) {
-            console.error('خطأ في تحديث السلة:', e);
-        }
-        
-        renderCart();
-        updateCartCount();
-    }
-
-    // إزالة منتج من السلة
-    function removeFromCart(index) {
-        if (isNaN(index) || index < 0 || index >= cart.length) return;
-        
-        var productName = cart[index].name || 'منتج';
-        cart.splice(index, 1);
-        
-        try {
-            localStorage.setItem('robuste_cart', JSON.stringify(cart));
-        } catch (e) {
-            console.error('خطأ في تحديث السلة:', e);
-        }
-        
-        renderCart();
-        updateCartCount();
-        showStatus('تمت إزالة "' + productName + '" من السلة', 'success');
-    }
-
     // إظهار/إخفاء السلة
     function toggleCart() {
         if (cart.length === 0) {
@@ -657,6 +649,9 @@
             showStatus('سلة المشتريات فارغة', 'error');
             return;
         }
+        
+        if (isProcessing) return;
+        isProcessing = true;
         
         // إخفاء سلة المشتريات
         try {
@@ -696,6 +691,10 @@
         if (orderModal) {
             orderModal.show();
         }
+        
+        setTimeout(function() {
+            isProcessing = false;
+        }, 300);
     }
 
     // ============== وظائف الطلب ==============
@@ -758,18 +757,18 @@
         submitBtn.disabled = true;
         submitBtn.innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>جاري المعالجة...';
         
+        var orderId = 'ORD-' + Date.now();
+        
         if (typeof db !== 'undefined') {
             // تخزين الطلب في Firebase
             db.collection('orders').add(orderData)
                 .then(function(docRef) {
                     console.log("تم تخزين الطلب في Firebase:", docRef.id);
-                    return sendOrderEmail(docRef.id, fullName, phone, email, wilaya, address, total, paymentMethod);
+                    orderId = docRef.id;
+                    return sendOrderEmail(orderId, fullName, phone, email, wilaya, address, total, paymentMethod);
                 })
                 .then(function() {
-                    // Fix: docRef is not available in this scope
-                    // We need to pass the orderId through the promise chain
-                    // This will be handled by returning the orderId from sendOrderEmail
-                    showSuccessMessage('Firebase-ID', fullName, phone, total);
+                    showSuccessMessage(orderId, fullName, phone, total);
                     clearCartAndResetForm();
                 })
                 .catch(function(error) {
@@ -779,7 +778,6 @@
             // Fallback إذا لم يكن Firebase متاحاً
             setTimeout(function() {
                 try {
-                    var orderId = 'ORD-' + Date.now();
                     sendOrderEmail(orderId, fullName, phone, email, wilaya, address, total, paymentMethod)
                         .then(function() {
                             showSuccessMessage(orderId, fullName, phone, total);
@@ -821,11 +819,9 @@
                 payment_method: paymentMethod,
                 order_date: new Date().toLocaleString('ar-DZ'),
                 products: productsList
-            }).then(function() {
-                return orderId; // Return orderId for promise chain
             });
         } else {
-            return Promise.resolve(orderId);
+            return Promise.resolve();
         }
     }
 
@@ -848,6 +844,11 @@
             '</div>';
         
         showStatus(successMessage, 'success');
+        
+        // إعادة تعيين زر الإرسال
+        var submitBtn = document.getElementById('submitOrderBtn');
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = 'تأكيد الطلب';
     }
 
     function clearCartAndResetForm() {
@@ -893,6 +894,9 @@
             return;
         }
         
+        if (isProcessing) return;
+        isProcessing = true;
+        
         // عرض حالة التحميل
         var contactSpinner = document.getElementById('contactSpinner');
         var contactSubmitText = document.getElementById('contactSubmitText');
@@ -927,11 +931,13 @@
             .finally(function() {
                 contactSpinner.classList.add('d-none');
                 contactSubmitText.textContent = 'إرسال الرسالة';
+                isProcessing = false;
             });
         } else {
             showStatus('تعذر إرسال الرسالة. يرجى المحاولة لاحقاً.', 'error');
             contactSpinner.classList.add('d-none');
             contactSubmitText.textContent = 'إرسال الرسالة';
+            isProcessing = false;
         }
     }
 
@@ -1081,6 +1087,9 @@
 
     // ============== وظيفة تبديل وضع الظلام ==============
     function toggleDarkMode() {
+        if (isProcessing) return;
+        isProcessing = true;
+        
         var currentTheme = document.documentElement.getAttribute('data-theme');
         var newTheme = currentTheme === 'dark' ? 'light' : 'dark';
         
@@ -1102,6 +1111,10 @@
         } catch (e) {
             console.error('Could not save theme preference:', e);
         }
+        
+        setTimeout(function() {
+            isProcessing = false;
+        }, 300);
     }
 
     function initDarkMode() {
@@ -1126,80 +1139,32 @@
         }
     }
 
-    // ============== إعدادات اللمس للأجهزة المحمولة ==============
-    function setupTouchHandlers() {
-        document.addEventListener('touchstart', function(e) {
-            touchStartTime = Date.now();
-            touchStartX = e.touches[0].clientX;
-            touchStartY = e.touches[0].clientY;
-            
-            // إضافة فئة للمس للحصول على استجابة فورية
-            if (e.target.matches('.add-to-cart-btn, .offer-btn, .btn, button, [role="button"]')) {
-                e.target.classList.add('touch-start');
-            }
-        }, { passive: true });
-        
-        document.addEventListener('touchend', function(e) {
-            var currentTime = Date.now();
-            var target = e.target;
-            
-            // إزالة فئة المس
-            if (target.matches('.add-to-cart-btn, .offer-btn, .btn, button, [role="button"]')) {
-                target.classList.remove('touch-start');
-            }
-            
-            // منع النقرات السريعة المتتالية
-            if (currentTime - touchStartTime < 50) {
-                e.preventDefault();
-                return;
-            }
-            
-            // منع التمرير العرضي
-            var touchEndX = e.changedTouches[0].clientX;
-            var touchEndY = e.changedTouches[0].clientY;
-            var deltaX = Math.abs(touchEndX - touchStartX);
-            var deltaY = Math.abs(touchEndY - touchStartY);
-            
-            if (deltaX > 10 || deltaY > 10) {
-                e.preventDefault();
-                return;
-            }
-            
-            // منع النقر المزدوج
-            if (currentTime - lastTapTime < 300 && target === lastTapTarget) {
-                e.preventDefault();
-                return;
-            }
-            
-            lastTapTime = currentTime;
-            lastTapTarget = target;
-        }, { passive: false });
-        
-        // تحسين أداء اللمس للأزرار
-        var interactiveElements = document.querySelectorAll('button, .btn, [role="button"], a');
-        for (var i = 0; i < interactiveElements.length; i++) {
-            interactiveElements[i].style.touchAction = 'manipulation';
-            interactiveElements[i].style.webkitTapHighlightColor = 'transparent';
-        }
-    }
-
     // ============== المنتجات القابلة للنقر ==============
     function setupProductCardClicks() {
         document.addEventListener('click', function(e) {
+            if (isProcessing) return;
+            
             var card = e.target.closest('.product-card');
             if (!card) return;
             
-            if (e.target.matches('button, a, input, select, textarea, .carousel-control, .carousel-indicators')) {
+            if (e.target.matches('button, a, input, select, textarea, .carousel-control, .carousel-indicators, .carousel-control-prev, .carousel-control-next')) {
                 return;
             }
             
             var pid = card.getAttribute('data-pid') || (card.querySelector('.add-to-cart-btn') && card.querySelector('.add-to-cart-btn').getAttribute('data-id'));
             if (!pid) return;
             
+            isProcessing = true;
             window.location.href = 'product.html?pid=' + encodeURIComponent(pid);
+            
+            setTimeout(function() {
+                isProcessing = false;
+            }, 500);
         });
         
         document.addEventListener('keydown', function(e) {
+            if (isProcessing) return;
+            
             var focused = document.activeElement;
             if (!focused || !focused.classList.contains('product-card')) return;
             
@@ -1207,7 +1172,12 @@
                 e.preventDefault();
                 var pid = focused.getAttribute('data-pid') || (focused.querySelector('.add-to-cart-btn') && focused.querySelector('.add-to-cart-btn').getAttribute('data-id'));
                 if (pid) {
+                    isProcessing = true;
                     window.location.href = 'product.html?pid=' + encodeURIComponent(pid);
+                    
+                    setTimeout(function() {
+                        isProcessing = false;
+                    }, 500);
                 }
             }
         });
@@ -1247,10 +1217,6 @@
             
             var themeToggle = document.getElementById('themeToggle');
             if (themeToggle) {
-                themeToggle.addEventListener('touchend', function(e) {
-                    e.preventDefault();
-                    toggleDarkMode();
-                }, { passive: false });
                 themeToggle.addEventListener('click', function(e) {
                     e.preventDefault();
                     toggleDarkMode();
@@ -1272,10 +1238,6 @@
             
             var cartToggle = document.getElementById('cartToggle');
             if (cartToggle) {
-                cartToggle.addEventListener('touchend', function(e) {
-                    e.preventDefault();
-                    toggleCart();
-                }, { passive: false });
                 cartToggle.addEventListener('click', function(e) {
                     e.preventDefault();
                     toggleCart();
@@ -1284,10 +1246,6 @@
             
             var checkoutBtn = document.getElementById('checkoutBtn');
             if (checkoutBtn) {
-                checkoutBtn.addEventListener('touchend', function(e) {
-                    e.preventDefault();
-                    checkout();
-                }, { passive: false });
                 checkoutBtn.addEventListener('click', function(e) {
                     e.preventDefault();
                     checkout();
@@ -1296,17 +1254,15 @@
             
             var submitOrderBtn = document.getElementById('submitOrderBtn');
             if (submitOrderBtn) {
-                submitOrderBtn.addEventListener('touchend', function(e) {
-                    e.preventDefault();
-                    submitOrder();
-                }, { passive: false });
                 submitOrderBtn.addEventListener('click', function(e) {
                     e.preventDefault();
                     submitOrder();
                 });
             }
             
-            setupTouchHandlers();
+            // تحسين تجربة اللمس
+            document.documentElement.style.touchAction = 'manipulation';
+            document.documentElement.style.webkitTapHighlightColor = 'transparent';
             
         } catch (error) {
             console.error('خطأ في تهيئة الصفحة:', error);
