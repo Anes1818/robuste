@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html dir="rtl" lang="fr">
+<html dir="ltr" lang="fr">
 <head>
-<meta name="description" content="متجر Robuste eulma - أجهزة كهربائية منزلية بجودة عالية وأسعار تنافسية في الجزائر مع ضمان سنتين وتوصيل سريع">
+<meta name="description" content="Robuste eulma - Appareils électroménagers de haute qualité à des prix compétitifs en Algérie avec garantie de 2 ans et livraison rapide">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 
-<!-- أيقونة SVG -->
+<!-- Icône SVG -->
 <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
 <link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png">
@@ -13,15 +13,15 @@
 
 <!-- Theme color -->
 <meta name="theme-color" content="#ff6600">
-<title>Robuste eulma- Boutique</title>
+<title>Robuste eulma - Boutique</title>
 
 <!-- Google Fonts (Tajawal) -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
 
-<!-- Bootstrap RTL -->
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.rtl.min.css" rel="stylesheet">
+<!-- Bootstrap -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 
 <!-- Bootstrap Icons -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
@@ -30,98 +30,107 @@
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
 
 <link rel="stylesheet" href="style.css">
-</head><body><nav class="navbar navbar-expand-lg navbar-light fixed-top bg-white shadow-sm">
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light fixed-top bg-white shadow-sm">
     <div class="container">
         <a class="navbar-brand" href="#">
             <img src="https://i.postimg.cc/7P7BK44r/f525e1dd-9f2c-4160-aed1-882a8b28b75c-20250703-131500-0000.png" 
-                 alt="Robuste Logo" class="d-inline-block align-top" 
+                 alt="Logo Robuste" class="d-inline-block align-top" 
                  style="width: 180px; height: auto; max-height: 50px; object-fit:fill;">
             <span class="d-none d-lg-inline fw-bold fs-4 ms-2" style="color: #FF6B35;">ROBUSTE eulma</span>
         </a>
        
-        <!-- زر دارك مود محترف -->
-        <div class="d-flex align-items-center me-3">
-            <button class="theme-toggle" id="themeToggle" title="تبديل وضع الظلام">
+        <!-- Bouton mode sombre -->
+        <div class="d-flex align-items-center ms-3">
+            <button class="theme-toggle" id="themeToggle" title="Basculer le mode sombre" aria-label="Basculer le mode sombre">
                 <i class="bi bi-moon"></i>
             </button>
         </div>
         
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-label="Menu">
             <span class="navbar-toggler-icon"></span>
         </button>
         
         <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav me-auto">
-                <li class="nav-item mx-2"><a class="nav-link active" href="#">الرئيسية</a></li>
-                <li class="nav-item"><a class="nav-link" href="#products">المنتجات</a></li>
-                <li class="nav-item"><a class="nav-link" href="#reviews">آراء العملاء</a></li>
-                <li class="nav-item"><a class="nav-link" href="#contact">اتصل بنا</a></li>
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item mx-2"><a class="nav-link active" href="#" aria-current="page">Accueil</a></li>
+                <li class="nav-item"><a class="nav-link" href="#products">Produits</a></li>
+                <li class="nav-item"><a class="nav-link" href="#reviews">Avis clients</a></li>
+                <li class="nav-item"><a class="nav-link" href="#contact">Contactez-nous</a></li>
             </ul>
         </div>
         
-        <!-- أيقونة السلة مع عداد -->
-        <div class="cart-icon-container ms-lg-4">
-            <span class="cart-label d-none d-lg-inline">panier</span>
-            <a href="#" class="cart-btn position-relative" onclick="toggleCart(); return false;">
+        <!-- Icône panier avec compteur -->
+        <div class="cart-icon-container me-lg-4">
+            <span class="cart-label d-none d-lg-inline">Panier</span>
+            <a href="#" class="cart-btn position-relative" onclick="toggleCart(); return false;" aria-label="Afficher le panier">
                 <i class="bi bi-cart3"></i>
-                <span class="position-absolute badge rounded-pill bg-danger" id="cartCount">0</span>
+                <span class="position-absolute badge rounded-pill bg-danger" id="cartCount" aria-live="polite">0</span>
             </a>
         </div>
     </div>
-</nav><div class="status-indicator" id="statusIndicator" style="display: none;"><div class="alert alert-dismissible fade show" role="alert"><span id="statusMessage"></span> <button type="button" class="btn-close" onclick="hideStatus()"></button></div></div>
-  
+</nav>
 
-<!-- بهذا الجزء المعدل -->
+<div class="status-indicator" id="statusIndicator" style="display: none;">
+    <div class="alert alert-dismissible fade show" role="alert" aria-live="polite">
+        <span id="statusMessage"></span> 
+        <button type="button" class="btn-close" onclick="hideStatus()" aria-label="Fermer"></button>
+    </div>
+</div>
+
+<!-- Section Hero -->
 <section class="hero-container position-relative">
     <div class="hero-image-container">
-        <img width="3780" height="1890" src="images/banner.webp" alt="أجهزة منزلية" class="hero-image">
+        <img width="3780" height="1890" src="images/banner.webp" alt="Appareils électroménagers" class="hero-image" loading="lazy">
         <div class="image-overlay"></div>
     </div>
     <div class="hero-content container text-center position-absolute top-50 start-50 translate-middle">
         <h1 class="hero-title">Des appareils ménagers qui simplifient votre vie</h1>
         <p class="hero-subtitle">Haute qualité à des prix adaptés à chaque foyer algérien avec service de livraison rapide et garantie de 2 ans</p>
         <div>
-            <a href="#products" class="btn btn-orange btn-lg px-4 me-2"><i class="bi bi-cart"></i> Acheter maintenant </a>
+            <a href="#products" class="btn btn-orange btn-lg px-4 me-2"><i class="bi bi-cart"></i> Acheter maintenant</a>
             <a href="#contact" class="btn btn-outline-light btn-lg px-4"><i class="bi bi-headset"></i> Contactez-nous</a>
         </div>
     </div>
 </section>
 
-   <!-- HTML -->
+<!-- Diaporama -->
 <div class="slideshow-container1">
   <div class="mySlides1 fade1">
-    <img src="images/signal-2025-08-21-103443_002.webp" style="width:100%">
+    <img src="images/signal-2025-08-21-103443_002.webp" style="width:100%" alt="Présentation des produits" loading="lazy">
   </div>
   <div class="mySlides1 fade1">
-    <img src="images/signal-2025-08-21-103443_003.webp" style="width:100%">
+    <img src="images/signal-2025-08-21-103443_003.webp" style="width:100%" alt="Offres spéciales" loading="lazy">
   </div>
   <div class="mySlides1 fade1">
-    <img src="images/signal-2025-08-21-103443_004.webp" style="width:100%">
+    <img src="images/signal-2025-08-21-103443_004.webp" style="width:100%" alt="Qualité des produits" loading="lazy">
   </div>
   <div class="mySlides1 fade1">
-    <img src="images/signal-2025-08-21-103443_005.webp" style="width:100%">
+    <img src="images/signal-2025-08-21-103443_005.webp" style="width:100%" alt="Garantie des produits" loading="lazy">
   </div>
   <div class="mySlides1 fade1">
-    <img src="images/4_20250820_152310_0003.webp" style="width:100%">
+    <img src="images/4_20250820_152310_0003.webp" style="width:100%" alt="Livraison rapide" loading="lazy">
   </div>
-  <a class="prev1" onclick="plusSlides1(-1)">&#10094;</a>
-  <a class="next1" onclick="plusSlides1(1)">&#10095;</a>
+  <a class="prev1" onclick="plusSlides1(-1)" role="button" tabindex="0" aria-label="Image précédente">&#10094;</a>
+  <a class="next1" onclick="plusSlides1(1)" role="button" tabindex="0" aria-label="Image suivante">&#10095;</a>
 </div>
   
 <br>
 <div style="text-align:center">
-  <span class="dot1" onclick="currentSlide1(1)"></span>
-  <span class="dot1" onclick="currentSlide1(2)"></span>
-  <span class="dot1" onclick="currentSlide1(3)"></span>
-  <span class="dot1" onclick="currentSlide1(4)"></span>
+  <span class="dot1" onclick="currentSlide1(1)" role="button" tabindex="0" aria-label="Aller à l'image 1"></span>
+  <span class="dot1" onclick="currentSlide1(2)" role="button" tabindex="0" aria-label="Aller à l'image 2"></span>
+  <span class="dot1" onclick="currentSlide1(3)" role="button" tabindex="0" aria-label="Aller à l'image 3"></span>
+  <span class="dot1" onclick="currentSlide1(4)" role="button" tabindex="0" aria-label="Aller à l'image 4"></span>
 </div>
     
-   <section class="offers-section">
+<!-- Section Offres -->
+<section class="offers-section">
   <div class="container position-relative">
     <h2 class="offers-title">Offres spéciales</h2>
     <p class="offer-subtitle">Profitez de nos offres exceptionnelles sur les meilleurs appareils électriques avec des remises allant jusqu'à 20% pour une durée limitée</p>
 
-    <!-- تايمر -->
+    <!-- Compte à rebours -->
     <div class="offer-timer">
       <div class="timer-title">L'offre se termine dans:</div>
       <div class="timer-content">
@@ -147,7 +156,7 @@
     <!-- Produits -->
     <div class="row offer-products">
 
-      <!-- المنتج 1 -->
+      <!-- Produit 1 -->
       <div class="col-md-4">
         <div class="offer-product">
           <div class="offer-product-discount">Quantité limitée</div>
@@ -155,131 +164,132 @@
 
           <div id="carousel-offer-1" class="carousel slide" data-bs-ride="carousel">
             <div class="carousel-indicators">
-              <button type="button" data-bs-target="#carousel-offer-1" data-bs-slide-to="0" class="active"></button>
-              <button type="button" data-bs-target="#carousel-offer-1" data-bs-slide-to="1"></button>
-              <button type="button" data-bs-target="#carousel-offer-1" data-bs-slide-to="2"></button>
+              <button type="button" data-bs-target="#carousel-offer-1" data-bs-slide-to="0" class="active" aria-label="Image 1"></button>
+              <button type="button" data-bs-target="#carousel-offer-1" data-bs-slide-to="1" aria-label="Image 2"></button>
+              <button type="button" data-bs-target="#carousel-offer-1" data-bs-slide-to="2" aria-label="Image 3"></button>
             </div>
 
             <div class="carousel-inner">
               <div class="carousel-item active">
-                 <img src="images/Robuste Defroisseur 1.jpg" class="d-block w-100" alt="Defroisseur" height="800" width="800">
+                 <img src="images/Robuste Defroisseur 1.jpg" class="d-block w-100" alt="Défroisseur" height="800" width="800" loading="lazy">
               </div>
               <div class="carousel-item">
-                <img loading="lazy" src="images/Robuste Defroisseur 2.jpg" class="d-block w-100" alt="Defroisseur" height="800" width="800">
+                <img loading="lazy" src="images/Robuste Defroisseur 2.jpg" class="d-block w-100" alt="Défroisseur" height="800" width="800">
               </div>
               <div class="carousel-item">
-                <img loading="lazy" src="images/Robuste Defroisseur.jpg" class="d-block w-100" alt="Defroisseur" height="800" width="800">
+                <img loading="lazy" src="images/Robuste Defroisseur.jpg" class="d-block w-100" alt="Défroisseur" height="800" width="800">
               </div>
             </div>
 
-            <button class="carousel-control-prev" type="button" data-bs-target="#carousel-offer-1" data-bs-slide="prev">
-              <span class="carousel-control-prev-icon"></span>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carousel-offer-1" data-bs-slide="prev" aria-label="Précédent">
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
             </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#carousel-offer-1" data-bs-slide="next">
-              <span class="carousel-control-next-icon"></span>
+            <button class="carousel-control-next" type="button" data-bs-target="#carousel-offer-1" data-bs-slide="next" aria-label="Suivant">
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
             </button>
           </div>
 
-          <h4 class="offer-product-title">Defroisseur Vapeur</h4>
-          <div class="offer-product-price">6500 د.ج</div>
-          <div class="offer-product-old-price">7000 د.ج</div>
-          <a href="product.html?pid=100" class="offer-btn" style="display: block; text-decoration: none; text-align: center; color: inherit;">
-    Voir le produit
-</a>
+          <h4 class="offer-product-title">Défroisseur Vapeur</h4>
+          <div class="offer-product-price">6500 DA</div>
+          <div class="offer-product-old-price">7000 DA</div>
+          <a href="product.html?pid=100" class="offer-btn" style="display: block; text-decoration: none; text-align: center; color: inherit;" aria-label="Voir le produit Défroisseur Vapeur">
+            Voir le produit
+          </a>
         </div>
       </div>
 
-      <!-- المنتج 2 -->
+      <!-- Produit 2 -->
       <div class="col-md-4">
         <div class="offer-product">
-          <div class="offer-product-discount">خصم 10%</div>
+          <div class="offer-product-discount">Remise 10%</div>
 
           <div id="carousel-offer-2" class="carousel slide" data-bs-ride="carousel">
             <div class="carousel-indicators">
-              <button type="button" data-bs-target="#carousel-offer-2" data-bs-slide-to="0" class="active"></button>
-              <button type="button" data-bs-target="#carousel-offer-2" data-bs-slide-to="1"></button>
+              <button type="button" data-bs-target="#carousel-offer-2" data-bs-slide-to="0" class="active" aria-label="Image 1"></button>
+              <button type="button" data-bs-target="#carousel-offer-2" data-bs-slide-to="1" aria-label="Image 2"></button>
             </div>
 
             <div class="carousel-inner">
                <div class="carousel-item active">
-                <img loading="lazy" src="images/aspirateur a main 1.jpg" class="d-block w-100" alt="ASPIRATEUR SOUFFLEUR A MAIN 1" height="800" width="800">
+                <img loading="lazy" src="images/aspirateur a main 1.jpg" class="d-block w-100" alt="Aspirateur Souffleur à Main 1" height="800" width="800">
               </div>
               <div class="carousel-item">
-                <img loading="lazy" src="images/aspirateur a main 2.jpg" class="d-block w-100" alt="ASPIRATEUR SOUFFLEUR A MAIN 2" height="800" width="800">
+                <img loading="lazy" src="images/aspirateur a main 2.jpg" class="d-block w-100" alt="Aspirateur Souffleur à Main 2" height="800" width="800">
               </div>
             </div>
 
-            <button class="carousel-control-prev" type="button" data-bs-target="#carousel-offer-2" data-bs-slide="prev">
-              <span class="carousel-control-prev-icon"></span>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carousel-offer-2" data-bs-slide="prev" aria-label="Précédent">
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
             </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#carousel-offer-2" data-bs-slide="next">
-              <span class="carousel-control-next-icon"></span>
+            <button class="carousel-control-next" type="button" data-bs-target="#carousel-offer-2" data-bs-slide="next" aria-label="Suivant">
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
             </button>
           </div>
 
-          <h4 class="offer-product-title">ASPIRATEUR SOUFFLEUR A MAIN</h4>
-          <div class="offer-product-price">5000 د.ج</div>
-          <div class="offer-product-old-price">5600 د.ج</div>
-          <a href="product.html?pid=101" class="offer-btn" style="display: block; text-decoration: none; text-align: center; color: inherit;">
-    Voir le produit
-</a>
+          <h4 class="offer-product-title">Aspirateur Souffleur à Main</h4>
+          <div class="offer-product-price">5000 DA</div>
+          <div class="offer-product-old-price">5600 DA</div>
+          <a href="product.html?pid=101" class="offer-btn" style="display: block; text-decoration: none; text-align: center; color: inherit;" aria-label="Voir le produit Aspirateur Souffleur à Main">
+            Voir le produit
+          </a>
         </div>
       </div>
 
-      <!-- المنتج 3 -->
+      <!-- Produit 3 -->
       <div class="col-md-4">
         <div class="offer-product">
-          <div class="offer-product-discount">خصم 20%</div>
+          <div class="offer-product-discount">Remise 20%</div>
           <div class="offer-product-badge">Nouveau</div>
 
           <div id="carousel-offer-3" class="carousel slide" data-bs-ride="carousel">
             <div class="carousel-indicators">
-              <button type="button" data-bs-target="#carousel-offer-3" data-bs-slide-to="0" class="active"></button>
-              <button type="button" data-bs-target="#carousel-offer-3" data-bs-slide-to="1"></button>
+              <button type="button" data-bs-target="#carousel-offer-3" data-bs-slide-to="0" class="active" aria-label="Image 1"></button>
+              <button type="button" data-bs-target="#carousel-offer-3" data-bs-slide-to="1" aria-label="Image 2"></button>
             </div>
 
             <div class="carousel-inner">
                <div class="carousel-item active">
-                <img loading="lazy" src="images/NETTOYEUR DE TACHES 4 EN 1.jpg" class="d-block w-100" alt="صورة المنتج 2" height="800" width="800">
+                <img loading="lazy" src="images/NETTOYEUR DE TACHES 4 EN 1.jpg" class="d-block w-100" alt="Nettoyeur de Taches 4 en 1" height="800" width="800">
               </div>
               <div class="carousel-item">
-                <img loading="lazy" src="images/NETTOYEUR DE TACHES 4 EN 1 robuste.jpg" class="d-block w-100" alt="صورة المنتج 3" height="800" width="800">
+                <img loading="lazy" src="images/NETTOYEUR DE TACHES 4 EN 1 robuste.jpg" class="d-block w-100" alt="Nettoyeur de Taches 4 en 1 vue arrière" height="800" width="800">
               </div>
             </div>
 
-            <button class="carousel-control-prev" type="button" data-bs-target="#carousel-offer-3" data-bs-slide="prev">
-              <span class="carousel-control-prev-icon"></span>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carousel-offer-3" data-bs-slide="prev" aria-label="Précédent">
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
             </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#carousel-offer-3" data-bs-slide="next">
-              <span class="carousel-control-next-icon"></span>
+            <button class="carousel-control-next" type="button" data-bs-target="#carousel-offer-3" data-bs-slide="next" aria-label="Suivant">
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
             </button>
           </div>
 
-          <h4 class="offer-product-title">NETTOYEUR DE TACHES 4 EN 1</h4>
-          <div class="offer-product-price">23,500 د.ج</div>
-          <div class="offer-product-old-price">25,000 د.ج</div>
-          <a href="product.html?pid=102" class="offer-btn" style="display: block; text-decoration: none; text-align: center; color: inherit;">
-    Voir le produit
-</a>
+          <h4 class="offer-product-title">Nettoyeur de Taches 4 en 1</h4>
+          <div class="offer-product-price">23,500 DA</div>
+          <div class="offer-product-old-price">25,000 DA</div>
+          <a href="product.html?pid=102" class="offer-btn" style="display: block; text-decoration: none; text-align: center; color: inherit;" aria-label="Voir le produit Nettoyeur de Taches 4 en 1">
+            Voir le produit
+          </a>
         </div>
       </div>
-
     </div>
   </div>
-</section>    <!-- في قسم المنتجات، سنقوم بتعديل هيكل البطاقات -->
+</section>
+
+<!-- Section Produits -->
 <section id="products" class="py-5">
     <div class="container">
-        <h2 class="section-title">أحدث Produits</h2>
+        <h2 class="section-title">Nos Derniers Produits</h2>
         
         <div class="categories-filter mb-5">
             <div class="d-flex flex-wrap justify-content-center gap-2">
-                <button class="btn btn-outline-primary category-btn active" data-category="all">Tous</button>
-                <button class="btn btn-outline-primary category-btn" data-category="coiffure">Soins capillaires</button>
-                <button class="btn btn-outline-primary category-btn" data-category="cuisine">Appareils de cuisine</button>
-                <button class="btn btn-outline-primary category-btn" data-category="beauté">Soins personnels</button>
-                <button class="btn btn-outline-primary category-btn" data-category="maison">Électroménager</button>
-                <button class="btn btn-outline-primary category-btn" data-category="jardin">Jardin</button>
-                <button class="btn btn-outline-primary category-btn" data-category="café">Machines à café</button>
+                <button class="btn btn-outline-primary category-btn active" data-category="all" aria-label="Afficher tous les produits">Tous</button>
+                <button class="btn btn-outline-primary category-btn" data-category="coiffure" aria-label="Afficher les produits de soins capillaires">Soins capillaires</button>
+                <button class="btn btn-outline-primary category-btn" data-category="cuisine" aria-label="Afficher les appareils de cuisine">Appareils de cuisine</button>
+                <button class="btn btn-outline-primary category-btn" data-category="beauté" aria-label="Afficher les produits de soins personnels">Soins personnels</button>
+                <button class="btn btn-outline-primary category-btn" data-category="maison" aria-label="Afficher les électroménagers">Électroménager</button>
+                <button class="btn btn-outline-primary category-btn" data-category="jardin" aria-label="Afficher les produits de jardin">Jardin</button>
+                <button class="btn btn-outline-primary category-btn" data-category="café" aria-label="Afficher les machines à café">Machines à café</button>
             </div>
         </div>
         
@@ -287,50 +297,324 @@
     </div>
 </section>
     
-<section id="reviews" class="py-5 bg-light"><div class="container"><h2 class="section-title">Avis clients</h2><div class="row"><div class="col-md-4 mb-4"><div class="review-card"><div class="d-flex"><img src="https://api.dicebear.com/7.x/initials/svg?seed=Ahmed%20Ben" class="rounded-circle me-3" width="60" height="60" alt="عميل"><div><h5 class="mb-0">عمر</h5><div class="text-warning"><i class="bi bi-star-fill"></i> <i class="bi bi-star-fill"></i> <i class="bi bi-star-fill"></i> <i class="bi bi-star-fill"></i> <i class="bi bi-star-fill"></i></div></div></div><p class="mt-3">"جودة المنتج ممتازة والتوصيل كان في الوقت المحدد، شكراً لفريق Robuste!"</p></div></div><div class="col-md-4 mb-4"><div class="review-card"><div class="d-flex"><img src="https://api.dicebear.com/7.x/initials/svg?seed=Rhmed%20Bn" class="rounded-circle me-3" width="60" height="60" alt="عميل"><div><h5 class="mb-0">Rose Blanch</h5><div class="text-warning"><i class="bi bi-star-fill"></i> <i class="bi bi-star-fill"></i> <i class="bi bi-star-fill"></i> <i class="bi bi-star-fill"></i> <i class="bi bi-star-half"></i></div></div></div><p class="mt-3">"Je suis ravie de la marque Robuste, j'utilise vos produits depuis pas mal d'années."</p></div></div><div class="col-md-4 mb-4"><div class="review-card"><div class="d-flex"><img src="https://api.dicebear.com/7.x/initials/svg?seed=Ahmed%20Hen" class="rounded-circle me-3" width="60" height="60" alt="عميل"><div><h5 class="mb-0">محمد</h5><div class="text-warning"><i class="bi bi-star-fill"></i> <i class="bi bi-star-fill"></i> <i class="bi bi-star-fill"></i> <i class="bi bi-star-fill"></i> <i class="bi bi-star-fill"></i></div></div></div><p class="mt-3">"الدفع عند الاستلام مريح جداً، والمنتج يعمل بكفاءة عالية، أنصح بالتعامل معهم."</p></div></div></div></div></section><div class="modal fade" id="orderModal" tabindex="-1" aria-hidden="true"><div class="modal-dialog modal-lg"><div class="modal-content"><div class="modal-header"><h5 class="modal-title">طلب منتج</h5><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div><div class="modal-body"><div class="order-summary mb-4"><h6 class="mb-3">ملخص الطلب</h6><div class="d-flex align-items-center"><img id="productImage" class="product-image-thumb me-3" src="" alt="صورة المنتج"><div><h5 id="productNameDisplay" class="mb-1"></h5><p id="productPrice" class="mb-0 text-primary fw-bold"></p></div></div></div><form id="orderForm"><input type="hidden" id="productName"> <input type="hidden" id="productPriceValue"> <input type="hidden" id="productImageUrl"><div class="row"><div class="col-md-6 mb-3"><label for="fullName" class="form-label">nom et prénom<span class="text-danger">*</span></label> <input type="text" class="form-control" id="fullName" required></div><div class="col-md-6 mb-3"><label for="phone" class="form-label">Numéro de téléphone <span class="text-danger">*</span></label> <input type="tel" class="form-control" id="phone" pattern="[0]{1}[5-7]{1}[0-9]{8}" required> <small class="text-muted">EX: 0551234566</small></div></div><div class="row"><div class="col-md-6 mb-3"><label for="email" class="form-label"> اختياري email</label> <input type="email" class="form-control" id="email"></div><div class="col-md-6 mb-3"><label for="wilaya" class="form-label">الولاية <span class="text-danger">*</span></label> <select class="form-select" id="wilaya" required><option value="">Choisissez votre état</option></select></div></div><div class="mb-3"><label for="address" class="form-label">Adresse </label> <textarea class="form-control" id="address" rows="2"></textarea></div><div class="row"><div class="col-md-6 mb-3">
-                                </div><div class="col-md-6 mb-3"><label class="form-label">طريقة الدفع</label><div class="form-check"><input class="form-check-input" type="radio" name="paymentMethod" id="cashOnDelivery" value="الدفع عند الاستلام" checked="checked"> <label class="form-check-label" for="cashOnDelivery">الدفع عند الاستلام</label></div><div class="form-check"><input class="form-check-input" type="radio" name="paymentMethod" id="onlinePayment" value="الدفع الإلكتروني"> <label class="form-check-label" for="onlinePayment">الدفع الإلكتروني</label></div></div></div></form></div><div class="modal-footer"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">إلغاء</button> <button type="button" class="btn btn-orange" id="submitOrderBtn" onclick="submitOrder()">Confirmer la commande</button></div></div></div></div><section id="contact" class="py-5"><div class="container"><h2 class="section-title">Contactez-nous</h2><div class="row"><div class="col-md-6 mb-4"><div class="contact-card h-100"><h4 class="mb-4">Coordonnées</h4><div class="d-flex mb-3"><div class="me-3 text-primary"><i class="bi bi-geo-alt fs-4"></i></div><div><h5>Adresse</h5><p class="mb-0">شارع بورقعة المنور، 426 قطعة، العلمة، سطيف، الجزائر</p></div></div><div class="d-flex mb-3"><div class="me-3 text-primary"><i class="bi bi-telephone fs-4"></i></div><div><h5>Téléphone</h5><p class="mb-0">0656360457</p></div></div><div class="d-flex mb-3"><div class="me-3 text-primary"><i class="bi bi-envelope fs-4"></i></div><div><h5>E-mail</h5><p class="mb-0">laidaouih@gmail.com</p></div></div><div class="d-flex"><div class="me-3 text-primary"><i class="bi bi-clock fs-4"></i></div><div><h5>Heures d'ouverture</h5><p class="mb-0">Tous les jours de 7h00 à 16h00</p></div></div><div class="mt-4"><h5>Suivez-nous sur</h5><div class="d-flex mt-3"><a href="https://www.facebook.com/share/19QooaXfy8/" class="social-icon"><i class="bi bi-facebook"></i> </a></div></div></div></div><div class="col-md-6 mb-4"><div class="contact-card h-100"><h4 class="mb-4">Envoyez-nous un message</h4><form id="contactForm"><div class="mb-3"><label for="contactName" class="form-label">Votre nom <span class="text-danger">*</span></label> <input type="text" class="form-control" id="contactName" required></div><div class="mb-3"><label for="contactEmail" class="form-label">Votre e-mail <span class="text-danger">*</span></label> <input type="email" class="form-control" id="contactEmail" required></div><div class="mb-3"><label for="contactPhone" class="form-label">Numéro de téléphone</label> <input type="tel" class="form-control" id="contactPhone"></div><div class="mb-3"><label for="contactMessage" class="form-label">Votre message <span class="text-danger">*</span></label> <textarea class="form-control" id="contactMessage" rows="4" required></textarea></div><button type="submit" class="btn btn-orange w-100"><span id="contactSubmitText">Envoyer le message</span> <span id="contactSpinner" class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span></button></form></div></div></div><div class="row mt-4"><div class="col-12">
-                                    <div class="contact-card" style="cursor: pointer;">
-  <h4 class="mb-4">Emplacement du magasin</h4>
-  
-  <!-- نلف الخريطة داخل رابط -->
-  <a href="https://maps.app.goo.gl/Cpk1L8fAadgE9pB76" target="_blank" style="display: block; text-decoration: none;">
-    <div class="map-container" style="position: relative; width: 100%; height: 300px;">
-      <iframe 
-        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3190.123456789012!2d5.7129892!3d36.1524645!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x12f2d5f1a5a5a5a5%3A0x12f2d5f1a5a5a5a5!2sROBUSTE%20EL%20EULMA!5e0!3m2!1sen!2sdz!4v1621234567890!5m2!1sen!2sdz" 
-        width="100%" 
-        height="100%" 
-        style="border:0; border-radius: 8px; pointer-events: none;" 
-        allowfullscreen="" 
-        loading="lazy" 
-        referrerpolicy="no-referrer-when-downgrade" 
-        title="موقع متجر ROBUSTE EL EULMA">
-      </iframe>
+<!-- Section Avis Clients -->
+<section id="reviews" class="py-5 bg-light">
+    <div class="container">
+        <h2 class="section-title">Avis Clients</h2>
+        <div class="row">
+            <div class="col-md-4 mb-4">
+                <div class="review-card">
+                    <div class="d-flex">
+                        <img src="https://api.dicebear.com/7.x/initials/svg?seed=Ahmed%20Ben" class="rounded-circle me-3" width="60" height="60" alt="Photo d'Omar">
+                        <div>
+                            <h5 class="mb-0">Omar</h5>
+                            <div class="text-warning">
+                                <i class="bi bi-star-fill"></i> <i class="bi bi-star-fill"></i> <i class="bi bi-star-fill"></i> <i class="bi bi-star-fill"></i> <i class="bi bi-star-fill"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="mt-3">"La qualité du produit est excellente et la livraison a été à l'heure, merci à l'équipe Robuste!"</p>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="review-card">
+                    <div class="d-flex">
+                        <img src="https://api.dicebear.com/7.x/initials/svg?seed=Rhmed%20Bn" class="rounded-circle me-3" width="60" height="60" alt="Photo de Rose Blanch">
+                        <div>
+                            <h5 class="mb-0">Rose Blanch</h5>
+                            <div class="text-warning">
+                                <i class="bi bi-star-fill"></i> <i class="bi bi-star-fill"></i> <i class="bi bi-star-fill"></i> <i class="bi bi-star-fill"></i> <i class="bi bi-star-half"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="mt-3">"Je suis ravie de la marque Robuste, j'utilise vos produits depuis pas mal d'années."</p>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="review-card">
+                    <div class="d-flex">
+                        <img src="https://api.dicebear.com/7.x/initials/svg?seed=Ahmed%20Hen" class="rounded-circle me-3" width="60" height="60" alt="Photo de Mohamed">
+                        <div>
+                            <h5 class="mb-0">Mohamed</h5>
+                            <div class="text-warning">
+                                <i class="bi bi-star-fill"></i> <i class="bi bi-star-fill"></i> <i class="bi bi-star-fill"></i> <i class="bi bi-star-fill"></i> <i class="bi bi-star-fill"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="mt-3">"Le paiement à la livraison est très pratique, et le produit fonctionne très efficacement, je recommande de faire affaire avec eux."</p>
+                </div>
+            </div>
+        </div>
     </div>
-  </a>
-</div></div></div></div></section><footer class="py-5 bg-dark text-white"><div class="container"><div class="row"><div class="col-lg-4 mb-4"><h5 class="mb-3">À propos de ROBUSTE</h5><p>Magasin spécialisé dans l'électroménager de haute qualité à prix compétitifs. Nous proposons les meilleurs produits et une livraison rapide.</p><div class="mt-3"><a href="https://www.facebook.com/share/19QooaXfy8/" class="social-icon"><i class="bi bi-facebook"></i> </a></div></div><div class="col-lg-2 col-md-4 mb-4"><h5 class="mb-3">Liens rapides</h5><ul class="list-unstyled"><li class="mb-2"><a href="#" class="text-white text-decoration-none">Accueil</a></li><li class="mb-2"><a href="#products" class="text-white text-decoration-none">Produits</a></li><li class="mb-2"><a href="#reviews" class="text-white text-decoration-none">آراء العملاء</a></li><li class="mb-2"><a href="#contact" class="text-white text-decoration-none">Contactez-nous</a></li></ul></div><div class="col-lg-3 col-md-4 mb-4"><h5 class="mb-3">Service client</h5><ul class="list-unstyled"><li class="mb-2"><a href="#" class="text-white text-decoration-none">FAQ</a></li><li class="mb-2"><a href="#" class="text-white text-decoration-none">Modes de paiement</a></li><li class="mb-2"><a href="#" class="text-white text-decoration-none">Conditions de garantie</a></li></ul></div><div class="col-lg-3 col-md-4 mb-4"><h5 class="mb-3">Abonnez-vous à notre page</h5><p>Abonnez-vous pour recevoir les dernières offres</p><div class="mt-3"><a href="https://www.facebook.com/share/19QooaXfy8/" class="btn btn-orange w-100" target="_blank">S'abonner</a></div></div></div><hr class="my-4 bg-light"><div class="row"><div class="col-md-6 text-center text-md-start mb-3 mb-md-0"><p class="mb-0">&copy; 2025 ROBUSTE. Tous droits réservés.</p></div><div class="col-md-6 text-center text-md-end"><div class="d-flex flex-column flex-md-row align-items-center justify-content-md-end"><p class="mb-2 mb-md-0 me-md-3">Paiement par carte gold disponible</p><img src="https://i.postimg.cc/bY06X2YN/logo-round.png" alt="Modes de paiement" style="width: 30px; height: auto;"></div></div></div></div></footer><a href="https://wa.me/213656360457" class="whatsapp-btn" target="_blank"><i class="bi bi-whatsapp"></i></a><script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script><script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script><script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</section>
+
+<!-- Modal Commande -->
+<div class="modal fade" id="orderModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Commander un produit</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermer"></button>
+            </div>
+            <div class="modal-body">
+                <div class="order-summary mb-4">
+                    <h6 class="mb-3">Résumé de la commande</h6>
+                    <div class="d-flex align-items-center">
+                        <img id="productImage" class="product-image-thumb me-3" src="" alt="Image du produit">
+                        <div>
+                            <h5 id="productNameDisplay" class="mb-1"></h5>
+                            <p id="productPrice" class="mb-0 text-primary fw-bold"></p>
+                        </div>
+                    </div>
+                </div>
+                <form id="orderForm">
+                    <input type="hidden" id="productName">
+                    <input type="hidden" id="productPriceValue">
+                    <input type="hidden" id="productImageUrl">
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="fullName" class="form-label">Nom et prénom<span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" id="fullName" required aria-required="true">
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="phone" class="form-label">Numéro de téléphone<span class="text-danger">*</span></label>
+                            <input type="tel" class="form-control" id="phone" pattern="[0]{1}[5-7]{1}[0-9]{8}" required aria-required="true">
+                            <small class="text-muted">Ex: 0551234566</small>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="email" class="form-label">Email (optionnel)</label>
+                            <input type="email" class="form-control" id="email">
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="wilaya" class="form-label">Wilaya<span class="text-danger">*</span></label>
+                            <select class="form-select" id="wilaya" required aria-required="true">
+                                <option value="">Choisissez votre wilaya</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="address" class="form-label">Adresse</label>
+                        <textarea class="form-control" id="address" rows="2"></textarea>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Méthode de paiement</label>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="paymentMethod" id="cashOnDelivery" value="Paiement à la livraison" checked>
+                                <label class="form-check-label" for="cashOnDelivery">Paiement à la livraison</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="paymentMethod" id="onlinePayment" value="Paiement en ligne">
+                                <label class="form-check-label" for="onlinePayment">Paiement en ligne</label>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                <button type="button" class="btn btn-orange" id="submitOrderBtn" onclick="submitOrder()">Confirmer la commande</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Section Contact -->
+<section id="contact" class="py-5">
+    <div class="container">
+        <h2 class="section-title">Contactez-nous</h2>
+        <div class="row">
+            <div class="col-md-6 mb-4">
+                <div class="contact-card h-100">
+                    <h4 class="mb-4">Coordonnées</h4>
+                    <div class="d-flex mb-3">
+                        <div class="me-3 text-primary">
+                            <i class="bi bi-geo-alt fs-4"></i>
+                        </div>
+                        <div>
+                            <h5>Adresse</h5>
+                            <p class="mb-0">Rue Bourquaa El Manouar, 426 Parcelle, El Eulma, Sétif, Algérie</p>
+                        </div>
+                    </div>
+                    <div class="d-flex mb-3">
+                        <div class="me-3 text-primary">
+                            <i class="bi bi-telephone fs-4"></i>
+                        </div>
+                        <div>
+                            <h5>Téléphone</h5>
+                            <p class="mb-0">0656360457</p>
+                        </div>
+                    </div>
+                    <div class="d-flex mb-3">
+                        <div class="me-3 text-primary">
+                            <i class="bi bi-envelope fs-4"></i>
+                        </div>
+                        <div>
+                            <h5>Email</h5>
+                            <p class="mb-0">laidaouih@gmail.com</p>
+                        </div>
+                    </div>
+                    <div class="d-flex">
+                        <div class="me-3 text-primary">
+                            <i class="bi bi-clock fs-4"></i>
+                        </div>
+                        <div>
+                            <h5>Heures d'ouverture</h5>
+                            <p class="mb-0">Tous les jours de 7h00 à 16h00</p>
+                        </div>
+                    </div>
+                    <div class="mt-4">
+                        <h5>Suivez-nous sur</h5>
+                        <div class="d-flex mt-3">
+                            <a href="https://www.facebook.com/share/19QooaXfy8/" class="social-icon" aria-label="Facebook">
+                                <i class="bi bi-facebook"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 mb-4">
+                <div class="contact-card h-100">
+                    <h4 class="mb-4">Envoyez-nous un message</h4>
+                    <form id="contactForm">
+                        <div class="mb-3">
+                            <label for="contactName" class="form-label">Votre nom<span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" id="contactName" required aria-required="true">
+                        </div>
+                        <div class="mb-3">
+                            <label for="contactEmail" class="form-label">Votre email<span class="text-danger">*</span></label>
+                            <input type="email" class="form-control" id="contactEmail" required aria-required="true">
+                        </div>
+                        <div class="mb-3">
+                            <label for="contactPhone" class="form-label">Numéro de téléphone</label>
+                            <input type="tel" class="form-control" id="contactPhone">
+                        </div>
+                        <div class="mb-3">
+                            <label for="contactMessage" class="form-label">Votre message<span class="text-danger">*</span></label>
+                            <textarea class="form-control" id="contactMessage" rows="4" required aria-required="true"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-orange w-100">
+                            <span id="contactSubmitText">Envoyer le message</span>
+                            <span id="contactSpinner" class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-4">
+            <div class="col-12">
+                <div class="contact-card">
+                    <h4 class="mb-4">Emplacement du magasin</h4>
+                    <a href="https://maps.app.goo.gl/Cpk1L8fAadgE9pB76" target="_blank" style="display: block; text-decoration: none;" aria-label="Ouvrir l'emplacement du magasin sur Google Maps">
+                        <div class="map-container" style="position: relative; width: 100%; height: 300px;">
+                            <iframe 
+                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3190.123456789012!2d5.7129892!3d36.1524645!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x12f2d5f1a5a5a5a5%3A0x12f2d5f1a5a5a5a5!2sROBUSTE%20EL%20EULMA!5e0!3m2!1sen!2sdz!4v1621234567890!5m2!1sen!2sdz" 
+                                width="100%" 
+                                height="100%" 
+                                style="border:0; border-radius: 8px; pointer-events: none;" 
+                                allowfullscreen="" 
+                                loading="lazy" 
+                                referrerpolicy="no-referrer-when-downgrade" 
+                                title="Emplacement du magasin ROBUSTE EL EULMA">
+                            </iframe>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer class="py-5 bg-dark text-white">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4 mb-4">
+                <h5 class="mb-3">À propos de ROBUSTE</h5>
+                <p>Magasin spécialisé dans l'électroménager de haute qualité à prix compétitifs. Nous proposons les meilleurs produits et une livraison rapide.</p>
+                <div class="mt-3">
+                    <a href="https://www.facebook.com/share/19QooaXfy8/" class="social-icon" aria-label="Facebook">
+                        <i class="bi bi-facebook"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="col-lg-2 col-md-4 mb-4">
+                <h5 class="mb-3">Liens rapides</h5>
+                <ul class="list-unstyled">
+                    <li class="mb-2"><a href="#" class="text-white text-decoration-none">Accueil</a></li>
+                    <li class="mb-2"><a href="#products" class="text-white text-decoration-none">Produits</a></li>
+                    <li class="mb-2"><a href="#reviews" class="text-white text-decoration-none">Avis clients</a></li>
+                    <li class="mb-2"><a href="#contact" class="text-white text-decoration-none">Contactez-nous</a></li>
+                </ul>
+            </div>
+            <div class="col-lg-3 col-md-4 mb-4">
+                <h5 class="mb-3">Service client</h5>
+                <ul class="list-unstyled">
+                    <li class="mb-2"><a href="#" class="text-white text-decoration-none">FAQ</a></li>
+                    <li class="mb-2"><a href="#" class="text-white text-decoration-none">Modes de paiement</a></li>
+                    <li class="mb-2"><a href="#" class="text-white text-decoration-none">Conditions de garantie</a></li>
+                </ul>
+            </div>
+            <div class="col-lg-3 col-md-4 mb-4">
+                <h5 class="mb-3">Abonnez-vous à notre page</h5>
+                <p>Abonnez-vous pour recevoir les dernières offres</p>
+                <div class="mt-3">
+                    <a href="https://www.facebook.com/share/19QooaXfy8/" class="btn btn-orange w-100" target="_blank" aria-label="S'abonner à la page Facebook">S'abonner</a>
+                </div>
+            </div>
+        </div>
+        <hr class="my-4 bg-light">
+        <div class="row">
+            <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+                <p class="mb-0">&copy; 2025 ROBUSTE. Tous droits réservés.</p>
+            </div>
+            <div class="col-md-6 text-center text-md-end">
+                <div class="d-flex flex-column flex-md-row align-items-center justify-content-md-end">
+                    <p class="mb-2 mb-md-0 me-md-3">Paiement par carte gold disponible</p>
+                    <img src="https://i.postimg.cc/bY06X2YN/logo-round.png" alt="Modes de paiement" style="width: 30px; height: auto;">
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- Bouton WhatsApp -->
+<a href="https://wa.me/213656360457" class="whatsapp-btn" target="_blank" aria-label="Nous contacter sur WhatsApp">
+    <i class="bi bi-whatsapp"></i>
+</a>
+
+<!-- Scripts -->
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script src="main.js"></script>
+
+<!-- Panier latéral -->
 <div class="offcanvas offcanvas-end" tabindex="-1" id="cartOffcanvas" aria-labelledby="cartOffcanvasLabel">
     <div class="offcanvas-header">
         <h5 class="offcanvas-title" id="cartOffcanvasLabel">Panier d'achat</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Fermer"></button>
     </div>
     <div class="offcanvas-body">
         <div id="cartItems" class="mb-3">
-            
             <div class="text-center py-4 text-muted" id="emptyCartMessage">
                 <i class="bi bi-cart-x display-4 d-block mb-2"></i>
-                Panier d'achat فارغة
+                Votre panier est vide
             </div>
         </div>
         
         <div class="cart-summary border-top pt-3">
             <div class="d-flex justify-content-between mb-2">
                 <span>Total:</span>
-                <span id="cartTotal">0 د.ج</span>
+                <span id="cartTotal">0 DA</span>
             </div>
-            <button class="btn btn-orange w-100" onclick="checkout()" id="checkoutBtn" disabled>
+            <button class="btn btn-orange w-100" onclick="checkout()" id="checkoutBtn" disabled aria-label="Finaliser l'achat">
                 <i class="bi bi-bag-check"></i> Finaliser la commande
             </button>
         </div>
     </div>
-</div></body></html>
+</div>
+</body>
+</html>
