@@ -77,7 +77,7 @@
     }
 
     // دالة عرض المنتجات
-    // دالة عرض المنتجات
+
 // دالة عرض المنتجات
 function renderProducts(products) {
     var container = document.getElementById('productsContainer');
@@ -140,10 +140,10 @@ function renderProducts(products) {
             '<div class="carousel-inner">' + carouselItems + '</div>' +
             carouselControls +
             '</div>' +
-            '<h5 class="product-title card-title mt-2 mb-1">' + product.title + '</h5>' +
+            '<h5 class="product-title card-title">' + product.title + '</h5>' +
             '<div class="price-section">' +
             oldPrice +
-            '<p dir="ltr" class="current-price mb-0">' + product.price.toLocaleString() + ' DA</p>' +
+            '<p dir="ltr" class="current-price">' + product.price.toLocaleString() + ' DA</p>' +
             '</div>' +
             '<div class="card-footer bg-transparent border-0 mt-auto">' +
             '<button class="btn btn-orange add-to-cart-btn" data-id="' + product.id + '" aria-label="Ajouter ' + product.title + ' au panier">' +
@@ -155,6 +155,7 @@ function renderProducts(products) {
         
         container.innerHTML += productCard;
     }
+}
 
         // إضافة تحسينات اللمس بعد عرض المنتجات
         addTouchEffects();
