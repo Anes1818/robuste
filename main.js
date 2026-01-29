@@ -78,6 +78,7 @@
 
     // دالة عرض المنتجات
     // دالة عرض المنتجات
+// دالة عرض المنتجات
 function renderProducts(products) {
     var container = document.getElementById('productsContainer');
     if (!container) return;
@@ -131,7 +132,7 @@ function renderProducts(products) {
                 '</button>';
         }
         
-        var productCard = '<div class="col-6 col-md-4 col-lg-3 mb-3">' +
+        var productCard = '<div class="col-6 col-md-4 col-lg-3 mb-4">' +
             '<div class="product-card card h-100 position-relative" role="link" tabindex="0" data-pid="' + product.id + '">' +
             productBadge + discountBadge +
             '<div id="carousel-' + product.id + '" class="carousel slide" data-bs-ride="carousel">' +
