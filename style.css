@@ -2563,6 +2563,8 @@ body,
         padding: 10px;
     }
 }
+
+
 /* ============== تحسينات حديثة لبطاقات المنتجات ============== */
 .product-card {
     border: none !important;
@@ -2572,7 +2574,7 @@ body,
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
     background: white !important;
     margin-bottom: 16px !important;
-    min-height: 320px !important;
+    min-height: 380px !important;
     display: flex !important;
     flex-direction: column !important;
 }
@@ -2582,11 +2584,11 @@ body,
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12) !important;
 }
 
-/* الصورة */
+/* الصورة بحجم مناسب */
 .product-card .carousel {
-    height: 150px !important;
-    min-height: 150px !important;
-    max-height: 150px !important;
+    height: 220px !important;
+    min-height: 220px !important;
+    max-height: 220px !important;
     overflow: hidden !important;
     border-radius: 12px 12px 0 0 !important;
     position: relative !important;
@@ -2602,7 +2604,7 @@ body,
 
 .product-card .carousel-item img {
     width: 100% !important;
-    height: 150px !important;
+    height: 220px !important;
     object-fit: contain !important;
     padding: 10px !important;
     background: #f8f9fa !important;
@@ -2615,39 +2617,39 @@ body,
 
 /* تحسين العنوان */
 .product-card .product-title {
-    font-size: 14px !important;
+    font-size: 15px !important;
     font-weight: 600 !important;
     color: #333 !important;
-    margin: 8px 0 !important;
-    line-height: 1.3 !important;
-    height: 36px !important;
+    margin: 12px 0 6px 0 !important;
+    line-height: 1.4 !important;
+    height: 42px !important;
     overflow: hidden !important;
     display: -webkit-box !important;
     -webkit-line-clamp: 2 !important;
     -webkit-box-orient: vertical !important;
-    padding: 0 8px !important;
+    padding: 0 12px !important;
 }
 
 /* السعر تحت الصورة مباشرة */
 .product-card .price-section {
-    padding: 0 8px !important;
-    margin: 4px 0 8px 0 !important;
+    padding: 0 12px !important;
+    margin: 8px 0 12px 0 !important;
     display: flex !important;
     align-items: center !important;
     justify-content: flex-start !important;
     flex-wrap: wrap !important;
-    gap: 4px !important;
+    gap: 6px !important;
 }
 
 .product-card .current-price {
-    font-size: 16px !important;
-    font-weight: 700 !important;
+    font-size: 18px !important;
+    font-weight: 800 !important;
     color: #FF6B35 !important;
     margin: 0 !important;
 }
 
 .product-card .old-price {
-    font-size: 12px !important;
+    font-size: 14px !important;
     color: #999 !important;
     text-decoration: line-through !important;
     margin: 0 !important;
@@ -2655,7 +2657,7 @@ body,
 
 /* الزر مباشرة تحت السعر */
 .product-card .card-footer {
-    padding: 0 8px 12px 8px !important;
+    padding: 0 12px 16px 12px !important;
     margin-top: auto !important;
     background: transparent !important;
     border: none !important;
@@ -2663,15 +2665,15 @@ body,
 
 .product-card .btn-orange {
     width: 100% !important;
-    padding: 8px !important;
-    font-size: 13px !important;
+    padding: 10px !important;
+    font-size: 14px !important;
     font-weight: 600 !important;
     border-radius: 8px !important;
-    min-height: 36px !important;
+    min-height: 42px !important;
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
-    gap: 4px !important;
+    gap: 6px !important;
     background: linear-gradient(135deg, #FF6B35, #FF8C42) !important;
     border: none !important;
     transition: all 0.2s !important;
@@ -2685,49 +2687,56 @@ body,
 /* تحسين البادجات */
 .product-card .discount-badge,
 .product-card .product-badge {
-    font-size: 10px !important;
-    padding: 2px 6px !important;
-    top: 8px !important;
-    left: 8px !important;
+    font-size: 11px !important;
+    padding: 3px 8px !important;
+    top: 10px !important;
+    left: 10px !important;
     right: auto !important;
     z-index: 2 !important;
 }
 
 .product-card .product-badge {
     left: auto !important;
-    right: 8px !important;
+    right: 10px !important;
 }
 
 /* تحسينات للهاتف */
 @media (max-width: 768px) {
     .product-card {
-        min-height: 280px !important;
+        min-height: 320px !important;
         margin-bottom: 12px !important;
     }
     
     .product-card .carousel {
-        height: 120px !important;
-        min-height: 120px !important;
-        max-height: 120px !important;
+        height: 180px !important;
+        min-height: 180px !important;
+        max-height: 180px !important;
     }
     
     .product-card .carousel-item img {
-        height: 120px !important;
+        height: 180px !important;
     }
     
     .product-card .product-title {
-        font-size: 13px !important;
-        height: 32px !important;
+        font-size: 14px !important;
+        height: 36px !important;
+        margin: 8px 0 4px 0 !important;
+        padding: 0 8px !important;
+    }
+    
+    .product-card .price-section {
+        padding: 0 8px !important;
+        margin: 6px 0 10px 0 !important;
     }
     
     .product-card .current-price {
-        font-size: 14px !important;
+        font-size: 16px !important;
     }
     
     .product-card .btn-orange {
-        font-size: 12px !important;
-        padding: 6px !important;
-        min-height: 32px !important;
+        font-size: 13px !important;
+        padding: 8px !important;
+        min-height: 38px !important;
     }
 }
 
@@ -2752,5 +2761,3 @@ body,
 [data-theme="dark"] .product-card .old-price {
     color: #888 !important;
 }
-
-
