@@ -77,86 +77,84 @@
     }
 
     // دالة عرض المنتجات
-    function renderProducts(products) {
-        var container = document.getElementById('productsContainer');
-        if (!container) return;
+    // دالة عرض المنتجات
+function renderProducts(products) {
+    var container = document.getElementById('productsContainer');
+    if (!container) return;
+    
+    container.innerHTML = '';
+    
+    if (products.length === 0) {
+        container.innerHTML = '<div class="col-12 text-center text-muted py-5">Aucun produit trouvé</div>';
+        return;
+    }
+    
+    for (var i = 0; i < products.length; i++) {
+        var product = products[i];
+        var discountBadge = '';
+        var oldPrice = '';
+        var productBadge = '';
         
-        container.innerHTML = '';
-        
-        if (products.length === 0) {
-            container.innerHTML = '<div class="col-12 text-center text-muted py-5">Aucun produit trouvé</div>';
-            return;
+        if (product.old_price && product.old_price > product.price) {
+            var discountPercentage = Math.round(((product.old_price - product.price) / product.old_price) * 100);
+            discountBadge = '<div class="discount-badge">-' + discountPercentage + '%</div>';
+            oldPrice = '<small dir="ltr" class="old-price text-decoration-line-through text-muted">' + product.old_price.toLocaleString() + ' DA</small>';
         }
         
-        for (var i = 0; i < products.length; i++) {
-            var product = products[i];
-            var discountBadge = '';
-            var oldPrice = '';
-            var productBadge = '';
+        if (product.badge) {
+            productBadge = '<div class="product-badge">' + product.badge + '</div>';
+        }
+        
+        // إنشاء سلايدر للصور
+        var carouselIndicators = '';
+        var carouselItems = '';
+        var carouselControls = '';
+        
+        for (var j = 0; j < product.images.length; j++) {
+            carouselIndicators += '<button type="button" data-bs-target="#carousel-' + product.id + '" data-bs-slide-to="' + j + '" ' + 
+                (j === 0 ? 'class="active" aria-current="true"' : '') + 
+                ' aria-label="صورة ' + (j + 1) + '"></button>';
             
-            if (product.old_price && product.old_price > product.price) {
-                var discountPercentage = Math.round(((product.old_price - product.price) / product.old_price) * 100);
-                discountBadge = '<div class="discount-badge">خصم ' + discountPercentage + '%</div>';
-                oldPrice = '<small dir="ltr" class="text-decoration-line-through text-muted me-2">' + product.old_price.toLocaleString() + ' DA</small>';
-            }
-            
-            if (product.badge) {
-                productBadge = '<div class="product-badge">' + product.badge + '</div>';
-            }
-            
-            // إنشاء سلايدر للصور
-            var carouselIndicators = '';
-            var carouselItems = '';
-            var carouselControls = '';
-            
-            for (var j = 0; j < product.images.length; j++) {
-                carouselIndicators += '<button type="button" data-bs-target="#carousel-' + product.id + '" data-bs-slide-to="' + j + '" ' + 
-                    (j === 0 ? 'class="active" aria-current="true"' : '') + 
-                    ' aria-label="صورة ' + (j + 1) + '"></button>';
-                
-                carouselItems += '<div class="carousel-item ' + (j === 0 ? 'active' : '') + '">' +
-                    '<img src="' + product.images[j] + '" class="d-block w-100" alt="' + product.title + '" loading="lazy">' +
-                    '</div>';
-            }
-            
-            if (product.images.length > 1) {
-                carouselControls = '<button class="carousel-control-prev" type="button" data-bs-target="#carousel-' + product.id + '" data-bs-slide="prev">' +
-                    '<span class="carousel-control-prev-icon" aria-hidden="true"></span>' +
-                    '<span class="visually-hidden">السابق</span>' +
-                    '</button>' +
-                    '<button class="carousel-control-next" type="button" data-bs-target="#carousel-' + product.id + '" data-bs-slide="next">' +
-                    '<span class="carousel-control-next-icon" aria-hidden="true"></span>' +
-                    '<span class="visually-hidden">التالي</span>' +
-                    '</button>';
-            }
-            
-            var productCard = '<div class="col-6 col-md-4 col-lg-3 mb-4">' +
-                '<div class="product-card card h-100 position-relative" role="link" tabindex="0" data-pid="' + product.id + '">' +
-                productBadge + discountBadge +
-                '<div id="carousel-' + product.id + '" class="carousel slide product-carousel" data-bs-ride="carousel">' +
-                '<div class="carousel-indicators">' + carouselIndicators + '</div>' +
-                '<div class="carousel-inner">' + carouselItems + '</div>' +
-                carouselControls +
-                '</div>' +
-                '<div class="card-body">' +
-                '<h5 class="product-title card-title">' + product.title + '</h5>' +
-                '<p class="card-text text-muted small">' + product.description_short + '</p>' +
-                '<div class="price-section d-flex align-items-center mt-2">' +
-                oldPrice +
-                '<p dir="ltr" class="current-price fw-bold mb-0">' + product.price.toLocaleString() + ' DA</p>' +
-                '</div>' +
-                '</div>' +
-                '<div class="card-footer bg-transparent border-0">' +
-                '<button class="btn btn-orange w-100 add-to-cart-btn" data-id="' + product.id + '" aria-label="Ajouter ' + product.title + ' au panier">' +
-                '<i class="bi bi-cart-plus"></i>&nbsp;Ajouter au panier' +
-                '</button>' +
-                '</div>' +
-                '</div>' +
+            carouselItems += '<div class="carousel-item ' + (j === 0 ? 'active' : '') + '">' +
+                '<img src="' + product.images[j] + '" class="d-block w-100" alt="' + product.title + '" loading="lazy">' +
                 '</div>';
-            
-            container.innerHTML += productCard;
         }
         
+        if (product.images.length > 1) {
+            carouselControls = '<button class="carousel-control-prev" type="button" data-bs-target="#carousel-' + product.id + '" data-bs-slide="prev">' +
+                '<span class="carousel-control-prev-icon" aria-hidden="true"></span>' +
+                '<span class="visually-hidden">السابق</span>' +
+                '</button>' +
+                '<button class="carousel-control-next" type="button" data-bs-target="#carousel-' + product.id + '" data-bs-slide="next">' +
+                '<span class="carousel-control-next-icon" aria-hidden="true"></span>' +
+                '<span class="visually-hidden">التالي</span>' +
+                '</button>';
+        }
+        
+        var productCard = '<div class="col-6 col-md-4 col-lg-3 mb-3">' +
+            '<div class="product-card card h-100 position-relative" role="link" tabindex="0" data-pid="' + product.id + '">' +
+            productBadge + discountBadge +
+            '<div id="carousel-' + product.id + '" class="carousel slide" data-bs-ride="carousel">' +
+            '<div class="carousel-indicators">' + carouselIndicators + '</div>' +
+            '<div class="carousel-inner">' + carouselItems + '</div>' +
+            carouselControls +
+            '</div>' +
+            '<h5 class="product-title card-title mt-2 mb-1">' + product.title + '</h5>' +
+            '<div class="price-section">' +
+            oldPrice +
+            '<p dir="ltr" class="current-price mb-0">' + product.price.toLocaleString() + ' DA</p>' +
+            '</div>' +
+            '<div class="card-footer bg-transparent border-0 mt-auto">' +
+            '<button class="btn btn-orange add-to-cart-btn" data-id="' + product.id + '" aria-label="Ajouter ' + product.title + ' au panier">' +
+            '<i class="bi bi-cart-plus"></i> Ajouter' +
+            '</button>' +
+            '</div>' +
+            '</div>' +
+            '</div>';
+        
+        container.innerHTML += productCard;
+    }
+
         // إضافة تحسينات اللمس بعد عرض المنتجات
         addTouchEffects();
     }
