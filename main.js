@@ -155,7 +155,7 @@ function renderProducts(products) {
         
         container.innerHTML += productCard;
     }
-}
+
 
         // إضافة تحسينات اللمس بعد عرض المنتجات
         addTouchEffects();
