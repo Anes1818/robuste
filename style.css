@@ -1,4 +1,4 @@
-/* أضف هذا في بداية ملف CSS لتحسينات اللمس فقط */
+ /* أضف هذا في بداية ملف CSS لتحسينات اللمس فقط */
 :root {
     --touch-target-size: 44px;
 }
@@ -190,7 +190,7 @@ body {
 [data-theme="dark"] .category-btn:active {
     background-color: rgba(255, 255, 255, 0.1);
 }
-:root {
+ :root {
     --primary: #FF6B35;
     --primary-dark: #E05A2B;
     --secondary: #FFF8F0;
@@ -201,21 +201,6 @@ body {
     --danger: #dc3545;
     --border-color: #e7e7e7;
     --shadow-color: rgba(0, 0, 0, 0.1);
-}
-
-/* تحسين نظام دارك مود محترف */
-:root {
-    --primary: #FF6B35;
-    --primary-dark: #E05A2B;
-    --secondary: #FFF8F0;
-    --light: #FFFFFF;
-    --dark: #333333;
-    --gray: #6C757D;
-    --success: #28a745;
-    --danger: #dc3545;
-    --border-color: #e7e7e7;
-    --shadow-color: rgba(0, 0, 0, 0.1);
-    --touch-target: 44px;
 }
 
 /* تحسين نظام دارك مود محترف */
@@ -238,185 +223,8 @@ body {
     color: var(--dark);
     padding-top: 56px;
     transition: background-color 0.3s ease, color 0.3s ease;
-    -webkit-tap-highlight-color: transparent;
-    touch-action: manipulation;
 }
 
-/* تحسينات اللمس للأزرار والعناصر القابلة للنقر */
-.btn, 
-.btn-orange,
-.offer-btn,
-.category-btn,
-.quantity-btn,
-.remove-item-btn,
-.cart-btn,
-.theme-toggle,
-.social-icon,
-.whatsapp-btn,
-.carousel-control-prev,
-.carousel-control-next,
-.prev1,
-.next1,
-.dot1 {
-    min-height: var(--touch-target);
-    min-width: var(--touch-target);
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    user-select: none;
-    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-    -webkit-tap-highlight-color: transparent;
-}
-
-/* تأثيرات اللمس */
-.touch-feedback {
-    transform: scale(0.95) !important;
-    opacity: 0.9 !important;
-    transition: transform 0.1s, opacity 0.1s !important;
-}
-
-/* تحسينات للأزرار عند اللمس */
-.btn:active,
-.btn-orange:active,
-.offer-btn:active,
-.category-btn:active,
-.quantity-btn:active,
-.remove-item-btn:active,
-.cart-btn:active,
-.theme-toggle:active {
-    transform: scale(0.95);
-    opacity: 0.9;
-}
-
-/* تحسينات للبطاقات عند اللمس */
-.product-card:active,
-.offer-product:active,
-.review-card:active,
-.contact-card:active {
-    transform: translateY(-2px);
-}
-
-/* تحسينات لمس الشريط المنزلق على الهواتف */
-@media (max-width: 768px) {
-    .offer-products {
-        -webkit-overflow-scrolling: touch;
-        scroll-behavior: smooth;
-        scroll-snap-type: x mandatory;
-    }
-    
-    .offer-product {
-        scroll-snap-align: start;
-    }
-    
-    /* تحسين قائمة الولايات على الهواتف */
-    #wilaya {
-        font-size: 16px; /* منع التكبير التلقائي في iOS */
-    }
-}
-
-/* تحسينات حقول الإدخال للهواتف */
-.form-control,
-.form-select {
-    font-size: 16px; /* منع التكبير التلقائي في iOS */
-    min-height: var(--touch-target);
-}
-
-/* تحسينات الكاروسيل للهواتف */
-.carousel-indicators button {
-    min-width: 12px;
-    min-height: 12px;
-    margin: 0 4px;
-}
-
-/* تحسينات الصور المنزلقة */
-.slideshow-container1 {
-    touch-action: pan-y pinch-zoom;
-}
-
-/* تحسينات متجر الدارك مود */
-/* [بقية أنماط CSS تبقى كما هي بدون تغيير] */
-
-/* أضف هذا في نهاية ملف CSS لتحسينات اللمس */
-@media (max-width: 768px) {
-    /* زيادة حجم أزرار التنقل في الهاتف */
-    .navbar-toggler {
-        width: var(--touch-target);
-        height: var(--touch-target);
-        padding: 0;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-    
-    /* تحسين حجم شريط السلة على الهاتف */
-    .cart-btn {
-        width: var(--touch-target);
-        height: var(--touch-target);
-    }
-    
-    /* تحسين أزرار الكاروسيل */
-    .carousel-control-prev,
-    .carousel-control-next {
-        width: var(--touch-target);
-        height: var(--touch-target);
-    }
-    
-    /* تحسين أزرار السلايدر */
-    .prev1,
-    .next1 {
-        width: var(--touch-target);
-        height: var(--touch-target);
-    }
-    
-    /* تحسين النقاط في السلايدر */
-    .dot1 {
-        width: 20px;
-        height: 20px;
-        margin: 0 6px;
-    }
-    
-    /* منع التمرير الأفقي غير المقصود */
-    body {
-        overflow-x: hidden;
-    }
-}
-
-/* تحسينات الصور للشاشات عالية الدقة */
-img {
-    image-rendering: -webkit-optimize-contrast;
-    image-rendering: crisp-edges;
-}
-
-/* تحسينات الانتقالات السلسة */
-.product-card,
-.offer-product,
-.review-card,
-.contact-card,
-.cart-item {
-    transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1), 
-                box-shadow 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-/* تحسينات الوصول */
-@media (prefers-reduced-motion: reduce) {
-    *,
-    *::before,
-    *::after {
-        animation-duration: 0.01ms !important;
-        animation-iteration-count: 1 !important;
-        transition-duration: 0.01ms !important;
-    }
-}
-
-/* بقية الأنماط تبقى كما هي */
-/* ... [كل CSS السابق يبقى كما هو بدون تغيير] ... */
-
-/* أضف هذا في النهاية */
-/* تحسينات اللمس للوضع الدارك */
-[data-theme="dark"] .touch-feedback {
-    background: rgba(255, 255, 255, 0.1) !important;
-}
 /* تطبيق دارك مود على العناصر */
 [data-theme="dark"] body {
     background-color: var(--secondary);
@@ -2898,4 +2706,3 @@ body,
         padding: 10px;
     }
 }
-
