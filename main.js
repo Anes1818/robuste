@@ -157,8 +157,8 @@
             container.innerHTML += productCard;
         }
         
-        // إضافة تأثيرات اللمس
-        setupTouchEffects();
+        // إضافة تحسينات اللمس بعد عرض المنتجات
+        addTouchEffects();
     }
 
     // دالة تحميل العروض الخاصة
@@ -207,7 +207,7 @@
             
             for (var j = 0; j < product.images.length; j++) {
                 carouselIndicators += '<button type="button" data-bs-target="#carousel-offer-' + product.id + '" data-bs-slide-to="' + j + '" ' + 
-                    (j === 0 ? 'class="active"' : '') + ' aria-label="صورة ' + (j + 1) + '"></button>';
+                    (j === 0 ? 'class="active"' : '') + '></button>';
                 
                 carouselItems += '<div class="carousel-item ' + (j === 0 ? 'active' : '') + '">' +
                     '<img src="' + product.images[j] + '" class="d-block w-100" alt="' + product.title + '" height="300" loading="lazy">' +
@@ -290,34 +290,30 @@
         }.bind(null, this), 200);
     }
 
-    // ============== تحسينات اللمس ==============
-    function setupTouchEffects() {
-        // تحسين أزرار إضافة إلى السلة
+    // ============== إضافة تأثيرات اللمس ==============
+    function addTouchEffects() {
+        // تأثير اللمس لأزرار إضافة إلى السلة
         var addToCartBtns = document.querySelectorAll('.add-to-cart-btn, .offer-btn');
         for (var i = 0; i < addToCartBtns.length; i++) {
-            var btn = addToCartBtns[i];
-            btn.addEventListener('touchstart', function(e) {
-                this.style.transform = 'scale(0.95)';
-                this.style.opacity = '0.9';
+            addToCartBtns[i].addEventListener('touchstart', function() {
+                this.style.transform = 'scale(0.96)';
             }, { passive: true });
             
-            btn.addEventListener('touchend', function(e) {
+            addToCartBtns[i].addEventListener('touchend', function() {
                 this.style.transform = '';
-                this.style.opacity = '';
             }, { passive: true });
         }
         
-        // تحسين بطاقات المنتجات
+        // تأثير اللمس للبطاقات
         var productCards = document.querySelectorAll('.product-card, .offer-product');
         for (var j = 0; j < productCards.length; j++) {
-            var card = productCards[j];
-            card.addEventListener('touchstart', function(e) {
-                if (!e.target.closest('button, a, .carousel-control')) {
+            productCards[j].addEventListener('touchstart', function(e) {
+                if (!e.target.closest('button, a')) {
                     this.style.transform = 'translateY(-2px)';
                 }
             }, { passive: true });
             
-            card.addEventListener('touchend', function(e) {
+            productCards[j].addEventListener('touchend', function() {
                 this.style.transform = '';
             }, { passive: true });
         }
@@ -493,12 +489,12 @@
                 '<div class="cart-item-title mb-1">' + (item.name || 'منتج بدون اسم') + '</div>' +
                 '<div class="cart-item-price mb-2">' + (item.price || 0) + ' د.ج</div>' +
                 '<div class="quantity-controls d-flex align-items-center">' +
-                '<button class="quantity-btn decrease-btn" data-index="' + i + '" aria-label="تقليل الكمية">-</button>' +
-                '<input type="number" class="quantity-input mx-2" value="' + (item.quantity || 1) + '" min="1" data-index="' + i + '" readonly aria-label="الكمية">' +
-                '<button class="quantity-btn increase-btn" data-index="' + i + '" aria-label="زيادة الكمية">+</button>' +
+                '<button class="quantity-btn decrease-btn" data-index="' + i + '">-</button>' +
+                '<input type="number" class="quantity-input mx-2" value="' + (item.quantity || 1) + '" min="1" data-index="' + i + '" readonly>' +
+                '<button class="quantity-btn increase-btn" data-index="' + i + '">+</button>' +
                 '</div>' +
                 '</div>' +
-                '<button class="remove-item-btn ms-2" data-index="' + i + '" aria-label="إزالة المنتج">' +
+                '<button class="remove-item-btn ms-2" data-index="' + i + '">' +
                 '<i class="bi bi-trash"></i>' +
                 '</button>' +
                 '</div>';
@@ -517,10 +513,10 @@
         var quantityBtns = document.querySelectorAll('.quantity-btn');
         for (var i = 0; i < quantityBtns.length; i++) {
             quantityBtns[i].addEventListener('click', handleQuantityClick);
-            quantityBtns[i].addEventListener('touchstart', function(e) {
+            quantityBtns[i].addEventListener('touchstart', function() {
                 this.style.transform = 'scale(0.9)';
             }, { passive: true });
-            quantityBtns[i].addEventListener('touchend', function(e) {
+            quantityBtns[i].addEventListener('touchend', function() {
                 this.style.transform = '';
             }, { passive: true });
         }
@@ -528,10 +524,10 @@
         var removeBtns = document.querySelectorAll('.remove-item-btn');
         for (var k = 0; k < removeBtns.length; k++) {
             removeBtns[k].addEventListener('click', handleRemoveClick);
-            removeBtns[k].addEventListener('touchstart', function(e) {
+            removeBtns[k].addEventListener('touchstart', function() {
                 this.style.transform = 'scale(0.9)';
             }, { passive: true });
-            removeBtns[k].addEventListener('touchend', function(e) {
+            removeBtns[k].addEventListener('touchend', function() {
                 this.style.transform = '';
             }, { passive: true });
         }
@@ -1148,11 +1144,9 @@
             if (newTheme === 'dark') {
                 themeIcon.className = 'bi bi-sun';
                 themeIcon.parentElement.title = 'تفعيل وضع النهار';
-                themeIcon.parentElement.setAttribute('aria-label', 'تفعيل وضع النهار');
             } else {
                 themeIcon.className = 'bi bi-moon';
                 themeIcon.parentElement.title = 'تفعيل وضع الظلام';
-                themeIcon.parentElement.setAttribute('aria-label', 'تفعيل وضع الظلام');
             }
         }
         
@@ -1182,11 +1176,9 @@
             if (savedTheme === 'dark') {
                 themeIcon.className = 'bi bi-sun';
                 themeIcon.parentElement.title = 'تفعيل وضع النهار';
-                themeIcon.parentElement.setAttribute('aria-label', 'تفعيل وضع النهار');
             } else {
                 themeIcon.className = 'bi bi-moon';
                 themeIcon.parentElement.title = 'تفعيل وضع الظلام';
-                themeIcon.parentElement.setAttribute('aria-label', 'تفعيل وضع الظلام');
             }
         }
     }
@@ -1233,20 +1225,6 @@
                 }
             }
         });
-        
-        // تحسينات اللمس للبطاقات
-        var productCards = document.querySelectorAll('.product-card');
-        for (var i = 0; i < productCards.length; i++) {
-            productCards[i].addEventListener('touchstart', function(e) {
-                if (!e.target.closest('button, a')) {
-                    this.style.transform = 'translateY(-4px)';
-                }
-            }, { passive: true });
-            
-            productCards[i].addEventListener('touchend', function(e) {
-                this.style.transform = '';
-            }, { passive: true });
-        }
     }
 
     // ============== تهيئة الصفحة ==============
@@ -1287,10 +1265,10 @@
                     e.preventDefault();
                     toggleDarkMode();
                 });
-                themeToggle.addEventListener('touchstart', function(e) {
+                themeToggle.addEventListener('touchstart', function() {
                     this.style.transform = 'scale(0.95)';
                 }, { passive: true });
-                themeToggle.addEventListener('touchend', function(e) {
+                themeToggle.addEventListener('touchend', function() {
                     this.style.transform = '';
                 }, { passive: true });
             }
@@ -1310,30 +1288,30 @@
             
             var cartToggle = document.querySelector('.cart-btn');
             if (cartToggle) {
-                cartToggle.addEventListener('touchstart', function(e) {
+                cartToggle.addEventListener('touchstart', function() {
                     this.style.transform = 'scale(0.95)';
                 }, { passive: true });
-                cartToggle.addEventListener('touchend', function(e) {
+                cartToggle.addEventListener('touchend', function() {
                     this.style.transform = '';
                 }, { passive: true });
             }
             
             var checkoutBtn = document.getElementById('checkoutBtn');
             if (checkoutBtn) {
-                checkoutBtn.addEventListener('touchstart', function(e) {
+                checkoutBtn.addEventListener('touchstart', function() {
                     this.style.transform = 'scale(0.95)';
                 }, { passive: true });
-                checkoutBtn.addEventListener('touchend', function(e) {
+                checkoutBtn.addEventListener('touchend', function() {
                     this.style.transform = '';
                 }, { passive: true });
             }
             
             var submitOrderBtn = document.getElementById('submitOrderBtn');
             if (submitOrderBtn) {
-                submitOrderBtn.addEventListener('touchstart', function(e) {
+                submitOrderBtn.addEventListener('touchstart', function() {
                     this.style.transform = 'scale(0.95)';
                 }, { passive: true });
-                submitOrderBtn.addEventListener('touchend', function(e) {
+                submitOrderBtn.addEventListener('touchend', function() {
                     this.style.transform = '';
                 }, { passive: true });
             }
@@ -1342,17 +1320,15 @@
             document.documentElement.style.touchAction = 'manipulation';
             document.documentElement.style.webkitTapHighlightColor = 'transparent';
             
-            // تحسينات اللمس لأزرار أخرى
-            var buttons = document.querySelectorAll('.btn, .offer-btn, .social-icon, .whatsapp-btn');
+            // تحسينات اللمس للأزرار الأخرى
+            var buttons = document.querySelectorAll('.btn, .offer-btn, .social-icon, .whatsapp-btn, .carousel-control-prev, .carousel-control-next, .prev1, .next1');
             for (var i = 0; i < buttons.length; i++) {
-                buttons[i].addEventListener('touchstart', function(e) {
-                    this.style.transform = 'scale(0.95)';
-                    this.style.opacity = '0.9';
+                buttons[i].addEventListener('touchstart', function() {
+                    this.style.transform = 'scale(0.96)';
                 }, { passive: true });
                 
-                buttons[i].addEventListener('touchend', function(e) {
+                buttons[i].addEventListener('touchend', function() {
                     this.style.transform = '';
-                    this.style.opacity = '';
                 }, { passive: true });
             }
             
