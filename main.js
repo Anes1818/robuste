@@ -79,6 +79,7 @@
     // دالة عرض المنتجات
 
 // دالة عرض المنتجات
+// دالة عرض المنتجات
 function renderProducts(products) {
     var container = document.getElementById('productsContainer');
     if (!container) return;
@@ -132,10 +133,16 @@ function renderProducts(products) {
                 '</button>';
         }
         
+        // إضافة التمرير التلقائي
+        var carouselAutoPlay = '';
+        if (product.images.length > 1) {
+            carouselAutoPlay = ' data-bs-ride="carousel" data-bs-interval="3000"';
+        }
+        
         var productCard = '<div class="col-6 col-md-4 col-lg-3 mb-4">' +
             '<div class="product-card card h-100 position-relative" role="link" tabindex="0" data-pid="' + product.id + '">' +
             productBadge + discountBadge +
-            '<div id="carousel-' + product.id + '" class="carousel slide" data-bs-ride="carousel">' +
+            '<div id="carousel-' + product.id + '" class="carousel slide"' + carouselAutoPlay + '>' +
             '<div class="carousel-indicators">' + carouselIndicators + '</div>' +
             '<div class="carousel-inner">' + carouselItems + '</div>' +
             carouselControls +
@@ -155,6 +162,13 @@ function renderProducts(products) {
         
         container.innerHTML += productCard;
     }
+
+    // إضافة تحسينات اللمس بعد عرض المنتجات
+    addTouchEffects();
+    
+    // تهيئة الكاروسيلات
+    initializeCarousels();
+
 
 
         // إضافة تحسينات اللمس بعد عرض المنتجات
@@ -1226,7 +1240,69 @@ function renderProducts(products) {
             }
         });
     }
+// دالة تهيئة الكاروسيلات
+function initializeCarousels() {
+    setTimeout(function() {
+        var carousels = document.querySelectorAll('.carousel');
+        if (!carousels.length) return;
+        
+        for (var i = 0; i < carousels.length; i++) {
+            var carousel = carousels[i];
+            var items = carousel.querySelectorAll('.carousel-item');
+            
+            // إذا كان يحتوي على أكثر من صورة واحدة
+            if (items.length > 1) {
+                // تفعيل التمرير التلقائي
+                carousel.setAttribute('data-bs-ride', 'carousel');
+                carousel.setAttribute('data-bs-interval', '3000');
+                
+                // استخدام Bootstrap Carousel API إذا كان متاحاً
+                if (typeof bootstrap !== 'undefined' && bootstrap.Carousel) {
+                    try {
+                        var bsCarousel = new bootstrap.Carousel(carousel, {
+                            interval: 3000,
+                            wrap: true,
+                            pause: 'hover'
+                        });
+                    } catch (e) {
+                        console.log('Carousel initialization error:', e);
+                    }
+                }
+                
+                // بدء التمرير يدوياً إذا لم يكن Bootstrap متاحاً
+                if (typeof bootstrap === 'undefined') {
+                    startManualCarousel(carousel);
+                }
+            }
+        }
+    }, 500); // تأخير بسيط لضمان تحميل الصفحة
+}
 
+// دالة بدء التمرير اليدوي (fallback)
+function startManualCarousel(carousel) {
+    var currentIndex = 0;
+    var items = carousel.querySelectorAll('.carousel-item');
+    var indicators = carousel.querySelectorAll('.carousel-indicators button');
+    
+    if (items.length <= 1) return;
+    
+    setInterval(function() {
+        // إخفاء الصورة الحالية
+        items[currentIndex].classList.remove('active');
+        if (indicators[currentIndex]) {
+            indicators[currentIndex].classList.remove('active');
+        }
+        
+        // الانتقال للصورة التالية
+        currentIndex = (currentIndex + 1) % items.length;
+        
+        // إظهار الصورة الجديدة
+        items[currentIndex].classList.add('active');
+        if (indicators[currentIndex]) {
+            indicators[currentIndex].classList.add('active');
+        }
+    }, 3000);
+}
     // ============== تهيئة الصفحة ==============
     function initializePage() {
         try {
@@ -1258,7 +1334,11 @@ function renderProducts(products) {
             }
             
             initDarkMode();
-            
+            // بعد هذا السطر في دالة initializePage:
+setupProductCardClicks();
+
+// أضف هذا السطر:
+initializeCarousels();
             var themeToggle = document.getElementById('themeToggle');
             if (themeToggle) {
                 themeToggle.addEventListener('click', function(e) {
