@@ -1434,7 +1434,11 @@ initializeCarousels();
     } else {
         initializePage();
     }
+// بعد هذا السطر في دالة initializePage:
+initializeCarousels();
 
+// أضف هذا السطر:
+initOfferProducts();
     // ============== تعريض الوظائف المطلوبة عالمياً ==============
     window.toggleCart = toggleCart;
     window.checkout = checkout;
@@ -1447,4 +1451,53 @@ initializeCarousels();
     window.currentSlide1 = currentSlide1;
     window.hideStatus = hideStatus;
 
-})();
+})();// ============== وظائف التنقل في قسم العروض ==============
+function scrollOffers(direction) {
+    var offersContainer = document.querySelector('.offer-products');
+    if (!offersContainer) return;
+    
+    var scrollAmount = 380; // مقدار التمرير
+    var currentScroll = offersContainer.scrollLeft;
+    
+    offersContainer.scrollTo({
+        left: currentScroll + (scrollAmount * direction),
+        behavior: 'smooth'
+    });
+}
+
+// ============== تحسينات التمرير التلقائي لقسم العروض ==============
+function initOfferProducts() {
+    var offerProducts = document.querySelectorAll('.offer-product');
+    if (!offerProducts.length) return;
+    
+    // إضافة تأثير التمرير عند التمرير أفقيًا
+    var offersContainer = document.querySelector('.offer-products');
+    if (offersContainer) {
+        offersContainer.addEventListener('wheel', function(e) {
+            if (Math.abs(e.deltaX) < Math.abs(e.deltaY)) {
+                e.preventDefault();
+                this.scrollLeft += e.deltaY;
+            }
+        });
+    }
+    
+    // تهيئة الكاروسيلات في العروض
+    offerProducts.forEach(function(product, index) {
+        var carousel = product.querySelector('.carousel');
+        if (carousel && typeof bootstrap !== 'undefined' && bootstrap.Carousel) {
+            try {
+                new bootstrap.Carousel(carousel, {
+                    interval: carousel.getAttribute('data-bs-interval') || 3000,
+                    wrap: true,
+                    pause: 'hover'
+                });
+            } catch (e) {
+                console.log('Offer carousel error:', e);
+            }
+        }
+    });
+}
+
+// قم باستدعاء هذه الدالة في نهاية initializePage
+// أضف هذا السطر في دالة initializePage:
+// initOfferProducts();
