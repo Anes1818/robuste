@@ -123,155 +123,176 @@
   <span class="dot1" onclick="currentSlide1(3)" role="button" tabindex="0" aria-label="Aller à l'image 3"></span>
   <span class="dot1" onclick="currentSlide1(4)" role="button" tabindex="0" aria-label="Aller à l'image 4"></span>
 </div>
-    
-<!-- Section Offres -->
+    <!-- Section Offres -->
 <section class="offers-section">
   <div class="container position-relative">
-    <h2 class="offers-title">Offres spéciales</h2>
-    <p class="offer-subtitle">Profitez de nos offres exceptionnelles sur les meilleurs appareils électriques avec des remises allant jusqu'à 20% pour une durée limitée</p>
+    <div class="text-center mb-5">
+      <h2 class="offers-title">🔥 OFFRES EXCLUSIVES 🔥</h2>
+      <p class="offer-subtitle">Profitez de nos promotions exceptionnelles avec des remises allant jusqu'à 30% sur les meilleurs produits électroménagers. Offre limitée dans le temps !</p>
+    </div>
 
     <!-- Compte à rebours -->
     <div class="offer-timer">
-      <div class="timer-title">L'offre se termine dans:</div>
+      <div class="timer-title">⏳ L'OFFRE SE TERMINE DANS :</div>
       <div class="timer-content">
         <div class="timer-item">
           <div class="timer-value" id="days">03</div>
-          <div class="timer-label">jours</div>
+          <div class="timer-label">Jours</div>
         </div>
         <div class="timer-item">
           <div class="timer-value" id="hours">12</div>
-          <div class="timer-label">heures</div>
+          <div class="timer-label">Heures</div>
         </div>
         <div class="timer-item">
           <div class="timer-value" id="minutes">45</div>
-          <div class="timer-label">minutes</div>
+          <div class="timer-label">Minutes</div>
         </div>
         <div class="timer-item">
           <div class="timer-value" id="seconds">30</div>
-          <div class="timer-label">secondes</div>
+          <div class="timer-label">Secondes</div>
         </div>
       </div>
     </div>
 
     <!-- Produits -->
-    <div class="row offer-products">
-
+    <div class="offer-products" id="offerProducts">
       <!-- Produit 1 -->
-      <div class="col-md-4">
-        <div class="offer-product">
-          <div class="offer-product-discount">Quantité limitée</div>
-          <div class="offer-product-badge">Le plus demandé</div>
+      <div class="offer-product">
+        <div class="offer-product-discount">-15%</div>
+        <div class="offer-product-badge">BEST SELLER</div>
 
-          <div id="carousel-offer-1" class="carousel slide" data-bs-ride="carousel">
-            <div class="carousel-indicators">
-              <button type="button" data-bs-target="#carousel-offer-1" data-bs-slide-to="0" class="active" aria-label="Image 1"></button>
-              <button type="button" data-bs-target="#carousel-offer-1" data-bs-slide-to="1" aria-label="Image 2"></button>
-              <button type="button" data-bs-target="#carousel-offer-1" data-bs-slide-to="2" aria-label="Image 3"></button>
-            </div>
-
-            <div class="carousel-inner">
-              <div class="carousel-item active">
-                 <img src="images/Robuste Defroisseur 1.jpg" class="d-block w-100" alt="Défroisseur" height="800" width="800" loading="lazy">
-              </div>
-              <div class="carousel-item">
-                <img loading="lazy" src="images/Robuste Defroisseur 2.jpg" class="d-block w-100" alt="Défroisseur" height="800" width="800">
-              </div>
-              <div class="carousel-item">
-                <img loading="lazy" src="images/Robuste Defroisseur.jpg" class="d-block w-100" alt="Défroisseur" height="800" width="800">
-              </div>
-            </div>
-
-            <button class="carousel-control-prev" type="button" data-bs-target="#carousel-offer-1" data-bs-slide="prev" aria-label="Précédent">
-              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#carousel-offer-1" data-bs-slide="next" aria-label="Suivant">
-              <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            </button>
+        <div id="carousel-offer-1" class="carousel slide" data-bs-ride="carousel" data-bs-interval="3000">
+          <div class="carousel-indicators">
+            <button type="button" data-bs-target="#carousel-offer-1" data-bs-slide-to="0" class="active" aria-label="Image 1"></button>
+            <button type="button" data-bs-target="#carousel-offer-1" data-bs-slide-to="1" aria-label="Image 2"></button>
+            <button type="button" data-bs-target="#carousel-offer-1" data-bs-slide-to="2" aria-label="Image 3"></button>
           </div>
 
-          <h4 class="offer-product-title">Défroisseur Vapeur</h4>
-          <div class="offer-product-price">6500 DA</div>
-          <div class="offer-product-old-price">7000 DA</div>
-          <a href="product.html?pid=100" class="offer-btn" style="display: block; text-decoration: none; text-align: center; color: inherit;" aria-label="Voir le produit Défroisseur Vapeur">
-            Voir le produit
+          <div class="carousel-inner">
+            <div class="carousel-item active">
+              <img src="images/Robuste Defroisseur 1.jpg" class="d-block w-100" alt="Défroisseur Vapeur Robuste" loading="lazy">
+            </div>
+            <div class="carousel-item">
+              <img src="images/Robuste Defroisseur 2.jpg" class="d-block w-100" alt="Défroisseur Vapeur vue de côté" loading="lazy">
+            </div>
+            <div class="carousel-item">
+              <img src="images/Robuste Defroisseur.jpg" class="d-block w-100" alt="Défroisseur Vapeur en action" loading="lazy">
+            </div>
+          </div>
+
+          <button class="carousel-control-prev" type="button" data-bs-target="#carousel-offer-1" data-bs-slide="prev" aria-label="Précédent">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          </button>
+          <button class="carousel-control-next" type="button" data-bs-target="#carousel-offer-1" data-bs-slide="next" aria-label="Suivant">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          </button>
+        </div>
+
+        <div class="offer-product-content">
+          <h4 class="offer-product-title">Défroisseur Vapeur Professionnel 1800W</h4>
+          <div class="price-container">
+            <div class="offer-product-price">6 500 DA</div>
+            <div class="offer-product-old-price">7 000 DA</div>
+          </div>
+          <a href="product.html?pid=100" class="offer-btn" aria-label="Voir le produit Défroisseur Vapeur">
+            <i class="bi bi-bolt"></i> ACHETER MAINTENANT
           </a>
         </div>
       </div>
 
       <!-- Produit 2 -->
-      <div class="col-md-4">
-        <div class="offer-product">
-          <div class="offer-product-discount">Remise 10%</div>
+      <div class="offer-product">
+        <div class="offer-product-discount">-20%</div>
+        <div class="offer-product-badge">NOUVEAU</div>
 
-          <div id="carousel-offer-2" class="carousel slide" data-bs-ride="carousel">
-            <div class="carousel-indicators">
-              <button type="button" data-bs-target="#carousel-offer-2" data-bs-slide-to="0" class="active" aria-label="Image 1"></button>
-              <button type="button" data-bs-target="#carousel-offer-2" data-bs-slide-to="1" aria-label="Image 2"></button>
-            </div>
-
-            <div class="carousel-inner">
-               <div class="carousel-item active">
-                <img loading="lazy" src="images/aspirateur a main 1.jpg" class="d-block w-100" alt="Aspirateur Souffleur à Main 1" height="800" width="800">
-              </div>
-              <div class="carousel-item">
-                <img loading="lazy" src="images/aspirateur a main 2.jpg" class="d-block w-100" alt="Aspirateur Souffleur à Main 2" height="800" width="800">
-              </div>
-            </div>
-
-            <button class="carousel-control-prev" type="button" data-bs-target="#carousel-offer-2" data-bs-slide="prev" aria-label="Précédent">
-              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#carousel-offer-2" data-bs-slide="next" aria-label="Suivant">
-              <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            </button>
+        <div id="carousel-offer-2" class="carousel slide" data-bs-ride="carousel" data-bs-interval="3500">
+          <div class="carousel-indicators">
+            <button type="button" data-bs-target="#carousel-offer-2" data-bs-slide-to="0" class="active" aria-label="Image 1"></button>
+            <button type="button" data-bs-target="#carousel-offer-2" data-bs-slide-to="1" aria-label="Image 2"></button>
+            <button type="button" data-bs-target="#carousel-offer-2" data-bs-slide-to="2" aria-label="Image 3"></button>
           </div>
 
-          <h4 class="offer-product-title">Aspirateur Souffleur à Main</h4>
-          <div class="offer-product-price">5000 DA</div>
-          <div class="offer-product-old-price">5600 DA</div>
-          <a href="product.html?pid=101" class="offer-btn" style="display: block; text-decoration: none; text-align: center; color: inherit;" aria-label="Voir le produit Aspirateur Souffleur à Main">
-            Voir le produit
+          <div class="carousel-inner">
+            <div class="carousel-item active">
+              <img src="images/aspirateur a main 1.jpg" class="d-block w-100" alt="Aspirateur Souffleur à Main" loading="lazy">
+            </div>
+            <div class="carousel-item">
+              <img src="images/aspirateur a main 2.jpg" class="d-block w-100" alt="Aspirateur Souffleur accessoires" loading="lazy">
+            </div>
+            <div class="carousel-item">
+              <img src="images/aspirateur a main robuste.jpg" class="d-block w-100" alt="Aspirateur Souffleur en action" loading="lazy">
+            </div>
+          </div>
+
+          <button class="carousel-control-prev" type="button" data-bs-target="#carousel-offer-2" data-bs-slide="prev" aria-label="Précédent">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          </button>
+          <button class="carousel-control-next" type="button" data-bs-target="#carousel-offer-2" data-bs-slide="next" aria-label="Suivant">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          </button>
+        </div>
+
+        <div class="offer-product-content">
+          <h4 class="offer-product-title">Aspirateur Souffleur Sans Fil 20V</h4>
+          <div class="price-container">
+            <div class="offer-product-price">5 000 DA</div>
+            <div class="offer-product-old-price">5 600 DA</div>
+          </div>
+          <a href="product.html?pid=101" class="offer-btn" aria-label="Voir le produit Aspirateur Souffleur">
+            <i class="bi bi-bolt"></i> ACHETER MAINTENANT
           </a>
         </div>
       </div>
 
       <!-- Produit 3 -->
-      <div class="col-md-4">
-        <div class="offer-product">
-          <div class="offer-product-discount">Remise 20%</div>
-          <div class="offer-product-badge">Nouveau</div>
+      <div class="offer-product">
+        <div class="offer-product-discount">-25%</div>
+        <div class="offer-product-badge">TOP VENTE</div>
 
-          <div id="carousel-offer-3" class="carousel slide" data-bs-ride="carousel">
-            <div class="carousel-indicators">
-              <button type="button" data-bs-target="#carousel-offer-3" data-bs-slide-to="0" class="active" aria-label="Image 1"></button>
-              <button type="button" data-bs-target="#carousel-offer-3" data-bs-slide-to="1" aria-label="Image 2"></button>
-            </div>
-
-            <div class="carousel-inner">
-               <div class="carousel-item active">
-                <img loading="lazy" src="images/NETTOYEUR DE TACHES 4 EN 1.jpg" class="d-block w-100" alt="Nettoyeur de Taches 4 en 1" height="800" width="800">
-              </div>
-              <div class="carousel-item">
-                <img loading="lazy" src="images/NETTOYEUR DE TACHES 4 EN 1 robuste.jpg" class="d-block w-100" alt="Nettoyeur de Taches 4 en 1 vue arrière" height="800" width="800">
-              </div>
-            </div>
-
-            <button class="carousel-control-prev" type="button" data-bs-target="#carousel-offer-3" data-bs-slide="prev" aria-label="Précédent">
-              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#carousel-offer-3" data-bs-slide="next" aria-label="Suivant">
-              <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            </button>
+        <div id="carousel-offer-3" class="carousel slide" data-bs-ride="carousel" data-bs-interval="4000">
+          <div class="carousel-indicators">
+            <button type="button" data-bs-target="#carousel-offer-3" data-bs-slide-to="0" class="active" aria-label="Image 1"></button>
+            <button type="button" data-bs-target="#carousel-offer-3" data-bs-slide-to="1" aria-label="Image 2"></button>
           </div>
 
-          <h4 class="offer-product-title">Nettoyeur de Taches 4 en 1</h4>
-          <div class="offer-product-price">23,500 DA</div>
-          <div class="offer-product-old-price">25,000 DA</div>
-          <a href="product.html?pid=102" class="offer-btn" style="display: block; text-decoration: none; text-align: center; color: inherit;" aria-label="Voir le produit Nettoyeur de Taches 4 en 1">
-            Voir le produit
+          <div class="carousel-inner">
+            <div class="carousel-item active">
+              <img src="images/NETTOYEUR DE TACHES 4 EN 1.jpg" class="d-block w-100" alt="Nettoyeur de Taches 4 en 1" loading="lazy">
+            </div>
+            <div class="carousel-item">
+              <img src="images/NETTOYEUR DE TACHES 4 EN 1 robuste.jpg" class="d-block w-100" alt="Nettoyeur de Taches 4 en 1 vue arrière" loading="lazy">
+            </div>
+          </div>
+
+          <button class="carousel-control-prev" type="button" data-bs-target="#carousel-offer-3" data-bs-slide="prev" aria-label="Précédent">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          </button>
+          <button class="carousel-control-next" type="button" data-bs-target="#carousel-offer-3" data-bs-slide="next" aria-label="Suivant">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          </button>
+        </div>
+
+        <div class="offer-product-content">
+          <h4 class="offer-product-title">Nettoyeur de Taches 4 en 1 Professionnel</h4>
+          <div class="price-container">
+            <div class="offer-product-price">23 500 DA</div>
+            <div class="offer-product-old-price">25 000 DA</div>
+          </div>
+          <a href="product.html?pid=102" class="offer-btn" aria-label="Voir le produit Nettoyeur de Taches">
+            <i class="bi bi-bolt"></i> ACHETER MAINTENANT
           </a>
         </div>
       </div>
+    </div>
+
+    <!-- أزرار التنقل -->
+    <div class="offers-navigation">
+      <button class="offers-nav-btn" onclick="scrollOffers(-1)" aria-label="Produits précédents">
+        <i class="bi bi-chevron-left"></i>
+      </button>
+      <button class="offers-nav-btn" onclick="scrollOffers(1)" aria-label="Produits suivants">
+        <i class="bi bi-chevron-right"></i>
+      </button>
     </div>
   </div>
 </section>
