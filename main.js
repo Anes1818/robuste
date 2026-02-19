@@ -77,102 +77,94 @@
     }
 
     // دالة عرض المنتجات
-
-// دالة عرض المنتجات
-// دالة عرض المنتجات
-function renderProducts(products) {
-    var container = document.getElementById('productsContainer');
-    if (!container) return;
-    
-    container.innerHTML = '';
-    
-    if (products.length === 0) {
-        container.innerHTML = '<div class="col-12 text-center text-muted py-5">Aucun produit trouvé</div>';
-        return;
-    }
-    
-    for (var i = 0; i < products.length; i++) {
-        var product = products[i];
-        var discountBadge = '';
-        var oldPrice = '';
-        var productBadge = '';
+    function renderProducts(products) {
+        var container = document.getElementById('productsContainer');
+        if (!container) return;
         
-        if (product.old_price && product.old_price > product.price) {
-            var discountPercentage = Math.round(((product.old_price - product.price) / product.old_price) * 100);
-            discountBadge = '<div class="discount-badge">-' + discountPercentage + '%</div>';
-            oldPrice = '<small dir="ltr" class="old-price text-decoration-line-through text-muted">' + product.old_price.toLocaleString() + ' DA</small>';
+        container.innerHTML = '';
+        
+        if (products.length === 0) {
+            container.innerHTML = '<div class="col-12 text-center text-muted py-5">Aucun produit trouvé</div>';
+            return;
         }
         
-        if (product.badge) {
-            productBadge = '<div class="product-badge">' + product.badge + '</div>';
-        }
-        
-        // إنشاء سلايدر للصور
-        var carouselIndicators = '';
-        var carouselItems = '';
-        var carouselControls = '';
-        
-        for (var j = 0; j < product.images.length; j++) {
-            carouselIndicators += '<button type="button" data-bs-target="#carousel-' + product.id + '" data-bs-slide-to="' + j + '" ' + 
-                (j === 0 ? 'class="active" aria-current="true"' : '') + 
-                ' aria-label="صورة ' + (j + 1) + '"></button>';
+        for (var i = 0; i < products.length; i++) {
+            var product = products[i];
+            var discountBadge = '';
+            var oldPrice = '';
+            var productBadge = '';
             
-            carouselItems += '<div class="carousel-item ' + (j === 0 ? 'active' : '') + '">' +
-                '<img src="' + product.images[j] + '" class="d-block w-100" alt="' + product.title + '" loading="lazy">' +
-                '</div>';
-        }
-        
-        if (product.images.length > 1) {
-            carouselControls = '<button class="carousel-control-prev" type="button" data-bs-target="#carousel-' + product.id + '" data-bs-slide="prev">' +
-                '<span class="carousel-control-prev-icon" aria-hidden="true"></span>' +
-                '<span class="visually-hidden">السابق</span>' +
+            if (product.old_price && product.old_price > product.price) {
+                var discountPercentage = Math.round(((product.old_price - product.price) / product.old_price) * 100);
+                discountBadge = '<div class="discount-badge">-' + discountPercentage + '%</div>';
+                oldPrice = '<small dir="ltr" class="old-price text-decoration-line-through text-muted">' + product.old_price.toLocaleString() + ' DA</small>';
+            }
+            
+            if (product.badge) {
+                productBadge = '<div class="product-badge">' + product.badge + '</div>';
+            }
+            
+            // إنشاء سلايدر للصور
+            var carouselIndicators = '';
+            var carouselItems = '';
+            var carouselControls = '';
+            
+            for (var j = 0; j < product.images.length; j++) {
+                carouselIndicators += '<button type="button" data-bs-target="#carousel-' + product.id + '" data-bs-slide-to="' + j + '" ' + 
+                    (j === 0 ? 'class="active" aria-current="true"' : '') + 
+                    ' aria-label="صورة ' + (j + 1) + '"></button>';
+                
+                carouselItems += '<div class="carousel-item ' + (j === 0 ? 'active' : '') + '">' +
+                    '<img src="' + product.images[j] + '" class="d-block w-100" alt="' + product.title + '" loading="lazy">' +
+                    '</div>';
+            }
+            
+            if (product.images.length > 1) {
+                carouselControls = '<button class="carousel-control-prev" type="button" data-bs-target="#carousel-' + product.id + '" data-bs-slide="prev">' +
+                    '<span class="carousel-control-prev-icon" aria-hidden="true"></span>' +
+                    '<span class="visually-hidden">السابق</span>' +
+                    '</button>' +
+                    '<button class="carousel-control-next" type="button" data-bs-target="#carousel-' + product.id + '" data-bs-slide="next">' +
+                    '<span class="carousel-control-next-icon" aria-hidden="true"></span>' +
+                    '<span class="visually-hidden">التالي</span>' +
+                    '</button>';
+            }
+            
+            // إضافة التمرير التلقائي
+            var carouselAutoPlay = '';
+            if (product.images.length > 1) {
+                carouselAutoPlay = ' data-bs-ride="carousel" data-bs-interval="3000"';
+            }
+            
+            var productCard = '<div class="col-6 col-md-4 col-lg-3 mb-4">' +
+                '<div class="product-card card h-100 position-relative" role="link" tabindex="0" data-pid="' + product.id + '">' +
+                productBadge + discountBadge +
+                '<div id="carousel-' + product.id + '" class="carousel slide"' + carouselAutoPlay + '>' +
+                '<div class="carousel-indicators">' + carouselIndicators + '</div>' +
+                '<div class="carousel-inner">' + carouselItems + '</div>' +
+                carouselControls +
+                '</div>' +
+                '<h5 class="product-title card-title">' + product.title + '</h5>' +
+                '<div class="price-section">' +
+                oldPrice +
+                '<p dir="ltr" class="current-price">' + product.price.toLocaleString() + ' DA</p>' +
+                '</div>' +
+                '<div class="card-footer bg-transparent border-0 mt-auto">' +
+                '<button class="btn btn-orange add-to-cart-btn" data-id="' + product.id + '" aria-label="Ajouter ' + product.title + ' au panier">' +
+                '<i class="bi bi-cart-plus"></i> Ajouter' +
                 '</button>' +
-                '<button class="carousel-control-next" type="button" data-bs-target="#carousel-' + product.id + '" data-bs-slide="next">' +
-                '<span class="carousel-control-next-icon" aria-hidden="true"></span>' +
-                '<span class="visually-hidden">التالي</span>' +
-                '</button>';
+                '</div>' +
+                '</div>' +
+                '</div>';
+            
+            container.innerHTML += productCard;
         }
-        
-        // إضافة التمرير التلقائي
-        var carouselAutoPlay = '';
-        if (product.images.length > 1) {
-            carouselAutoPlay = ' data-bs-ride="carousel" data-bs-interval="3000"';
-        }
-        
-        var productCard = '<div class="col-6 col-md-4 col-lg-3 mb-4">' +
-            '<div class="product-card card h-100 position-relative" role="link" tabindex="0" data-pid="' + product.id + '">' +
-            productBadge + discountBadge +
-            '<div id="carousel-' + product.id + '" class="carousel slide"' + carouselAutoPlay + '>' +
-            '<div class="carousel-indicators">' + carouselIndicators + '</div>' +
-            '<div class="carousel-inner">' + carouselItems + '</div>' +
-            carouselControls +
-            '</div>' +
-            '<h5 class="product-title card-title">' + product.title + '</h5>' +
-            '<div class="price-section">' +
-            oldPrice +
-            '<p dir="ltr" class="current-price">' + product.price.toLocaleString() + ' DA</p>' +
-            '</div>' +
-            '<div class="card-footer bg-transparent border-0 mt-auto">' +
-            '<button class="btn btn-orange add-to-cart-btn" data-id="' + product.id + '" aria-label="Ajouter ' + product.title + ' au panier">' +
-            '<i class="bi bi-cart-plus"></i> Ajouter' +
-            '</button>' +
-            '</div>' +
-            '</div>' +
-            '</div>';
-        
-        container.innerHTML += productCard;
-    }
-
-    // إضافة تحسينات اللمس بعد عرض المنتجات
-    addTouchEffects();
-    
-    // تهيئة الكاروسيلات
-    initializeCarousels();
-
-
 
         // إضافة تحسينات اللمس بعد عرض المنتجات
         addTouchEffects();
+        
+        // تهيئة الكاروسيلات
+        initializeCarousels();
     }
 
     // دالة تحميل العروض الخاصة
@@ -1102,9 +1094,10 @@ function renderProducts(products) {
         }
     }
 
-    // ============== السلايدر ==============
+    // ============== السلايدر العلوي (معدل بالكامل) ==============
     var slideIndex1 = 1;
-    
+    var slideshowInterval = null;
+
     function showSlides1(n) {
         var slides = document.getElementsByClassName("mySlides1");
         var dots = document.getElementsByClassName("dot1");
@@ -1116,31 +1109,86 @@ function renderProducts(products) {
         
         for (var i = 0; i < slides.length; i++) {
             slides[i].style.display = "none";
+            slides[i].classList.remove('active-slide');
         }
         
         for (var j = 0; j < dots.length; j++) {
-            dots[j].className = dots[j].className.replace(" active", "");
+            dots[j].className = dots[j].className.replace(" active1", "");
+            dots[j].classList.remove('active');
         }
         
-        slides[slideIndex1 - 1].style.display = "block";
-        if (dots.length > 0) {
-            dots[slideIndex1 - 1].className += " active";
+        if (slides[slideIndex1 - 1]) {
+            slides[slideIndex1 - 1].style.display = "block";
+            slides[slideIndex1 - 1].classList.add('active-slide');
+        }
+        
+        if (dots[slideIndex1 - 1]) {
+            dots[slideIndex1 - 1].className += " active1";
+            dots[slideIndex1 - 1].classList.add('active');
         }
     }
-    
+
     function plusSlides1(n) {
-        showSlides1(slideIndex1 + n);
+        slideIndex1 += n;
+        showSlides1(slideIndex1);
+        resetSlideshowTimer();
     }
-    
+
     function currentSlide1(n) {
-        showSlides1(n);
+        slideIndex1 = n;
+        showSlides1(slideIndex1);
+        resetSlideshowTimer();
     }
-    
-    function initSlides() {
-        showSlides1(1);
-        setInterval(function() {
+
+    function resetSlideshowTimer() {
+        if (slideshowInterval) {
+            clearInterval(slideshowInterval);
+        }
+        slideshowInterval = setInterval(function() {
             plusSlides1(1);
         }, 4000);
+    }
+
+    function initSlides() {
+        slideIndex1 = 1;
+        showSlides1(slideIndex1);
+        resetSlideshowTimer();
+        
+        // التأكد من وجود نقاط كافية
+        var slides = document.getElementsByClassName("mySlides1");
+        var dotsContainer = document.querySelector('.mySlides1').parentElement.nextElementSibling;
+        if (dotsContainer && dotsContainer.tagName === 'DIV') {
+            var dots = document.getElementsByClassName("dot1");
+            if (dots.length < slides.length) {
+                for (var i = dots.length; i < slides.length; i++) {
+                    var newDot = document.createElement('span');
+                    newDot.className = 'dot1';
+                    newDot.setAttribute('onclick', 'currentSlide1(' + (i+1) + ')');
+                    newDot.setAttribute('role', 'button');
+                    newDot.setAttribute('tabindex', '0');
+                    newDot.setAttribute('aria-label', 'Aller à l\'image ' + (i+1));
+                    dotsContainer.appendChild(newDot);
+                }
+            }
+        }
+    }
+
+    // ============== تفعيل التمرير التلقائي للعروض ==============
+    function initOfferProducts() {
+        var offerProducts = document.querySelectorAll('.offer-product .carousel');
+        if (typeof bootstrap !== 'undefined' && bootstrap.Carousel) {
+            offerProducts.forEach(function(carousel) {
+                try {
+                    new bootstrap.Carousel(carousel, {
+                        interval: 3000,
+                        wrap: true,
+                        pause: 'hover'
+                    });
+                } catch (e) {
+                    console.log('Offer carousel error:', e);
+                }
+            });
+        }
     }
 
     // ============== وظيفة تبديل وضع الظلام ==============
@@ -1240,69 +1288,73 @@ function renderProducts(products) {
             }
         });
     }
-// دالة تهيئة الكاروسيلات
-function initializeCarousels() {
-    setTimeout(function() {
-        var carousels = document.querySelectorAll('.carousel');
-        if (!carousels.length) return;
-        
-        for (var i = 0; i < carousels.length; i++) {
-            var carousel = carousels[i];
-            var items = carousel.querySelectorAll('.carousel-item');
+
+    // دالة تهيئة الكاروسيلات
+    function initializeCarousels() {
+        setTimeout(function() {
+            var carousels = document.querySelectorAll('.carousel');
+            if (!carousels.length) return;
             
-            // إذا كان يحتوي على أكثر من صورة واحدة
-            if (items.length > 1) {
-                // تفعيل التمرير التلقائي
-                carousel.setAttribute('data-bs-ride', 'carousel');
-                carousel.setAttribute('data-bs-interval', '3000');
+            for (var i = 0; i < carousels.length; i++) {
+                var carousel = carousels[i];
+                var items = carousel.querySelectorAll('.carousel-item');
                 
-                // استخدام Bootstrap Carousel API إذا كان متاحاً
-                if (typeof bootstrap !== 'undefined' && bootstrap.Carousel) {
-                    try {
-                        var bsCarousel = new bootstrap.Carousel(carousel, {
-                            interval: 3000,
-                            wrap: true,
-                            pause: 'hover'
-                        });
-                    } catch (e) {
-                        console.log('Carousel initialization error:', e);
+                // إذا كان يحتوي على أكثر من صورة واحدة
+                if (items.length > 1) {
+                    // تفعيل التمرير التلقائي
+                    carousel.setAttribute('data-bs-ride', 'carousel');
+                    carousel.setAttribute('data-bs-interval', '3000');
+                    
+                    // استخدام Bootstrap Carousel API إذا كان متاحاً
+                    if (typeof bootstrap !== 'undefined' && bootstrap.Carousel) {
+                        try {
+                            var bsCarousel = new bootstrap.Carousel(carousel, {
+                                interval: 3000,
+                                wrap: true,
+                                pause: 'hover'
+                            });
+                        } catch (e) {
+                            console.log('Carousel initialization error:', e);
+                        }
+                    }
+                    
+                    // بدء التمرير يدوياً إذا لم يكن Bootstrap متاحاً
+                    if (typeof bootstrap === 'undefined') {
+                        startManualCarousel(carousel);
                     }
                 }
-                
-                // بدء التمرير يدوياً إذا لم يكن Bootstrap متاحاً
-                if (typeof bootstrap === 'undefined') {
-                    startManualCarousel(carousel);
-                }
             }
-        }
-    }, 500); // تأخير بسيط لضمان تحميل الصفحة
-}
+            // إعادة حساب الأبعاد بعد تحميل الكاروسيلات
+            window.dispatchEvent(new Event('resize'));
+        }, 500); // تأخير بسيط لضمان تحميل الصفحة
+    }
 
-// دالة بدء التمرير اليدوي (fallback)
-function startManualCarousel(carousel) {
-    var currentIndex = 0;
-    var items = carousel.querySelectorAll('.carousel-item');
-    var indicators = carousel.querySelectorAll('.carousel-indicators button');
-    
-    if (items.length <= 1) return;
-    
-    setInterval(function() {
-        // إخفاء الصورة الحالية
-        items[currentIndex].classList.remove('active');
-        if (indicators[currentIndex]) {
-            indicators[currentIndex].classList.remove('active');
-        }
+    // دالة بدء التمرير اليدوي (fallback)
+    function startManualCarousel(carousel) {
+        var currentIndex = 0;
+        var items = carousel.querySelectorAll('.carousel-item');
+        var indicators = carousel.querySelectorAll('.carousel-indicators button');
         
-        // الانتقال للصورة التالية
-        currentIndex = (currentIndex + 1) % items.length;
+        if (items.length <= 1) return;
         
-        // إظهار الصورة الجديدة
-        items[currentIndex].classList.add('active');
-        if (indicators[currentIndex]) {
-            indicators[currentIndex].classList.add('active');
-        }
-    }, 3000);
-}
+        setInterval(function() {
+            // إخفاء الصورة الحالية
+            items[currentIndex].classList.remove('active');
+            if (indicators[currentIndex]) {
+                indicators[currentIndex].classList.remove('active');
+            }
+            
+            // الانتقال للصورة التالية
+            currentIndex = (currentIndex + 1) % items.length;
+            
+            // إظهار الصورة الجديدة
+            items[currentIndex].classList.add('active');
+            if (indicators[currentIndex]) {
+                indicators[currentIndex].classList.add('active');
+            }
+        }, 3000);
+    }
+
     // ============== تهيئة الصفحة ==============
     function initializePage() {
         try {
@@ -1334,11 +1386,10 @@ function startManualCarousel(carousel) {
             }
             
             initDarkMode();
-            // بعد هذا السطر في دالة initializePage:
-setupProductCardClicks();
-
-// أضف هذا السطر:
-initializeCarousels();
+            setupProductCardClicks();
+            initializeCarousels();
+            initOfferProducts(); // تفعيل التمرير التلقائي للعروض
+            
             var themeToggle = document.getElementById('themeToggle');
             if (themeToggle) {
                 themeToggle.addEventListener('click', function(e) {
@@ -1434,11 +1485,7 @@ initializeCarousels();
     } else {
         initializePage();
     }
-// بعد هذا السطر في دالة initializePage:
-initializeCarousels();
 
-// أضف هذا السطر:
-initOfferProducts();
     // ============== تعريض الوظائف المطلوبة عالمياً ==============
     window.toggleCart = toggleCart;
     window.checkout = checkout;
@@ -1451,7 +1498,9 @@ initOfferProducts();
     window.currentSlide1 = currentSlide1;
     window.hideStatus = hideStatus;
 
-})();// ============== وظائف التنقل في قسم العروض ==============
+})();
+
+// ============== وظائف التنقل في قسم العروض ==============
 function scrollOffers(direction) {
     var offersContainer = document.querySelector('.offer-products');
     if (!offersContainer) return;
@@ -1464,40 +1513,3 @@ function scrollOffers(direction) {
         behavior: 'smooth'
     });
 }
-
-// ============== تحسينات التمرير التلقائي لقسم العروض ==============
-function initOfferProducts() {
-    var offerProducts = document.querySelectorAll('.offer-product');
-    if (!offerProducts.length) return;
-    
-    // إضافة تأثير التمرير عند التمرير أفقيًا
-    var offersContainer = document.querySelector('.offer-products');
-    if (offersContainer) {
-        offersContainer.addEventListener('wheel', function(e) {
-            if (Math.abs(e.deltaX) < Math.abs(e.deltaY)) {
-                e.preventDefault();
-                this.scrollLeft += e.deltaY;
-            }
-        });
-    }
-    
-    // تهيئة الكاروسيلات في العروض
-    offerProducts.forEach(function(product, index) {
-        var carousel = product.querySelector('.carousel');
-        if (carousel && typeof bootstrap !== 'undefined' && bootstrap.Carousel) {
-            try {
-                new bootstrap.Carousel(carousel, {
-                    interval: carousel.getAttribute('data-bs-interval') || 3000,
-                    wrap: true,
-                    pause: 'hover'
-                });
-            } catch (e) {
-                console.log('Offer carousel error:', e);
-            }
-        }
-    });
-}
-
-// قم باستدعاء هذه الدالة في نهاية initializePage
-// أضف هذا السطر في دالة initializePage:
-// initOfferProducts();
