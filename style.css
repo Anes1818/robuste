@@ -3236,10 +3236,15 @@ body,
     background-color: var(--primary) !important;
 }
 /* ============== تحسينات حديثة لقسم العروض الخاصة ============== */
+/* ============== قسم العروض الخاصة (فاتح افتراضياً، يتحول للداكن مع الوضع الداكن) ============== */
 .offers-section {
-    background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 50%, #1a1a1a 100%) !important;
+    background: linear-gradient(135deg, #fff5e6 0%, #ffe6d5 50%, #ffd6b3 100%);
+    padding: 80px 0;
+    color: #333;
+    text-align: center;
     position: relative;
     overflow: hidden;
+    margin: 0;
 }
 
 .offers-section::before {
@@ -3250,9 +3255,9 @@ body,
     right: 0;
     bottom: 0;
     background: 
-        radial-gradient(circle at 20% 80%, rgba(255, 107, 53, 0.1) 0%, transparent 50%),
-        radial-gradient(circle at 80% 20%, rgba(255, 140, 66, 0.1) 0%, transparent 50%),
-        radial-gradient(circle at 40% 40%, rgba(255, 165, 82, 0.05) 0%, transparent 50%);
+        radial-gradient(circle at 20% 80%, rgba(255, 107, 53, 0.05) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(255, 140, 66, 0.05) 0%, transparent 50%),
+        radial-gradient(circle at 40% 40%, rgba(255, 165, 82, 0.03) 0%, transparent 50%);
     z-index: 1;
 }
 
@@ -3261,14 +3266,15 @@ body,
     z-index: 2;
 }
 
+/* العنوان */
 .offers-title {
     font-size: 3.2rem;
     font-weight: 900;
-    background: linear-gradient(135deg, #FF6B35, #FFA552, #FF8C42);
+    background: linear-gradient(135deg, #FF6B35, #FF8C42, #FFA552);
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
-    text-shadow: 0 4px 15px rgba(255, 107, 53, 0.3);
+    text-shadow: 0 4px 15px rgba(255, 107, 53, 0.2);
     position: relative;
     display: inline-block;
     margin-bottom: 1.5rem;
@@ -3298,23 +3304,19 @@ body,
     max-width: 800px;
     margin: 0 auto 50px;
     line-height: 1.6;
-    color: rgba(255, 255, 255, 0.9);
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    color: #555;
 }
 
-/* ============== تحسينات عداد الوقت ============== */
+/* ===== عداد الوقت ===== */
 .offer-timer {
-    background: rgba(255, 255, 255, 0.05);
-    backdrop-filter: blur(15px);
-    -webkit-backdrop-filter: blur(15px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(0, 0, 0, 0.1);
     border-radius: 20px;
     padding: 25px 30px;
     max-width: 650px;
     margin: 0 auto 60px;
-    box-shadow: 
-        0 10px 30px rgba(0, 0, 0, 0.3),
-        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.8);
     position: relative;
     overflow: hidden;
 }
@@ -3340,9 +3342,7 @@ body,
     font-size: 1.3rem;
     font-weight: 600;
     margin-bottom: 25px;
-    color: #ffffff;
-    text-align: center;
-    letter-spacing: 1px;
+    color: #333;
 }
 
 .timer-content {
@@ -3359,60 +3359,33 @@ body,
     justify-content: center;
     min-width: 100px;
     padding: 20px 15px;
-    background: rgba(255, 255, 255, 0.05);
+    background: white;
     border-radius: 15px;
-    position: relative;
-    overflow: hidden;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
     transition: all 0.3s ease;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-}
-
-.timer-item::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(135deg, rgba(255, 107, 53, 0.1), transparent);
-    opacity: 0;
-    transition: opacity 0.3s ease;
-}
-
-.timer-item:hover::before {
-    opacity: 1;
 }
 
 .timer-item:hover {
     transform: translateY(-5px) scale(1.05);
     border-color: rgba(255, 107, 53, 0.3);
-    box-shadow: 
-        0 10px 25px rgba(255, 107, 53, 0.2),
-        0 0 20px rgba(255, 107, 53, 0.1);
+    box-shadow: 0 10px 25px rgba(255, 107, 53, 0.15);
 }
 
 .timer-value {
     font-size: 2.8rem;
     font-weight: 900;
-    margin-bottom: 8px;
-    color: #ffffff;
-    text-shadow: 0 2px 10px rgba(255, 107, 53, 0.5);
-    position: relative;
-    z-index: 2;
+    color: #FF6B35;
 }
 
 .timer-label {
     font-size: 1rem;
-    color: rgba(255, 255, 255, 0.8);
+    color: #666;
     font-weight: 500;
     text-transform: uppercase;
-    letter-spacing: 1px;
-    position: relative;
-    z-index: 2;
 }
 
-/* ============== تحسينات بطاقات المنتجات في العروض ============== */
+/* ===== بطاقات المنتجات في العروض ===== */
 .offer-products {
     display: flex;
     flex-wrap: nowrap;
@@ -3421,7 +3394,7 @@ body,
     overflow-x: auto;
     scroll-behavior: smooth;
     scrollbar-width: thin;
-    scrollbar-color: #FF6B35 rgba(255, 255, 255, 0.1);
+    scrollbar-color: #FF6B35 #ddd;
 }
 
 .offer-products::-webkit-scrollbar {
@@ -3429,7 +3402,7 @@ body,
 }
 
 .offer-products::-webkit-scrollbar-track {
-    background: rgba(255, 255, 255, 0.1);
+    background: #f0f0f0;
     border-radius: 10px;
 }
 
@@ -3440,45 +3413,20 @@ body,
 
 .offer-product {
     flex: 0 0 360px;
-    background: linear-gradient(145deg, #ffffff, #f5f5f5);
+    background: white;
     border-radius: 20px;
     overflow: hidden;
-    box-shadow: 
-        0 15px 35px rgba(0, 0, 0, 0.2),
-        0 5px 15px rgba(0, 0, 0, 0.1);
-    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    position: relative;
-    scroll-snap-align: start;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-}
-
-.offer-product::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(135deg, rgba(255, 107, 53, 0.1), transparent);
-    opacity: 0;
-    transition: opacity 0.3s ease;
-    z-index: 1;
-    pointer-events: none;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1), 0 5px 15px rgba(0, 0, 0, 0.05);
+    transition: all 0.4s ease;
+    border: 1px solid rgba(0, 0, 0, 0.05);
 }
 
 .offer-product:hover {
     transform: translateY(-15px) scale(1.02);
-    box-shadow: 
-        0 25px 50px rgba(255, 107, 53, 0.25),
-        0 10px 30px rgba(0, 0, 0, 0.3),
-        inset 0 0 0 1px rgba(255, 255, 255, 0.2);
+    box-shadow: 0 25px 50px rgba(255, 107, 53, 0.15), 0 10px 30px rgba(0, 0, 0, 0.1);
 }
 
-.offer-product:hover::before {
-    opacity: 1;
-}
-
-/* البادجات المحسنة */
+/* البادجات */
 .offer-product-discount {
     position: absolute;
     top: 20px;
@@ -3489,10 +3437,8 @@ body,
     border-radius: 25px;
     font-size: 14px;
     font-weight: 800;
-    box-shadow: 0 5px 15px rgba(255, 46, 99, 0.4);
+    box-shadow: 0 5px 15px rgba(255, 46, 99, 0.3);
     z-index: 3;
-    letter-spacing: 0.5px;
-    text-transform: uppercase;
 }
 
 .offer-product-badge {
@@ -3505,27 +3451,15 @@ body,
     border-radius: 25px;
     font-size: 14px;
     font-weight: 800;
-    box-shadow: 0 5px 15px rgba(255, 107, 53, 0.4);
+    box-shadow: 0 5px 15px rgba(255, 107, 53, 0.3);
     z-index: 3;
-    letter-spacing: 0.5px;
-    text-transform: uppercase;
 }
 
-/* الكاروسيل المحسن */
+/* الكاروسيل */
 .offer-product .carousel {
     height: 260px;
     border-radius: 20px 20px 0 0;
     overflow: hidden;
-    position: relative;
-}
-
-.offer-product .carousel-inner {
-    height: 100%;
-}
-
-.offer-product .carousel-item {
-    height: 100%;
-    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .offer-product .carousel-item img {
@@ -3533,25 +3467,14 @@ body,
     height: 100%;
     object-fit: contain;
     padding: 20px;
-    transition: transform 0.3s ease;
-}
-
-.offer-product:hover .carousel-item.active img {
-    transform: scale(1.05);
-}
-
-.offer-product .carousel-indicators {
-    margin-bottom: 10px;
-    gap: 5px;
 }
 
 .offer-product .carousel-indicators button {
     width: 10px !important;
     height: 10px !important;
     border-radius: 50%;
-    background: rgba(255, 255, 255, 0.5);
+    background: rgba(0, 0, 0, 0.3);
     border: none;
-    transition: all 0.3s ease;
 }
 
 .offer-product .carousel-indicators button.active {
@@ -3563,13 +3486,10 @@ body,
 .offer-product .carousel-control-next {
     width: 45px;
     height: 45px;
-    top: 50%;
-    transform: translateY(-50%);
     background: rgba(255, 255, 255, 0.9);
     border-radius: 50%;
     opacity: 0;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    transition: opacity 0.3s ease;
 }
 
 .offer-product:hover .carousel-control-prev,
@@ -3577,24 +3497,10 @@ body,
     opacity: 1;
 }
 
-.offer-product .carousel-control-prev {
-    left: 15px;
-}
-
-.offer-product .carousel-control-next {
-    right: 15px;
-}
-
-.offer-product .carousel-control-prev:hover,
-.offer-product .carousel-control-next:hover {
-    background: #FF6B35;
-}
-
-/* محتوى المنتج المحسن */
+/* محتوى المنتج */
 .offer-product-content {
     padding: 25px;
     background: white;
-    border-radius: 0 0 20px 20px;
 }
 
 .offer-product-title {
@@ -3602,7 +3508,6 @@ body,
     font-weight: 700;
     color: #333;
     margin-bottom: 15px;
-    line-height: 1.4;
     height: 50px;
     overflow: hidden;
     display: -webkit-box;
@@ -3623,17 +3528,15 @@ body,
     font-size: 1.8rem;
     font-weight: 900;
     color: #FF6B35;
-    text-shadow: 0 2px 5px rgba(255, 107, 53, 0.2);
 }
 
 .offer-product-old-price {
     font-size: 1.1rem;
     color: #999;
     text-decoration: line-through;
-    font-weight: 500;
 }
 
-/* زر الشراء المحسن */
+/* زر الشراء */
 .offer-btn {
     display: block;
     width: 100%;
@@ -3644,181 +3547,97 @@ body,
     border-radius: 12px;
     font-size: 1rem;
     font-weight: 700;
-    text-align: center;
-    text-decoration: none;
     transition: all 0.3s ease;
-    position: relative;
-    overflow: hidden;
-    letter-spacing: 0.5px;
-    box-shadow: 0 5px 15px rgba(255, 107, 53, 0.3);
-}
-
-.offer-btn::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-    transition: left 0.5s;
+    box-shadow: 0 5px 15px rgba(255, 107, 53, 0.2);
 }
 
 .offer-btn:hover {
-    background: linear-gradient(135deg, #E05A2B, #FF6B35);
     transform: translateY(-3px);
-    box-shadow: 0 8px 25px rgba(255, 107, 53, 0.4);
-    color: white;
-    text-decoration: none;
+    box-shadow: 0 8px 25px rgba(255, 107, 53, 0.3);
 }
 
-.offer-btn:hover::before {
-    left: 100%;
-}
-
-.offer-btn i {
-    margin-right: 8px;
-    font-size: 1.1rem;
-}
-
-/* ============== أزرار التنقل للعروض ============== */
+/* أزرار التنقل */
 .offers-navigation {
     display: flex;
     justify-content: center;
     gap: 15px;
     margin-top: 30px;
-    position: relative;
-    z-index: 2;
 }
 
 .offers-nav-btn {
     width: 50px;
     height: 50px;
     border-radius: 50%;
-    background: rgba(255, 255, 255, 0.1);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    color: white;
+    background: white;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    color: #FF6B35;
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 1.2rem;
     cursor: pointer;
     transition: all 0.3s ease;
-    backdrop-filter: blur(10px);
 }
 
 .offers-nav-btn:hover {
     background: linear-gradient(135deg, #FF6B35, #FF8C42);
+    color: white;
     transform: scale(1.1);
-    box-shadow: 0 5px 15px rgba(255, 107, 53, 0.4);
 }
 
-/* ============== تحسينات للهاتف ============== */
-@media (max-width: 768px) {
-    .offers-title {
-        font-size: 2.2rem;
-    }
-    
-    .offer-subtitle {
-        font-size: 1rem;
-        margin-bottom: 30px;
-        padding: 0 15px;
-    }
-    
-    .offer-timer {
-        padding: 20px;
-        margin-bottom: 40px;
-    }
-    
-    .timer-item {
-        min-width: 70px;
-        padding: 15px 10px;
-    }
-    
-    .timer-value {
-        font-size: 2rem;
-    }
-    
-    .timer-label {
-        font-size: 0.8rem;
-    }
-    
-    .offer-products {
-        gap: 15px;
-        padding: 15px 10px 30px;
-    }
-    
-    .offer-product {
-        flex: 0 0 280px;
-    }
-    
-    .offer-product .carousel {
-        height: 200px;
-    }
-    
-    .offer-product-content {
-        padding: 20px;
-    }
-    
-    .offer-product-title {
-        font-size: 1rem;
-        height: 45px;
-    }
-    
-    .offer-product-price {
-        font-size: 1.5rem;
-    }
-    
-    .offer-btn {
-        padding: 14px;
-        font-size: 0.95rem;
-    }
+/* ============== أنماط الوضع الداكن لقسم العروض ============== */
+[data-theme="dark"] .offers-section {
+    background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 50%, #1a1a1a 100%);
+    color: #fff;
 }
 
-@media (max-width: 576px) {
-    .offers-title {
-        font-size: 1.8rem;
-    }
-    
-    .offer-timer {
-        padding: 15px;
-    }
-    
-    .timer-item {
-        min-width: 60px;
-        padding: 12px 8px;
-    }
-    
-    .timer-value {
-        font-size: 1.8rem;
-    }
-    
-    .offer-product {
-        flex: 0 0 250px;
-    }
-    
-    .offer-product .carousel {
-        height: 180px;
-    }
-    
-    .offer-product-content {
-        padding: 15px;
-    }
-    
-    .offer-product-title {
-        font-size: 0.95rem;
-        height: 40px;
-    }
-    
-    .offer-product-price {
-        font-size: 1.3rem;
-    }
+[data-theme="dark"] .offers-section::before {
+    background: 
+        radial-gradient(circle at 20% 80%, rgba(255, 107, 53, 0.15) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(255, 140, 66, 0.15) 0%, transparent 50%),
+        radial-gradient(circle at 40% 40%, rgba(255, 165, 82, 0.1) 0%, transparent 50%);
 }
 
-/* ============== تحسينات دارك مود ============== */
+[data-theme="dark"] .offers-title {
+    background: linear-gradient(135deg, #FF8C42, #FFA552, #FFB86C);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    text-shadow: 0 4px 15px rgba(255, 140, 66, 0.4);
+}
+
+[data-theme="dark"] .offer-subtitle {
+    color: rgba(255, 255, 255, 0.9);
+}
+
+[data-theme="dark"] .offer-timer {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.1);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+[data-theme="dark"] .timer-title {
+    color: #fff;
+}
+
+[data-theme="dark"] .timer-item {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.1);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+[data-theme="dark"] .timer-value {
+    color: #FF8C42;
+}
+
+[data-theme="dark"] .timer-label {
+    color: rgba(255, 255, 255, 0.8);
+}
+
 [data-theme="dark"] .offer-product {
     background: linear-gradient(145deg, #2a2a2a, #1f1f1f);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.1);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
 }
 
 [data-theme="dark"] .offer-product-content {
@@ -3829,20 +3648,122 @@ body,
     color: #f0f0f0;
 }
 
-[data-theme="dark"] .offer-product-old-price {
-    color: #888;
-}
-
 [data-theme="dark"] .price-container {
     border-bottom-color: rgba(255, 255, 255, 0.1);
 }
 
+[data-theme="dark"] .offer-product-old-price {
+    color: #888;
+}
+
+[data-theme="dark"] .offer-product .carousel-indicators button {
+    background: rgba(255, 255, 255, 0.5);
+}
+
+[data-theme="dark"] .offer-product .carousel-indicators button.active {
+    background: #FF8C42;
+}
+
+[data-theme="dark"] .offer-product .carousel-control-prev,
+[data-theme="dark"] .offer-product .carousel-control-next {
+    background: rgba(0, 0, 0, 0.6);
+}
+
 [data-theme="dark"] .offer-btn {
+    background: linear-gradient(135deg, #FF8C42, #FF6B35);
+    box-shadow: 0 5px 15px rgba(255, 140, 66, 0.3);
+}
+
+[data-theme="dark"] .offers-nav-btn {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.2);
+    color: white;
+}
+
+[data-theme="dark"] .offers-nav-btn:hover {
     background: linear-gradient(135deg, #FF8C42, #FF6B35);
 }
 
-[data-theme="dark"] .offer-btn:hover {
-    background: linear-gradient(135deg, #FF6B35, #E05A2B);
+/* تحسينات للهاتف (تبقى كما هي) */
+@media (max-width: 768px) {
+    .offers-title {
+        font-size: 2.2rem;
+    }
+    .offer-subtitle {
+        font-size: 1rem;
+        margin-bottom: 30px;
+        padding: 0 15px;
+    }
+    .offer-timer {
+        padding: 20px;
+        margin-bottom: 40px;
+    }
+    .timer-item {
+        min-width: 70px;
+        padding: 15px 10px;
+    }
+    .timer-value {
+        font-size: 2rem;
+    }
+    .timer-label {
+        font-size: 0.8rem;
+    }
+    .offer-products {
+        gap: 15px;
+        padding: 15px 10px 30px;
+    }
+    .offer-product {
+        flex: 0 0 280px;
+    }
+    .offer-product .carousel {
+        height: 200px;
+    }
+    .offer-product-content {
+        padding: 20px;
+    }
+    .offer-product-title {
+        font-size: 1rem;
+        height: 45px;
+    }
+    .offer-product-price {
+        font-size: 1.5rem;
+    }
+    .offer-btn {
+        padding: 14px;
+        font-size: 0.95rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .offers-title {
+        font-size: 1.8rem;
+    }
+    .offer-timer {
+        padding: 15px;
+    }
+    .timer-item {
+        min-width: 60px;
+        padding: 12px 8px;
+    }
+    .timer-value {
+        font-size: 1.8rem;
+    }
+    .offer-product {
+        flex: 0 0 250px;
+    }
+    .offer-product .carousel {
+        height: 180px;
+    }
+    .offer-product-content {
+        padding: 15px;
+    }
+    .offer-product-title {
+        font-size: 0.95rem;
+        height: 40px;
+    }
+    .offer-product-price {
+        font-size: 1.3rem;
+    }
 }
 
 /* ===== إصلاح الصور في بطاقات المنتجات والعروض (إزالة الفراغات) ===== */
