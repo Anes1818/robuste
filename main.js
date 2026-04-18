@@ -44,6 +44,125 @@
     var lastActionTime = 0;
     var lastActionElement = null;
 
+
+function upsertMeta(attribute, key, value) {
+    var element = document.head.querySelector('meta[' + attribute + '="' + key + '"]');
+    if (!element) {
+        element = document.createElement('meta');
+        element.setAttribute(attribute, key);
+        document.head.appendChild(element);
+    }
+    element.setAttribute('content', value);
+}
+
+function upsertCanonical(href) {
+    var element = document.head.querySelector('link[rel="canonical"]');
+    if (!element) {
+        element = document.createElement('link');
+        element.setAttribute('rel', 'canonical');
+        document.head.appendChild(element);
+    }
+    element.setAttribute('href', href);
+}
+
+function upsertJsonLd(id, data) {
+    var element = document.getElementById(id);
+    if (!element) {
+        element = document.createElement('script');
+        element.type = 'application/ld+json';
+        element.id = id;
+        document.head.appendChild(element);
+    }
+    element.textContent = JSON.stringify(data);
+}
+
+function toAbsoluteUrl(path) {
+    try {
+        return new URL(path, 'https://www.robusteeleulma.shop/').href;
+    } catch (e) {
+        return path;
+    }
+}
+
+function updateHomeSeoFromCatalog() {
+    if (!document.getElementById('productsContainer')) return;
+
+    document.documentElement.lang = 'ar';
+    document.documentElement.dir = 'rtl';
+    document.title = 'متجر ROBUSTE EL EULMA | أجهزة منزلية وكهربائية في الجزائر';
+    upsertCanonical('https://www.robusteeleulma.shop/');
+    upsertMeta('name', 'description', 'متجر ROBUSTE EL EULMA للأجهزة المنزلية والكهربائية في الجزائر. منتجات للمطبخ والعناية والتنظيف بأسعار واضحة مع توصيل سريع إلى جميع الولايات والدفع عند الاستلام.');
+    upsertMeta('name', 'robots', 'index,follow,max-image-preview:large');
+    upsertMeta('property', 'og:type', 'website');
+    upsertMeta('property', 'og:locale', 'ar_DZ');
+    upsertMeta('property', 'og:site_name', 'ROBUSTE EL EULMA');
+    upsertMeta('property', 'og:title', 'متجر ROBUSTE EL EULMA | أجهزة منزلية وكهربائية في الجزائر');
+    upsertMeta('property', 'og:description', 'منتجات للمطبخ والعناية والتنظيف بأسعار واضحة مع توصيل سريع إلى جميع الولايات والدفع عند الاستلام.');
+    upsertMeta('property', 'og:url', 'https://www.robusteeleulma.shop/');
+    upsertMeta('property', 'og:image', 'https://www.robusteeleulma.shop/images/banner.webp');
+    upsertMeta('name', 'twitter:card', 'summary_large_image');
+    upsertMeta('name', 'twitter:title', 'متجر ROBUSTE EL EULMA | أجهزة منزلية وكهربائية في الجزائر');
+    upsertMeta('name', 'twitter:description', 'منتجات للمطبخ والعناية والتنظيف بأسعار واضحة مع توصيل سريع إلى جميع الولايات والدفع عند الاستلام.');
+    upsertMeta('name', 'twitter:image', 'https://www.robusteeleulma.shop/images/banner.webp');
+
+    fetch('products.json')
+        .then(function(response) {
+            if (!response.ok) {
+                throw new Error('تعذر تحميل بيانات المنتجات');
+            }
+            return response.json();
+        })
+        .then(function(products) {
+            upsertJsonLd('homeStructuredData', {
+                '@context': 'https://schema.org',
+                '@graph': [
+                    {
+                        '@type': 'Store',
+                        name: 'ROBUSTE EL EULMA',
+                        url: 'https://www.robusteeleulma.shop/',
+                        telephone: '+213656360457',
+                        email: 'mailto:laidaouih@gmail.com',
+                        address: {
+                            '@type': 'PostalAddress',
+                            streetAddress: 'Rue Bourquaa El Manouar, 426 Parcelle',
+                            addressLocality: 'El Eulma',
+                            addressRegion: 'Sétif',
+                            addressCountry: 'DZ'
+                        },
+                        sameAs: ['https://www.facebook.com/share/19QooaXfy8/']
+                    },
+                    {
+                        '@type': 'ItemList',
+                        name: 'منتجات ROBUSTE EL EULMA',
+                        itemListElement: products.slice(0, 12).map(function(product, index) {
+                            return {
+                                '@type': 'ListItem',
+                                position: index + 1,
+                                url: 'https://www.robusteeleulma.shop/product.html?pid=' + encodeURIComponent(product.id),
+                                name: product.title,
+                                image: product.images && product.images[0] ? toAbsoluteUrl(product.images[0]) : undefined
+                            };
+                        })
+                    }
+                ]
+            });
+        })
+        .catch(function(error) {
+            console.error('خطأ في تهيئة SEO للصفحة الرئيسية:', error);
+        });
+}
+
+function updateWhatsAppLinks() {
+    var message = encodeURIComponent('السلام عليكم، أريد الاستفسار عن منتجات ROBUSTE EL EULMA.');
+    var links = document.querySelectorAll('a.whatsapp-btn, a[href*="wa.me/213656360457"]');
+    for (var i = 0; i < links.length; i++) {
+        if (links[i].getAttribute('href') && links[i].getAttribute('href').indexOf('wa.me/213656360457') !== -1 && links[i].getAttribute('href').indexOf('?text=') === -1) {
+            links[i].setAttribute('href', 'https://wa.me/213656360457?text=' + message);
+        }
+        links[i].setAttribute('rel', 'noopener');
+    }
+}
+
     // ============== نظام المنتجات الديناميكي ==============
 
     // دالة جلب وعرض المنتجات من JSON
@@ -53,7 +172,7 @@
         fetch('products.json')
             .then(function(response) {
                 if (!response.ok) {
-                    throw new Error('Erreur lors du chargement des produits');
+                    throw new Error('تعذر تحميل بيانات المنتجات');
                 }
                 return response.json();
             })
@@ -71,8 +190,8 @@
                 renderProducts(filteredProducts);
             })
             .catch(function(error) {
-                console.error('Erreur:', error);
-                showStatus('Erreur lors du chargement des produits', 'error');
+                console.error('خطأ:', error);
+                showStatus('تعذر تحميل المنتجات حالياً', 'error');
             });
     }
 
@@ -84,7 +203,7 @@
         container.innerHTML = '';
         
         if (products.length === 0) {
-            container.innerHTML = '<div class="col-12 text-center text-muted py-5">Aucun produit trouvé</div>';
+            container.innerHTML = '<div class="col-12 text-center text-muted py-5">لا توجد منتجات مطابقة</div>';
             return;
         }
         
@@ -97,7 +216,7 @@
             if (product.old_price && product.old_price > product.price) {
                 var discountPercentage = Math.round(((product.old_price - product.price) / product.old_price) * 100);
                 discountBadge = '<div class="discount-badge">-' + discountPercentage + '%</div>';
-                oldPrice = '<small dir="ltr" class="old-price text-decoration-line-through text-muted">' + product.old_price.toLocaleString() + ' DA</small>';
+                oldPrice = '<small dir="ltr" class="old-price text-decoration-line-through text-muted">' + product.old_price.toLocaleString() + ' د.ج</small>';
             }
             
             if (product.badge) {
@@ -147,11 +266,11 @@
                 '<h5 class="product-title card-title">' + product.title + '</h5>' +
                 '<div class="price-section">' +
                 oldPrice +
-                '<p dir="ltr" class="current-price">' + product.price.toLocaleString() + ' DA</p>' +
+                '<p dir="ltr" class="current-price">' + product.price.toLocaleString() + ' د.ج</p>' +
                 '</div>' +
                 '<div class="card-footer bg-transparent border-0 mt-auto">' +
-                '<button class="btn btn-orange add-to-cart-btn" data-id="' + product.id + '" aria-label="Ajouter ' + product.title + ' au panier">' +
-                '<i class="bi bi-cart-plus"></i> Ajouter' +
+                '<button class="btn btn-orange add-to-cart-btn" data-id="' + product.id + '" aria-label="إضافة ' + product.title + ' إلى السلة">' +
+                '<i class="bi bi-cart-plus"></i> أضف إلى السلة' +
                 '</button>' +
                 '</div>' +
                 '</div>' +
@@ -172,7 +291,7 @@
         fetch('products.json')
             .then(function(response) {
                 if (!response.ok) {
-                    throw new Error('Erreur lors du chargement des produits');
+                    throw new Error('تعذر تحميل بيانات المنتجات');
                 }
                 return response.json();
             })
@@ -188,7 +307,7 @@
                 renderSpecialOffers(specialOffers);
             })
             .catch(function(error) {
-                console.error('Erreur lors du chargement des offres spéciales:', error);
+                console.error('خطأ أثناء تحميل العروض الخاصة:', error);
             });
     }
 
@@ -198,7 +317,7 @@
         if (!offersContainer) return;
         
         if (offers.length === 0) {
-            offersContainer.innerHTML = '<div class="col-12 text-center text-muted">Aucune offre spéciale pour le moment</div>';
+            offersContainer.innerHTML = '<div class="col-12 text-center text-muted">لا توجد عروض خاصة حالياً</div>';
             return;
         }
         
@@ -237,10 +356,10 @@
                 '</button>' +
                 '</div>' +
                 '<h4 class="offer-product-title">' + product.title + '</h4>' +
-                '<div class="offer-product-price">' + product.price.toLocaleString() + ' DA</div>' +
-                '<div class="offer-product-old-price">' + product.old_price.toLocaleString() + ' DA</div>' +
+                '<div class="offer-product-price">' + product.price.toLocaleString() + ' د.ج</div>' +
+                '<div class="offer-product-old-price">' + product.old_price.toLocaleString() + ' د.ج</div>' +
                 '<button class="offer-btn add-to-cart-btn" data-id="' + product.id + '">' +
-                '<i class="bi bi-cart-plus"></i> Acheter maintenant' +
+                '<i class="bi bi-cart-plus"></i> اطلب الآن' +
                 '</button>' +
                 '</div>' +
                 '</div>';
@@ -382,19 +501,19 @@
                 if (product) {
                     addToCart(
                         product.title,
-                        product.price.toLocaleString() + ' DA',
+                        product.price.toLocaleString() + ' د.ج',
                         product.price,
                         product.images,
                         product.id
                     );
                 } else {
                     console.warn('Product not found for id', productId);
-                    showStatus('Produit introuvable', 'error');
+                    showStatus('المنتج غير موجود', 'error');
                 }
             })
             .catch(function(error) {
                 console.error('Error loading product:', error);
-                showStatus('Error loading product details', 'error');
+                showStatus('تعذر تحميل تفاصيل المنتج', 'error');
             })
             .finally(function() {
                 setTimeout(function() {
@@ -730,7 +849,7 @@
         document.getElementById('productImageUrl').value = firstItem.image;
         
         document.getElementById('productNameDisplay').textContent = cart.length + ' منتجات مختلفة';
-        document.getElementById('productPrice').textContent = total.toLocaleString() + ' DA';
+        document.getElementById('productPrice').textContent = total.toLocaleString('ar-DZ') + ' د.ج';
         document.getElementById('productImage').src = firstItem.image;
         
         // إعادة تعيين النموذج
@@ -1386,6 +1505,8 @@
             }
             
             initDarkMode();
+            updateHomeSeoFromCatalog();
+            updateWhatsAppLinks();
             setupProductCardClicks();
             initializeCarousels();
             initOfferProducts(); // تفعيل التمرير التلقائي للعروض
