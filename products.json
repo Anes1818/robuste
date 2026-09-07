@@ -55,13 +55,13 @@
   {
     "id": 201,
     "title": "SUMMER PACK — GRILL 1000W + FRITEUSE DF 900W",
-    "price": 12600,
-    "old_price": 13000,
+    "price": 13000,
+    "old_price": 13400,
     "images": [
       "images/PANINEUSE ET GRILL 1000W.png",
       "images/FRITEUSE DF 900 W.png"
     ],
-    "description_short": "Summer Pack : grill 1000W + friteuse DF 900W à 12 600 DA. | باك الصيف: شواية 1000W + مقلاة DF 900W بـ 12,600 دج.",
+    "description_short": "Summer Pack : grill 1000W + friteuse DF 900W à 13 000 DA. | باك الصيف: شواية 1000W + مقلاة DF 900W بـ 13,000 دج.",
     "description_long": "باك المطبخ المتكامل: بانينوز وغريل ROBUSTE 1000W مع مقلاة FRITEUSE DF 900W بسعر واحد مخفّض. — Le pack cuisine complet : paninieuse-grill ROBUSTE 1000W et friteuse DF 900W à prix réduit. Payez à la livraison.",
     "features": [
       "PANINEUSE ET GRILL 1000W",
@@ -479,51 +479,6 @@
     "badge": ""
   },
   {
-    "id": 16,
-    "title": "ASPIRATEUR SOUFFLEUR A MAIN AM80",
-    "price": 5100,
-    "old_price": 6500,
-    "images": [
-      "images/ASPIRATEUR SOUFFLEUR A MAIN.png",
-      "images/ASPIRATEUR SOUFFLEUR A MAIN 2.png",
-      "images/ASPIRATEUR SOUFFLEUR A MAIN 3.png"
-    ],
-    "description_short": "Aspirateur-souffleur portable 80W",
-    "description_long": "Aspirateur-souffleur à main AM80 portable avec puissance 80W. Idéal pour petits espaces et voiture.",
-    "features": [
-      "Puissance 80W",
-      "Double fonction",
-      "Filtre lavable",
-      "Compact et léger",
-      "Poids 0.5 kg"
-    ],
-    "stock": 14,
-    "category": "jardin",
-    "badge": ""
-  },
-  {
-    "id": 17,
-    "title": "NETTOYEUR DE TACHES 4 EN 1",
-    "price": 22200,
-    "old_price": 25000,
-    "images": [
-      "images/NETTOYEUR DE TACHES 4 EN 1.jpg",
-      "images/NETTOYEUR DE TACHES 4 EN 1 robuste.jpg",
-      "images/NETTOYEUR DE TACHES 4 EN 1_3.jpg"
-    ],
-    "description_short": "Nettoyeur vapeur multifonction 4 en 1",
-    "description_long": "Nettoyeur de taches 4 en 1 utilisant la technologie vapeur pour nettoyer, désinfecter et détacher sans produits chimiques.",
-    "features": [
-      "4 fonctions en 1",
-      "Technologie vapeur",
-      "Réservoir 1.5L",
-      "Accessoires multiples"
-    ],
-    "stock": 3,
-    "category": "maison",
-    "badge": "Exclusivité"
-  },
-  {
     "id": 19,
     "title": "CAFETIERE ELECTRIQUE CBL15B",
     "price": 15300,
@@ -734,10 +689,10 @@
   {
     "id": 28,
     "title": "PANINEUSE 2000W",
-    "price": 13500,
+    "price": 14500,
     "old_price": 15500,
     "images": [
-      "images/PANINEUSE 2000W.jpg"
+      "images/panineuse.jpg"
     ],
     "description_short": "Panini grill 2000W avec plaque de grill",
     "description_long": "Panini grill 2000W avec plaques de grill anti-adhésives pour des sandwichs grillés parfaits.",
@@ -823,7 +778,7 @@
   {
     "id": 103,
     "title": "ROBUSTE PANINEUSE ET GRILL 1000W",
-    "price": 6500,
+    "price": 6900,
     "old_price": 8000,
     "images": [
       "images/PANINEUSE ET GRILL 1000W.png",

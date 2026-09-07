@@ -3,7 +3,7 @@
         xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <url>
     <loc>https://www.robustedz.store/</loc>
-    <lastmod>2026-08-10</lastmod>
+    <lastmod>2026-09-04</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
@@ -218,26 +218,6 @@
     </image:image>
   </url>
   <url>
-    <loc>https://www.robustedz.store/product-16.html</loc>
-    <lastmod>2026-08-10</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-    <image:image>
-      <image:loc>https://www.robustedz.store/images/ASPIRATEUR%20SOUFFLEUR%20A%20MAIN.png</image:loc>
-      <image:title>ASPIRATEUR SOUFFLEUR A MAIN AM80</image:title>
-    </image:image>
-  </url>
-  <url>
-    <loc>https://www.robustedz.store/product-17.html</loc>
-    <lastmod>2026-08-10</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-    <image:image>
-      <image:loc>https://www.robustedz.store/images/NETTOYEUR%20DE%20TACHES%204%20EN%201.jpg</image:loc>
-      <image:title>NETTOYEUR DE TACHES 4 EN 1</image:title>
-    </image:image>
-  </url>
-  <url>
     <loc>https://www.robustedz.store/product-19.html</loc>
     <lastmod>2026-08-10</lastmod>
     <changefreq>weekly</changefreq>
@@ -329,11 +309,11 @@
   </url>
   <url>
     <loc>https://www.robustedz.store/product-28.html</loc>
-    <lastmod>2026-08-10</lastmod>
+    <lastmod>2026-09-04</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://www.robustedz.store/images/panineuse.jpg</image:loc>
+      <image:loc>https://www.robustedz.store/images/PANINEUSE%202000W.jpg</image:loc>
       <image:title>PANINEUSE 2000W</image:title>
     </image:image>
   </url>
@@ -359,7 +339,7 @@
   </url>
   <url>
     <loc>https://www.robustedz.store/product-101.html</loc>
-    <lastmod>2026-08-10</lastmod>
+    <lastmod>2026-09-04</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -415,6 +395,16 @@
     <image:image>
       <image:loc>https://www.robustedz.store/images/EXTRACTEUR%20DE%20JUS.webp</image:loc>
       <image:title>EXTRACTEUR DE JUS</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.robustedz.store/product-206.html</loc>
+    <lastmod>2026-09-04</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://www.robustedz.store/images/ASPIRATEUR%20BALAI%20AVEC%20FIL%203EN1.webp</image:loc>
+      <image:title>ASPIRATEUR BALAI AVEC FIL 3EN1</image:title>
     </image:image>
   </url>
 </urlset>
