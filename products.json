@@ -623,7 +623,7 @@
   {
     "id": 25,
     "title": "PETRIN PRO MAX 8L 1800W",
-    "price": 18500,
+    "price": 18200,
     "old_price": 24900,
     "images": [
       "images/petrin promax noir.jpg",
@@ -692,7 +692,7 @@
     "price": 14500,
     "old_price": 15500,
     "images": [
-      "images/panineuse.jpg"
+      "images/PANINEUSE 2000W.jpg"
     ],
     "description_short": "Panini grill 2000W avec plaque de grill",
     "description_long": "Panini grill 2000W avec plaques de grill anti-adhésives pour des sandwichs grillés parfaits.",
@@ -877,7 +877,7 @@
   {
     "id": 206,
     "title": "ASPIRATEUR BALAI AVEC FIL 3EN1",
-    "price": 10500,
+    "price": 9500,
     "old_price": null,
     "images": [
       "images/ASPIRATEUR BALAI AVEC FIL 3EN1.webp",
